@@ -1,0 +1,53 @@
+{
+    "name": "mod_simpleemailform",
+    "description": "Joomla module: mod_simpleemailform",
+    "type": "project",
+    "license": "GPL-2.0",
+    "keywords": [
+        "joomla",
+        "simple email form",
+        "module",
+        "extension"
+    ],
+    "homepage": "http://joomla.unlikelysource.org/",
+    "authors": [
+        {
+            "name": "Doug Bierer",
+            "email": "doug@unlikelysource.org",
+            "homepage": "http://unlikelysource.net/"
+        },
+        {
+            "name": "Andrew Caya",
+            "email": "andrewscaya@yahoo.ca",
+            "homepage": "https://github.com/andrewscaya",
+            "role": "Developer"
+        },
+        {
+            "name": "Martin Beaudry",
+            "email": "martinbeaudry@hotmail.com",
+            "homepage": "https://github.com/martinbeaudry",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^5.3 || ^7.0",
+        "joomla/framework": "^1.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8",
+        "squizlabs/php_codesniffer": "^2.3.1"
+    },
+    "autoload": {
+        "psr-4": { "": "./" },
+        "classmap": ["./", "./test"]
+    },
+    "scripts": {
+        "check": [
+            "@cs",
+            "@test"
+        ],
+        "cs": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit"
+    }
+}
