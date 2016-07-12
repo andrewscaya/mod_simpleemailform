@@ -7,17 +7,38 @@
     <arg name="colors"/>
 
     <!-- inherit rules from: -->
-    <rule ref="PSR2"/>
-    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+    <rule ref="PSR2">
+        <exclude name="PSR2.Methods.MethodDeclaration" />
+        <exclude name="PSR2.Classes.PropertyDeclaration" />
+        <exclude name="PSR1.Classes.ClassDeclaration" />
+        <exclude name="PSR1.Files.SideEffects" />
+        <exclude name="Squiz.Classes.ValidClassName" />
+    </rule>
+	
     <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace">
         <properties>
             <property name="ignoreBlankLines" value="false"/>
         </properties>
     </rule>
+    
+    <!-- Lines can be 150 chars long, but never show errors -->
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="150"/>
+            <property name="absoluteLineLimit" value="0"/>
+        </properties>
+    </rule>
+    
+    <!-- Allow long array syntax (PHP 5.3) -->
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax.Found">
+        <severity>0</severity>
+    </rule>
 
     <!-- Paths to check -->
     <file>.</file>
     
-    <!-- Paths to check -->
+    <!-- Paths and files to ignore -->
     <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>PEAR.php</exclude-pattern>
+    <exclude-pattern>PEAR5.php</exclude-pattern>
 </ruleset>
