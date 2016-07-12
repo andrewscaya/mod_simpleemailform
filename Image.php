@@ -3,7 +3,7 @@
 
 /**
  *
- * Require Image_Text class for generating the text.
+ * Require ImageText class for generating the text.
  *
  */
 require_once 'CAPTCHA.php';
@@ -12,13 +12,13 @@ require_once 'Text.php';
 /**
  * Text_CAPTCHA_Driver_Image - Text_CAPTCHA driver graphical CAPTCHAs
  *
- * Class to create a graphical Turing test 
+ * Class to create a graphical Turing test
  *
- * 
+ *
  * @license BSD License
  * @author Christian Wenz <wenz@php.net>
  * @todo refine the obfuscation algorithm :-)
- * @todo consider removing Image_Text dependency
+ * @todo consider removing ImageText dependency
  */
 
 class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
@@ -33,7 +33,7 @@ class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
     public $_im;
 
     /**
-     * Image_Text object
+     * ImageText object
      *
      * @access private
      * @public resource
@@ -59,7 +59,7 @@ class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
     /**
      * Phrase length of CAPTCHA
      *
-	 * @access public static
+     * @access public static
      * @public int
      */
     public static $_phraseLength;
@@ -73,7 +73,7 @@ class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
     public $_output;
 
     /**
-     * Further options (here: for Image_Text)
+     * Further options (here: for ImageText)
      *
      * @access private
      * @public array
@@ -85,7 +85,7 @@ class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
         'text_color'       => '#000000',
         'lines_color'      => '#CACACA',
         'background_color' => '#555555');
-        
+
     /**
      * Whether the immage resource has been created
      *
@@ -115,17 +115,17 @@ class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
     {
         if (!is_array($options)) {
             // Compatibility mode ... in future versions, these two
-            // lines of code will be used: 
+            // lines of code will be used:
             // $this->_error = PEAR::raiseError('You need to provide a set of CAPTCHA options!');
-            // return $this->_error;                  
+            // return $this->_error;
             $o = array();
             $args = func_get_args();
             if (isset($args[0])) {
                 $o['width'] = $args[0];
-            }    
+            }
             if (isset($args[1])) {
                 $o['height'] = $args[1];
-            }    
+            }
             if (isset($args[2]) && $args[2] != null) {
                 $o['phrase'] = $args[2];
             }
@@ -134,16 +134,16 @@ class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
             }
             $options = $o;
         }
-        if (is_array($options)) { 
+        if (is_array($options)) {
             if (isset($options['width']) && is_int($options['width'])) {
-              $this->_width = $options['width'];
+                $this->_width = $options['width'];
             } else {
-              $this->_width = 200; 
+                $this->_width = 200;
             }
             if (isset($options['height']) && is_int($options['height'])) {
-              $this->_height = $options['height'];
+                $this->_height = $options['height'];
             } else {
-              $this->_height = 80; 
+                $this->_height = 80;
             }
             if (!isset($options['phrase']) || empty($options['phrase'])) {
                 $phraseoptions = (isset($options['phraseOptions']) && is_array($options['phraseOptions'])) ? $options['phraseOptions'] : array();
@@ -155,9 +155,9 @@ class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
                 $this->_output = 'resource';
             } else {
                 $this->_output = $options['output'];
-            } 
+            }
             if (isset($options['imageOptions']) && is_array($options['imageOptions']) && count($options['imageOptions']) > 0) {
-                $this->_imageOptions = array_merge($this->_imageOptions, $options['imageOptions']); 
+                $this->_imageOptions = array_merge($this->_imageOptions, $options['imageOptions']);
             }
             return true;
         }
@@ -172,11 +172,11 @@ class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
      */
     public function _createPhrase($options = array())
     {
-		if (isset(self::$_phraseLength)) {
-			$len = intval(min(self::$_phraseLength, $this->_width / 25));
-		} else {
-			$len = intval(min(8, $this->_width / 25));
-		}
+        if (isset(self::$_phraseLength)) {
+            $len = intval(min(self::$_phraseLength, $this->_width / 25));
+        } else {
+            $len = intval(min(8, $this->_width / 25));
+        }
         if (!is_array($options) || count($options) === 0) {
             $this->_phrase = Text_Password::create($len);
         } else {
@@ -208,11 +208,11 @@ class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
         $options['canvas'] = array(
             'width' => $this->_width,
             'height' => $this->_height
-        ); 
+        );
         $options['width'] = $this->_width - 20;
-        $options['height'] = $this->_height - 20; 
+        $options['height'] = $this->_height - 20;
         $options['cx'] = ceil(($this->_width) / 2 + 10);
-        $options['cy'] = ceil(($this->_height) / 2 + 10); 
+        $options['cy'] = ceil(($this->_height) / 2 + 10);
         $options['angle'] = rand(0, 30) - 15;
         $options['font_size'] = $this->_imageOptions['font_size'];
         $options['font_path'] = $this->_imageOptions['font_path'];
@@ -222,17 +222,20 @@ class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
         $options['max_lines'] = 1;
         $options['mode'] = 'auto';
         do {
-            $this->_imt = new Image_Text( 
+            $this->_imt = new ImageText(
                 $this->_phrase,
                 $options
             );
             if (PEAR::isError($e = $this->_imt->init())) {
                 $this->_error = PEAR::raiseError(
-                    sprintf('Error initializing Image_Text (%s)',
-                    $e->getMessage()));
+                    sprintf(
+                        'Error initializing ImageText (%s)',
+                        $e->getMessage()
+                    )
+                );
                 return $this->_error;
             } else {
-                $this->_created = true; 
+                $this->_created = true;
             }
             $result = $this->_imt->measurize();
         } while ($result === false && --$options['font_size'] > 0);
@@ -240,8 +243,8 @@ class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
             $this->_error = PEAR::raiseError('The text provided does not fit in the image dimensions');
             return $this->_error;
         }
-        $this->_imt->render(); 
-        $this->_im =& $this->_imt->getImg(); 
+        $this->_imt->render();
+        $this->_im =& $this->_imt->getImg();
         $colors = $this->_imt->_convertString2RGB($this->_imageOptions['lines_color']);
         $lines_color = imagecolorallocate($this->_im, $colors['r'], $colors['g'], $colors['b']);
         //some obfuscation
@@ -277,7 +280,7 @@ class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
         if (PEAR::isError($retval)) {
             return PEAR::raiseError($retval->getMessage());
         }
-        
+
         if ($this->_output == 'gif' && !function_exists('imagegif')) {
             $this->_output = 'png';
         }
@@ -286,7 +289,7 @@ class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
             case 'png':
                 return $this->getCAPTCHAAsPNG();
                 break;
-            case 'jpg': 
+            case 'jpg':
             case 'jpeg':
                 return $this->getCAPTCHAAsJPEG();
                 break;
@@ -386,5 +389,5 @@ class Text_CAPTCHA_Driver_Image extends Text_CAPTCHA
     public function __wakeup()
     {
         $this->_created = false;
-    } 
+    }
 }

@@ -11,7 +11,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      * @var modSimpleEmailForm
      */
     private $modSimpleEmailForm;
-    
+
     public $object;
 
     /**
@@ -20,12 +20,12 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        
+
         $paramsSerialized = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'serializedParamsObject');
         $params = unserialize($paramsSerialized);
-        
+
         $message = '';
-        
+
         $this->modSimpleEmailForm = new modSimpleEmailForm($params);
     }
 
@@ -35,20 +35,22 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         $this->modSimpleEmailForm = null;
-        
+
         parent::tearDown();
     }
-    
-    public function testmodSimpleEmailFormConstruct() {
+
+    public function testmodSimpleEmailFormConstruct()
+    {
         $this->assertInstanceOf('modSimpleEmailForm', $this->modSimpleEmailForm);
     }
-    
-    public function testAllPhptFiles() {
-        $tests = glob('test/phpt/*.phpt'); 
-        
+
+    public function testAllPhptFiles()
+    {
+        $tests = glob('test/phpt/*.phpt');
+
         $output = array();
-        
-        foreach($tests as $file) {
+
+        foreach ($tests as $file) {
             exec("pear run-tests $file", $output);
             $this->assertTrue(in_array('1 PASSED TESTS', $output));
         }
@@ -61,7 +63,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 //     {
 //         // TODO Auto-generated modSimpleEmailFormTest->testFormatRow()
 //         //$this->markTestIncomplete("formatRow test not implemented");
-        
+
 //         //$this->modSimpleEmailForm->formatRow(/* parameters */);
 //         return TRUE;
 //     }
@@ -73,7 +75,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 //     {
 //         // TODO Auto-generated modSimpleEmailFormTest->testSendResults()
 //         $this->markTestIncomplete("sendResults test not implemented");
-        
+
 //         $this->modSimpleEmailForm->sendResults(/* parameters */);
 //     }
 
@@ -84,7 +86,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 //     {
 //         // TODO Auto-generated modSimpleEmailFormTest->testImageCaptcha()
 //         $this->markTestIncomplete("imageCaptcha test not implemented");
-        
+
 //         $this->modSimpleEmailForm->imageCaptcha(/* parameters */);
 //     }
 
@@ -95,7 +97,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 //     {
 //         // TODO Auto-generated modSimpleEmailFormTest->testTextCaptcha()
 //         $this->markTestIncomplete("textCaptcha test not implemented");
-        
+
 //         $this->modSimpleEmailForm->textCaptcha(/* parameters */);
 //     }
 
@@ -106,7 +108,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 //     {
 //         // TODO Auto-generated modSimpleEmailFormTest::testIsEmailAddress()
 //         $this->markTestIncomplete("isEmailAddress test not implemented");
-        
+
 //         modSimpleEmailForm::isEmailAddress(/* parameters */);
 //     }
 
@@ -121,6 +123,4 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, count($nodeList));
         $this->assertEquals('post', $nodeList->item(0)->getAttributeNode('method')->value);
     }
-
 }
-
