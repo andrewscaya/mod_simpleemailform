@@ -52,7 +52,7 @@ require_once MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'Password.php';
             fclose($file);
             return $n ? $n : false;
         }
-		}
+        }
 
     // Start PHP session support
     session_start();

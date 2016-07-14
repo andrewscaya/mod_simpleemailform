@@ -24,7 +24,7 @@
         * fixed error where session 1 time hash key not set 1st time generates notice
         * fixed bug whereby page not found was generated after form posting; removed "#" as default "anchor" tag
         * see: http://joomla.stackexchange.com/questions/16051/fix-the-invalid-address-error-after-upgrading-to-joomla-3-5-1
-		* @TODO: convert to JForm
+        * @TODO: convert to JForm
 */
 
 class _SimpleEmailForm
@@ -322,7 +322,6 @@ class modSimpleEmailForm
 
         // 2015-04-24 DB: build CSRF hash field name
         $this->_csrfField = $this->_fieldPrefix . '_oneTime_' . $this->_instance;
-
     }
 
     /**
@@ -736,7 +735,7 @@ class modSimpleEmailForm
             // Formulate FN for attachment
             foreach ($msg->attachment as $fn) {
                 /* Check if null was returned by uploadAttachment()
-				 * due to empty upload fields
+                 * due to empty upload fields
 				 */
                 if (isset($fn)) {
                     $fullPath = $msg->dir . DIRECTORY_SEPARATOR . $fn;
@@ -779,7 +778,6 @@ class modSimpleEmailForm
         }
         ob_end_clean();
         return $result;
-
     }
 
     public function imageCaptcha(
@@ -909,9 +907,9 @@ class modSimpleEmailForm
         }
 
         /*
-		 * Check the local address
-		 * We're a bit more conservative about what constitutes a "legal" address, that is, A-Za-z0-9!#$%&\'*+/=?^_`{|}~-
-		 * Also, the last character in local cannot be a period ('.')
+         * Check the local address
+         * We're a bit more conservative about what constitutes a "legal" address, that is, A-Za-z0-9!#$%&\'*+/=?^_`{|}~-
+         * Also, the last character in local cannot be a period ('.')
 		 */
         $allowed = 'A-Za-z0-9!#&*+=?_-';
         $regex = "/^[$allowed][\.$allowed]{0,63}$/";
