@@ -86,7 +86,12 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 
         foreach ($tests as $file) {
             exec("pear run-tests $file", $output);
-            $this->assertTrue(in_array('1 PASSED TESTS', $output));
+            $key = array_search('1 FAILED TESTS:', $output);
+            if ($key) {
+                $key++;
+                echo PHP_EOL . 'FAILED PHPT: ' . $output[$key] . PHP_EOL;
+            }
+            $this->assertTrue(!in_array('1 FAILED TESTS:', $output));
         }
     }
 
