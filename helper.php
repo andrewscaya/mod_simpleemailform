@@ -900,9 +900,15 @@ class modSimpleEmailForm
         $domain = substr($email, $atIndex + 1);
         $local = substr($email, 0, $atIndex);
 
-        // Check Length of domain
+        // Check length of domain
         $domainLen = strlen($domain);
         if ($domainLen < 1 || $domainLen > 255) {
+            return false;
+        }
+
+        // Check length of local
+        $localLen = strlen($local);
+        if ($localLen < 1 || $localLen > 64) {
             return false;
         }
 
@@ -921,12 +927,6 @@ class modSimpleEmailForm
         $regex = '/^[0-9\.]+$/';
         if (preg_match($regex, $domain)) {
             return true;
-        }
-
-        // Check Lengths
-        $localLen = strlen($local);
-        if ($localLen < 1 || $localLen > 64) {
-            return false;
         }
 
         // Check the domain

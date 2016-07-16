@@ -59,8 +59,6 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
         $this->modSimpleEmailForm = new modSimpleEmailForm($params);
 
         $this->modSimpleEmailFormReflection = new \ReflectionClass($this->modSimpleEmailForm);
-        $this->formatErrorMessageMethod = $this->modSimpleEmailFormReflection->getMethod('formatErrorMessage');
-        $this->formatErrorMessageMethod->setAccessible(true);
     }
 
     /**
@@ -138,15 +136,192 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 //     }
 
     /**
+     * Valid email address
+     *
      * Tests modSimpleEmailForm::isEmailAddress()
      */
-//     public function testIsEmailAddress()
-//     {
-//         // TODO Auto-generated modSimpleEmailFormTest::testIsEmailAddress()
-//         $this->markTestIncomplete("isEmailAddress test not implemented");
+    public function testIsEmailAddress()
+    {
+        $this->assertTrue($this->modSimpleEmailForm->isEmailAddress('test@localhost.localdomain'));
+    }
 
-//         modSimpleEmailForm::isEmailAddress(/* parameters */);
-//     }
+    /**
+     * Empty email address
+     *
+     * Tests modSimpleEmailForm::isEmailAddress()
+     */
+    public function testIsEmailAddressEmptyAddress()
+    {
+        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress(''));
+    }
+
+    /**
+     * Invalid email domain address with less than one character
+     *
+     * Tests modSimpleEmailForm::isEmailAddress()
+     */
+    public function testIsEmailAddressInvalidDomainLessThanOne()
+    {
+        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress('test@'));
+    }
+
+    /**
+     * Valid email domain address with 63 characters
+     *
+     * Tests modSimpleEmailForm::isEmailAddress()
+     */
+    public function testIsEmailAddressValidDomainWith63()
+    {
+        $address = 'test@test.';
+
+        $i = 0;
+
+        while ($i < 63) {
+            $address .= 'a';
+
+            $i++;
+        }
+
+        $this->assertTrue($this->modSimpleEmailForm->isEmailAddress($address));
+    }
+
+    /**
+     * Invalid email domain address with more than 63 characters
+     *
+     * Tests modSimpleEmailForm::isEmailAddress()
+     */
+    public function testIsEmailAddressInvalidDomainGreaterThan63()
+    {
+        $address = 'test@test.';
+
+        $i = 0;
+
+        while ($i < 64) {
+            $address .= 'a';
+
+            $i++;
+        }
+
+        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress($address));
+    }
+
+    /**
+     * Invalid email domain address with empty part
+     *
+     * Tests modSimpleEmailForm::isEmailAddress()
+     */
+    public function testIsEmailAddressInvalidDomainEmptyPart()
+    {
+        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress('test@localhost..localdomain'));
+    }
+
+    /**
+     * Invalid email domain address that begins with a dash
+     *
+     * Tests modSimpleEmailForm::isEmailAddress()
+     */
+    public function testIsEmailAddressInvalidDomainBeginsDash()
+    {
+        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress('test@-localhost.localdomain'));
+    }
+
+    /**
+     * Invalid email domain address that ends with a dash
+     *
+     * Tests modSimpleEmailForm::isEmailAddress()
+     */
+    public function testIsEmailAddressInvalidDomainEndsDash()
+    {
+        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress('test@localhost.localdomain-'));
+    }
+
+    /**
+     * Email address with IP address as domain
+     *
+     * Tests modSimpleEmailForm::isEmailAddress()
+     */
+    public function testIsEmailAddressWithIPDomain()
+    {
+        $this->assertTrue($this->modSimpleEmailForm->isEmailAddress('test@127.0.0.1'));
+    }
+
+    /**
+     * Invalid local email address that ends with a dot
+     *
+     * Tests modSimpleEmailForm::isEmailAddress()
+     */
+    public function testIsEmailAddressInvalidLocalThatEndsWithDot()
+    {
+        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress('test.@local'));
+    }
+
+    /**
+     * Invalid local email address with IP address as domain
+     *
+     * Tests modSimpleEmailForm::isEmailAddress()
+     */
+    public function testIsEmailAddressInvalidLocalWithIPDomain()
+    {
+        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress('test.@127.0.0.1'));
+    }
+
+    /**
+     * Empty local email address
+     *
+     * Tests modSimpleEmailForm::isEmailAddress()
+     */
+    public function testIsEmailAddressEmptyLocal()
+    {
+        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress('@localhost.localdomain'));
+    }
+
+    /**
+     * Local email address with space
+     *
+     * Tests modSimpleEmailForm::isEmailAddress()
+     */
+    public function testIsEmailAddressLocalWithSpace()
+    {
+        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress(' @localhost.localdomain'));
+    }
+
+    /**
+     * Greater than 64 characters long local email address
+     *
+     * Tests modSimpleEmailForm::isEmailAddress()
+     */
+    public function testIsEmailAddressLocalGreaterThan64()
+    {
+        $address = '';
+
+        $i = 0;
+
+        while ($i < 65) {
+            $address .= 'a';
+
+            $i++;
+        }
+
+        $address .= '@localhost.localdomain';
+
+        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress($address));
+    }
+
+    /**
+     * Empty local email address with IP address as domain
+     *
+     * Tests modSimpleEmailForm::isEmailAddress()
+     */
+    public function testIsEmailAddressEmptyLocalWithIPDomain()
+    {
+        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress('@127.0.0.1'));
+    }
+
+    protected function setformatErrorMessageMethodAccessible()
+    {
+        $this->formatErrorMessageMethod = $this->modSimpleEmailFormReflection->getMethod('formatErrorMessage');
+        $this->formatErrorMessageMethod->setAccessible(true);
+    }
 
     //Three tests to check the function's behaviour with filenames
     /**
@@ -154,6 +329,11 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      */
     public function testFormatErrorMessageNoFn()
     {
+        $this->setformatErrorMessageMethodAccessible();
+
+        $this->formatErrorMessageMethod = $this->modSimpleEmailFormReflection->getMethod('formatErrorMessage');
+        $this->formatErrorMessageMethod->setAccessible(true);
+
         $message = $this->formatErrorMessageMethod->invokeArgs(
             $this->modSimpleEmailForm,
             array($this->color, $this->standardMessage)
@@ -169,6 +349,8 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      */
     public function testFormatErrorMessageWithFn()
     {
+        $this->setformatErrorMessageMethodAccessible();
+
         $message = $this->formatErrorMessageMethod->invokeArgs(
             $this->modSimpleEmailForm,
             array($this->color, $this->standardMessage, $this->fn)
@@ -184,6 +366,8 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      */
     public function testFormatErrorMessageInvalidFn()
     {
+        $this->setformatErrorMessageMethodAccessible();
+
         $message = $this->formatErrorMessageMethod->invokeArgs(
             $this->modSimpleEmailForm,
             array($this->color, $this->standardMessage, $this->fnSpace)
@@ -206,6 +390,8 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      */
     public function testFormatErrornullMessageMessage()
     {
+        $this->setformatErrorMessageMethodAccessible();
+
         $message = $this->formatErrorMessageMethod->invokeArgs(
             $this->modSimpleEmailForm,
             array($this->color, $this->nullMessage, $this->fn)
@@ -227,6 +413,8 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      */
     public function testFormatErrorMessageSpaceMessage()
     {
+        $this->setformatErrorMessageMethodAccessible();
+
         $message = $this->formatErrorMessageMethod->invokeArgs(
             $this->modSimpleEmailForm,
             array($this->color, $this->emptyMessage, $this->fn)
@@ -248,6 +436,8 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      */
     public function testFormatErrorMessageRealMessage()
     {
+        $this->setformatErrorMessageMethodAccessible();
+
         $message = $this->formatErrorMessageMethod->invokeArgs(
             $this->modSimpleEmailForm,
             array($this->color, $this->standardMessage, $this->fn)
@@ -268,6 +458,8 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      */
     public function testFormatErrorMessageColor()
     {
+        $this->setformatErrorMessageMethodAccessible();
+
         $message = $this->formatErrorMessageMethod->invokeArgs(
             $this->modSimpleEmailForm,
             array($this->color, $this->standardMessage, $this->fn)
