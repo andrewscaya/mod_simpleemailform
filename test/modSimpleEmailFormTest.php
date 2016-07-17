@@ -19,6 +19,12 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
     private $modSimpleEmailFormReflection;
 
     /**
+     *
+     * @var ReflectionMethod
+     */
+    private $formatErrorMessageMethod;
+
+    /**
      * Color argument
      *
      * @var color
@@ -61,9 +67,6 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
         $this->modSimpleEmailForm = new modSimpleEmailForm($params);
 
         $this->modSimpleEmailFormReflection = new \ReflectionClass($this->modSimpleEmailForm);
-        
-        $this->formatErrorMessageMethod = $this->modSimpleEmailFormReflection->getMethod('formatErrorMessage');
-        $this->formatErrorMessageMethod->setAccessible(true);
     }
 
     /**
@@ -74,7 +77,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
         $this->modSimpleEmailForm = null;
 
         $this->modSimpleEmailFormReflection = null;
-        
+
         $this->formatErrorMessageMethod = null;
 
         parent::tearDown();
@@ -329,12 +332,6 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->modSimpleEmailForm->isEmailAddress('@127.0.0.1'));
     }
 
-    protected function setformatErrorMessageMethodAccessible()
-    {
-        $this->formatErrorMessageMethod = $this->modSimpleEmailFormReflection->getMethod('formatErrorMessage');
-        $this->formatErrorMessageMethod->setAccessible(true);
-    }
-
     /**
      * Tests modSimpleEmailForm::FormatErrorMessage()
      */
@@ -344,58 +341,66 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
     * @param string representing the color sent as an argument to formatErrorMessage
     * @param string representing the message sent as an argument to formatErrorMessage
     * @param string representing the filename sent as an argument to formatErrorMessage
-    
+
     * @dataProvider providerTestFormatErrorMessage
     */
-    public function testFormatErrorMessage ($expectedResult, $color, $message, $fn = '')
+    public function testFormatErrorMessage($expectedResult, $color, $message, $fn = '')
     {
+        $this->setformatErrorMessageMethodAccessible();
+
         $actualResult = $this->formatErrorMessageMethod->invokeArgs(
             $this->modSimpleEmailForm,
             array($color, $message, $fn)
         );
-        
+
         $this->assertSame($expectedResult, $actualResult);
     }
-    
+
     public function providerTestFormatErrorMessage()
     {
         return array(
             //Three tests to check the behaviour with filenames
             //Test 1: Valid without filename
-            array("<p><b><span style='color:$this->color;'>$this->standardMessage</span></b></p>\n", 
+            array("<p><b><span style='color:$this->color;'>$this->standardMessage</span></b></p>\n",
                   $this->color, $this->standardMessage),
             //Test 2: Valid with filename
             array("<p><b><span style='color:$this->color;'>$this->standardMessage ($this->standardFn)</span></b></p>\n",
                   $this->color, $this->standardMessage, $this->standardFn),
             //Test 3: Invalid filename - to be replaced by the commented test below
-            array("<p><b><span style='color:$this->color;'>$this->standardMessage ( )</span></b></p>\n", 
+            array("<p><b><span style='color:$this->color;'>$this->standardMessage ( )</span></b></p>\n",
                   $this->color, $this->standardMessage, $this->emptyFn),
             //@todo Test 3
-//            array(<p><b><span style='color:$this->color;'>$this->standardMessage
-//                  ('Warning - Invalid filename: no alnum character')</span></b></p>\n",
-//                  $this->color, $this->standardMessage, $this->emptyFn),
-            
+            //array(<p><b><span style='color:$this->color;'>$this->standardMessage
+            //     ('Warning - Invalid filename: no alnum character')</span></b></p>\n",
+            //     $this->color, $this->standardMessage, $this->emptyFn),
+
             //Three tests to check the behaviour with messages
             //Test 4: Null message - to be replaced by the commented test below
             array("<p><b><span style='color:$this->color;'>$this->nullMessage ($this->standardFn)</span></b></p>\n",
                   $this->color, $this->nullMessage, $this->standardFn),
             // @todo Test 4
-//            array("<p><b><span style='color:$this->color;'>Warning - No message sent
-//                    ($this->standardFn)</span></b></p>\n",
-//                    $this->color, $this->nullMessage, $this->standardFn),
+            //array("<p><b><span style='color:$this->color;'>Warning - No message sent
+            //       ($this->standardFn)</span></b></p>\n",
+            //       $this->color, $this->nullMessage, $this->standardFn),
             //Test 5: Message with no alnum character - to be replaced by the commented test below
             array("<p><b><span style='color:$this->color;'>$this->emptyMessage ($this->standardFn)</span></b></p>\n",
                   $this->color, $this->emptyMessage, $this->standardFn),
             //@todo Test 5
-//            array("<p><b><span style='color:$this->color;'>Warning - Invalid message: no alnum character
-//                    ($this->standardFn)</span></b></p>\n", 
-//                    $this->color, $this->emptyMessage, $this->standardFn),
+            //array("<p><b><span style='color:$this->color;'>Warning - Invalid message: no alnum character
+            //       ($this->standardFn)</span></b></p>\n",
+            //       $this->color, $this->emptyMessage, $this->standardFn),
             //Test 6: Valid message
             array("<p><b><span style='color:$this->color;'>$this->standardMessage ($this->standardFn)</span></b></p>\n",
                   $this->color, $this->standardMessage, $this->standardFn),
             //No test required for color. Only issue is whether it is put in the right place in the string or not.
             //If it's not, all previous tests will fail.
         );
+    }
+
+    protected function setformatErrorMessageMethodAccessible()
+    {
+        $this->formatErrorMessageMethod = $this->modSimpleEmailFormReflection->getMethod('formatErrorMessage');
+        $this->formatErrorMessageMethod->setAccessible(true);
     }
 
     /**
