@@ -29,6 +29,8 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      * Message argument
      *
      * @var standardMessage
+     * @var nullMessage
+     * @var emptyMessage
      */
     protected $standardMessage = 'This is a test';
     protected $nullMessage = null;
@@ -38,11 +40,11 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
     /**
      * Filename argument
      *
-     * @var fn
+     * @var standardFn
+     * @var emptyFn
      */
-    protected $fn = 'test.php';
-    protected $fnNull = null;
-    protected $fnSpace = ' ';
+    protected $standardFn = 'test.php';
+    protected $emptyFn = ' ';
 
     /**
      * Prepares the environment before running a test.
@@ -59,6 +61,9 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
         $this->modSimpleEmailForm = new modSimpleEmailForm($params);
 
         $this->modSimpleEmailFormReflection = new \ReflectionClass($this->modSimpleEmailForm);
+        
+        $this->formatErrorMessageMethod = $this->modSimpleEmailFormReflection->getMethod('formatErrorMessage');
+        $this->formatErrorMessageMethod->setAccessible(true);
     }
 
     /**
@@ -69,6 +74,8 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
         $this->modSimpleEmailForm = null;
 
         $this->modSimpleEmailFormReflection = null;
+        
+        $this->formatErrorMessageMethod = null;
 
         parent::tearDown();
     }
@@ -328,150 +335,66 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
         $this->formatErrorMessageMethod->setAccessible(true);
     }
 
-    //Three tests to check the function's behaviour with filenames
     /**
      * Tests modSimpleEmailForm::FormatErrorMessage()
      */
-    public function testFormatErrorMessageNoFn()
+
+    /**
+    * @param string we expect to be returned by formatErrorMessage
+    * @param string representing the color sent as an argument to formatErrorMessage
+    * @param string representing the message sent as an argument to formatErrorMessage
+    * @param string representing the filename sent as an argument to formatErrorMessage
+    
+    * @dataProvider providerTestFormatErrorMessage
+    */
+    public function testFormatErrorMessage ($expectedResult, $color, $message, $fn = '')
     {
-        $this->setformatErrorMessageMethodAccessible();
-
-        $this->formatErrorMessageMethod = $this->modSimpleEmailFormReflection->getMethod('formatErrorMessage');
-        $this->formatErrorMessageMethod->setAccessible(true);
-
-        $message = $this->formatErrorMessageMethod->invokeArgs(
+        $actualResult = $this->formatErrorMessageMethod->invokeArgs(
             $this->modSimpleEmailForm,
-            array($this->color, $this->standardMessage)
+            array($color, $message, $fn)
         );
-        $this->assertSame(
-            "<p><b><span style='color:$this->color;'>$this->standardMessage</span></b></p>\n",
-            $message
-        );
+        
+        $this->assertSame($expectedResult, $actualResult);
     }
-
-    /**
-     * Tests modSimpleEmailForm::FormatErrorMessage()
-     */
-    public function testFormatErrorMessageWithFn()
+    
+    public function providerTestFormatErrorMessage()
     {
-        $this->setformatErrorMessageMethodAccessible();
-
-        $message = $this->formatErrorMessageMethod->invokeArgs(
-            $this->modSimpleEmailForm,
-            array($this->color, $this->standardMessage, $this->fn)
-        );
-        $this->assertSame(
-            "<p><b><span style='color:$this->color;'>$this->standardMessage ($this->fn)</span></b></p>\n",
-            $message
-        );
-    }
-
-    /**
-     * Tests modSimpleEmailForm::FormatErrorMessage()
-     */
-    public function testFormatErrorMessageInvalidFn()
-    {
-        $this->setformatErrorMessageMethodAccessible();
-
-        $message = $this->formatErrorMessageMethod->invokeArgs(
-            $this->modSimpleEmailForm,
-            array($this->color, $this->standardMessage, $this->fnSpace)
-        );
-        // @todo
-//         $this->assertSame(
-//             "<p><b><span style='color:$this->color;'>$this->standardMessage('Warning - Invalid filename: no alnum character')</span></b></p>\n",
-//             $message
-//         );
-
-        $this->assertSame(
-            "<p><b><span style='color:$this->color;'>$this->standardMessage ( )</span></b></p>\n",
-            $message
-        );
-    }
-
-    //Three tests to ckeck the function's behaviour with messages
-    /**
-     * Tests modSimpleEmailForm::FormatErrorMessage()
-     */
-    public function testFormatErrornullMessageMessage()
-    {
-        $this->setformatErrorMessageMethodAccessible();
-
-        $message = $this->formatErrorMessageMethod->invokeArgs(
-            $this->modSimpleEmailForm,
-            array($this->color, $this->nullMessage, $this->fn)
-        );
-        // @todo
-//         $this->assertSame(
-//             "<p><b><span style='color:$this->color;'>$this->standardMessage('Warning - Invalid filename: no alnum character')</span></b></p>\n",
-//             $message
-//         );
-
-        $this->assertSame(
-            "<p><b><span style='color:$this->color;'>$this->nullMessage ($this->fn)</span></b></p>\n",
-            $message
-        );
-    }
-
-    /**
-     * Tests modSimpleEmailForm::FormatErrorMessage()
-     */
-    public function testFormatErrorMessageSpaceMessage()
-    {
-        $this->setformatErrorMessageMethodAccessible();
-
-        $message = $this->formatErrorMessageMethod->invokeArgs(
-            $this->modSimpleEmailForm,
-            array($this->color, $this->emptyMessage, $this->fn)
-        );
-        // @todo
-//         $this->assertSame(
-//             "<p><b><span style='color:$this->color;'>$this->standardMessage('Warning - Invalid filename: no alnum character')</span></b></p>\n",
-//             $message
-//         );
-
-        $this->assertSame(
-            "<p><b><span style='color:$this->color;'>$this->emptyMessage ($this->fn)</span></b></p>\n",
-            $message
-        );
-    }
-
-    /**
-     * Tests modSimpleEmailForm::FormatErrorMessage()
-     */
-    public function testFormatErrorMessageRealMessage()
-    {
-        $this->setformatErrorMessageMethodAccessible();
-
-        $message = $this->formatErrorMessageMethod->invokeArgs(
-            $this->modSimpleEmailForm,
-            array($this->color, $this->standardMessage, $this->fn)
-        );
-        $this->assertSame(
-            "<p><b><span style='color:$this->color;'>$this->standardMessage ($this->fn)</span></b></p>\n",
-            $message
-        );
-    }
-
-    /*
-	 * Only important thing with color is that the value is put in its
-     * rightful place. Html is valid no matter what the value is.
-	 */
-
-    /**
-     * Tests modSimpleEmailForm::FormatErrorMessage()
-     */
-    public function testFormatErrorMessageColor()
-    {
-        $this->setformatErrorMessageMethodAccessible();
-
-        $message = $this->formatErrorMessageMethod->invokeArgs(
-            $this->modSimpleEmailForm,
-            array($this->color, $this->standardMessage, $this->fn)
-        );
-        $this->assertSame(
-            "<p><b><span style='color:$this->color;'>$this->standardMessage ($this->fn)</span></b></p>\n",
-            $message
+        return array(
+            //Three tests to check the behaviour with filenames
+            //Test 1: Valid without filename
+            array("<p><b><span style='color:$this->color;'>$this->standardMessage</span></b></p>\n", 
+                  $this->color, $this->standardMessage),
+            //Test 2: Valid with filename
+            array("<p><b><span style='color:$this->color;'>$this->standardMessage ($this->standardFn)</span></b></p>\n",
+                  $this->color, $this->standardMessage, $this->standardFn),
+            //Test 3: Invalid filename - to be replaced by the commented test below
+            array("<p><b><span style='color:$this->color;'>$this->standardMessage ( )</span></b></p>\n", 
+                  $this->color, $this->standardMessage, $this->emptyFn),
+            //@todo Test 3
+//            array(<p><b><span style='color:$this->color;'>$this->standardMessage
+//                  ('Warning - Invalid filename: no alnum character')</span></b></p>\n",
+//                  $this->color, $this->standardMessage, $this->emptyFn),
+            
+            //Three tests to check the behaviour with messages
+            //Test 4: Null message - to be replaced by the commented test below
+            array("<p><b><span style='color:$this->color;'>$this->nullMessage ($this->standardFn)</span></b></p>\n",
+                  $this->color, $this->nullMessage, $this->standardFn),
+            // @todo Test 4
+//            array("<p><b><span style='color:$this->color;'>Warning - No message sent
+//                    ($this->standardFn)</span></b></p>\n",
+//                    $this->color, $this->nullMessage, $this->standardFn),
+            //Test 5: Message with no alnum character - to be replaced by the commented test below
+            array("<p><b><span style='color:$this->color;'>$this->emptyMessage ($this->standardFn)</span></b></p>\n",
+                  $this->color, $this->emptyMessage, $this->standardFn),
+            //@todo Test 5
+//            array("<p><b><span style='color:$this->color;'>Warning - Invalid message: no alnum character
+//                    ($this->standardFn)</span></b></p>\n", 
+//                    $this->color, $this->emptyMessage, $this->standardFn),
+            //Test 6: Valid message
+            array("<p><b><span style='color:$this->color;'>$this->standardMessage ($this->standardFn)</span></b></p>\n",
+                  $this->color, $this->standardMessage, $this->standardFn),
+            //No test required for color. Only issue is whether it is put in the right place in the string or not.
+            //If it's not, all previous tests will fail.
         );
     }
 
