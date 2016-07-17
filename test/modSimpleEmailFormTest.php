@@ -151,41 +151,94 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 //     }
 
     /**
-     * Valid email address
-     *
      * Tests modSimpleEmailForm::isEmailAddress()
+     *
+     * Tests if email address is valid
+     *
+     * @param string representing an email address
+     *
+     * @dataProvider providerTestIsEmailAddressValid
      */
-    public function testIsEmailAddress()
+    public function testIsEmailAddressValid($email)
     {
-        $this->assertTrue($this->modSimpleEmailForm->isEmailAddress('test@localhost.localdomain'));
+        $this->assertTrue($this->modSimpleEmailForm->isEmailAddress($email));
+    }
+
+    public function providerTestIsEmailAddressValid()
+    {
+        return array(
+            array(
+                'test@localhost.localdomain',
+            ),
+            array(
+                'test@127.0.0.1',
+            ),
+            array(
+                $this->getDomainWith63Chars(),
+            ),
+        );
     }
 
     /**
-     * Empty email address
-     *
      * Tests modSimpleEmailForm::isEmailAddress()
+     *
+     * Tests if email address is invalid
+     *
+     * @param string representing an email address
+     *
+     * @dataProvider providerTestIsEmailAddressInvalid
      */
-    public function testIsEmailAddressEmptyAddress()
+    public function testIsEmailAddressInvalid($email)
     {
-        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress(''));
+        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress($email));
     }
 
-    /**
-     * Invalid email domain address with less than one character
-     *
-     * Tests modSimpleEmailForm::isEmailAddress()
-     */
-    public function testIsEmailAddressInvalidDomainLessThanOne()
+    public function providerTestIsEmailAddressInvalid()
     {
-        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress('test@'));
+        return array(
+            array(
+                '',
+            ),
+            array(
+                'test@',
+            ),
+            array(
+                'test@localhost..localdomain',
+            ),
+            array(
+                'test@-localhost.localdomain',
+            ),
+            array(
+                'test@localhost.localdomain-',
+            ),
+            array(
+                'test.@localhost.localdomain',
+            ),
+            array(
+                'test.@127.0.0.1',
+            ),
+            array(
+                '@localhost.localdomain',
+            ),
+            array(
+                ' @localhost.localdomain',
+            ),
+            array(
+                '@127.0.0.1',
+            ),
+            array(
+                ' @127.0.0.1',
+            ),
+            array(
+                $this->getDomainGreaterThan63(),
+            ),
+            array(
+                $this->getLocalGreaterThan64(),
+            ),
+        );
     }
 
-    /**
-     * Valid email domain address with 63 characters
-     *
-     * Tests modSimpleEmailForm::isEmailAddress()
-     */
-    public function testIsEmailAddressValidDomainWith63()
+    public function getDomainWith63Chars()
     {
         $address = 'test@test.';
 
@@ -193,11 +246,10 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 
         while ($i < 63) {
             $address .= 'a';
-
             $i++;
         }
 
-        $this->assertTrue($this->modSimpleEmailForm->isEmailAddress($address));
+        return (string) $address;
     }
 
     /**
@@ -205,7 +257,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      *
      * Tests modSimpleEmailForm::isEmailAddress()
      */
-    public function testIsEmailAddressInvalidDomainGreaterThan63()
+    public function getDomainGreaterThan63()
     {
         $address = 'test@test.';
 
@@ -213,91 +265,10 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 
         while ($i < 64) {
             $address .= 'a';
-
             $i++;
         }
 
-        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress($address));
-    }
-
-    /**
-     * Invalid email domain address with empty part
-     *
-     * Tests modSimpleEmailForm::isEmailAddress()
-     */
-    public function testIsEmailAddressInvalidDomainEmptyPart()
-    {
-        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress('test@localhost..localdomain'));
-    }
-
-    /**
-     * Invalid email domain address that begins with a dash
-     *
-     * Tests modSimpleEmailForm::isEmailAddress()
-     */
-    public function testIsEmailAddressInvalidDomainBeginsDash()
-    {
-        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress('test@-localhost.localdomain'));
-    }
-
-    /**
-     * Invalid email domain address that ends with a dash
-     *
-     * Tests modSimpleEmailForm::isEmailAddress()
-     */
-    public function testIsEmailAddressInvalidDomainEndsDash()
-    {
-        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress('test@localhost.localdomain-'));
-    }
-
-    /**
-     * Email address with IP address as domain
-     *
-     * Tests modSimpleEmailForm::isEmailAddress()
-     */
-    public function testIsEmailAddressWithIPDomain()
-    {
-        $this->assertTrue($this->modSimpleEmailForm->isEmailAddress('test@127.0.0.1'));
-    }
-
-    /**
-     * Invalid local email address that ends with a dot
-     *
-     * Tests modSimpleEmailForm::isEmailAddress()
-     */
-    public function testIsEmailAddressInvalidLocalThatEndsWithDot()
-    {
-        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress('test.@local'));
-    }
-
-    /**
-     * Invalid local email address with IP address as domain
-     *
-     * Tests modSimpleEmailForm::isEmailAddress()
-     */
-    public function testIsEmailAddressInvalidLocalWithIPDomain()
-    {
-        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress('test.@127.0.0.1'));
-    }
-
-    /**
-     * Empty local email address
-     *
-     * Tests modSimpleEmailForm::isEmailAddress()
-     */
-    public function testIsEmailAddressEmptyLocal()
-    {
-        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress('@localhost.localdomain'));
-    }
-
-    /**
-     * Local email address with space
-     *
-     * Tests modSimpleEmailForm::isEmailAddress()
-     */
-    public function testIsEmailAddressLocalWithSpace()
-    {
-        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress(' @localhost.localdomain'));
+        return (string) $address;
     }
 
     /**
@@ -305,7 +276,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      *
      * Tests modSimpleEmailForm::isEmailAddress()
      */
-    public function testIsEmailAddressLocalGreaterThan64()
+    public function getLocalGreaterThan64()
     {
         $address = '';
 
@@ -313,23 +284,12 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 
         while ($i < 65) {
             $address .= 'a';
-
             $i++;
         }
 
         $address .= '@localhost.localdomain';
 
-        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress($address));
-    }
-
-    /**
-     * Empty local email address with IP address as domain
-     *
-     * Tests modSimpleEmailForm::isEmailAddress()
-     */
-    public function testIsEmailAddressEmptyLocalWithIPDomain()
-    {
-        $this->assertFalse($this->modSimpleEmailForm->isEmailAddress('@127.0.0.1'));
+        return (string) $address;
     }
 
     /**
