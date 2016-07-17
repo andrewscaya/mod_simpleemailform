@@ -1,5 +1,21 @@
 <?php
 
+namespace ModSimpleEmailFormTest;
+
+use PHPUnit_Framework_TestCase;
+use Mockery;
+use \_SimpleEmailForm;
+use \modSimpleEmailForm;
+use \DOMDocument;
+use JFactory;
+use JDocument;
+use JMail;
+
+/**
+ * @runTestsInSeparateProcesses
+ * @preserveGlobalState disabled
+ */
+
 /**
  * modSimpleEmailForm test case.
  */
@@ -17,6 +33,12 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      * @var modSimpleEmailForm
      */
     private $modSimpleEmailFormReflection;
+
+    /**
+     *
+     * @var ReflectionProperty
+     */
+    private $fieldProperty;
 
     /**
      *
@@ -120,13 +142,51 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
     /**
      * Tests modSimpleEmailForm->sendResults()
      */
-//     public function testSendResults()
-//     {
-//         // TODO Auto-generated modSimpleEmailFormTest->testSendResults()
-//         $this->markTestIncomplete("sendResults test not implemented");
+    public function testSendResults()
+    {
+        $this->setFieldPropertyAccessible();
 
-//         $this->modSimpleEmailForm->sendResults(/* parameters */);
-//     }
+        $msg = new \_SimpleEmailForm();
+
+        $jFactoryMock = Mockery::mock('overload:JFactory');
+        $jDocumentMock = Mockery::mock('overload:JDocument');
+        $jMailMock = Mockery::mock('overload:JMail');
+        $jMailMock->shouldReceive('addRecipient')
+                  ->once()
+                  ->with($msg->to)
+                  ->andReturn(true);
+        $jMailMock->shouldReceive('setSender')
+                  ->once()
+                  ->with($msg->from)
+                  ->andReturn(true);
+        $jMailMock->shouldReceive('setSubject')
+                  ->once()
+                  ->with($msg->subject)
+                  ->andReturn(true);
+        $jMailMock->shouldReceive('setBody')
+                  ->once()
+                  ->with($msg->body)
+                  ->andReturn(true);
+        $jMailMock->shouldReceive('send')
+                  ->once()
+                  ->andReturn(true);
+        $jFactoryMock->shouldReceive('getDocument')
+            ->once()
+            ->andReturn($jDocumentMock);
+        $jFactoryMock->shouldReceive('getMailer')
+            ->once()
+            ->andReturn($jMailMock);
+
+        $result = $this->modSimpleEmailForm->sendResults($msg, $this->fieldProperty->getValue($this->modSimpleEmailForm));
+
+        $this->assertTrue($result);
+    }
+
+    protected function setFieldPropertyAccessible()
+    {
+        $this->fieldProperty = $this->modSimpleEmailFormReflection->getProperty('_field');
+        $this->fieldProperty->setAccessible(true);
+    }
 
     /**
      * Tests modSimpleEmailForm->imageCaptcha()
@@ -306,7 +366,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
     */
     public function testFormatErrorMessage($expectedResult, $color, $message, $fn = '')
     {
-        $this->setformatErrorMessageMethodAccessible();
+        $this->setFormatErrorMessageMethodAccessible();
 
         $actualResult = $this->formatErrorMessageMethod->invokeArgs(
             $this->modSimpleEmailForm,
@@ -357,7 +417,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    protected function setformatErrorMessageMethodAccessible()
+    protected function setFormatErrorMessageMethodAccessible()
     {
         $this->formatErrorMessageMethod = $this->modSimpleEmailFormReflection->getMethod('formatErrorMessage');
         $this->formatErrorMessageMethod->setAccessible(true);
