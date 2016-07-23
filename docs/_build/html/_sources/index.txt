@@ -5,8 +5,6 @@ Welcome to Simple Email Form's documentation!
 .. image:: /images/logo.png
 Home Page : `<http://joomla.unlikelysource.org/>`_
 
-Contents:
-
 .. toctree::
    :maxdepth: 2
 
