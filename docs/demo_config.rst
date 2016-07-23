@@ -1,7 +1,7 @@
 .. _DemoConfigAnchor:
 
-Simple Email Form Module Configuration for This Website
-=======================================================
+Simple Email Form's Configuration Example
+=========================================
 
 .. image:: /images/demo_config_screenshot01.png
 .. image:: /images/demo_config_screenshot02.png
