@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installation options &mdash; Simple Email Form 2.0a1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0a1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Simple Email Form 2.0a1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">Simple Email Form 2.0a1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="installation-options">
+<span id="installationoptionsanchor"></span><h1>Installation options<a class="headerlink" href="#installation-options" title="Permalink to this headline">¶</a></h1>
+<p>At the top you will see options to set the language used by the form.
+Language files can be found and edited at /path/to/joomla/modules/mod_simpleemailform/language_files.</p>
+<p>Under that you <em>must</em> enter an email address next to <em>Send Results To</em>.
+This is the destination address where information gathered by the simple
+email form will be sent.</p>
+<img alt="_images/installation_options01.png" src="_images/installation_options01.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>when you move your mouse over any of the fields, additional explanation boxes will pop up to assist you during module configuration.</p>
+<p class="last">New to version <em>1.8.5</em> the default values now appear using the HTML5 placeholder attribute.  Defaults will not appear in Textarea fields.</p>
+</div>
+<p>To set a default for a radio button, drop-down select, or checkbox field, just make sure the desired default value is the first one specified.  (See notes below for more information.)</p>
+<p>In version <em>1.8.x</em> fields can now be normal (text), textarea, radio buttons, checkboxes, or dropdown (select).
+For dropdown (select), radio button, or checkbox fields, you can populate them by supplying default values in this format:</p>
+<p>A=Apple,B=Banana,C=Cantelope</p>
+<p>In this case, the customer will see Apple, Banana and Cantelope on screen.
+If &#8220;Apple&#8221; is chosen, &#8220;A&#8221; is returned, etc.</p>
+<p>For textareas, you need to specify, in the size field, a value: rows,cols</p>
+<p>So if you enter 4,40 you will get a textarea of 4 rows X 40 columns, etc.</p>
+<p><em>If you place your mouse over any of the options, a pop-up description will appear with more information.</em></p>
+<p>The appearance of the module configuration screen has changed in 1.8.1.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">this article is still under construction and will be updated over time!</p>
+</div>
+<img alt="_images/installation_options02.png" src="_images/installation_options02.png" />
+<p>Choose from 26 different languages</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">at this time the module is not integrated with Joomla native language support.</p>
+</div>
+<p>Hopefully that will be available in the future.</p>
+<p>Send results to this email address.   If more than one, separate with commas or spaces.</p>
+<p>Choose to have the labels aligned LEFT,RIGHT, or CENTER.</p>
+<img alt="_images/installation_options03.png" src="_images/installation_options03.png" />
+<p>The first field defaults to <em>From</em></p>
+<p>Any field can be Active (Yes), inactive (No), Required, or Hidden.</p>
+<p>If the field is not a radio button or checkbox field: <em>ignore</em> FIELD x FORMAT and FIELD x BEFORE/AFTER!!!</p>
+<p><em>Hidden Fields</em></p>
+<ul class="simple">
+<li>will not appear on screen</li>
+<li>the value will appear automatically in the email sent to you</li>
+</ul>
+<p>Format and Before/After are ignored for this field type.</p>
+<img alt="_images/installation_options04.png" src="_images/installation_options04.png" />
+<p>The second field defaults to <em>Subject</em>.</p>
+<p>The default value is what will appear in the form next to &#8220;Subject&#8221;.</p>
+<p>Whatever the user enters will become the &#8220;Subject&#8221; in the email sent to you.</p>
+<p>Format and Before/After are ignored for this field type.</p>
+<img alt="_images/installation_options05.png" src="_images/installation_options05.png" />
+<p>Above is an example of a <em>Normal</em> text field.</p>
+<p>This field will appear as one line on your input form.</p>
+<p>If you do not wish to enter a default value, make sure to hit the <em>spacebar</em>!</p>
+<p>You can configure the size of the field which will appear in your email form (ignored if you want this field to be a textarea).</p>
+<p>You can also configure the maximum number of characters allowed in this field.</p>
+<p>Format and Before/After are ignored for this field type.</p>
+<img alt="_images/installation_options06.png" src="_images/installation_options06.png" />
+<p>Above is an example of a <em>Textarea</em>.</p>
+<p>You must enter the &#8220;Display SIze of Field x&#8221; parameter as two values separated by a comma: <em>rows, columns</em>.</p>
+<p>The example above will display a textarea for comments 4 rows by 60 columns in size.</p>
+<p>Maximum length and display size are ignored.</p>
+<p>Format and Before/After are ignored for this field type.</p>
+<img alt="_images/installation_options07.png" src="_images/installation_options07.png" />
+<p>The example above is an example of <em>Radio Buttons</em>.</p>
+<p>Enter options separated by commas as follows: return1=visible1,return2=visible2</p>
+<p>returnX will be the value returned in the email message sent when that button is selected and</p>
+<p>visibleX  is what is visible onscreen</p>
+<p>Horizontal format is table/row/col/col/col; Vertical format is table/row/col/col/row/col/col.</p>
+<p>Use CSS (default) assumes you will use CSS.</p>
+<p>You can also choose whether the label  appears <em>before</em> or <em>after</em> the button.</p>
+<img alt="_images/installation_options08.png" src="_images/installation_options08.png" />
+<p>The example above is an example of <em>Checkboxes</em>.</p>
+<p>Enter options separated by commas as follows: return1=visible1,return2=visible2</p>
+<p>returnX will be the value returned in the email message sent when that button is selected and</p>
+<p>visibleX  is what is visible onscreen</p>
+<p>Horizontal format is table/row/col/col/col; Vertical format is table/row/col/col/row/col/col.</p>
+<p>Use CSS (default) assumes you will use CSS.</p>
+<p>You can also choose whether the label  appears <em>before</em> or <em>after</em> the checkbox.</p>
+<img alt="_images/installation_options09.png" src="_images/installation_options09.png" />
+<p>The example above is an example of <em>Drop (Select)</em>.</p>
+<p>Enter options separated by commas as follows: return1=visible1,return2=visible2</p>
+<p>returnX will be the value returned in the email message sent when that button is selected and</p>
+<p>visibleX  is what is visible onscreen</p>
+<p>Format and Before/After are ignored for this field type.</p>
+<img alt="_images/installation_options10.png" src="_images/installation_options10.png" />
+<p>Set the above option to YES if you wish to have form fields automatically reset after form submission.</p>
+<p>For <strong>any</strong> of the options, including <em>Advanced Options</em>, for more help, simply move your mouse over the field!</p>
+<p>For <em>Redirect URL</em> make sure you enter a <strong>fully formed</strong> URL.</p>
+<p>Example: do enter &#8220;<a class="reference external" href="http://www.unlikelysource.com/">http://www.unlikelysource.com/</a>&#8220;</p>
+<p>do not enter &#8220;www.unlikelysource.com&#8221;</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">CAPTCHA options only apply to Image CAPTCHAs!</p>
+</div>
+<img alt="_images/installation_options11.png" src="_images/installation_options11.png" />
+<img alt="_images/installation_options12.png" src="_images/installation_options12.png" />
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/installation_options.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="index.html">Simple Email Form 2.0a1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, Doug Bierer, Andrew Caya and Martin Beaudry.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
