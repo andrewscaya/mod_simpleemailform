@@ -42,9 +42,21 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 
     /**
      *
+     * @var ReflectionProperty
+     */
+    private $fieldPrefixProperty;
+
+    /**
+     *
      * @var ReflectionMethod
      */
     private $formatErrorMessageMethod;
+
+    /**
+     *
+     * @var ReflectionMethod
+     */
+    private $buildCheckRadioFieldMethod;
 
     /**
      * Color argument
@@ -140,6 +152,134 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 //     }
 
     /**
+     * Tests modSimpleEmailForm->buildCheckRadioField()
+     *
+     * @param string a format type
+     *
+     * @dataProvider providerTestBuildCheckRadioField
+     */
+    public function testBuildCheckRadioField($expectedResult, $ckRfmt, $ckRpos)
+    {
+        $this->setFieldPropertyAccessible();
+
+        $this->setFieldPrefixPropertyAccessible();
+
+        $this->setBuildCheckRadioFieldMethodAccessible();
+
+        $fields = $this->fieldProperty->getValue($this->modSimpleEmailForm);
+
+        $fields[1]['value'] = array('test' => 'TEST');
+
+        $fields[1]['ckRfmt'] = $ckRfmt;
+
+        $fields[1]['ckRpos'] = $ckRpos;
+
+        $fieldPrefixes = $this->fieldPrefixProperty->getValue($this->modSimpleEmailForm);
+
+        $name = $fieldPrefixes . '1_1';
+
+        $output = $this->buildCheckRadioFieldMethod->invokeArgs(
+            $this->modSimpleEmailForm,
+            array($fields[1], $name, 'radio', array('test'))
+        );
+
+        $doc = new \DOMDocument();
+        $doc->loadHTML($output);
+
+        $xpath = new \DOMXPath($doc);
+
+        if (!empty($fields[1]['ckRfmt']) && !empty($fields[1]['ckRpos']) && $fields[1]['ckRfmt'] != 'C') {
+            $table = $doc->getElementsByTagName('table')->item(0);
+            $node = $xpath->query('*', $table)->item(0)->firstChild;
+            $this->assertSame($expectedResult, $node->nodeName);
+
+            if ($fields[1]['ckRpos'] == 'B') {
+                $this->assertSame('TEST', substr($node->nodeValue, 4, 4));
+                $this->assertEquals(1, preg_match('/TEST.+<input/i', $output));
+            } else {
+                $node = $doc->getElementsByTagName('th')->item(0);
+                $this->assertSame('TEST', substr($node->nodeValue, 4, 4));
+                $this->assertEquals(1, preg_match('/<input.+TEST/i', $output));
+            }
+
+            $nodeList = $doc->getElementsByTagName('input');
+            $this->assertEquals('radio', $nodeList->item(0)->getAttributeNode('type')->value);
+            $this->assertEquals('mod_simpleemailform_field1_1_test', $nodeList->item(0)->getAttributeNode('id')->value);
+            $this->assertEquals('test', $nodeList->item(0)->getAttributeNode('value')->value);
+        } elseif (!empty($fields[1]['ckRfmt']) && !empty($fields[1]['ckRpos']) && $fields[1]['ckRfmt'] == 'C') {
+            $span = $doc->getElementsByTagName('span')->item(0);
+            $node = $xpath->query('*', $span)->item(0);
+            $this->assertSame($expectedResult, $node->nodeName);
+
+            if ($fields[1]['ckRpos'] == 'B') {
+                $this->assertSame('TEST', substr($span->nodeValue, 4, 4));
+                $this->assertEquals(1, preg_match('/TEST.+<input/i', $output));
+            } else {
+                $node = $doc->getElementsByTagName('th')->item(0);
+                $this->assertSame('TEST', substr($span->nodeValue, 4, 4));
+                $this->assertEquals(1, preg_match('/<input.+TEST/i', $output));
+            }
+
+            $nodeList = $doc->getElementsByTagName('input');
+            $this->assertEquals('radio', $nodeList->item(0)->getAttributeNode('type')->value);
+            $this->assertEquals('mod_simpleemailform_field1_1_test', $nodeList->item(0)->getAttributeNode('id')->value);
+            $this->assertEquals('test', $nodeList->item(0)->getAttributeNode('value')->value);
+        } else {
+            $table = $doc->getElementsByTagName('table')->item(0);
+            $node = $xpath->query('*', $table)->item(0)->firstChild;
+            $this->assertSame($expectedResult, $node->nodeName);
+
+            $nodeList = $doc->getElementsByTagName('td');
+            $this->assertEquals('Undefined', $nodeList->item(0)->nodeValue);
+        }
+    }
+
+    public function providerTestBuildCheckRadioField()
+    {
+        return array(
+            array(
+                'th', 'H', 'B'
+            ),
+            array(
+                'td', 'H', 'A'
+            ),
+            array(
+                'th', 'V', 'B'
+            ),
+            array(
+                'td', 'V', 'A'
+            ),
+            array(
+                'input', 'C', 'B'
+            ),
+            array(
+                'input', 'C', 'A'
+            ),
+            array(
+                'td', '', ''
+            ),
+        );
+    }
+
+    protected function setFieldPropertyAccessible()
+    {
+        $this->fieldProperty = $this->modSimpleEmailFormReflection->getProperty('_field');
+        $this->fieldProperty->setAccessible(true);
+    }
+
+    protected function setFieldPrefixPropertyAccessible()
+    {
+        $this->fieldPrefixProperty = $this->modSimpleEmailFormReflection->getProperty('_fieldPrefix');
+        $this->fieldPrefixProperty->setAccessible(true);
+    }
+
+    protected function setBuildCheckRadioFieldMethodAccessible()
+    {
+        $this->buildCheckRadioFieldMethod = $this->modSimpleEmailFormReflection->getMethod('buildCheckRadioField');
+        $this->buildCheckRadioFieldMethod->setAccessible(true);
+    }
+
+    /**
      * Tests modSimpleEmailForm->sendResults()
      */
     public function testSendResults()
@@ -180,12 +320,6 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
         $result = $this->modSimpleEmailForm->sendResults($msg, $this->fieldProperty->getValue($this->modSimpleEmailForm));
 
         $this->assertTrue($result);
-    }
-
-    protected function setFieldPropertyAccessible()
-    {
-        $this->fieldProperty = $this->modSimpleEmailFormReflection->getProperty('_field');
-        $this->fieldProperty->setAccessible(true);
     }
 
     /**
@@ -428,7 +562,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      */
     public function testMain()
     {
-        $doc = new DOMDocument();
+        $doc = new \DOMDocument();
         $doc->loadHTML($this->modSimpleEmailForm->main());
         $nodeList = $doc->getElementsByTagName('form');
         $this->assertEquals(1, count($nodeList));

@@ -324,6 +324,11 @@ class modSimpleEmailForm
         $this->_csrfField = $this->_fieldPrefix . '_oneTime_' . $this->_instance;
     }
 
+    // Code coverage will be ignored as this part of the code is tested by phpt files.
+    /**
+     * @codeCoverageIgnoreStart
+     */
+
     /**
      * Assumes $this->_transLang[] has been defined
      */
@@ -381,6 +386,10 @@ class modSimpleEmailForm
         }
         return null;
     }
+
+    /**
+     * @codeCoverageIgnoreEnd
+     */
 
     // uses $this->_labelAlign, $this->_col2space, $this->_errorTxtColor, $this->_field, $this->_maxFields
     public function formatRow()
