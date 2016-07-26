@@ -45,7 +45,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      * @var ReflectionProperty
      */
     private $fieldPrefixProperty;
-    
+
     /**
      *
      * @var ReflectionProperty
@@ -63,13 +63,13 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      * @var ReflectionMethod
      */
     private $buildCheckRadioFieldMethod;
-    
+
     /**
      *
      * @var ReflectionMethod
      */
     private $renderCaptchaMethod;
-    
+
     /**
      *
      * @var ReflectionMethod
@@ -364,7 +364,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
         $match = '';
         $output = $this->modSimpleEmailForm->textCaptcha('white', $captchaLen, 1, 'red', 1, $textCaptcha);
         $this->assertEquals($captchaLen, strlen($output));
-        
+
         //@todo This part depends on styling being implemented in modSimpleEmailForm::textCaptcha
         //$doc = new \DOMDocument();
         //$doc->loadHTML($output);
@@ -393,31 +393,31 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
             ),
         );
     }
-    
+
     /**
      * Tests modSimpleEmailForm::FormatErrorMessage()
      */
-    
+
     /**
      * @param string we expect to be returned by formatErrorMessage
      * @param string representing the color sent as an argument to formatErrorMessage
      * @param string representing the message sent as an argument to formatErrorMessage
      * @param string representing the filename sent as an argument to formatErrorMessage
-    
+
      * @dataProvider providerTestFormatErrorMessage
      */
     public function testFormatErrorMessage($expectedResult, $color, $message, $fn = '')
     {
         $this->setFormatErrorMessageMethodAccessible();
-    
+
         $actualResult = $this->formatErrorMessageMethod->invokeArgs(
             $this->modSimpleEmailForm,
             array($color, $message, $fn)
-            );
-    
+        );
+
         $this->assertSame($expectedResult, $actualResult);
     }
-    
+
     public function providerTestFormatErrorMessage()
     {
         return array(
@@ -435,7 +435,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
             //array(<p><b><span style='color:$this->color;'>$this->standardMessage
             //     ('Warning - Invalid filename: no alnum character')</span></b></p>\n",
             //     $this->color, $this->standardMessage, $this->emptyFn),
-    
+
             //Three tests to check the behaviour with messages
             //Test 4: Null message - to be replaced by the commented test below
             array("<p><b><span style='color:$this->color;'>$this->nullMessage ($this->standardFn)</span></b></p>\n",
@@ -458,7 +458,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
             //If it's not, all previous tests will fail.
             );
     }
-    
+
     protected function setFormatErrorMessageMethodAccessible()
     {
         $this->formatErrorMessageMethod = $this->modSimpleEmailFormReflection->getMethod('formatErrorMessage');
@@ -606,66 +606,66 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 
         return (string) $address;
     }
-    
+
     /**
      * Tests modSimpleEmailForm::renderCaptcha()
      */
     public function testRenderCaptcha()
     {
         $this->setRenderCaptchaMethodAccessible();
-        
+
         $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
-        
+
         $output = $this->renderCaptchaMethod->invokeArgs(
             $this->modSimpleEmailForm,
             array()
         );
-        
+
         $doc = new \DOMDocument();
         $doc->loadHTML($output);
         $captchaInputNode = $doc->getElementsByTagName('input')->item(0);
         $this->assertSame('mod_simpleemailform_captcha_1', $captchaInputNode->getAttributeNode('name')->value);
     }
-    
+
     protected function setRenderCaptchaMethodAccessible()
     {
         $this->renderCaptchaMethod = $this->modSimpleEmailFormReflection->getMethod('renderCaptcha');
         $this->renderCaptchaMethod->setAccessible(true);
     }
-    
+
     /**
      * Tests modSimpleEmailForm::cleanupCaptchas()
      */
     public function testCleanupCaptchas()
     {
         $this->setCleanupCaptchasMethodAccessible();
-        
+
         $_SERVER['HTTP_HOST'] = 'localhost';
-    
+
         $output = $this->cleanupCaptchasMethod->invokeArgs(
             $this->modSimpleEmailForm,
             array()
         );
-    
+
         $doc = new \DOMDocument();
         $doc->loadHTML($output);
         $spanNode = $doc->getElementsByTagName('span')->item(0);
         $this->assertSame('Unable to cleanup old CAPTCHAs', $spanNode->nodeValue);
     }
-    
+
     protected function setCleanupCaptchasMethodAccessible()
     {
         $this->cleanupCaptchasMethod = $this->modSimpleEmailFormReflection->getMethod('cleanupCaptchas');
         $this->cleanupCaptchasMethod->setAccessible(true);
     }
-    
+
     /**
      * Tests modSimpleEmailForm::compareCsrfHash()
-     * 
+     *
      * @param bool representing the expected result
-     * 
+     *
      * @param string representing the form's CSRF
-     * 
+     *
      * @param string representing the session's CSRF
      *
      * @dataProvider providerTestCompareCsrfHash
@@ -674,30 +674,30 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
     {
         $this->setCsrfFieldPropertyAccessible();
         $this->setCompareCsrfHashMethodAccessible();
-        
+
         $csrfFieldValue = $this->csrfFieldProperty->getValue($this->modSimpleEmailForm);
-        
+
         $_POST[$csrfFieldValue] = $formCsrf;
-        
+
         $_SESSION[$csrfFieldValue] = $formSess;
-    
+
         $output = $this->compareCsrfHashMethod->invokeArgs(
             $this->modSimpleEmailForm,
             array()
         );
-    
+
         if ($expected) {
             $this->assertTrue($output);
         } else {
             $this->assertFalse($output);
         }
     }
-    
+
     public function providerTestCompareCsrfHash()
     {
         $string1 = substr(str_shuffle(MD5(microtime())), 0, 10);
         $string2 = substr(str_shuffle(MD5(microtime())), 0, 10);
-        
+
         return array(
             array(
                 true, $string1, $string1
@@ -710,13 +710,13 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
             ),
         );
     }
-    
+
     protected function setCsrfFieldPropertyAccessible()
     {
         $this->csrfFieldProperty = $this->modSimpleEmailFormReflection->getProperty('_csrfField');
         $this->csrfFieldProperty->setAccessible(true);
     }
-    
+
     protected function setCompareCsrfHashMethodAccessible()
     {
         $this->compareCsrfHashMethod = $this->modSimpleEmailFormReflection->getMethod('compareCsrfHash');

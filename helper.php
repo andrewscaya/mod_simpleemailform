@@ -3,7 +3,7 @@
         mod_simpleEmailForm.php
 
         Copyright 2010 - 2016 D. Bierer <doug@unlikelysource.com>
-		Version	1.8.9
+        Version 1.8.9
 
         This program is free software; you can redistribute it and/or modify
         it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
         * fixed error where session 1 time hash key not set 1st time generates notice
         * fixed bug whereby page not found was generated after form posting; removed "#" as default "anchor" tag
         * see: http://joomla.stackexchange.com/questions/16051/fix-the-invalid-address-error-after-upgrading-to-joomla-3-5-1
-		* @TODO: convert to JForm
+	* @TODO: convert to JForm
 */
 
 class _SimpleEmailForm
@@ -844,10 +844,10 @@ class modSimpleEmailForm
         }
 
         /*
-		 * Check the local address
-		 * We're a bit more conservative about what constitutes a "legal" address, that is, A-Za-z0-9!#$%&\'*+/=?^_`{|}~-
-		 * Also, the last character in local cannot be a period ('.')
-		 */
+         * Check the local address
+         * We're a bit more conservative about what constitutes a "legal" address, that is, A-Za-z0-9!#$%&\'*+/=?^_`{|}~-
+         * Also, the last character in local cannot be a period ('.')
+         */
         $allowed = 'A-Za-z0-9!#&*+=?_-';
         $regex = "/^[$allowed][\.$allowed]{0,63}$/";
         if (!preg_match($regex, $local) || substr($local, -1) == '.') {
@@ -864,7 +864,7 @@ class modSimpleEmailForm
         $domain_array = explode(".", rtrim($domain, '.'));
         $regex = '/^[A-Za-z0-9-]{0,63}$/';
         foreach ($domain_array as $domain) {
-        // Must be something
+            // Must be something
             if (!$domain) {
                 return false;
             }
@@ -1035,13 +1035,13 @@ class modSimpleEmailForm
     {
         $inputClass = $this->_inputClass . '_upload';
         return "<br />"
-               . "<input "
-                    . "type=file "
-                    . "name='mod_simpleemailform_upload_" . $fieldNum . '_' . $this->_instance . "' "
-                    . "id='mod_simpleemailform_upload_" . $fieldNum . '_' . $this->_instance . "' "
-                    . "enctype='multipart/form-data' "
-                    . "class='" . $inputClass . "'"
-                    . " />";
+                . "<input "
+                . "type=file "
+                . "name='mod_simpleemailform_upload_" . $fieldNum . '_' . $this->_instance . "' "
+                . "id='mod_simpleemailform_upload_" . $fieldNum . '_' . $this->_instance . "' "
+                . "enctype='multipart/form-data' "
+                . "class='" . $inputClass . "'"
+                . " />";
     }
 
     // 2015-04-23 DB: builds 1 time hash + stores in $_SESSION
