@@ -133,7 +133,7 @@ class modSimpleEmailForm
         $this->_testMode        = $params->get('mod_simpleemailform_testMode');
         // error checking for all incoming params
         $this->_instance        = trim($this->_instance);
-        $this->_redirectURL         = trim($this->_redirectURL);
+        $this->_redirectURL     = trim($this->_redirectURL);
         $this->_col2space       = (int) $this->_col2space;
         $this->_uploadActive    = (int) $this->_uploadActive;
         $this->_uploadAllowed   = strtolower(trim($this->_uploadAllowed));
@@ -158,7 +158,7 @@ class modSimpleEmailForm
         $this->_trClass         = $this->_cssClass . "_tr";
         $this->_thClass         = $this->_cssClass . "_th";
         $this->_spaceClass      = $this->_cssClass . "_space";
-        $this->_tdClass             = $this->_cssClass . "_td";
+        $this->_tdClass         = $this->_cssClass . "_td";
         $this->_inputClass      = $this->_cssClass . "_input";
         $this->_captchaClass    = $this->_cssClass . "_captcha";
         // Assign field params into array
@@ -765,6 +765,9 @@ class modSimpleEmailForm
         return $c->getPhrase();
     }
 
+    // @todo Add styling - the textCaptcha only returns the phrase without styling
+    // @todo Implement font size
+    // @todo Implement captcha width
     public function textCaptcha(
         $captchaBgColor,
         $captchaLen,
