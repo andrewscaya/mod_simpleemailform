@@ -4,3 +4,5 @@ composer.lock
 .settings/
 .project
 .buildpath
+deployment.xml
+deployment.properties
