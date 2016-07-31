@@ -79,29 +79,43 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
     /**
      * Color argument
      *
-     * @var color
+     * @var string
      */
     protected $color = 'red';
 
     /**
      * Message argument
      *
-     * @var standardMessage
-     * @var nullMessage
-     * @var emptyMessage
+     * @var string
      */
     protected $standardMessage = 'This is a test';
+    
+    /**
+     * Message argument
+     *
+     * @var null
+     */
     protected $nullMessage = null;
+    
+    /**
+     * Message argument
+     *
+     * @var string
+     */
     protected $emptyMessage = ' ';
 
-    //
     /**
      * Filename argument
      *
-     * @var standardFn
-     * @var emptyFn
+     * @var string
      */
     protected $standardFn = 'test.php';
+    
+    /**
+     * Filename argument
+     *
+     * @var string
+     */
     protected $emptyFn = ' ';
 
     /**
@@ -134,12 +148,18 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 
         parent::tearDown();
     }
-
+    
+    /**
+     * Tests modSimpleEmailForm::__construct()
+     */
     public function testmodSimpleEmailFormConstruct()
     {
         $this->assertInstanceOf('modSimpleEmailForm', $this->modSimpleEmailForm);
     }
-
+    
+    /**
+     * Tests modSimpleEmailForm::uploadAttachment()
+     */
     public function testAllPhptFiles()
     {
         $tests = glob('test/phpt/*.phpt');
@@ -172,7 +192,9 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
     /**
      * Tests modSimpleEmailForm::buildCheckRadioField()
      *
-     * @param string a format type
+     * @param string containing the expected result
+     * @param string signifying form disposition
+     * @param string signifying label position
      *
      * @dataProvider providerTestBuildCheckRadioField
      */
@@ -365,7 +387,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
         $output = $this->modSimpleEmailForm->textCaptcha('white', $captchaLen, 1, 'red', 1, $textCaptcha);
         $this->assertEquals($captchaLen, strlen($output));
 
-        //@todo This part depends on styling being implemented in modSimpleEmailForm::textCaptcha
+        //@todo This part depends on styling being implemented in modSimpleEmailForm::textCaptcha()
         //$doc = new \DOMDocument();
         //$doc->loadHTML($output);
 
@@ -454,7 +476,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
             //Test 6: Valid message
             array("<p><b><span style='color:$this->color;'>$this->standardMessage ($this->standardFn)</span></b></p>\n",
                 $this->color, $this->standardMessage, $this->standardFn),
-                //No test required for color. Only issue is whether it is put in the right place in the string or not.
+            //No test required for color. Only issue is whether it is put in the right place in the string or not.
             //If it's not, all previous tests will fail.
             );
     }
@@ -569,8 +591,6 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 
     /**
      * Invalid email domain address with more than 63 characters
-     *
-     * Tests modSimpleEmailForm::isEmailAddress()
      */
     public function getDomainGreaterThan63()
     {
@@ -588,8 +608,6 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 
     /**
      * Greater than 64 characters long local email address
-     *
-     * Tests modSimpleEmailForm::isEmailAddress()
      */
     public function getLocalGreaterThan64()
     {
@@ -663,9 +681,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      * Tests modSimpleEmailForm::compareCsrfHash()
      *
      * @param bool representing the expected result
-     *
      * @param string representing the form's CSRF
-     *
      * @param string representing the session's CSRF
      *
      * @dataProvider providerTestCompareCsrfHash
