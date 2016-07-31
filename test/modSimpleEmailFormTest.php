@@ -89,14 +89,14 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      * @var string
      */
     protected $standardMessage = 'This is a test';
-    
+
     /**
      * Message argument
      *
      * @var null
      */
     protected $nullMessage = null;
-    
+
     /**
      * Message argument
      *
@@ -110,7 +110,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      * @var string
      */
     protected $standardFn = 'test.php';
-    
+
     /**
      * Filename argument
      *
@@ -148,7 +148,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 
         parent::tearDown();
     }
-    
+
     /**
      * Tests modSimpleEmailForm::__construct()
      */
@@ -156,7 +156,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf('modSimpleEmailForm', $this->modSimpleEmailForm);
     }
-    
+
     /**
      * Tests modSimpleEmailForm::uploadAttachment()
      */
