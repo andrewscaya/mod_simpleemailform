@@ -29,43 +29,43 @@
 
 class _SimpleEmailForm
 {
-    public $to          = null;
-    public $from        = null;
-    public $fromName    = null;
-    public $cc          = null;
-    public $bcc         = null;
-    public $replyTo     = null;
+    public $to            = null;
+    public $from          = null;
+    public $fromName      = null;
+    public $cc            = null;
+    public $bcc           = null;
+    public $replyTo       = null;
     public $replyToActive = false;
-    public $attachment  = array();
-    public $subject     = '';
-    public $body        = '';
-    public $dir         = '';
-    public $copyMe      = '';
-    public $copyMeAuto  = '';
-    public $error       = '';
+    public $attachment    = array();
+    public $subject       = '';
+    public $body          = '';
+    public $dir           = '';
+    public $copyMe        = '';
+    public $copyMeAuto    = '';
+    public $error         = '';
 }
 
 class modSimpleEmailForm
 {
 
     // Initialize vars
-    protected $_msg         = '';
-    protected $_output      = '';
+    protected $_msg          = '';
+    protected $_output       = '';
     // NOTE to developers: just increase this number for more fields
     // BUT you will have to also increase the number of entries in mod_simpleemailform.xml
-    protected $_maxFields   = 8;        // mixed From, Subject, text, textarea, dropdown select, radio, checkbox fields
-    protected $_field       = array();
-    protected $_badEmail    = '';
-    protected $_fromField   = 1;
-    protected $_subjectField= 2;
-    protected $_fileMsg     = array();
-    protected $_lang        = 'en-GB';
-    protected $_transLang   = array();
-    protected $_params      = array();
-    protected $_testMode    = 'N';
-    protected $_testInfo    = array();
-    protected $_fieldPrefix = 'mod_simpleemailform_field';
-    protected $_csrfField   = 'mod_simpleemailform_field_oneTime_1';
+    protected $_maxFields    = 8;        // mixed From, Subject, text, textarea, dropdown select, radio, checkbox fields
+    protected $_field        = array();
+    protected $_badEmail     = '';
+    protected $_fromField    = 1;
+    protected $_subjectField = 2;
+    protected $_fileMsg      = array();
+    protected $_lang         = 'en-GB';
+    protected $_transLang    = array();
+    protected $_params       = array();
+    protected $_testMode     = 'N';
+    protected $_testInfo     = array();
+    protected $_fieldPrefix  = 'mod_simpleemailform_field';
+    protected $_csrfField    = 'mod_simpleemailform_field_oneTime_1';
 
     // 2011-12-03 DB: added CSS styling for elements
     // Used if CSS Class param is set
@@ -121,7 +121,7 @@ class modSimpleEmailForm
         $this->_successTxtColor = $params->get('mod_simpleemailform_successTxtColor');
         $this->_anchor          = $params->get('mod_simpleemailform_anchor');
         $this->_autoReset       = $params->get('mod_simpleemailform_autoreset');
-        $this->_redirectURL         = $params->get('mod_simpleemailform_redirectURL');
+        $this->_redirectURL     = $params->get('mod_simpleemailform_redirectURL');
         $this->_col2space       = $params->get('mod_simpleemailform_col2space');
         $this->_uploadActive    = $params->get('mod_simpleemailform_uploadActive');
         $this->_uploadAllowed   = $params->get('mod_simpleemailform_uploadAllowed');

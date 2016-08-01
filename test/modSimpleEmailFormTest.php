@@ -143,19 +143,19 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
         $this->modSimpleEmailForm = null;
 
         $this->modSimpleEmailFormReflection = null;
-        
+
         $this->fieldProperty = null;
-        
+
         $this->fieldPrefixProperty = null;
-        
+
         $this->csrfFieldProperty = null;
-        
+
         $this->formatErrorMessageMethod = null;
-        
+
         $this->buildCheckRadioFieldMethod = null;
-        
+
         $this->renderCaptchaMethod = null;
-        
+
         $this->cleanupCaptchasMethod = null;
 
         parent::tearDown();
