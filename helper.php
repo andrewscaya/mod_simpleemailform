@@ -24,7 +24,7 @@
         * fixed error where session 1 time hash key not set 1st time generates notice
         * fixed bug whereby page not found was generated after form posting; removed "#" as default "anchor" tag
         * see: http://joomla.stackexchange.com/questions/16051/fix-the-invalid-address-error-after-upgrading-to-joomla-3-5-1
-	* @TODO: convert to JForm
+        * @TODO: convert to JForm
 */
 
 class _SimpleEmailForm
@@ -324,7 +324,7 @@ class modSimpleEmailForm
         $this->_csrfField = $this->_fieldPrefix . '_oneTime_' . $this->_instance;
     }
 
-    // Code coverage will be ignored as this part of the code is tested by phpt files.
+    // Code coverage - this part of the code will be ignored since it is tested by phpt files.
     /**
      * @codeCoverageIgnoreStart
      */

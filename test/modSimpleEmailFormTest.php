@@ -54,6 +54,18 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 
     /**
      *
+     * @var ReflectionProperty
+     */
+    private $msgProperty;
+
+    /**
+     *
+     * @var ReflectionProperty
+     */
+    private $testModeProperty;
+
+    /**
+     *
      * @var ReflectionMethod
      */
     private $formatErrorMessageMethod;
@@ -150,6 +162,10 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 
         $this->csrfFieldProperty = null;
 
+        $this->msgProperty = null;
+
+        $this->testModeProperty = null;
+
         $this->formatErrorMessageMethod = null;
 
         $this->buildCheckRadioFieldMethod = null;
@@ -157,6 +173,8 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
         $this->renderCaptchaMethod = null;
 
         $this->cleanupCaptchasMethod = null;
+
+        \Mockery::close();
 
         parent::tearDown();
     }
@@ -763,12 +781,70 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
     /**
      * Tests modSimpleEmailForm::main()
      */
-    public function testMain()
+    public function testMainReturnValueWithoutSubmit()
     {
         $doc = new \DOMDocument();
         $doc->loadHTML($this->modSimpleEmailForm->main());
         $nodeList = $doc->getElementsByTagName('form');
         $this->assertEquals(1, count($nodeList));
         $this->assertEquals('post', $nodeList->item(0)->getAttributeNode('method')->value);
+    }
+
+    /**
+     * Tests modSimpleEmailForm::main()
+     */
+    public function testMainReturnValueWithSubmit()
+    {
+        $this->setCsrfFieldPropertyAccessible();
+        $csrfFieldValue = $this->csrfFieldProperty->getValue($this->modSimpleEmailForm);
+
+        $this->setMsgPropertyAccessible();
+        $msgValue = $this->msgProperty->getValue($this->modSimpleEmailForm);
+
+        $_POST['mod_simpleemailform_submit_1'] = true;
+        $_POST[$csrfFieldValue] = 'test';
+        $_SESSION[$csrfFieldValue] = 'test';
+
+        $this->modSimpleEmailForm->main();
+
+        /* @todo assertions */
+    }
+
+    /**
+     * Tests modSimpleEmailForm::main()
+     */
+    public function testMainTestModeFalse()
+    {
+        $this->setTestModePropertyAccessible();
+
+        ini_set('display_errors', 0);
+        $this->testModeProperty->setValue($this->modSimpleEmailForm, 'N');
+        $this->modSimpleEmailForm->main();
+        $this->assertSame('0', ini_get('display_errors'));
+    }
+
+    /**
+     * Tests modSimpleEmailForm::main()
+     */
+    public function testMainTestModeTrue()
+    {
+        $this->setTestModePropertyAccessible();
+
+        ini_set('display_errors', 0);
+        $this->testModeProperty->setValue($this->modSimpleEmailForm, 'Y');
+        $this->modSimpleEmailForm->main();
+        $this->assertSame('1', ini_get('display_errors'));
+    }
+
+    protected function setMsgPropertyAccessible()
+    {
+        $this->msgProperty = $this->modSimpleEmailFormReflection->getProperty('_msg');
+        $this->msgProperty->setAccessible(true);
+    }
+
+    protected function setTestModePropertyAccessible()
+    {
+        $this->testModeProperty = $this->modSimpleEmailFormReflection->getProperty('_testMode');
+        $this->testModeProperty->setAccessible(true);
     }
 }
