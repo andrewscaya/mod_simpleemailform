@@ -736,6 +736,15 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
             array(
                 false, $string2, $string1
             ),
+            array(
+                false, null, $string1
+            ),
+            array(
+                false, $string2, null
+            ),
+            array(
+                false, null, null
+            ),
         );
     }
 
