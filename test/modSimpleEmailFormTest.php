@@ -532,7 +532,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
         );
 
         foreach ($_POST as $key => $value) {
-            $this->assertSame($value, '');
+            $this->assertTrue(empty($_POST[$key]));
         }
     }
 
