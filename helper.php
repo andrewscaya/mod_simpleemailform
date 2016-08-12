@@ -110,7 +110,6 @@ class modSimpleEmailForm
 
     public function __construct($params)
     {
-
         // Get XML params
         $this->_cssClass        = $params->get('mod_simpleemailform_cssClass');
         $this->_labelAlign      = $params->get('mod_simpleemailform_labelAlign');

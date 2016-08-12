@@ -36,63 +36,17 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 
     /**
      *
-     * @var ReflectionProperty
+     * @var Array
+     *        ReflectionProperty
      */
-    private $fieldProperty;
+    private $modSimpleEmailFormProperties = array();
 
     /**
      *
-     * @var ReflectionProperty
+     * @var Array
+     *        ReflectionMethod
      */
-    private $fieldPrefixProperty;
-
-    /**
-     *
-     * @var ReflectionProperty
-     */
-    private $csrfFieldProperty;
-
-    /**
-     *
-     * @var ReflectionProperty
-     */
-    private $msgProperty;
-
-    /**
-     *
-     * @var ReflectionProperty
-     */
-    private $testModeProperty;
-
-    /**
-     *
-     * @var ReflectionMethod
-     */
-    private $formatErrorMessageMethod;
-
-   /**
-     *
-     * @var ReflectionMethod
-     */
-    private $autoResetFormMethod;
-
-    /**
-     *
-     * @var ReflectionMethod
-     */
-    private $buildCheckRadioFieldMethod;
-
-    /**
-     *
-     * @var ReflectionMethod
-     */
-    private $renderCaptchaMethod;
-
-    /**
-     *
-     * @var ReflectionMethod
-     */
-    private $cleanupCaptchasMethod;
+    private $modSimpleEmailFormMethods = array();
 
     /**
      * Color argument
@@ -151,6 +105,10 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
         $this->modSimpleEmailForm = new modSimpleEmailForm($params);
 
         $this->modSimpleEmailFormReflection = new \ReflectionClass($this->modSimpleEmailForm);
+
+        $this->setAllPropertiesAccessible();
+
+        $this->setAllMethodsAccessible();
     }
 
     /**
@@ -162,29 +120,35 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 
         $this->modSimpleEmailFormReflection = null;
 
-        $this->fieldProperty = null;
+        $this->modSimpleEmailFormProperties = null;
 
-        $this->fieldPrefixProperty = null;
-
-        $this->csrfFieldProperty = null;
-
-        $this->msgProperty = null;
-
-        $this->testModeProperty = null;
-
-        $this->formatErrorMessageMethod = null;
-
-        $this->autoResetFormMethod = null;
-
-        $this->buildCheckRadioFieldMethod = null;
-
-        $this->renderCaptchaMethod = null;
-
-        $this->cleanupCaptchasMethod = null;
+        $this->modSimpleEmailFormMethods = null;
 
         \Mockery::close();
 
         parent::tearDown();
+    }
+
+    protected function setAllPropertiesAccessible()
+    {
+        $propertiesList = $this->modSimpleEmailFormReflection->getProperties();
+
+        for ($i = 0; $i < count($propertiesList); $i++) {
+            $key = $propertiesList[$i]->name;
+            $this->modSimpleEmailFormProperties[$key] = $propertiesList[$i];
+            $this->modSimpleEmailFormProperties[$key]->setAccessible(true);
+        }
+    }
+
+    protected function setAllMethodsAccessible()
+    {
+        $methodsList = $this->modSimpleEmailFormReflection->getMethods();
+
+        for ($i = 0; $i < count($methodsList); $i++) {
+            $key = $methodsList[$i]->name;
+            $this->modSimpleEmailFormMethods[$key] = $methodsList[$i];
+            $this->modSimpleEmailFormMethods[$key]->setAccessible(true);
+        }
     }
 
     /**
@@ -238,13 +202,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      */
     public function testBuildCheckRadioField($expectedResult, $ckRfmt, $ckRpos)
     {
-        $this->setFieldPropertyAccessible();
-
-        $this->setFieldPrefixPropertyAccessible();
-
-        $this->setBuildCheckRadioFieldMethodAccessible();
-
-        $fields = $this->fieldProperty->getValue($this->modSimpleEmailForm);
+        $fields = $this->modSimpleEmailFormProperties['_field']->getValue($this->modSimpleEmailForm);
 
         $fields[1]['value'] = array('test' => 'TEST');
 
@@ -252,11 +210,11 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 
         $fields[1]['ckRpos'] = $ckRpos;
 
-        $fieldPrefixes = $this->fieldPrefixProperty->getValue($this->modSimpleEmailForm);
+        $fieldPrefix = $this->modSimpleEmailFormProperties['_fieldPrefix']->getValue($this->modSimpleEmailForm);
 
-        $name = $fieldPrefixes . '1_1';
+        $name = $fieldPrefix . '1_1';
 
-        $output = $this->buildCheckRadioFieldMethod->invokeArgs(
+        $output = $this->modSimpleEmailFormMethods['buildCheckRadioField']->invokeArgs(
             $this->modSimpleEmailForm,
             array($fields[1], $name, 'radio', array('test'))
         );
@@ -339,31 +297,11 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    protected function setFieldPropertyAccessible()
-    {
-        $this->fieldProperty = $this->modSimpleEmailFormReflection->getProperty('_field');
-        $this->fieldProperty->setAccessible(true);
-    }
-
-    protected function setFieldPrefixPropertyAccessible()
-    {
-        $this->fieldPrefixProperty = $this->modSimpleEmailFormReflection->getProperty('_fieldPrefix');
-        $this->fieldPrefixProperty->setAccessible(true);
-    }
-
-    protected function setBuildCheckRadioFieldMethodAccessible()
-    {
-        $this->buildCheckRadioFieldMethod = $this->modSimpleEmailFormReflection->getMethod('buildCheckRadioField');
-        $this->buildCheckRadioFieldMethod->setAccessible(true);
-    }
-
     /**
      * Tests modSimpleEmailForm::sendResults()
      */
     public function testSendResults()
     {
-        $this->setFieldPropertyAccessible();
-
         $msg = new \_SimpleEmailForm();
 
         $jFactoryMock = Mockery::mock('overload:JFactory');
@@ -395,7 +333,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
             ->once()
             ->andReturn($jMailMock);
 
-        $result = $this->modSimpleEmailForm->sendResults($msg, $this->fieldProperty->getValue($this->modSimpleEmailForm));
+        $result = $this->modSimpleEmailForm->sendResults($msg, $this->modSimpleEmailFormProperties['_field']->getValue($this->modSimpleEmailForm));
 
         $this->assertTrue($result);
     }
@@ -468,9 +406,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      */
     public function testFormatErrorMessage($expectedResult, $color, $message, $fn = '')
     {
-        $this->setFormatErrorMessageMethodAccessible();
-
-        $actualResult = $this->formatErrorMessageMethod->invokeArgs(
+        $actualResult = $this->modSimpleEmailFormMethods['formatErrorMessage']->invokeArgs(
             $this->modSimpleEmailForm,
             array($color, $message, $fn)
         );
@@ -524,9 +460,8 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
     public function testAutoResetForm()
     {
         $_POST = [1, 2, 3];
-        $this->setAutoResetFormMethodAccessible();
 
-        $this->autoResetFormMethod->invokeArgs(
+        $this->modSimpleEmailFormMethods['autoResetForm']->invokeArgs(
             $this->modSimpleEmailForm,
             array()
         );
@@ -534,18 +469,6 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
         foreach ($_POST as $key => $value) {
             $this->assertTrue(empty($_POST[$key]));
         }
-    }
-
-    protected function setAutoResetFormMethodAccessible()
-    {
-        $this->autoResetFormMethod = $this->modSimpleEmailFormReflection->getMethod('autoResetForm');
-        $this->autoResetFormMethod->setAccessible(true);
-    }
-
-    protected function setFormatErrorMessageMethodAccessible()
-    {
-        $this->formatErrorMessageMethod = $this->modSimpleEmailFormReflection->getMethod('formatErrorMessage');
-        $this->formatErrorMessageMethod->setAccessible(true);
     }
 
     /**
@@ -691,11 +614,9 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      */
     public function testRenderCaptcha()
     {
-        $this->setRenderCaptchaMethodAccessible();
-
         $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
 
-        $output = $this->renderCaptchaMethod->invokeArgs(
+        $output = $this->modSimpleEmailFormMethods['renderCaptcha']->invokeArgs(
             $this->modSimpleEmailForm,
             array()
         );
@@ -706,22 +627,14 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
         $this->assertSame('mod_simpleemailform_captcha_1', $captchaInputNode->getAttributeNode('name')->value);
     }
 
-    protected function setRenderCaptchaMethodAccessible()
-    {
-        $this->renderCaptchaMethod = $this->modSimpleEmailFormReflection->getMethod('renderCaptcha');
-        $this->renderCaptchaMethod->setAccessible(true);
-    }
-
     /**
      * Tests modSimpleEmailForm::cleanupCaptchas()
      */
     public function testCleanupCaptchas()
     {
-        $this->setCleanupCaptchasMethodAccessible();
-
         $_SERVER['HTTP_HOST'] = 'localhost';
 
-        $output = $this->cleanupCaptchasMethod->invokeArgs(
+        $output = $this->modSimpleEmailFormMethods['cleanupCaptchas']->invokeArgs(
             $this->modSimpleEmailForm,
             array()
         );
@@ -730,12 +643,6 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
         $doc->loadHTML($output);
         $spanNode = $doc->getElementsByTagName('span')->item(0);
         $this->assertSame('Unable to cleanup old CAPTCHAs', $spanNode->nodeValue);
-    }
-
-    protected function setCleanupCaptchasMethodAccessible()
-    {
-        $this->cleanupCaptchasMethod = $this->modSimpleEmailFormReflection->getMethod('cleanupCaptchas');
-        $this->cleanupCaptchasMethod->setAccessible(true);
     }
 
     /**
@@ -749,16 +656,13 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      */
     public function testCompareCsrfHash($expected, $formCsrf, $formSess)
     {
-        $this->setCsrfFieldPropertyAccessible();
-        $this->setCompareCsrfHashMethodAccessible();
-
-        $csrfFieldValue = $this->csrfFieldProperty->getValue($this->modSimpleEmailForm);
+        $csrfFieldValue = $this->modSimpleEmailFormProperties['_csrfField']->getValue($this->modSimpleEmailForm);
 
         $_POST[$csrfFieldValue] = $formCsrf;
 
         $_SESSION[$csrfFieldValue] = $formSess;
 
-        $output = $this->compareCsrfHashMethod->invokeArgs(
+        $output = $this->modSimpleEmailFormMethods['compareCsrfHash']->invokeArgs(
             $this->modSimpleEmailForm,
             array()
         );
@@ -797,18 +701,6 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    protected function setCsrfFieldPropertyAccessible()
-    {
-        $this->csrfFieldProperty = $this->modSimpleEmailFormReflection->getProperty('_csrfField');
-        $this->csrfFieldProperty->setAccessible(true);
-    }
-
-    protected function setCompareCsrfHashMethodAccessible()
-    {
-        $this->compareCsrfHashMethod = $this->modSimpleEmailFormReflection->getMethod('compareCsrfHash');
-        $this->compareCsrfHashMethod->setAccessible(true);
-    }
-
     /**
      * Tests modSimpleEmailForm::main()
      */
@@ -826,11 +718,8 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      */
     public function testMainReturnValueWithSubmit()
     {
-        $this->setCsrfFieldPropertyAccessible();
-        $csrfFieldValue = $this->csrfFieldProperty->getValue($this->modSimpleEmailForm);
-
-        $this->setMsgPropertyAccessible();
-        $msgValue = $this->msgProperty->getValue($this->modSimpleEmailForm);
+        $csrfFieldValue = $this->modSimpleEmailFormProperties['_csrfField']->getValue($this->modSimpleEmailForm);
+        $msgValue = $this->modSimpleEmailFormProperties['_msg']->getValue($this->modSimpleEmailForm);
 
         $_POST['mod_simpleemailform_submit_1'] = true;
         $_POST[$csrfFieldValue] = 'test';
@@ -846,10 +735,8 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      */
     public function testMainTestModeFalse()
     {
-        $this->setTestModePropertyAccessible();
-
         ini_set('display_errors', 0);
-        $this->testModeProperty->setValue($this->modSimpleEmailForm, 'N');
+        $this->modSimpleEmailFormProperties['_testMode']->setValue($this->modSimpleEmailForm, 'N');
         $this->modSimpleEmailForm->main();
         $this->assertSame('0', ini_get('display_errors'));
     }
@@ -859,23 +746,9 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      */
     public function testMainTestModeTrue()
     {
-        $this->setTestModePropertyAccessible();
-
         ini_set('display_errors', 0);
-        $this->testModeProperty->setValue($this->modSimpleEmailForm, 'Y');
+        $this->modSimpleEmailFormProperties['_testMode']->setValue($this->modSimpleEmailForm, 'Y');
         $this->modSimpleEmailForm->main();
         $this->assertSame('1', ini_get('display_errors'));
-    }
-
-    protected function setMsgPropertyAccessible()
-    {
-        $this->msgProperty = $this->modSimpleEmailFormReflection->getProperty('_msg');
-        $this->msgProperty->setAccessible(true);
-    }
-
-    protected function setTestModePropertyAccessible()
-    {
-        $this->testModeProperty = $this->modSimpleEmailFormReflection->getProperty('_testMode');
-        $this->testModeProperty->setAccessible(true);
     }
 }
