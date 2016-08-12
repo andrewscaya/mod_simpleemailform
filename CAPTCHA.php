@@ -4,10 +4,10 @@
  * Text_CAPTCHA - creates a CAPTCHA for Turing tests
  *
  * Class to create a Turing test for websites by
- * creating an image, ASCII art or something else 
- * with some (obfuscated) characters 
+ * creating an image, ASCII art or something else
+ * with some (obfuscated) characters
  *
- * 
+ *
  * @package Text_CAPTCHA
  * @license BSD License
  * @author Christian Wenz <wenz@php.net>
@@ -33,13 +33,13 @@ require_once MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'Password.php';
  * Text_CAPTCHA - creates a CAPTCHA for Turing tests
  *
  * Class to create a Turing test for websites by
- * creating an image, ASCII art or something else 
- * with some (obfuscated) characters 
+ * creating an image, ASCII art or something else
+ * with some (obfuscated) characters
  *
  * @package Text_CAPTCHA
  */
- 
-/*  
+
+/*
     // This is a simple example script
 
     <?php
@@ -52,7 +52,7 @@ require_once MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'Password.php';
             fclose($file);
             return $n ? $n : false;
         }
-		}
+        }
 
     // Start PHP session support
     session_start();
@@ -73,16 +73,16 @@ require_once MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'Password.php';
             $msg = 'Please try again!';
         }
 
-        unlink(sha1(session_id()) . '.png');   
+        unlink(sha1(session_id()) . '.png');
 
     }
 
     print "<p>$msg</p>";
 
     if (!$ok) {
-    
+
         require_once 'Text/CAPTCHA.php';
-                   
+
         // Set CAPTCHA image options (font must exist!)
         $imageOptions = array(
             'font_size'        => 24,
@@ -109,10 +109,10 @@ require_once MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'Password.php';
                 $retval->getMessage());
             exit;
         }
-    
+
         // Get CAPTCHA secret passphrase
         $_SESSION['phrase'] = $c->getPhrase();
-    
+
         // Get CAPTCHA image (as PNG)
         $png = $c->getCAPTCHA();
         if (PEAR::isError($png)) {
@@ -121,16 +121,17 @@ require_once MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'Password.php';
             exit;
         }
         file_put_contents(sha1(session_id()) . '.png', $png);
-    
-        echo '<form method="post">' . 
-             '<img src="' . sha1(session_id()) . '.png?' . time() . '" />' . 
+
+        echo '<form method="post">' .
+             '<img src="' . sha1(session_id()) . '.png?' . time() . '" />' .
              '<input type="text" name="phrase" />' .
              '<input type="submit" /></form>';
     }
     ?>
 */
- 
-class Text_CAPTCHA {
+
+class Text_CAPTCHA
+{
 
     /**
      * Version number
@@ -208,12 +209,12 @@ class Text_CAPTCHA {
     /**
      * Sets secret CAPTCHA phrase
      *
-     * This method sets the CAPTCHA phrase 
+     * This method sets the CAPTCHA phrase
      * (use null for a random phrase)
      *
      * @access  public
      * @param   string   $phrase    the (new) phrase
-     * @void 
+     * @void
      */
     public function setPhrase($phrase = null)
     {
@@ -226,12 +227,13 @@ class Text_CAPTCHA {
 
     /**
      * Place holder for the real init() method
-     * used by extended classes to initialize CAPTCHA 
+     * used by extended classes to initialize CAPTCHA
      *
      * @access private
      * @return PEAR_Error
      */
-    public function init() {
+    public function init()
+    {
         return PEAR::raiseError('CAPTCHA type not selected', true);
     }
 
@@ -242,21 +244,21 @@ class Text_CAPTCHA {
      * @access private
      * @return PEAR_Error
      */
-    public function _createCAPTCHA() {
+    public function _createCAPTCHA()
+    {
         return PEAR::raiseError('CAPTCHA type not selected', true);
     }
 
     /**
      * Place holder for the real getCAPTCHA() method
-     * used by extended classes to return the generated CAPTCHA 
+     * used by extended classes to return the generated CAPTCHA
      * (as an image resource, as an ASCII text, ...)
      *
      * @access private
      * @return PEAR_Error
      */
-    public function getCAPTCHA() {
+    public function getCAPTCHA()
+    {
         return PEAR::raiseError('CAPTCHA type not selected', true);
     }
-
 }
-?>

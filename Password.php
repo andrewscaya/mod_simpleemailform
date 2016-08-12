@@ -41,7 +41,8 @@ $GLOBALS['_Text_Password_NumberOfPossibleCharacters'] = 0;
  * @version    Release: @package_version@
  * @link       http://pear.php.net/package/Text_Password
  */
-class Text_Password {
+class Text_Password
+{
 
     /**
      * Create a single password.
@@ -57,12 +58,12 @@ class Text_Password {
     public static function create($length = 10, $type = 'pronounceable', $chars = '')
     {
         switch ($type) {
-        case 'unpronounceable' :
-            return Text_Password::_createUnpronounceable($length, $chars);
+            case 'unpronounceable':
+                return Text_Password::_createUnpronounceable($length, $chars);
 
-        case 'pronounceable' :
-        default :
-            return Text_Password::_createPronounceable($length);
+            case 'pronounceable':
+            default:
+                return Text_Password::_createPronounceable($length);
         }
     }
 
@@ -112,35 +113,35 @@ class Text_Password {
     public function createFromLogin($login, $type, $key = 0)
     {
         switch ($type) {
-        case 'reverse':
-            return strrev($login);
+            case 'reverse':
+                return strrev($login);
 
-        case 'shuffle':
-            return Text_Password::_shuffle($login);
+            case 'shuffle':
+                return Text_Password::_shuffle($login);
 
-        case 'xor':
-            return Text_Password::_xor($login, $key);
+            case 'xor':
+                return Text_Password::_xor($login, $key);
 
-        case 'rot13':
-            return str_rot13($login);
+            case 'rot13':
+                return str_rot13($login);
 
-        case 'rotx':
-            return Text_Password::_rotx($login, $key);
+            case 'rotx':
+                return Text_Password::_rotx($login, $key);
 
-        case 'rotx++':
-            return Text_Password::_rotxpp($login, $key);
+            case 'rotx++':
+                return Text_Password::_rotxpp($login, $key);
 
-        case 'rotx--':
-            return Text_Password::_rotxmm($login, $key);
+            case 'rotx--':
+                return Text_Password::_rotxmm($login, $key);
 
-        case 'ascii_rotx':
-            return Text_Password::_asciiRotx($login, $key);
+            case 'ascii_rotx':
+                return Text_Password::_asciiRotx($login, $key);
 
-        case 'ascii_rotx++':
-            return Text_Password::_asciiRotxpp($login, $key);
+            case 'ascii_rotx++':
+                return Text_Password::_asciiRotxpp($login, $key);
 
-        case 'ascii_rotx--':
-            return Text_Password::_asciiRotxmm($login, $key);
+            case 'ascii_rotx--':
+                return Text_Password::_asciiRotxmm($login, $key);
         }
     }
 
@@ -322,11 +323,11 @@ class Text_Password {
                 $next += 255;
             }
             switch ($next) { // delete white space
-            case 0x09:
-            case 0x20:
-            case 0x0A:
-            case 0x0D:
-                $next++;
+                case 0x09:
+                case 0x20:
+                case 0x0A:
+                case 0x0D:
+                    $next++;
             }
             $tmp .= chr($next);
         }
@@ -356,11 +357,11 @@ class Text_Password {
                 $next += 255;
             }
             switch ($next) { // delete white space
-            case 0x09:
-            case 0x20:
-            case 0x0A:
-            case 0x0D:
-                $next++;
+                case 0x09:
+                case 0x20:
+                case 0x0A:
+                case 0x0D:
+                    $next++;
             }
             $tmp .= chr($next);
         }
@@ -390,11 +391,11 @@ class Text_Password {
                 $next += 255;
             }
             switch ($next) { // delete white space
-            case 0x09:
-            case 0x20:
-            case 0x0A:
-            case 0x0D:
-                $next++;
+                case 0x09:
+                case 0x20:
+                case 0x0A:
+                case 0x0D:
+                    $next++;
             }
             $tmp .= chr($next);
         }
@@ -486,45 +487,44 @@ class Text_Password {
         /**
          * List of character which could be use in the password
          */
-         switch($chars) {
+        switch ($chars) {
+            case 'alphanumeric':
+                $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                $GLOBALS['_Text_Password_NumberOfPossibleCharacters'] = 62;
+                break;
 
-         case 'alphanumeric':
-             $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-             $GLOBALS['_Text_Password_NumberOfPossibleCharacters'] = 62;
-             break;
+            case 'alphabetical':
+                $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+                $GLOBALS['_Text_Password_NumberOfPossibleCharacters'] = 52;
+                break;
 
-         case 'alphabetical':
-             $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-             $GLOBALS['_Text_Password_NumberOfPossibleCharacters'] = 52;
-             break;
+            case 'numeric':
+                $chars = '0123456789';
+                $GLOBALS['_Text_Password_NumberOfPossibleCharacters'] = 10;
+                break;
 
-         case 'numeric':
-             $chars = '0123456789';
-             $GLOBALS['_Text_Password_NumberOfPossibleCharacters'] = 10;
-             break;
+            case '':
+                $chars = '_#@%&ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                $GLOBALS['_Text_Password_NumberOfPossibleCharacters'] = 67;
+                break;
 
-         case '':
-             $chars = '_#@%&ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-             $GLOBALS['_Text_Password_NumberOfPossibleCharacters'] = 67;
-             break;
-
-         default:
-             /**
+            default:
+                /**
               * Some characters shouldn't be used
               */
-             $chars = trim($chars);
-             $chars = str_replace(array('+', '|', '$', '^', '/', '\\', ','), '', $chars);
+                $chars = trim($chars);
+                $chars = str_replace(array('+', '|', '$', '^', '/', '\\', ','), '', $chars);
 
-             $GLOBALS['_Text_Password_NumberOfPossibleCharacters'] = strlen($chars);
-         }
+                $GLOBALS['_Text_Password_NumberOfPossibleCharacters'] = strlen($chars);
+        }
 
          /**
           * Generate password
           */
-         for ($i = 0; $i < $length; $i++) {
-             $num = mt_rand(0, $GLOBALS['_Text_Password_NumberOfPossibleCharacters'] - 1);
-             $password .= $chars{$num};
-         }
+        for ($i = 0; $i < $length; $i++) {
+            $num = mt_rand(0, $GLOBALS['_Text_Password_NumberOfPossibleCharacters'] - 1);
+            $password .= $chars{$num};
+        }
 
          /**
           * Return password
@@ -532,4 +532,3 @@ class Text_Password {
          return $password;
     }
 }
-?>

@@ -34,5 +34,7 @@ MAINTAINERS.txt export-ignore
 INSTALL*.txt export-ignore
 # tests
 test export-ignore
+# docs
+docs export-ignore
 # scripts
 createpack.sh export-ignore

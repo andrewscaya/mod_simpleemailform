@@ -3,12 +3,12 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * Image_Text.
+ * ImageText.
  *
- * This is the main file of the Image_Text package. This file has to be
- * included for usage of Image_Text.
+ * This is the main file of the ImageText package. This file has to be
+ * included for usage of ImageText.
  *
- * This is a simple example script, showing Image_Text's facilities.
+ * This is a simple example script, showing ImageText's facilities.
  *
  * -------- Start example --------
  *
@@ -20,7 +20,24 @@
  *     2 => '#7ae8ad'
  * );
  *
- * $text = "EXTERIOR: DAGOBAH -- DAY\nWith Yoda\nstrapped to\n\nhis back, Luke climbs up one of the many thick vines that grow in the swamp until he reaches the Dagobah statistics lab. Panting heavily, he continues his exercises -- grepping, installing new packages, logging in as root, and writing replacements for two-year-old shell scripts in PHP.\nYODA: Code! Yes. A programmer's strength flows from code maintainability. But beware of Perl. Terse syntax... more than one way to do it... default variables. The dark side of code maintainability are they. Easily they flow, quick to join you when code you write. If once you start down the dark path, forever will it dominate your destiny, consume you it will.\nLUKE: Is Perl better than PHP?\nYODA: No... no... no. Orderless, dirtier, more seductive.\nLUKE: But how will I know why PHP is better than Perl?\nYODA: You will know. When your code you try to read six months from now...";
+ * $text = "EXTERIOR: DAGOBAH -- DAY\n
+ *      With Yoda\n
+ *      strapped to\n\n
+ *      his back, Luke climbs up one of the many thick vines that grow
+ *      in the swamp until he reaches the Dagobah statistics lab. Panting heavily,
+ *      he continues his exercises -- grepping, installing new packages,
+ *      logging in as root, and writing replacements for two-year-old shell scripts
+ *      in PHP.\n
+ *      YODA: Code! Yes. A programmer's strength flows from code maintainability.
+ *      But beware of Perl. Terse syntax... more than one way to do it...
+ *      default variables. The dark side of code maintainability are they.
+ *      Easily they flow, quick to join you when code you write.
+ *      If once you start down the dark path, forever will it dominate your destiny,
+ *      consume you it will.\n
+ *      LUKE: Is Perl better than PHP?\n
+ *      YODA: No... no... no. Orderless, dirtier, more seductive.\n
+ *      LUKE: But how will I know why PHP is better than Perl?\n
+ *      YODA: You will know. When your code you try to read six months from now...";
  *
  * $options = array(
  *             'canvas'        => array('width'=> 600,'height'=> 600), // Generate a new image 600x600 pixel
@@ -42,8 +59,8 @@
  *             'valign'        => IMAGE_TEXT_ALIGN_MIDDLE
  *         );
  *
- * // Generate a new Image_Text object
- * $itext = new Image_Text($text, $options);
+ * // Generate a new ImageText object
+ * $itext = new ImageText($text, $options);
  *
  * // Initialize and check the settings
  * $itext->init();
@@ -123,13 +140,13 @@ define("IMAGE_TEXT_ALIGN_BOTTOM", "bottom", true);
 define("IMAGE_TEXT_ALIGN_JUSTIFY", "justify", true);
 
 /**
- * Image_Text - Advanced text maipulations in images
+ * ImageText - Advanced text maipulations in images
  *
- * Image_Text provides advanced text manipulation facilities for GD2
+ * ImageText provides advanced text manipulation facilities for GD2
  * image generation with PHP. Simply add text clippings to your images,
  * let the class automatically determine lines, rotate text boxes around
  * their center or top left corner. These are only a couple of features
- * Image_Text provides.
+ * ImageText provides.
  *
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
  * @category   Image
@@ -141,7 +158,8 @@ define("IMAGE_TEXT_ALIGN_JUSTIFY", "justify", true);
  * @since      0.0.1
  * @access     public
  */
-class Image_Text {
+class ImageText
+{
 
     /**
      * Options array. these options can be set through the constructor or the set() method.
@@ -198,7 +216,7 @@ class Image_Text {
      *
      * @access public
      * @public array
-     * @see Image_Text::Image_Text(), Image_Text::set()
+     * @see ImageText::ImageText(), ImageText::set()
      */
 
     public $options = array(
@@ -358,18 +376,18 @@ class Image_Text {
     /**
      * Constructor
      *
-     * Set the text and options. This initializes a new Image_Text object. You must set your text
+     * Set the text and options. This initializes a new ImageText object. You must set your text
      * here. Optinally you can set all options here using the $options parameter. If you finished switching
-     * all options you have to call the init() method first befor doing anything further! See Image_Text::set()
+     * all options you have to call the init() method first before doing anything further! See ImageText::set()
      * for further information.
      *
      * @param   string  $text       Text to print.
      * @param   array   $options    Options.
      * @access public
-     * @see Image_Text::set(), Image_Text::construct(), Image_Text::init()
+     * @see ImageText::set(), ImageText::construct(), ImageText::init()
      */
 
-    public function Image_Text($text, $options = null)
+    public function __construct($text, $options = null)
     {
         $this->set('text', $text);
         if (!empty($options)) {
@@ -378,19 +396,20 @@ class Image_Text {
     }
 
     /**
-     * Construct and initialize an Image_Text in one step.
-     * This method is called statically and creates plus initializes an Image_Text object.
+     * Construct and initialize an ImageText in one step.
+     * This method is called statically and creates plus initializes an ImageText object.
      * Beware: You will have to recall init() if you set an option afterwards manually.
      *
      * @param   string  $text       Text to print.
      * @param   array   $options    Options.
      * @access public
      * @static
-     * @see Image_Text::set(), Image_Text::Image_Text(), Image_Text::init()
+     * @see ImageText::set(), ImageText::ImageText(), ImageText::init()
      */
 
-    public function &construct ( $text, $options ) {
-        $itext = new Image_Text($text, $options);
+    public function &construct($text, $options)
+    {
+        $itext = new ImageText($text, $options);
         $res = $itext->init();
         if (PEAR::isError($res)) {
             return $res;
@@ -401,7 +420,7 @@ class Image_Text {
     /**
      * Set options
      *
-     * Set a single or multiple options. It may happen that you have to reinitialize the Image_Text
+     * Set a single or multiple options. It may happen that you have to reinitialize the ImageText
      * object after changing options. For possible options, please take a look at the class options
      * array!
      *
@@ -410,10 +429,10 @@ class Image_Text {
      * @param   mixed   $value      Option value if $option is string.
      * @return  bool                True on success, otherwise PEAR::Error.
      * @access public
-     * @see Image_Text::Image_Text()
+     * @see ImageText::ImageText()
      */
 
-    public function set($option, $value=null)
+    public function set($option, $value = null)
     {
         $reInits = array_flip($this->_reInits);
         if (!is_array($option)) {
@@ -424,19 +443,19 @@ class Image_Text {
         }
         foreach ($option as $opt => $val) {
             switch ($opt) {
-             case 'color':
-                $this->setColors($val);
-                break;
-             case 'text':
-                if (is_array($val)) {
-                    $this->_text = implode('\n', $val);
-                } else {
-                    $this->_text = $val;
-                }
-                break;
-             default:
-                $this->options[$opt] = $val;
-                break;
+                case 'color':
+                      $this->setColors($val);
+                    break;
+                case 'text':
+                    if (is_array($val)) {
+                        $this->_text = implode('\n', $val);
+                    } else {
+                         $this->_text = $val;
+                    }
+                    break;
+                default:
+                      $this->options[$opt] = $val;
+                    break;
             }
             if (isset($reInits[$opt])) {
                 $this->_init = false;
@@ -465,7 +484,7 @@ class Image_Text {
      * @param   mixed  $colors       Single color or array of colors.
      * @return  bool                 True on success, otherwise PEAR::Error.
      * @access  public
-     * @see Image_Text::setColor(), Image_Text::set()
+     * @see ImageText::setColor(), ImageText::set()
      */
 
     public function setColors($colors)
@@ -475,7 +494,7 @@ class Image_Text {
             (is_string($colors[0]) || is_array($colors[0]))
            ) {
             foreach ($colors as $color) {
-                $res = $this->setColor($color,$i++);
+                $res = $this->setColor($color, $i++);
                 if (PEAR::isError($res)) {
                     return $res;
                 }
@@ -501,16 +520,16 @@ class Image_Text {
      * @param   mixed    $id           ID (in the color array) to set color to.
      * @return  bool                True on success, otherwise PEAR::Error.
      * @access  public
-     * @see Image_Text::setColors(), Image_Text::set()
+     * @see ImageText::setColors(), ImageText::set()
      */
 
-    public function setColor($color, $id=0)
+    public function setColor($color, $id = 0)
     {
-        if(is_array($color)) {
+        if (is_array($color)) {
             if (isset($color['r']) && isset($color['g']) && isset($color['b'])) {
                 $color['a'] = isset($color['a']) ? $color['a'] : 0;
                 $this->options['colors'][$id] = $color;
-            } else if (isset($color[0]) && isset($color[1]) && isset($color[2])) {
+            } elseif (isset($color[0]) && isset($color[1]) && isset($color[2])) {
                 $color['r'] = $color[0];
                 $color['g'] = $color[1];
                 $color['b'] = $color[2];
@@ -530,27 +549,36 @@ class Image_Text {
         if ($this->_img) {
             $aaFactor = ($this->options['antialias']) ? 1 : -1;
             if (function_exists('imagecolorallocatealpha') && isset($color['a'])) {
-                $this->colors[$id] = $aaFactor * imagecolorallocatealpha($this->_img,
-                                $color['r'],$color['g'],$color['b'],$color['a']);
+                $this->colors[$id] = $aaFactor * imagecolorallocatealpha(
+                    $this->_img,
+                    $color['r'],
+                    $color['g'],
+                    $color['b'],
+                    $color['a']
+                );
             } else {
-                $this->colors[$id] = $aaFactor * imagecolorallocate($this->_img,
-                                $color['r'],$color['g'],$color['b']);
+                $this->colors[$id] = $aaFactor * imagecolorallocate(
+                    $this->_img,
+                    $color['r'],
+                    $color['g'],
+                    $color['b']
+                );
             }
         }
         return true;
     }
 
     /**
-     * Initialiaze the Image_Text object.
+     * Initialiaze the ImageText object.
      *
-     * This method has to be called after setting the options for your Image_Text object.
+     * This method has to be called after setting the options for your ImageText object.
      * It initializes the canvas, normalizes some data and checks important options.
      * Be shure to check the initialization after you switched some options. The
      * set() method may force you to reinitialize the object.
      *
      * @access  public
      * @return  bool  True on success, otherwise PEAR::Error.
-     * @see Image_Text::set()
+     * @see ImageText::set()
      */
 
     public function init()
@@ -578,10 +606,11 @@ class Image_Text {
 
         switch (true) {
             case (empty($this->options['canvas'])):
-
                 // Create new image from width && height of the clipping
                 $this->_img = imagecreatetruecolor(
-                            $this->options['width'], $this->options['height']);
+                    $this->options['width'],
+                    $this->options['height']
+                );
                 if (!$this->_img) {
                     return PEAR::raiseError('Could not create image canvas.');
                 }
@@ -596,7 +625,6 @@ class Image_Text {
             case (is_array($this->options['canvas']) &&
                     isset($this->options['canvas']['width']) &&
                     isset($this->options['canvas']['height'])):
-
                 // Canvas must be a width and height measure
                 $this->_img = imagecreatetruecolor(
                     $this->options['canvas']['width'],
@@ -608,7 +636,6 @@ class Image_Text {
             case (is_array($this->options['canvas']) &&
                     isset($this->options['canvas']['size']) &&
                     ($this->options['canvas']['size'] = 'auto')):
-
             case (is_string($this->options['canvas']) &&
                      ($this->options['canvas'] = 'auto')):
                 $this->_mode = 'auto';
@@ -616,7 +643,6 @@ class Image_Text {
 
             default:
                 return PEAR::raiseError('Could not create image canvas.');
-
         }
 
 
@@ -646,8 +672,10 @@ class Image_Text {
         }
         imagefilledrectangle(
             $this->_img,
-            0, 0,
-            $this->options['canvas']['width'] - 1, $this->options['canvas']['height'] - 1,
+            0,
+            0,
+            $this->options['canvas']['width'] - 1,
+            $this->options['canvas']['height'] - 1,
             $colBg
         );
 
@@ -690,10 +718,10 @@ class Image_Text {
      * @param  int      $start  Fontsize to start testing with.
      * @param  int      $end    Fontsize to end testing with.
      * @return int              Fontsize measured or PEAR::Error.
-     * @see Image_Text::measurize()
+     * @see ImageText::measurize()
      */
 
-    public function autoMeasurize($start=false, $end=false)
+    public function autoMeasurize($start = false, $end = false)
     {
         if (!$this->_init) {
             return PEAR::raiseError('Not initialized. Call ->init() first!');
@@ -729,16 +757,16 @@ class Image_Text {
      *
      * This method makes your text fit into the defined textbox by measurizing the
      * lines for your given font-size. You can do this manually before rendering (or use
-     * even Image_Text::autoMeasurize()) or the renderer will do measurizing
+     * even ImageText::autoMeasurize()) or the renderer will do measurizing
      * automatically.
      *
      * @access public
      * @param  bool  $force  Optionally, default is false, set true to force measurizing.
      * @return array         Array of measured lines or PEAR::Error.
-     * @see Image_Text::autoMeasurize()
+     * @see ImageText::autoMeasurize()
      */
 
-    public function measurize($force=false)
+    public function measurize($force = false)
     {
         if (!$this->_init) {
             return PEAR::raiseError('Not initialized. Call ->init() first!');
@@ -780,7 +808,7 @@ class Image_Text {
         $beginning_of_line = true;
 
         // Run through tokens and order them in lines
-        foreach($this->_tokens as $token) {
+        foreach ($this->_tokens as $token) {
             // Handle new paragraphs
             if ($token=="\n") {
                 $bounds = imagettfbbox($size, 0, $font, $text_line);
@@ -860,7 +888,7 @@ class Image_Text {
             }
         }
         // Store remaining line
-        $bounds = imagettfbbox($size, 0, $font,$text_line);
+        $bounds = imagettfbbox($size, 0, $font, $text_line);
         if ($this->options['color_mode']=='line') {
             $c = $this->colors[$i++%$colors_cnt];
         } else {
@@ -903,7 +931,7 @@ class Image_Text {
      * @return bool             True on success, otherwise PEAR::Error.
      */
 
-    public function render($force=false)
+    public function render($force = false)
     {
         if (!$this->_init) {
             return PEAR::raiseError('Not initialized. Call ->init() first!');
@@ -914,7 +942,7 @@ class Image_Text {
         }
 
         if (empty($this->_lines) || ($this->_measurizedSize != $this->options['font_size'])) {
-            $this->_lines = $this->measurize( $force );
+            $this->_lines = $this->measurize($force);
         }
         $lines = $this->_lines;
 
@@ -924,9 +952,9 @@ class Image_Text {
 
         if ($this->_mode === 'auto') {
             $this->_img = imagecreatetruecolor(
-                        $this->_realTextSize['width'],
-                        $this->_realTextSize['height']
-                    );
+                $this->_realTextSize['width'],
+                $this->_realTextSize['height']
+            );
             if (!$this->_img) {
                 return PEAR::raiseError('Could not create image cabvas.');
             }
@@ -982,14 +1010,13 @@ class Image_Text {
         $new_posx = $start_x + ($sinR * ($valign_space + $size));
         $new_posy = $start_y + ($cosR * ($valign_space + $size));
 
-        $lines_cnt = min($max_lines,sizeof($lines));
+        $lines_cnt = min($max_lines, sizeof($lines));
 
         // Go thorugh lines for rendering
-        for($i=0; $i<$lines_cnt; $i++){
-
+        for ($i=0; $i<$lines_cnt; $i++) {
             // Calc the new start X and Y (only for line>0)
             // the distance between the line above is used
-            if($i > 0){
+            if ($i > 0) {
                 $new_posx += $sinR * $space;
                 $new_posy += $cosR * $space;
             }
@@ -1002,7 +1029,7 @@ class Image_Text {
 
             // Calc the position using the block width, the current line width and obviously
             // the angle. That gives us the offset to slide the line.
-            switch($align) {
+            switch ($align) {
                 case IMAGE_TEXT_ALIGN_LEFT:
                     $hyp = 0;
                     break;
@@ -1023,7 +1050,7 @@ class Image_Text {
             $c = $lines[$i]['color'];
 
             // Render textline
-            $bboxes[] = imagettftext ($im, $size, $angle, $posx, $posy, $c, $font, $lines[$i]['string']);
+            $bboxes[] = imagettftext($im, $size, $angle, $posx, $posy, $c, $font, $lines[$i]['string']);
         }
         $this->bbox = $bboxes;
         return true;
@@ -1054,10 +1081,10 @@ class Image_Text {
      * @param   bool  $free  Free the image on exit.
      * @return  bool         True on success, otherwise PEAR::Error.
      * @access public
-     * @see Image_Text::save()
+     * @see ImageText::save()
      */
 
-    public function display($save=false, $free=false)
+    public function display($save = false, $free = false)
     {
         if (!headers_sent()) {
             header("Content-type: " .image_type_to_mime_type($this->options['image_type']));
@@ -1085,7 +1112,7 @@ class Image_Text {
                 return $res;
             }
         } else {
-           $imgout($this->_img);
+            $imgout($this->_img);
         }
 
         if ($free) {
@@ -1106,10 +1133,10 @@ class Image_Text {
      *
      * @param   string  $destFile   The destination to save to (optional, uses options value else).
      * @return  bool                True on success, otherwise PEAR::Error.
-     * @see Image_Text::display()
+     * @see ImageText::display()
      */
 
-    public function save($dest_file=false)
+    public function save($dest_file = false)
     {
         if (!$dest_file) {
             $dest_file = $this->options['dest_file'];
@@ -1241,13 +1268,13 @@ class Image_Text {
         $this->_text = preg_replace("[\r\n]", "\n", $this->_text);
 
         // Get each paragraph
-        $paras = explode("\n",$this->_text);
+        $paras = explode("\n", $this->_text);
 
         // loop though the paragraphs
         // and get each word (token)
-        foreach($paras as $para) {
-            $words = explode(' ',$para);
-            foreach($words as $word) {
+        foreach ($paras as $para) {
+            $words = explode(' ', $para);
+            foreach ($words as $word) {
                 $this->_tokens[] = $word;
             }
             // add a "\n" to mark the end of a paragraph
@@ -1257,5 +1284,3 @@ class Image_Text {
         array_pop($this->_tokens);
     }
 }
-
-

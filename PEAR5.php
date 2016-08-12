@@ -10,7 +10,7 @@ class PEAR5
     * properties, you can use this method to simulate them. Eg. in your method(s)
     * do this: $myVar = &PEAR5::getStaticProperty('myclass', 'myVar');
     * You MUST use a reference, or they will not persist!
-    * 
+    *
     * 2011-07-23 DB: rewrote to make $properties a a separate public entity
     *
     * @access public
@@ -19,9 +19,9 @@ class PEAR5
     * @return mixed   A reference to the variable. If not set it will be
     *                 auto initialised to NULL.
     */
-    
+
     public static $properties;
-    
+
     static function getStaticProperty($class, $var)
     {
         if (!isset(self::$properties[$class])) {

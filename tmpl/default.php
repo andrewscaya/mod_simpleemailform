@@ -1,3 +1,3 @@
 <?php // no direct access
-defined( '_JEXEC' ) or die( 'Restricted access' ); ?>
-<?php echo $view; ?>
+defined('_JEXEC') or die('Restricted access'); ?>
+<?php echo $view;
