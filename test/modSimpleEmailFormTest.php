@@ -69,7 +69,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      * @var ReflectionMethod
      */
     private $formatErrorMessageMethod;
-    
+
    /**
      *
      * @var ReflectionMethod
@@ -173,7 +173,7 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
         $this->testModeProperty = null;
 
         $this->formatErrorMessageMethod = null;
-        
+
         $this->autoResetFormMethod = null;
 
         $this->buildCheckRadioFieldMethod = null;
@@ -477,8 +477,8 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame($expectedResult, $actualResult);
     }
-    
-  
+
+
 
     public function providerTestFormatErrorMessage()
     {
@@ -520,28 +520,28 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
             //If it's not, all previous tests will fail.
             );
     }
-    
+
     public function testAutoResetForm()
     {
-		$_POST = [1, 2, 3];
-		$this->setAutoResetFormMethodAccessible();
-		
-		$this->autoResetFormMethod->invokeArgs(
-            $this->modSimpleEmailForm,
-            array());
-            
-        foreach ($_POST as $key => $value) {
-            $this->assertSame ($value, '');
-        }
-		
-	}
+        $_POST = [1, 2, 3];
+        $this->setAutoResetFormMethodAccessible();
 
-	protected function setAutoResetFormMethodAccessible()
+        $this->autoResetFormMethod->invokeArgs(
+            $this->modSimpleEmailForm,
+            array()
+        );
+
+        foreach ($_POST as $key => $value) {
+            $this->assertSame($value, '');
+        }
+    }
+
+    protected function setAutoResetFormMethodAccessible()
     {
         $this->autoResetFormMethod = $this->modSimpleEmailFormReflection->getMethod('autoResetForm');
         $this->autoResetFormMethod->setAccessible(true);
     }
-    
+
     protected function setFormatErrorMessageMethodAccessible()
     {
         $this->formatErrorMessageMethod = $this->modSimpleEmailFormReflection->getMethod('formatErrorMessage');
