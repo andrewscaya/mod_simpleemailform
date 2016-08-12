@@ -3,7 +3,7 @@
         mod_simpleEmailForm.php
         
         Copyright 2010 - 2016 D. Bierer <doug@unlikelysource.com>
-		Version	1.8.7
+		Version	1.8.8
 
         This program is free software; you can redistribute it and/or modify
         it under the terms of the GNU General Public License as published by
@@ -329,9 +329,9 @@ class modSimpleEmailForm
 		$result  = '';
 		$allowed = FALSE;
 		$fieldLabel = 'mod_simpleemailform_upload_' . $fieldNum . '_' . $this->_instance;
-		// Capture filename
-		$fn = (isset($_FILES[$fieldLabel]['name'])) 
-			   ? basename(strip_tags($_FILES[$fieldLabel]['name'])) : '';
+		// Capture the filename or else return FALSE if the filename is not set or if it is empty
+		$fn = (isset($_FILES[$fieldLabel]['name']) && !empty($_FILES[$fieldLabel]['name'])) 
+			   ? basename(strip_tags($_FILES[$fieldLabel]['name'])) : FALSE;
 		// use regex to check for allowed filenames
 		if ($fn) {
 			// Get filename extension
@@ -358,6 +358,7 @@ class modSimpleEmailForm
 							// Save name of file
 							$message .= $this->formatErrorMessage($successTxtColor, $this->_transLang['MOD_SIMPLEEMAILFORM_upload_success'], $fn);
 							$result = $fn;
+							return $result;
 						} else {
 							// Trap upload file handle errors
 							$message .= $this->formatErrorMessage($errorTxtColor, $this->_transLang['MOD_SIMPLEEMAILFORM_upload_unable'], $fn);
@@ -375,7 +376,7 @@ class modSimpleEmailForm
 				$message .= $this->formatErrorMessage($errorTxtColor, $this->_transLang['MOD_SIMPLEEMAILFORM_disallowed_filename'], $fn);
 			}
 		}
-		return $result;
+		return NULL;
 	}
 
 	// uses $this->_labelAlign, $this->_col2space, $this->_errorTxtColor, $this->_field, $this->_maxFields
@@ -626,8 +627,13 @@ class modSimpleEmailForm
 		if (count($msg->attachment) > 0) { 
 			// Formulate FN for attachment
 			foreach ($msg->attachment as $fn) {
-				$fullPath = $msg->dir . DIRECTORY_SEPARATOR . $fn;
-				$message->addAttachment($fullPath);
+				/* Check if null was returned by uploadAttachment()
+				 * due to empty upload fields
+				 */
+				if (isset($fn)) {
+					$fullPath = $msg->dir . DIRECTORY_SEPARATOR . $fn;
+					$message->addAttachment($fullPath);
+				}
 			} 
 		}
 		try {
