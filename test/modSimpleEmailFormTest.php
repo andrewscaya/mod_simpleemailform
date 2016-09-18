@@ -632,6 +632,56 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
      */
     public function testCleanupCaptchas()
     {
+        $this->modSimpleEmailFormProperties['_captchaDir']->setValue($this->modSimpleEmailForm, __DIR__);
+
+        $this->modSimpleEmailFormProperties['_useCaptcha']->setValue($this->modSimpleEmailForm, 'I');
+
+        touch(__DIR__ . DIRECTORY_SEPARATOR . 'captcha_testfile1.img', time());
+
+        touch(__DIR__ . DIRECTORY_SEPARATOR . 'captcha_testfile2.img', time() - 3600);
+
+        $this->modSimpleEmailFormMethods['cleanupCaptchas']->invokeArgs(
+            $this->modSimpleEmailForm,
+            array()
+        );
+
+        $this->assertTrue(file_exists(__DIR__ . DIRECTORY_SEPARATOR . 'captcha_testfile1.img'));
+
+        $this->assertFalse(file_exists(__DIR__ . DIRECTORY_SEPARATOR . 'captcha_testfile2.img'));
+
+        if (file_exists(__DIR__ . DIRECTORY_SEPARATOR . 'captcha_testfile1.img')) {
+            unlink(__DIR__ . DIRECTORY_SEPARATOR . 'captcha_testfile1.img');
+        }
+    }
+
+    /**
+     * Tests modSimpleEmailForm::cleanupCaptchas()
+     */
+    public function testCleanupCaptchasFailTestModeOn()
+    {
+        $_SERVER['HTTP_HOST'] = 'localhost';
+
+        $this->modSimpleEmailFormProperties['_testMode']->setValue($this->modSimpleEmailForm, 'Y');
+
+        $testModeFieldValuePre = $this->modSimpleEmailFormProperties['_testInfo']->getValue($this->modSimpleEmailForm);
+
+        $this->assertTrue(empty($testModeFieldValuePre));
+
+        $this->modSimpleEmailFormMethods['cleanupCaptchas']->invokeArgs(
+            $this->modSimpleEmailForm,
+            array()
+        );
+
+        $testModeFieldValuePost = $this->modSimpleEmailFormProperties['_testInfo']->getValue($this->modSimpleEmailForm);
+
+        $this->assertFalse(empty($testModeFieldValuePost));
+    }
+
+    /**
+     * Tests modSimpleEmailForm::cleanupCaptchas()
+     */
+    public function testCleanupCaptchasFail()
+    {
         $_SERVER['HTTP_HOST'] = 'localhost';
 
         $output = $this->modSimpleEmailFormMethods['cleanupCaptchas']->invokeArgs(
