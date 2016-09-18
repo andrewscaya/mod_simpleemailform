@@ -784,11 +784,8 @@ class modSimpleEmailForm
             $a = substr($alpha, rand(0, 25), 1);
             $phrase .= $a;
             switch ($count) {
-                case ($count % 3):
+                case ($count % 1):
                     $textCaptcha .= "<b>$a</b>";
-                    break;
-                case ($count % 2):
-                    $textCaptcha .= "<font size=+1>$a</font>";
                     break;
                 default:
                     $textCaptcha .= "<font size=+2>$a</font>";
