@@ -7,9 +7,10 @@ use Mockery;
 use \_SimpleEmailForm;
 use \modSimpleEmailForm;
 use \DOMDocument;
-use JFactory;
-use JDocument;
-use JMail;
+use \JFactory;
+use \JDocument;
+use \JMail;
+use \Jfileproxy;
 
 /**
  * @runTestsInSeparateProcesses
@@ -340,14 +341,52 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tests modSimpleEmailForm::imageCaptcha()
+     *
+     * @param string containing Captcha's URL
+     *
+     * @dataProvider providerTestImageCaptcha
      */
-//     public function testImageCaptcha()
-//     {
-//         // TODO Auto-generated modSimpleEmailFormTest->testImageCaptcha()
-//         $this->markTestIncomplete("imageCaptcha test not implemented");
+    public function testImageCaptcha($captchaURL)
+    {
+        if (!defined('MOD_SIMPLEEMAILFORM_DIR')) {
+            define('MOD_SIMPLEEMAILFORM_DIR', __DIR__ . DIRECTORY_SEPARATOR . '..');
+        }
 
-//         $this->modSimpleEmailForm->imageCaptcha(/* parameters */);
-//     }
+        $url_fn = 'captcha_testfile.png';
+
+        $jFileMock = Mockery::mock('overload:JFile');
+        $jFileMock->shouldReceive('write')
+        ->once()
+        ->andReturn(true);
+
+        $output = $this->modSimpleEmailForm->imageCaptcha(
+            '#FFFF00',
+            __DIR__,
+            60,
+            4,
+            '#BFBFBF',
+            24,
+            '#000000',
+            $captchaURL,
+            200,
+            $url_fn
+        );
+
+        $this->assertTrue(is_string($output));
+        $this->assertEquals(8, strlen($output));
+    }
+
+    public function providerTestImageCaptcha()
+    {
+        return array(
+            array(
+                'http://localhost/projects/mod_simpleemailform/test',
+            ),
+            array(
+                'http://localhost/projects/mod_simpleemailform/test/'
+            ),
+        );
+    }
 
     /**
      * Tests modSimpleEmailForm::textCaptcha()
