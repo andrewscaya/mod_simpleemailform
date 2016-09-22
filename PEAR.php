@@ -868,7 +868,7 @@ class PEAR_Error
      * @access public
      *
      */
-    function PEAR_Error(
+    function __construct(
         $message = 'unknown error',
         $code = null,
         $mode = null,
