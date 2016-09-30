@@ -450,7 +450,7 @@ class modSimpleEmailForm
                         foreach ($this->_field[$x]['value'] as $key => $visible) {
                             $key     = htmlspecialchars($key);
                             $visible = htmlspecialchars($visible);
-                            $row .= "<option value='$key'>$visible</option>\n";
+                            $row .= "<option value=\"$key\">$visible</option>\n";
                         }
                         $row .= "</select>\n";
                         break;
