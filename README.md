@@ -3,4 +3,4 @@ Joomla Simple Email Form Module
 
 [![Build Status](https://travis-ci.org/andrewscaya/mod_simpleemailform.svg?branch=master)](https://travis-ci.org/andrewscaya/mod_simpleemailform)
 
-Code Coverage: 66.94% covered.
+Code Coverage: 72.57% covered.

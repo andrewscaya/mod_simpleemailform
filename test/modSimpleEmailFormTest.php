@@ -182,15 +182,145 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tests modSimpleEmailForm::formatRow()
+     *
+     * @param string containing the expected result
+     * @param string signifying object's $_field property value
+     *
+     * @dataProvider providerTestFormatRow
      */
-//     public function testFormatRow()
-//     {
-//         // TODO Auto-generated modSimpleEmailFormTest->testFormatRow()
-//         //$this->markTestIncomplete("formatRow test not implemented");
+    public function testFormatRow($expectedResult, $fieldPropertyValue)
+    {
+        // @TODO $_POST cannot be an array - code in helper.php will have to be modified in version 2.0 - lines 402-411
+        $_POST['mod_simpleemailform_field1_1'] = 'TEST_POST';
 
-//         //$this->modSimpleEmailForm->formatRow(/* parameters */);
-//         return TRUE;
-//     }
+        $this->modSimpleEmailFormProperties['_maxFields']->setValue($this->modSimpleEmailForm, 1);
+
+        $this->modSimpleEmailFormProperties['_field']->setValue($this->modSimpleEmailForm, null);
+
+        $this->modSimpleEmailFormProperties['_field']->setValue($this->modSimpleEmailForm, $fieldPropertyValue);
+
+        $output = $this->modSimpleEmailForm->formatRow();
+
+        $this->assertTrue(is_string($output));
+
+        if (strlen($output) < 1) {
+            $this->assertEquals($expectedResult, strlen($output));
+        } else {
+            $this->assertEquals(1, preg_match("/$expectedResult/i", $output));
+        }
+    }
+
+    public function providerTestFormatRow()
+    {
+        return array(
+            array(
+                '<input type="email"',
+                array(
+                    1 => array(
+                        'value' => '',
+                        'size' => 40,
+                        'error' => '',
+                        'maxx' => 255,
+                        'label' => 'From',
+                        'ckRfmt' => 'C',
+                        'ckRpos' => 'B',
+                        'active' => 'R',
+                        'from' => 'F',
+                    )
+                ),
+
+            ),
+            array(
+                '<textarea',
+                array(
+                    1 => array(
+                        'value' => '',
+                        'size' => '4, 40',
+                        'error' => '',
+                        'maxx' => 255,
+                        'label' => 'From',
+                        'ckRfmt' => 'C',
+                        'ckRpos' => 'B',
+                        'active' => 'R',
+                        'from' => 'A',
+                    )
+                ),
+
+            ),
+            array(
+                '<option value="testkey">TEST<\/option>',
+                array(
+                    1 => array(
+                        'value' => array('testkey' => 'TEST'),
+                        'size' => 40,
+                        'error' => '',
+                        'maxx' => 255,
+                        'label' => 'From',
+                        'ckRfmt' => 'C',
+                        'ckRpos' => 'B',
+                        'active' => 'R',
+                        'from' => 'D',
+                    )
+                ),
+
+            ),
+            array(
+                '<span.+TEST.+input type="radio"',
+                array(
+                    1 => array(
+                        'value' => array('TEST'),
+                        'size' => 40,
+                        'error' => '',
+                        'maxx' => 255,
+                        'label' => 'From',
+                        'ckRfmt' => 'C',
+                        'ckRpos' => 'B',
+                        'active' => 'R',
+                        'from' => 'R',
+                    )
+                ),
+
+            ),
+            array(
+                '<span.+TEST.+input type="checkbox"',
+                array(
+                    1 => array(
+                        'value' => array('TEST'),
+                        'size' => 40,
+                        'error' => '',
+                        'maxx' => 255,
+                        'label' => 'From',
+                        'ckRfmt' => 'C',
+                        'ckRpos' => 'B',
+                        'active' => 'R',
+                        'from' => 'C',
+                    )
+                ),
+
+            ),
+            array(
+                '<input type="phone"',
+                array(
+                    1 => array(
+                        'value' => '',
+                        'size' => 40,
+                        'error' => '',
+                        'maxx' => 255,
+                        'label' => 'From',
+                        'ckRfmt' => 'C',
+                        'ckRpos' => 'B',
+                        'active' => 'R',
+                        'from' => 'U',
+                    )
+                ),
+
+            ),
+            array(
+                0,
+                null,
+            ),
+        );
+    }
 
     /**
      * Tests modSimpleEmailForm::buildCheckRadioField()
@@ -655,6 +785,39 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests modSimpleEmailForm::doesCaptchaMatch()
+     */
+    public function testDoesCaptchaMatch()
+    {
+        $_SERVER['REMOTE_ADDR'] = 'localhost';
+
+        $_POST['mod_simpleemailform_captcha_1'] = 'test';
+
+        $hash = $this->modSimpleEmailFormMethods['buildCaptchaHash']->invokeArgs(
+            $this->modSimpleEmailForm,
+            array('test')
+        );
+
+        $_POST['mod_simpleemailform_crsf_1'] = $hash;
+
+        $output = $this->modSimpleEmailFormMethods['doesCaptchaMatch']->invokeArgs(
+            $this->modSimpleEmailForm,
+            array()
+        );
+
+        $this->assertTrue($output);
+
+        $_POST['mod_simpleemailform_crsf_1'] = 'wrong';
+
+        $outputBad = $this->modSimpleEmailFormMethods['doesCaptchaMatch']->invokeArgs(
+            $this->modSimpleEmailForm,
+            array()
+        );
+
+        $this->assertFalse($outputBad);
+    }
+
+    /**
      * Tests modSimpleEmailForm::renderCaptcha()
      */
     public function testRenderCaptcha()
@@ -817,12 +980,27 @@ class modSimpleEmailFormTest extends PHPUnit_Framework_TestCase
         $msgValue = $this->modSimpleEmailFormProperties['_msg']->getValue($this->modSimpleEmailForm);
 
         $_POST['mod_simpleemailform_submit_1'] = true;
+
+        $output = $this->modSimpleEmailForm->main();
+
+        $this->assertEquals(0, preg_match("/style='color:red;'>Please/i", $output));
+    }
+
+    /**
+     * Tests modSimpleEmailForm::main()
+     */
+    public function testMainReturnValueWithInvalidSubmit()
+    {
+        $csrfFieldValue = $this->modSimpleEmailFormProperties['_csrfField']->getValue($this->modSimpleEmailForm);
+        $msgValue = $this->modSimpleEmailFormProperties['_msg']->getValue($this->modSimpleEmailForm);
+
+        $_POST['mod_simpleemailform_submit_1'] = true;
         $_POST[$csrfFieldValue] = 'test';
         $_SESSION[$csrfFieldValue] = 'test';
 
-        $this->modSimpleEmailForm->main();
+        $output = $this->modSimpleEmailForm->main();
 
-        /* @todo assertions */
+        $this->assertEquals(1, preg_match("/style='color:red;'>Please/i", $output));
     }
 
     /**
