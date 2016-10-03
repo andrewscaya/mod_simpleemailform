@@ -24,10 +24,6 @@
         * @subpackage Modules
         * @link       http://joomla.unlikelysource.com/
         * @license    GNU/GPL, see above
-
-        2014-10-31 DB:
-        * Added the Norwegian language thanks to    Eugen Landeide <eugen.landeide@online.no>
-        *
 */
 
 // no direct access
@@ -40,9 +36,17 @@ jimport('joomla.filesystem.file');
 defined('MOD_SIMPLEEMAILFORM_DIR')
     || define('MOD_SIMPLEEMAILFORM_DIR', dirname(__FILE__));
 
-// Include the syndicate functions only once
-require_once(MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'helper.php');
+// @TODO Joomla autoloading
+//\JLoader::registerPrefix('Sef', MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'sef');
+//\JLoader::setup();
 
-$form = new modSimpleEmailForm($params);
+require_once MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'sef' . DIRECTORY_SEPARATOR . 'helper.php';
+require_once MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'sef' . DIRECTORY_SEPARATOR . 'modsimpleemailform.php';
+
+$sefhelper = \SefHelper::getInstance();
+
+$form = $sefhelper->buildForm($params, 'classic');
+
 $view = $form->main();
+
 require(JModuleHelper::getLayoutPath('mod_simpleemailform'));

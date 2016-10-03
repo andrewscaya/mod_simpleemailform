@@ -17,14 +17,13 @@ Upload
 --FILE--
 <?php
 require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
-require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'helper.php';
 
 $paramsSerialized = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'serializedParamsObject'); 
 $params = unserialize($paramsSerialized);
 
 $message = '';
 
-$obj = new modSimpleEmailForm($params);
+$obj = new \SefModsimpleemailform($params);
 
 $testResult = $obj->uploadAttachment('/tmp', '', 'RED', 'GREEN', $message, 1);;
 

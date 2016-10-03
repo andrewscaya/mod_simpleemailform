@@ -18,14 +18,13 @@ Upload
 <?php
 ini_set('display_errors', 0);
 require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
-require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'helper.php';
 
 $paramsSerialized = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'serializedParamsObject'); 
 $params = unserialize($paramsSerialized);
 
 $message = '';
 
-$obj = new modSimpleEmailForm($params);
+$obj = new \SefModsimpleemailform($params);
 
 $testResult = $obj->uploadAttachment('', '', 'RED', 'GREEN', $message, 1);
 
