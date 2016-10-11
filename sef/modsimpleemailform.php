@@ -95,6 +95,10 @@ class sefmodsimpleemailform
 
     public function __construct($params)
     {
+        if (!defined('MOD_SIMPLEEMAILFORM_DIR')) {
+            define('MOD_SIMPLEEMAILFORM_DIR', dirname(dirname(__FILE__)));
+        }
+        
         // Get XML params
         $this->_cssClass        = $params->get('mod_simpleemailform_cssClass');
         $this->_labelAlign      = $params->get('mod_simpleemailform_labelAlign');
@@ -257,12 +261,12 @@ class sefmodsimpleemailform
         // Load language files
         // i.e. tr-TR.mod_simpleemailform.ini
         $this->_lang = $params->get('mod_simpleemailform_defaultLang');
-        $langFile = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'language_files'
+        $langFile = MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'language_files'
                   . DIRECTORY_SEPARATOR . $this->_lang . '.mod_simpleemailform.ini';
         if (file_exists($langFile)) {
             $this->_transLang = parse_ini_file($langFile);
         } else {
-            $langFile = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'language_files'
+            $langFile = MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'language_files'
                       . DIRECTORY_SEPARATOR . 'en-GB.mod_simpleemailform.ini';
             $this->_transLang = parse_ini_file($langFile);
         }
