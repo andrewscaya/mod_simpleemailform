@@ -23,7 +23,7 @@ $params = unserialize($paramsSerialized);
 
 $message = '';
 
-$obj = new \SefModsimpleemailform($params);
+$obj = new \sefmodsimpleemailform($params);
 
 $testResult = $obj->uploadAttachment('/tmp', '', 'RED', 'GREEN', $message, 1);;
 

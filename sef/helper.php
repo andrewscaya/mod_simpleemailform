@@ -39,7 +39,7 @@ class _SimpleEmailForm
     public $error         = '';
 }
 
-class SefHelper
+class sefhelper
 {
     private static $instance = null;
 
@@ -66,7 +66,7 @@ class SefHelper
         if ($formObject === 'jform') {
             // @TODO introduce JForm object here
         } else {
-            return new \SefModsimpleemailform($params);
+            return new \sefmodsimpleemailform($params);
         }
     }
 }

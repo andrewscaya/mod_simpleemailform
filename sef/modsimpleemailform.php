@@ -30,7 +30,7 @@
         * @TODO: convert to JForm
 */
 
-class SefModsimpleemailform
+class sefmodsimpleemailform
 {
 
     // Initialize vars

@@ -26,7 +26,7 @@ $message = '';
 
 $_FILES['mod_simpleemailform_upload_1_1']['name'] = '';
 
-$obj = new \SefModsimpleemailform($params);
+$obj = new \sefmodsimpleemailform($params);
 
 $testResult = $obj->uploadAttachment('/tmp', '', 'RED', 'GREEN', $message, 1);
 

@@ -36,14 +36,10 @@ jimport('joomla.filesystem.file');
 defined('MOD_SIMPLEEMAILFORM_DIR')
     || define('MOD_SIMPLEEMAILFORM_DIR', dirname(__FILE__));
 
-// @TODO Joomla autoloading
-//\JLoader::registerPrefix('Sef', MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'sef');
-//\JLoader::setup();
+// Joomla autoloading
+\JLoader::discover('Sef', MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'sef', true, true);
 
-require_once MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'sef' . DIRECTORY_SEPARATOR . 'helper.php';
-require_once MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'sef' . DIRECTORY_SEPARATOR . 'modsimpleemailform.php';
-
-$sefhelper = \SefHelper::getInstance();
+$sefhelper = \sefhelper::getInstance();
 
 $form = $sefhelper->buildForm($params, 'classic');
 

@@ -102,7 +102,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
 
         $message = '';
 
-        $this->modsimpleemailform = new \SefModsimpleemailform($params);
+        $this->modsimpleemailform = new \sefmodsimpleemailform($params);
 
         $this->modsimpleemailformReflection = new \ReflectionClass($this->modsimpleemailform);
 
