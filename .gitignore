@@ -6,3 +6,4 @@ composer.lock
 .buildpath
 deployment.xml
 deployment.properties
+.idea/
