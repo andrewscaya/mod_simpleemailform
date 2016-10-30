@@ -531,7 +531,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
         $output = $this->modsimpleemailform->textCaptcha('white', $captchaLen, 1, 'red', 1, $textCaptcha);
         $this->assertEquals($captchaLen, strlen($output));
 
-        //@todo This part depends on styling being implemented in Modsimpleemailform::textCaptcha()
+        // @TODO This part depends on styling being implemented in Modsimpleemailform::textCaptcha()
         //$doc = new \DOMDocument();
         //$doc->loadHTML($output);
 
@@ -542,7 +542,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
         //$this->assertEquals(1, preg_match('/background-color: red/i', $spanCss));
         //$this->assertEquals(1, preg_match('/color: white/i', $spanCss));
         //$this->assertEquals($captchaLen, strlen($spanNode->nodeValue));
-        //@todo Check captcha size
+        // @TODO Check captcha size
     }
 
     public function providerTestTextCaptcha()
@@ -588,8 +588,6 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
         $this->assertSame($expectedResult, $actualResult);
     }
 
-
-
     public function providerTestFormatErrorMessage()
     {
         return array(
@@ -603,7 +601,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
             //Test 3: Invalid filename - to be replaced by the commented test below
             array("<p><b><span style='color:$this->color;'>$this->standardMessage ( )</span></b></p>\n",
                 $this->color, $this->standardMessage, $this->emptyFn),
-            //@todo Test 3
+            // @TODO Test 3
             //array(<p><b><span style='color:$this->color;'>$this->standardMessage
             //     ('Warning - Invalid filename: no alnum character')</span></b></p>\n",
             //     $this->color, $this->standardMessage, $this->emptyFn),
@@ -612,14 +610,14 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
             //Test 4: Null message - to be replaced by the commented test below
             array("<p><b><span style='color:$this->color;'>$this->nullMessage ($this->standardFn)</span></b></p>\n",
                 $this->color, $this->nullMessage, $this->standardFn),
-            // @todo Test 4
+            // @TODO Test 4
             //array("<p><b><span style='color:$this->color;'>Warning - No message sent
             //       ($this->standardFn)</span></b></p>\n",
             //       $this->color, $this->nullMessage, $this->standardFn),
             //Test 5: Message with no alnum character - to be replaced by the commented test below
             array("<p><b><span style='color:$this->color;'>$this->emptyMessage ($this->standardFn)</span></b></p>\n",
                 $this->color, $this->emptyMessage, $this->standardFn),
-                //@todo Test 5
+            // @TODO Test 5
             //array("<p><b><span style='color:$this->color;'>Warning - Invalid message: no alnum character
             //       ($this->standardFn)</span></b></p>\n",
             //       $this->color, $this->emptyMessage, $this->standardFn),
@@ -631,6 +629,11 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
             );
     }
 
+    /**
+     * Tests Modsimpleemailform::autoResetForm()
+     *
+     * Tests if form is reset in POST
+     */
     public function testAutoResetForm()
     {
         $_POST = [1, 2, 3];
@@ -737,11 +740,8 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     {
         $address = 'test@test.';
 
-        $i = 0;
-
-        while ($i < 63) {
+        for ($i = 0; $i < 63; $i++) {
             $address .= 'a';
-            $i++;
         }
 
         return (string) $address;
@@ -754,11 +754,8 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     {
         $address = 'test@test.';
 
-        $i = 0;
-
-        while ($i < 64) {
+        for ($i = 0; $i < 64; $i++) {
             $address .= 'a';
-            $i++;
         }
 
         return (string) $address;
@@ -771,11 +768,8 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     {
         $address = '';
 
-        $i = 0;
-
-        while ($i < 65) {
+        for ($i = 0; $i < 65; $i++) {
             $address .= 'a';
-            $i++;
         }
 
         $address .= '@localhost.localdomain';
@@ -785,8 +779,10 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tests Modsimpleemailform::doesCaptchaMatch()
+     *
+     * Tests to see if method works properly when captchas match
      */
-    public function testDoesCaptchaMatch()
+    public function testDoesCaptchaMatchIfMatches()
     {
         $_SERVER['REMOTE_ADDR'] = 'localhost';
 
@@ -805,6 +801,23 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
         );
 
         $this->assertTrue($output);
+    }
+
+    /**
+     * Tests Modsimpleemailform::doesCaptchaMatch()
+     *
+     * Tests to see if method works properly when captchas do not match
+     */
+    public function testDoesCaptchaMatchIfDoesNotMatch()
+    {
+        $_SERVER['REMOTE_ADDR'] = 'localhost';
+
+        $_POST['mod_simpleemailform_captcha_1'] = 'test';
+
+        $hash = $this->modsimpleemailformMethods['buildCaptchaHash']->invokeArgs(
+            $this->modsimpleemailform,
+            array('test')
+        );
 
         $_POST['mod_simpleemailform_crsf_1'] = 'wrong';
 
@@ -960,6 +973,8 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tests Modsimpleemailform::main()
+     *
+     * Tests if form is not submitted
      */
     public function testMainReturnValueWithoutSubmit()
     {
@@ -972,6 +987,8 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tests Modsimpleemailform::main()
+     *
+     * Tests if form was submitted
      */
     public function testMainReturnValueWithSubmit()
     {
@@ -987,6 +1004,8 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tests Modsimpleemailform::main()
+     *
+     * Tests if form was submitted but invalid
      */
     public function testMainReturnValueWithInvalidSubmit()
     {
@@ -1004,6 +1023,8 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tests Modsimpleemailform::main()
+     *
+     * Tests if test mode is set to false
      */
     public function testMainTestModeFalse()
     {
@@ -1015,6 +1036,8 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tests Modsimpleemailform::main()
+     *
+     * Tests if test mode is set to true
      */
     public function testMainTestModeTrue()
     {
