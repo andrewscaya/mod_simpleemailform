@@ -9,7 +9,6 @@ use \DOMDocument;
 use \JFactory;
 use \JDocument;
 use \JMail;
-use \Jfileproxy;
 
 /**
  * @runTestsInSeparateProcesses
@@ -21,6 +20,11 @@ use \Jfileproxy;
  */
 class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
 {
+
+    /**
+     * @var \Joomla\Registry\Registry
+     */
+    private $params;
 
     /**
      *
@@ -98,11 +102,10 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
         parent::setUp();
 
         $paramsSerialized = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'serializedParamsObject');
-        $params = unserialize($paramsSerialized);
 
-        $message = '';
+        $this->params = unserialize($paramsSerialized);
 
-        $this->modsimpleemailform = new \sefmodsimpleemailform($params);
+        $this->modsimpleemailform = new \sefmodsimpleemailform($this->params);
 
         $this->modsimpleemailformReflection = new \ReflectionClass($this->modsimpleemailform);
 
@@ -152,15 +155,15 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Modsimpleemailform::__construct()
+     * Tests sefmodsimpleemailform::__construct()
      */
     public function testModsimpleemailformConstruct()
     {
-        $this->assertInstanceOf('SefModsimpleemailform', $this->modsimpleemailform);
+        $this->assertInstanceOf('sefmodsimpleemailform', $this->modsimpleemailform);
     }
 
     /**
-     * Tests Modsimpleemailform::uploadAttachment()
+     * Tests sefmodsimpleemailform::uploadAttachment()
      */
     public function testAllPhptFiles()
     {
@@ -180,7 +183,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Modsimpleemailform::formatRow()
+     * Tests sefmodsimpleemailform::formatRow()
      *
      * @param string containing the expected result
      * @param string signifying object's $_field property value
@@ -322,7 +325,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Modsimpleemailform::buildCheckRadioField()
+     * Tests sefmodsimpleemailform::buildCheckRadioField()
      *
      * @param string containing the expected result
      * @param string signifying form disposition
@@ -428,7 +431,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Modsimpleemailform::sendResults()
+     * Tests sefmodsimpleemailform::sendResults()
      */
     public function testSendResults()
     {
@@ -469,7 +472,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Modsimpleemailform::imageCaptcha()
+     * Tests sefmodsimpleemailform::imageCaptcha()
      *
      * @param string containing Captcha's URL
      *
@@ -518,7 +521,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Modsimpleemailform::textCaptcha()
+     * Tests sefmodsimpleemailform::textCaptcha()
      *
      * @param int representing the captcha's length
      *
@@ -531,7 +534,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
         $output = $this->modsimpleemailform->textCaptcha('white', $captchaLen, 1, 'red', 1, $textCaptcha);
         $this->assertEquals($captchaLen, strlen($output));
 
-        // @TODO This part depends on styling being implemented in Modsimpleemailform::textCaptcha()
+        // @TODO This part depends on styling being implemented in sefmodsimpleemailform::textCaptcha()
         //$doc = new \DOMDocument();
         //$doc->loadHTML($output);
 
@@ -567,7 +570,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Modsimpleemailform::FormatErrorMessage()
+     * Tests sefmodsimpleemailform::FormatErrorMessage()
      */
 
     /**
@@ -630,7 +633,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Modsimpleemailform::autoResetForm()
+     * Tests sefmodsimpleemailform::autoResetForm()
      *
      * Tests if form is reset in POST
      */
@@ -649,7 +652,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Modsimpleemailform::isEmailAddress()
+     * Tests sefmodsimpleemailform::isEmailAddress()
      *
      * Tests if email address is valid
      *
@@ -678,7 +681,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Modsimpleemailform::isEmailAddress()
+     * Tests sefmodsimpleemailform::isEmailAddress()
      *
      * Tests if email address is invalid
      *
@@ -778,7 +781,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Modsimpleemailform::doesCaptchaMatch()
+     * Tests sefmodsimpleemailform::doesCaptchaMatch()
      *
      * Tests to see if method works properly when captchas match
      */
@@ -804,7 +807,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Modsimpleemailform::doesCaptchaMatch()
+     * Tests sefmodsimpleemailform::doesCaptchaMatch()
      *
      * Tests to see if method works properly when captchas do not match
      */
@@ -830,7 +833,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Modsimpleemailform::renderCaptcha()
+     * Tests sefmodsimpleemailform::renderCaptcha()
      */
     public function testRenderCaptcha()
     {
@@ -848,7 +851,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Modsimpleemailform::cleanupCaptchas()
+     * Tests sefmodsimpleemailform::cleanupCaptchas()
      */
     public function testCleanupCaptchas()
     {
@@ -875,7 +878,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Modsimpleemailform::cleanupCaptchas()
+     * Tests sefmodsimpleemailform::cleanupCaptchas()
      */
     public function testCleanupCaptchasFailTestModeOn()
     {
@@ -898,7 +901,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Modsimpleemailform::cleanupCaptchas()
+     * Tests sefmodsimpleemailform::cleanupCaptchas()
      */
     public function testCleanupCaptchasFail()
     {
@@ -916,7 +919,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Modsimpleemailform::compareCsrfHash()
+     * Tests sefmodsimpleemailform::compareCsrfHash()
      *
      * @param bool representing the expected result
      * @param string representing the form's CSRF
@@ -972,7 +975,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Modsimpleemailform::main()
+     * Tests sefmodsimpleemailform::main()
      *
      * Tests if form is not submitted
      */
@@ -986,7 +989,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Modsimpleemailform::main()
+     * Tests sefmodsimpleemailform::main()
      *
      * Tests if form was submitted
      */
@@ -1003,7 +1006,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Modsimpleemailform::main()
+     * Tests sefmodsimpleemailform::main()
      *
      * Tests if form was submitted but invalid
      */
@@ -1022,7 +1025,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Modsimpleemailform::main()
+     * Tests sefmodsimpleemailform::main()
      *
      * Tests if test mode is set to false
      */
@@ -1035,7 +1038,7 @@ class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Modsimpleemailform::main()
+     * Tests sefmodsimpleemailform::main()
      *
      * Tests if test mode is set to true
      */

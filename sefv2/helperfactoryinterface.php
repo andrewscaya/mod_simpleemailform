@@ -1,7 +1,7 @@
 <?php
 
 /**
- * mod_simpleemailform.php
+ * helperfactoryinterface.php
  *
  * Copyright 2010 - 2016 D. Bierer <doug@unlikelysource.com>
  * Version 1.8.9
@@ -22,31 +22,12 @@
  * MA 02110-1301, USA.
  *
  * @package    Simple Email Form
- * @copyright  Copyright 2010 - 2016 D. Bierer <doug@unlikelysource.com>
+ * @subpackage Modules
  * @link       http://joomla.unlikelysource.com/
  * @license    GNU/GPLv2, see above
- * @since 1.0.0
- * @version 1.8.9
  */
 
-// no direct access
-defined('_JEXEC') or die('Restricted access');
-
-// 2010-04-28 added DB
-jimport('joomla.filesystem.file');
-
-// current directory constant
-defined('MOD_SIMPLEEMAILFORM_DIR')
-    || define('MOD_SIMPLEEMAILFORM_DIR', dirname(__FILE__));
-
-// Joomla autoloading
-\JLoader::discover('sef', MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'sef', true, true);
-\JLoader::discover('sefv2', MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'sefv2', true, true);
-
-$sefhelper = \sefhelper::getInstance();
-
-$form = $sefhelper->buildForm($params, 'classic');
-
-$view = $form->render();
-
-require(JModuleHelper::getLayoutPath('mod_simpleemailform'));
+interface sefv2helperfactoryinterface
+{
+    public function buildForm(\Joomla\Registry\Registry $params, $formObjectType = 'classic');
+}

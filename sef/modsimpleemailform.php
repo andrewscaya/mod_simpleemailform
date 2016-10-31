@@ -1,36 +1,6 @@
 <?php
-/*
-        mod_simpleEmailForm.php
 
-        Copyright 2010 - 2016 D. Bierer <doug@unlikelysource.com>
-        Version 1.8.9
-
-        This program is free software; you can redistribute it and/or modify
-        it under the terms of the GNU General Public License as published by
-        the Free Software Foundation; either version 2 of the License, or
-        (at your option) any later version.
-
-        This program is distributed in the hope that it will be useful,
-        but WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-        GNU General Public License for more details.
-
-        You should have received a copy of the GNU General Public License
-        along with this program; if not, write to the Free Software
-        Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-        MA 02110-1301, USA.
-
-        2014-10-31 DB:
-        * Added the Norwegian language thanks to Eugen Landeide <eugen.landeide@online.no>
-
-        2016-02-25 DB:
-        * fixed error where session 1 time hash key not set 1st time generates notice
-        * fixed bug whereby page not found was generated after form posting; removed "#" as default "anchor" tag
-        * see: http://joomla.stackexchange.com/questions/16051/fix-the-invalid-address-error-after-upgrading-to-joomla-3-5-1
-        * @TODO: convert to JForm
-*/
-
-class sefmodsimpleemailform
+class sefmodsimpleemailform implements sefv2formrendererinterface
 {
 
     // Initialize vars
@@ -278,7 +248,7 @@ class sefmodsimpleemailform
         $this->_msg->copyMe     =  0;   // NOTE: depends on what user selects
         $this->_msg->fromName   = $params->get('mod_simpleemailform_fromName');
         $this->_msg->copyMeAuto = ($this->_copymeAuto == 'Y') ? 1 : 0;
-        // TODO: check for multiple targets, and, if so, convert to array()
+        // @TODO: check for multiple targets, and, if so, convert to array()
         $to  = trim($params->get('mod_simpleemailform_emailTo'));
         $cc  = trim($params->get('mod_simpleemailform_emailCC'));
         $bcc = trim($params->get('mod_simpleemailform_emailBCC'));
@@ -1316,5 +1286,10 @@ class sefmodsimpleemailform
         $this->_output .= "</form>\n";
         $this->_output .= ($this->_cssClass) ? '</div>' : '';
         return $this->_output;
+    }
+
+    public function render()
+    {
+        return $this->main();
     }
 }
