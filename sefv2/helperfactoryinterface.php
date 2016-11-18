@@ -29,5 +29,5 @@
 
 interface sefv2helperfactoryinterface
 {
-    public function buildForm(\Joomla\Registry\Registry $params, $formObjectType = 'classic');
+    public function buildForm(\Joomla\Registry\Registry $params);
 }

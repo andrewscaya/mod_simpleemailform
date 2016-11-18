@@ -45,7 +45,7 @@ defined('MOD_SIMPLEEMAILFORM_DIR')
 
 $sefhelper = \sefhelper::getInstance();
 
-$form = $sefhelper->buildForm($params, 'classic');
+$form = $sefhelper->buildForm($params);
 
 $view = $form->render();
 

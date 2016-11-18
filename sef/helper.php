@@ -51,9 +51,9 @@ class sefhelper implements sefv2helperfactoryinterface
     }
 
     // @TODO Create object abstraction (DIP) with appropriate interface(s)
-    public function buildForm(\Joomla\Registry\Registry $params, $formObjectType = 'classic')
+    public function buildForm(\Joomla\Registry\Registry $params)
     {
-        if ($formObjectType === 'jform') {
+        if ($params->mod_simpleemailform_formType === 'jform') {
             $formFactory = new sefv2formfactory();
             return $formFactory->createSefv2FormObject($params);
         } else {
