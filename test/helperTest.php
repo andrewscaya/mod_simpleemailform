@@ -87,7 +87,9 @@ class sefhelperTest extends \PHPUnit_Framework_TestCase
     {
         $this->createJoomlaMocks();
 
-        $formObject = $this->helper->buildForm($this->params, $wantedObjectType);
+        $this->params->mod_simpleemailform_formType = $wantedObjectType;
+
+        $formObject = $this->helper->buildForm($this->params);
 
         $this->assertInstanceOf($wantedObjectClassName, $formObject);
 
