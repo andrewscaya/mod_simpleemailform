@@ -3,8 +3,8 @@
 /**
  * mod_simpleemailform.php
  *
- * Copyright 2010 - 2016 D. Bierer <doug@unlikelysource.com>
- * Version 1.8.9
+ * Copyright 2010 - 2017 D. Bierer <doug@unlikelysource.com>
+ * Version 2.0
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,11 +22,11 @@
  * MA 02110-1301, USA.
  *
  * @package    Simple Email Form
- * @copyright  Copyright 2010 - 2016 D. Bierer <doug@unlikelysource.com>
- * @link       http://joomla.unlikelysource.com/
+ * @copyright  Copyright 2010 - 2017 D. Bierer <doug@unlikelysource.com>
+ * @link       http://joomla.unlikelysource.org/
  * @license    GNU/GPLv2, see above
  * @since 1.0.0
- * @version 1.8.9
+ * @version 2.0
  */
 
 // no direct access
@@ -43,9 +43,9 @@ defined('MOD_SIMPLEEMAILFORM_DIR')
 \JLoader::discover('sef', MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'sef', true, true);
 \JLoader::discover('sefv2', MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'sefv2', true, true);
 
-$sefhelper = \sefhelper::getInstance();
+$sefv2helper = \sefv2helper::getInstance();
 
-$form = $sefhelper->buildForm($params);
+$form = $sefv2helper->buildForm($params);
 
 $view = $form->render();
 

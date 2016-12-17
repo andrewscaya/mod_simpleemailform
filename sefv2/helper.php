@@ -3,8 +3,8 @@
 /**
  * helper.php
  *
- * Copyright 2010 - 2016 D. Bierer <doug@unlikelysource.com>
- * Version 1.8.9
+ * Copyright 2010 - 2017 D. Bierer <doug@unlikelysource.com>
+ * Version 2.0
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,14 +22,14 @@
  * MA 02110-1301, USA.
  *
  * @package    Simple Email Form
- * @copyright  Copyright 2010 - 2016 D. Bierer <doug@unlikelysource.com>
- * @link       http://joomla.unlikelysource.com/
+ * @copyright  Copyright 2010 - 2017 D. Bierer <doug@unlikelysource.com>
+ * @link       http://joomla.unlikelysource.org/
  * @license    GNU/GPLv2, see above
  */
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . '_SimpleEmailForm.php';
 
-class sefhelper implements sefv2helperfactoryinterface
+class sefv2helper implements sefv2helperfactoryinterface
 {
     private static $instance = null;
 
@@ -57,7 +57,7 @@ class sefhelper implements sefv2helperfactoryinterface
             $formFactory = new sefv2formfactory();
             return $formFactory->createSefv2FormObject($params);
         } else {
-            return new \sefmodsimpleemailform($params);
+            return new sefmodsimpleemailform($params);
         }
     }
 }

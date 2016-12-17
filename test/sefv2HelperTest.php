@@ -12,7 +12,7 @@ use Mockery;
 /**
  * Helper test case.
  */
-class sefhelperTest extends \PHPUnit_Framework_TestCase
+class sefv2helperTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -37,7 +37,7 @@ class sefhelperTest extends \PHPUnit_Framework_TestCase
 
         $this->params = unserialize($paramsSerialized);
 
-        $this->helper = \sefhelper::getInstance();
+        $this->helper = \sefv2helper::getInstance();
     }
 
     /**
@@ -70,7 +70,7 @@ class sefhelperTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetInstanceIfObjectIsOfRightClassAndInterface()
     {
-        $this->assertInstanceOf('sefhelper', $this->helper);
+        $this->assertInstanceOf('sefv2helper', $this->helper);
 
         $this->assertInstanceOf('sefv2helperfactoryinterface', $this->helper);
     }
