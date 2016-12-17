@@ -1,6 +1,6 @@
 <?php
 
-namespace ModsimpleemailformTest;
+namespace SefModsimpleemailformTest;
 
 use PHPUnit_Framework_TestCase;
 use Mockery;
@@ -18,7 +18,7 @@ use \JMail;
 /**
  * Modsimpleemailform test case.
  */
-class ModsimpleemailformTest extends PHPUnit_Framework_TestCase
+class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
 {
 
     /**
