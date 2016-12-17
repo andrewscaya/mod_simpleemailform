@@ -20,15 +20,15 @@
 	</description>
 	<files>
 		<filename module="mod_simpleemailform">mod_simpleemailform.php</filename>
-		<filename>helper.php</filename>
+		<filename>sefv2/helper.php</filename>
 		<filename>index.html</filename>
-		<filename>FreeSansBold.ttf</filename>
-		<filename>Image.php</filename>
-		<filename>Text.php</filename>
-		<filename>CAPTCHA.php</filename>
-		<filename>Password.php</filename>
-		<filename>PEAR.php</filename>
-		<filename>PEAR5.php</filename>
+		<filename>sef/FreeSansBold.ttf</filename>
+		<filename>sef/Image.php</filename>
+		<filename>sef/Text.php</filename>
+		<filename>sef/CAPTCHA.php</filename>
+		<filename>sef/Password.php</filename>
+		<filename>sef/PEAR.php</filename>
+		<filename>sef/PEAR5.php</filename>
 		<filename>tmpl/default.php</filename>
 		<filename>tmpl/index.html</filename>
 		<filename>language_files/af-ZA.mod_simpleemailform.ini</filename>
@@ -75,6 +75,7 @@
 					<option value="en-GB">English</option>
 					<option value="af-ZA">Afrikaans</option>
 					<option value="ar-SA">Arabic</option>
+					<option value="be-BY">беларускі (Belarusian)</option>
 					<option value="bg-BG">български (Bulgarian)</option>
 					<option value="cs-CZ">česky</option>
 					<option value="zh-ZH">中文 (Chinese)</option>
