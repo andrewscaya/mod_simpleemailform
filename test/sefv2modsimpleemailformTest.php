@@ -265,8 +265,6 @@ class sefv2modsimpleemailformTest extends PHPUnit_Framework_TestCase
      */
     public function testSefv2modsimpleemailformConstruct()
     {
-        $transLang = $this->sefv2modsimpleemailformProperties['transLang']->getValue($this->sefv2modsimpleemailform);
-
         $this->assertInstanceOf(
             'sefv2modsimpleemailform',
             $this->sefv2modsimpleemailform
@@ -307,15 +305,14 @@ class sefv2modsimpleemailformTest extends PHPUnit_Framework_TestCase
             'en-GB',
             $this->sefv2modsimpleemailformProperties['lang']->getValue($this->sefv2modsimpleemailform)
         );
+
+        $transLang = $this->sefv2modsimpleemailformProperties['transLang']->getValue($this->sefv2modsimpleemailform);
+
         $this->assertTrue(
-            is_array(
-                $this->sefv2modsimpleemailformProperties['transLang']->getValue($this->sefv2modsimpleemailform)
-            )
+            is_array($transLang)
         );
         $this->assertTrue(
-            !empty(
-                $this->sefv2modsimpleemailformProperties['transLang']->getValue($this->sefv2modsimpleemailform)
-            )
+            !empty($transLang)
         );
         $this->assertSame(
             'Successfully uploaded',
