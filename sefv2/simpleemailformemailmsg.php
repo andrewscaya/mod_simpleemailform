@@ -27,7 +27,7 @@ MA 02110-1301, USA.
  * @license    GNU/GPLv2, see above
  */
 
-class _SimpleEmailForm
+class sefv2simpleemailformemailmsg
 {
     public $to            = null;
     public $from          = null;

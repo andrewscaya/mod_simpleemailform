@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="module" client="site" method="upgrade" version="2.5">
 	<name>Simple Email Form</name> 
-	<author>unlikelysource.com</author> 
+	<author>joomla.unlikelysource.org</author>
 	<creationDate>2014-05-21</creationDate>
-	<copyright>All rights reserved by unlikelysource.com (c) 2010 - 2016</copyright> 
+	<copyright>All rights reserved by unlikelysource.com (c) 2010 - 2017</copyright>
 	<license>GNU General Public License version 2</license>
 	<authorEmail>info@unlikelysource.org</authorEmail> 
 	<authorUrl>www.unlikelysource.com</authorUrl> 
-	<version>1.8.9</version> 
+	<version>2.0.0</version>
 	<description><![CDATA[ 
 	A simple email form from unlikelysource.com with up to 8 fields + CAPTCHA + 28 languages. 
 	<br />Version 1.8.9 -- works on Joomla 2.x and 3.x (1.8.1-1x supports Joomla 1.x)!

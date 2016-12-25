@@ -3,6 +3,7 @@
 namespace ModsimpleemailformTest;
 
 use Mockery;
+use Joomla\Registry\Registry;
 
 /**
  * @runTestsInSeparateProcesses
@@ -11,23 +12,36 @@ use Mockery;
 
 /**
  * Helper test case.
+ *
+ * @since 2.0.0
  */
 class sefv2helperTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
      * @var \Joomla\Registry\Registry
+     * @since 2.0.0
      */
     private $params;
 
     /**
      *
-     * @var Modsimpleemailform
+     * @var sefv2helper
+     * @since 2.0.0
      */
-    private $helper;
+    private $sefv2helper;
+
+    /**
+     *
+     * @var sefv2helper reflection
+     * @since 2.0.0
+     */
+    private $sefv2HelperReflection;
 
     /**
      * Prepares the environment before running a test.
+     *
+     * @since 2.0.0
      */
     protected function setUp()
     {
@@ -37,15 +51,19 @@ class sefv2helperTest extends \PHPUnit_Framework_TestCase
 
         $this->params = unserialize($paramsSerialized);
 
-        $this->helper = \sefv2helper::getInstance();
+        $this->sefv2helper = \sefv2helper::getInstance();
+
+        $this->sefv2HelperReflection = new \ReflectionClass($this->sefv2helper);
     }
 
     /**
      * Cleans up the environment after running a test.
+     *
+     * @since 2.0.0
      */
     protected function tearDown()
     {
-        $this->helper = null;
+        $this->sefv2helper = null;
 
         \Mockery::close();
 
@@ -55,28 +73,61 @@ class sefv2helperTest extends \PHPUnit_Framework_TestCase
     protected function createJoomlaMocks()
     {
         $jFormMock = Mockery::mock('overload:JForm');
-        $jFormMock->shouldReceive('getInstance')->once()->andReturn($jFormMock);
+        $jFormMock->shouldReceive('load')->once()->andReturn(true);
 
-        $jMailMock = Mockery::mock('overload:JMail');
-        $jMailMock->shouldReceive('getInstance')->once()->andReturn($jMailMock);
-
-        $jDocumentMock = Mockery::mock('overload:JDocument');
         $jFactoryMock = Mockery::mock('overload:JFactory');
+        $jMailMock = Mockery::mock('overload:JMail');
+        $jFactoryMock->shouldReceive('getMailer')->once()->andReturn($jMailMock);
+        $jDocumentMock = Mockery::mock('overload:JDocument');
         $jFactoryMock->shouldReceive('getDocument')->once()->andReturn($jDocumentMock);
+        $jLanguageMock = Mockery::mock('overload:JLanguage');
+        $jLanguageMock->shouldReceive('getTag')->once()->andReturn('en-GB');
+        $jFactoryMock->shouldReceive('getLanguage')->once()->andReturn($jLanguageMock);
+        $jInputMock = Mockery::mock('overload:JInput');
+        $jInputMock->shouldReceive('getMethod')->once()->andReturn('POST');
+        $jApplicationMock = Mockery::mock('overload:JApplication');
+        $jApplicationMock->input = $jInputMock;
+        $jFactoryMock->shouldReceive('getApplication')->once()->andReturn($jApplicationMock);
+
+        $stdClassComponentFake = new \stdClass;
+        $stdClassComponentFake->id = 10000;
+        $jComponentHelperMock = Mockery::mock('overload:JComponentHelper');
+        $jComponentHelperMock->shouldReceive('getComponent')->with('mod_simpleemailform')->once()->andReturn($stdClassComponentFake);
+
+        $stdClassModuleFake = new \stdClass;
+        $stdClassModuleFake->id = 93;
+        $jComponentHelperMock = Mockery::mock('overload:JModuleHelper');
+        $jComponentHelperMock->shouldReceive('getModule')->with('mod_simpleemailform')->once()->andReturn($stdClassModuleFake);
+
+        $jTableExtensionMock = Mockery::mock('overload:JTableExtension');
+        $jTableModuleMock = Mockery::mock('overload:JTableModule');
+        $jTableMock = Mockery::mock('overload:JTable');
+        $jTableMock->shouldReceive('getInstance')->with('extension')->once()->andReturn($jTableExtensionMock);
+        $jTableExtensionMock->shouldReceive('load')->with(10000)->once()->andReturn(true);
+        $jTableExtensionMock->shouldReceive('check')->once()->andReturn(true);
+        $jTableExtensionMock->shouldReceive('store')->once()->andReturn(true);
+        $jTableMock->shouldReceive('getInstance')->with('module')->once()->andReturn($jTableModuleMock);
+        $jTableModuleMock->shouldReceive('load')->with(93)->once()->andReturn(true);
+        $jTableModuleMock->shouldReceive('check')->once()->andReturn(true);
+        $jTableModuleMock->shouldReceive('store')->once()->andReturn(true);
     }
 
     /**
-     * Tests static Modsimpleemailform::getInstance()
+     * Tests static sefv2helper::getInstance()
+     *
+     * @since 2.0.0
      */
     public function testGetInstanceIfObjectIsOfRightClassAndInterface()
     {
-        $this->assertInstanceOf('sefv2helper', $this->helper);
+        $this->assertInstanceOf('sefv2helper', $this->sefv2helper);
 
-        $this->assertInstanceOf('sefv2helperfactoryinterface', $this->helper);
+        $this->assertInstanceOf('sefv2helperfactoryinterface', $this->sefv2helper);
     }
 
     /**
-     * Tests static Modsimpleemailform::buildForm()
+     * Tests static sefv2helper::buildForm()
+     *
+     * @since 2.0.0
      *
      * @param string containing the wanted form object's type
      * @param string containing the wanted form object's class name
@@ -89,7 +140,7 @@ class sefv2helperTest extends \PHPUnit_Framework_TestCase
 
         $this->params->set('mod_simpleemailform_formType', $wantedObjectType);
 
-        $formObject = $this->helper->buildForm($this->params);
+        $formObject = $this->sefv2helper->buildForm($this->params);
 
         $this->assertInstanceOf($wantedObjectClassName, $formObject);
 
@@ -116,5 +167,11 @@ class sefv2helperTest extends \PHPUnit_Framework_TestCase
                 'sefmodsimpleemailform'
             ),
         );
+    }
+
+    public function testCloneMethodIsNotAccessible()
+    {
+        $reflection = new \ReflectionMethod(\sefv2helper::class, '__clone');
+        $this->assertTrue($reflection->isPrivate());
     }
 }

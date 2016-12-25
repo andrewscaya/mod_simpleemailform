@@ -4,7 +4,7 @@
  * mod_simpleemailform.php
  *
  * Copyright 2010 - 2017 D. Bierer <doug@unlikelysource.com>
- * Version 2.0
+ * Version 2.0.0
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,10 +43,11 @@ defined('MOD_SIMPLEEMAILFORM_DIR')
 \JLoader::discover('sef', MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'sef', true, true);
 \JLoader::discover('sefv2', MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'sefv2', true, true);
 
+// Get the module helper (must be a helperfactoryinterface).
 $sefv2helper = \sefv2helper::getInstance();
 
+// Build the form and render the form's output in order to send it to the view.
 $form = $sefv2helper->buildForm($params);
-
 $view = $form->render();
 
 require(JModuleHelper::getLayoutPath('mod_simpleemailform'));

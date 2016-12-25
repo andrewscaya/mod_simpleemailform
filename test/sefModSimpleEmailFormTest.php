@@ -1,14 +1,9 @@
 <?php
 
-namespace SefModsimpleemailformTest;
+namespace ModsimpleemailformTest;
 
 use PHPUnit_Framework_TestCase;
 use Mockery;
-use \_SimpleEmailForm;
-use \DOMDocument;
-use \JFactory;
-use \JDocument;
-use \JMail;
 
 /**
  * @runTestsInSeparateProcesses
@@ -16,39 +11,40 @@ use \JMail;
  */
 
 /**
- * Modsimpleemailform test case.
+ * SefModsimpleemailform test case.
+ *
+ * @since 1.8.8
  */
 class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
 {
 
     /**
      * @var \Joomla\Registry\Registry
+     * @since 1.8.8
      */
     private $params;
 
     /**
-     *
-     * @var Modsimpleemailform
+     * @var sefmodsimpleemailform
+     * @since 1.8.8
      */
     private $modsimpleemailform;
 
     /**
-     *
-     * @var Modsimpleemailform
+     * @var sefmodsimpleemailform
+     * @since 1.8.8
      */
     private $modsimpleemailformReflection;
 
     /**
-     *
-     * @var Array
-     *        ReflectionProperty
+     * @var array (Reflection Properties)
+     * @since 1.8.8
      */
     private $modsimpleemailformProperties = array();
 
     /**
-     *
-     * @var Array
-     *        ReflectionMethod
+     * @var array (Reflection Methods)
+     * @since 1.8.8
      */
     private $modsimpleemailformMethods = array();
 
@@ -56,6 +52,7 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
      * Color argument
      *
      * @var string
+     * @since 1.8.8
      */
     protected $color = 'red';
 
@@ -63,6 +60,7 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
      * Message argument
      *
      * @var string
+     * @since 1.8.8
      */
     protected $standardMessage = 'This is a test';
 
@@ -70,6 +68,7 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
      * Message argument
      *
      * @var null
+     * @since 1.8.8
      */
     protected $nullMessage = null;
 
@@ -77,6 +76,7 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
      * Message argument
      *
      * @var string
+     * @since 1.8.8
      */
     protected $emptyMessage = ' ';
 
@@ -84,6 +84,7 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
      * Filename argument
      *
      * @var string
+     * @since 1.8.8
      */
     protected $standardFn = 'test.php';
 
@@ -91,11 +92,14 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
      * Filename argument
      *
      * @var string
+     * @since 1.8.8
      */
     protected $emptyFn = ' ';
 
     /**
      * Prepares the environment before running a test.
+     *
+     * @since 1.8.8
      */
     protected function setUp()
     {
@@ -116,6 +120,8 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
 
     /**
      * Cleans up the environment after running a test.
+     *
+     * @since 1.8.8
      */
     protected function tearDown()
     {
@@ -156,6 +162,8 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tests sefmodsimpleemailform::__construct()
+     *
+     * @since 1.8.8
      */
     public function testModsimpleemailformConstruct()
     {
@@ -164,6 +172,8 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tests sefmodsimpleemailform::uploadAttachment()
+     *
+     * @since 1.8.8
      */
     public function testAllPhptFiles()
     {
@@ -185,6 +195,8 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
     /**
      * Tests sefmodsimpleemailform::formatRow()
      *
+     * @since 1.8.8
+     *
      * @param string containing the expected result
      * @param string signifying object's $_field property value
      *
@@ -192,7 +204,7 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
      */
     public function testFormatRow($expectedResult, $fieldPropertyValue)
     {
-        // @TODO $_POST cannot be an array - code in helper.php will have to be modified in version 2.0 - lines 402-411
+        // @TODO $_POST cannot be an array - code in helper.php will have to be modified in a future version - lines 402-411
         $_POST['mod_simpleemailform_field1_1'] = 'TEST_POST';
 
         $this->modsimpleemailformProperties['_maxFields']->setValue($this->modsimpleemailform, 1);
@@ -327,6 +339,8 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
     /**
      * Tests sefmodsimpleemailform::buildCheckRadioField()
      *
+     * @since 1.8.8
+     *
      * @param string containing the expected result
      * @param string signifying form disposition
      * @param string signifying label position
@@ -432,10 +446,12 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tests sefmodsimpleemailform::sendResults()
+     *
+     * @since 1.8.8
      */
     public function testSendResults()
     {
-        $msg = new \_SimpleEmailForm();
+        $msg = new \sefv2simpleemailformemailmsg();
 
         $jFactoryMock = Mockery::mock('overload:JFactory');
         $jDocumentMock = Mockery::mock('overload:JDocument');
@@ -473,6 +489,8 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tests sefmodsimpleemailform::imageCaptcha()
+     *
+     * @since 1.8.8
      *
      * @param string containing Captcha's URL
      *
@@ -523,6 +541,8 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
     /**
      * Tests sefmodsimpleemailform::textCaptcha()
      *
+     * @since 1.8.8
+     *
      * @param int representing the captcha's length
      *
      * @dataProvider providerTestTextCaptcha
@@ -571,9 +591,9 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tests sefmodsimpleemailform::FormatErrorMessage()
-     */
-
-    /**
+     *
+     * @since 1.8.8
+     *
      * @param string we expect to be returned by formatErrorMessage
      * @param string representing the color sent as an argument to formatErrorMessage
      * @param string representing the message sent as an argument to formatErrorMessage
@@ -635,6 +655,8 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
     /**
      * Tests sefmodsimpleemailform::autoResetForm()
      *
+     * @since 1.8.8
+     *
      * Tests if form is reset in POST
      */
     public function testAutoResetForm()
@@ -655,6 +677,8 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
      * Tests sefmodsimpleemailform::isEmailAddress()
      *
      * Tests if email address is valid
+     *
+     * @since 1.8.8
      *
      * @param string representing an email address
      *
@@ -684,6 +708,8 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
      * Tests sefmodsimpleemailform::isEmailAddress()
      *
      * Tests if email address is invalid
+     *
+     * @since 1.8.8
      *
      * @param string representing an email address
      *
@@ -752,6 +778,8 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
 
     /**
      * Invalid email domain address with more than 63 characters
+     *
+     * @since 1.8.8
      */
     public function getDomainGreaterThan63()
     {
@@ -766,6 +794,8 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
 
     /**
      * Greater than 64 characters long local email address
+     *
+     * @since 1.8.8
      */
     public function getLocalGreaterThan64()
     {
@@ -784,6 +814,8 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
      * Tests sefmodsimpleemailform::doesCaptchaMatch()
      *
      * Tests to see if method works properly when captchas match
+     *
+     * @since 1.8.8
      */
     public function testDoesCaptchaMatchIfMatches()
     {
@@ -810,6 +842,8 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
      * Tests sefmodsimpleemailform::doesCaptchaMatch()
      *
      * Tests to see if method works properly when captchas do not match
+     *
+     * @since 1.8.8
      */
     public function testDoesCaptchaMatchIfDoesNotMatch()
     {
@@ -834,6 +868,8 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tests sefmodsimpleemailform::renderCaptcha()
+     *
+     * @since 1.8.8
      */
     public function testRenderCaptcha()
     {
@@ -852,6 +888,8 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tests sefmodsimpleemailform::cleanupCaptchas()
+     *
+     * @since 1.8.8
      */
     public function testCleanupCaptchas()
     {
@@ -879,6 +917,8 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tests sefmodsimpleemailform::cleanupCaptchas()
+     *
+     * @since 1.8.8
      */
     public function testCleanupCaptchasFailTestModeOn()
     {
@@ -902,6 +942,8 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tests sefmodsimpleemailform::cleanupCaptchas()
+     *
+     * @since 1.8.8
      */
     public function testCleanupCaptchasFail()
     {
@@ -920,6 +962,8 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tests sefmodsimpleemailform::compareCsrfHash()
+     *
+     * @since 1.8.8
      *
      * @param bool representing the expected result
      * @param string representing the form's CSRF
@@ -978,6 +1022,8 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
      * Tests sefmodsimpleemailform::main()
      *
      * Tests if form is not submitted
+     *
+     * @since 1.8.8
      */
     public function testMainReturnValueWithoutSubmit()
     {
@@ -992,6 +1038,8 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
      * Tests sefmodsimpleemailform::main()
      *
      * Tests if form was submitted
+     *
+     * @since 1.8.8
      */
     public function testMainReturnValueWithSubmit()
     {
@@ -1009,6 +1057,8 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
      * Tests sefmodsimpleemailform::main()
      *
      * Tests if form was submitted but invalid
+     *
+     * @since 1.8.8
      */
     public function testMainReturnValueWithInvalidSubmit()
     {
@@ -1028,6 +1078,8 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
      * Tests sefmodsimpleemailform::main()
      *
      * Tests if test mode is set to false
+     *
+     * @since 1.8.8
      */
     public function testMainTestModeFalse()
     {
@@ -1041,6 +1093,8 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
      * Tests sefmodsimpleemailform::main()
      *
      * Tests if test mode is set to true
+     *
+     * @since 1.8.8
      */
     public function testMainTestModeTrue()
     {

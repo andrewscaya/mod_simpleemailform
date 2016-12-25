@@ -242,7 +242,7 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
         }
 
         // Set email object params
-        $this->_msg             = new _SimpleEmailForm();
+        $this->_msg             = new sefv2simpleemailformemailmsg();
         $this->_msg->dir        = $params->get('mod_simpleemailform_emailFile');
         $this->_msg->subject    = $params->get('mod_simpleemailform_subjectline');
         $this->_msg->copyMe     =  0;   // NOTE: depends on what user selects
@@ -259,7 +259,7 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
         if ($bcc) {
             $this->_msg->bcc = (preg_match('/[\s,]+/', $bcc)) ? preg_split('/[\s,]+/', $bcc) : array($bcc);
         }
-        // 2012-2-7 DB: add optional Reply-To field
+        // 2012-02-07 DB: add optional Reply-To field
         $this->_msg->replyToActive  = $params->get('mod_simpleemailform_replytoActive');
         if ($this->_msg->replyToActive == 'Y') {
             // 2016-04-18 DB: replyTo no longer needs to be an array
@@ -561,7 +561,7 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
         return '&nbsp;&nbsp;' . $visible . '&nbsp;&nbsp;';
     }
 
-    public function sendResults(_SimpleEmailForm &$msg, $field)
+    public function sendResults(sefv2simpleemailformemailmsg &$msg, $field)
     {
         // 2012-02-15 db: override unwanted error messages originating from JMail
         ob_start();
@@ -1144,8 +1144,8 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
         $this->_output .= (strlen($this->_anchor) > 1) ? "<a name='" . substr($this->_anchor, 1) . "'>&nbsp;</a>\n" : '';
         $this->_output .= "<form method='post' "
                         . "action='" . $this->_anchor . "' "
-                        . "name='_SimpleEmailForm_" . $this->_instance . "' "
-                        . "id='_SimpleEmailForm_" . $this->_instance . "' "
+                        . "name='mod_simpleemailform_" . $this->_instance . "' "
+                        . "id='mod_simpleemailform_" . $this->_instance . "' "
                         . "enctype='multipart/form-data'>\n";
         $this->_output .= "<table class='" . $this->_tableClass . "'>\n";
         // 2010-11-28 DB: all fields are now included in $this->_field[]

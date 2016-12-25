@@ -2,23 +2,23 @@
 
 interface sefv2jformproxyinterface
 {
-    public function bind();
+    public function bind($data);
 
-    public function filter();
+    public function filter(array $data, $group = null);
 
     public function getData();
 
-    public function getField();
+    public function getField($name, $group = null, $value = null);
 
-    public function addField();
+    public function removeField($name, $group = null);
 
-    public function removeField();
+    public function getErrors();
 
-    public function getFieldset();
+    public function getFieldset($set);
 
-    public function load();
+    public function load($xmlConfigString);
 
-    public function reset();
+    public function reset($xml = false);
 
-    public function validate();
+    public function validate(array $data, $group = null);
 }

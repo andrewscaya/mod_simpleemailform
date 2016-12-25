@@ -4,7 +4,7 @@
  * helper.php
  *
  * Copyright 2010 - 2017 D. Bierer <doug@unlikelysource.com>
- * Version 2.0
+ * Version 2.0.0
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,8 +27,6 @@
  * @license    GNU/GPLv2, see above
  */
 
-require_once __DIR__ . DIRECTORY_SEPARATOR . '_SimpleEmailForm.php';
-
 class sefv2helper implements sefv2helperfactoryinterface
 {
     private static $instance = null;
@@ -37,9 +35,17 @@ class sefv2helper implements sefv2helperfactoryinterface
     {
     }
 
+    /**
+     * @codeCoverageIgnoreStart
+     */
+
     private function __clone()
     {
     }
+
+    /**
+     * @codeCoverageIgnoreEnd
+     */
 
     public static function getInstance()
     {
@@ -50,7 +56,6 @@ class sefv2helper implements sefv2helperfactoryinterface
         return static::$instance;
     }
 
-    // @TODO Create object abstraction (DIP) with appropriate interface(s)
     public function buildForm(\Joomla\Registry\Registry $params)
     {
         if ($params->get('mod_simpleemailform_formType') === 'jform') {
