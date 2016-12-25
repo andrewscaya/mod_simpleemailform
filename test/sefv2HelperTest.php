@@ -132,7 +132,7 @@ class sefv2helperTest extends \PHPUnit_Framework_TestCase
      * @param string containing the wanted form object's type
      * @param string containing the wanted form object's class name
      *
-     * @dataProvider providerTestBuildFormIfClassicSefIsReturned
+     * @dataProvider providerTestBuildFormIfCorrespondingObjectsAreReturned
      */
     public function testBuildFormIfCorrespondingObjectsAreReturned($wantedObjectType, $wantedObjectClassName)
     {
@@ -151,27 +151,27 @@ class sefv2helperTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function providerTestBuildFormIfClassicSefIsReturned()
+    public function providerTestBuildFormIfCorrespondingObjectsAreReturned()
     {
         return array(
             array(
                 'classic',
-                'sefmodsimpleemailform'
+                'sefmodsimpleemailform',
             ),
             array(
                 'jform',
-                'sefv2modsimpleemailform'
+                'sefv2modsimpleemailform',
             ),
             array(
                 'shouldreturnclassicbydefault',
-                'sefmodsimpleemailform'
+                'sefmodsimpleemailform',
             ),
         );
     }
 
     public function testCloneMethodIsNotAccessible()
     {
-        $reflection = new \ReflectionMethod(\sefv2helper::class, '__clone');
+        $reflection = new \ReflectionMethod('\sefv2helper', '__clone');
         $this->assertTrue($reflection->isPrivate());
     }
 }
