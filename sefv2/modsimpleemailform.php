@@ -284,6 +284,12 @@ class sefv2modsimpleemailform implements
      * @var string
      * @since 2.0.0
      */
+    protected $fieldUploadRequiredName = '_uploadRequired';
+
+    /**
+     * @var string
+     * @since 2.0.0
+     */
     protected $fieldCopymeName = '_copyMe';
 
     /**
@@ -1056,7 +1062,7 @@ class sefv2modsimpleemailform implements
 
         // Filter active fields by limiting the maximum length of input per field.
         for ($i = 0; $i < $this->formActiveElementsCount; $i++) {
-            $maxLength = $this->paramsArray[$this->formActiveElements[$i] . $this->fieldSizeName];
+            $maxLength = $paramsArray[$this->formActiveElements[$i] . $this->fieldSizeName];
 
             if (preg_match('/,/', $maxLength) === 1) {
                 $maxLengthArray = explode(',', $maxLength);
@@ -1078,7 +1084,7 @@ class sefv2modsimpleemailform implements
         $this->bind($formDataClean);
 
         // IMPORTANT : This loop will not run if there are no (0) configured upload fields.
-        for ($i = 1; $i <= $this->paramsArray[$this->formPrefixName . $this->formUploadActiveName]; $i++) {
+        for ($i = 1; $i <= $paramsArray[$this->formPrefixName . $this->formUploadActiveName]; $i++) {
             if (!empty($files[$this->uploadName[$i]]['tmp_name']) && $files[$this->uploadName[$i]]['error'] === 0) {
                 $uploadFileResult = $this->uploadFile(
                     $this->jFile,
@@ -1088,8 +1094,14 @@ class sefv2modsimpleemailform implements
             } elseif (!empty($files['tmp_name']) && $files['error'] !== 0) {
                 $uploadFileResult = false;
             } else {
-                // IMPORTANT : Must return true if no file was submitted (i.e. optional field(s)).
-                $uploadFileResult = true;
+                if ($paramsArray[$this->formPrefixName . $this->fieldUploadRequiredName] === 'Y') {
+                    $uploadFileResult = false;
+                    $this->msg .=
+                        "<p style=\"color:{$this->errorColour}\">{$this->transLang['MOD_SIMPLEEMAILFORM_upload_error']}</p>";
+                } else {
+                    // IMPORTANT : Must return true if no file was submitted (i.e. optional field(s)).
+                    $uploadFileResult = true;
+                }
             }
 
             if (!$uploadFileResult) {
@@ -1445,7 +1457,7 @@ class sefv2modsimpleemailform implements
             }
         } else {
             $this->msg .=
-                "<p style=\"color:{$this->errorColour}\">{$this->transLang['MOD_SIMPLEEMAILFORM_upload_error']}</p>";
+                "<p style=\"color:{$this->errorColour}\">{$this->transLang['MOD_SIMPLEEMAILFORM_disallowed_filename']}</p>";
             return false;
         }
     }

@@ -382,6 +382,10 @@
 				<field name="mod_simpleemailform_uploadActive"      type="text"	size="4"  default="0"       label="Number of Upload Fields" description="Enter a number greater than 0 which represents how many file upload fields you want to have for email attachments" />
 				<field name="mod_simpleemailform_uploadLabel" 		type="text" size="20" default="Attachment"     	label="Upload Field Label" description="Enter a label for the file upload fields (if any)." />
 				<field name="mod_simpleemailform_uploadAllowed" 	type="text" size="20" default=""             	label="Allowed Attachment Filenames" description="Enter a list of allowed filename extensions separated by commas.  Example: if you want jpg,png, or gif, then enter 'jpg,png,gif'.  Leave blank to allow ANY type of file." />
+				<field name="mod_simpleemailform_uploadRequired" 	type="radio"          default="N"             	label="Are upload fields required?" description="Select 'Y' if upload fields are to be required for valid form submission." >
+					<option value="Y">JYES</option>
+					<option value="N">JNO</option>
+				</field>
 				<field name="mod_simpleemailform_emailFile"    		type="text" size="60" default=""          		label="Directory to Save Attachments" description="Enter the absolute directory path for email attachment files" />
 				<field name="mod_simpleemailform_copymeLabel" 		type="text" size="40" default="Send me a copy"	label="Send Me A Copy Field Label" description="The label for the Send Me A Copy Field" />
 				<field name="mod_simpleemailform_copymeActive" 		type="radio"		  default="N"         		label="Send Me A Copy Field" description="Select 'Y' if you want to activate a field which lets users send a copy to themselves" >
