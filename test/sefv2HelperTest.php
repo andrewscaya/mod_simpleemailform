@@ -47,7 +47,7 @@ class sefv2helperTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $paramsSerialized = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'serializedParamsObject');
+        $paramsSerialized = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'serializedParamsObjectJformBasic');
 
         $this->params = unserialize($paramsSerialized);
 

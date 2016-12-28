@@ -152,7 +152,7 @@ class sefv2modsimpleemailformTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $paramsSerialized = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'serializedParamsObject');
+        $paramsSerialized = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'serializedParamsObjectJformBasic');
 
         $this->params = unserialize($paramsSerialized);
 
@@ -169,7 +169,8 @@ class sefv2modsimpleemailformTest extends PHPUnit_Framework_TestCase
             $this->jTableExtensionMock,
             $this->jTableModuleMock,
             $this->stdClassModuleHelperResultFake,
-            $this->jSession
+            $this->jSessionMock,
+            $this->jFileMock
         );
 
         $this->sefv2modsimpleemailformReflection = new \ReflectionClass($this->sefv2modsimpleemailform);
@@ -309,7 +310,7 @@ class sefv2modsimpleemailformTest extends PHPUnit_Framework_TestCase
         );
         $this->assertSame(
             '1',
-            $this->sefv2modsimpleemailformProperties['instance']->getValue($this->sefv2modsimpleemailform)
+            $this->sefv2modsimpleemailformProperties['formInstance']->getValue($this->sefv2modsimpleemailform)
         );
         $this->assertEquals(
             8,
@@ -335,12 +336,12 @@ class sefv2modsimpleemailformTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(
             2,
             count(
-                $this->sefv2modsimpleemailformProperties['activeElements']->getValue($this->sefv2modsimpleemailform)
+                $this->sefv2modsimpleemailformProperties['formActiveElements']->getValue($this->sefv2modsimpleemailform)
             )
         );
         $this->assertEquals(
             2,
-            $this->sefv2modsimpleemailformProperties['activeElementsCount']->getValue($this->sefv2modsimpleemailform)
+            $this->sefv2modsimpleemailformProperties['formActiveElementsCount']->getValue($this->sefv2modsimpleemailform)
         );
         $this->assertEquals(
             1,
@@ -419,7 +420,7 @@ class sefv2modsimpleemailformTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($output);
 
-        $activeElements = $this->sefv2modsimpleemailformProperties['activeElements']
+        $activeElements = $this->sefv2modsimpleemailformProperties['formActiveElements']
             ->getValue($this->sefv2modsimpleemailform);
 
         $this->assertEquals(2, count($activeElements));
@@ -440,7 +441,7 @@ class sefv2modsimpleemailformTest extends PHPUnit_Framework_TestCase
 
         $this->assertFalse($output);
 
-        $activeElements = $this->sefv2modsimpleemailformProperties['activeElements']
+        $activeElements = $this->sefv2modsimpleemailformProperties['formActiveElements']
             ->getValue($this->sefv2modsimpleemailform);
 
         $this->assertEquals(0, count($activeElements));
@@ -608,25 +609,27 @@ class sefv2modsimpleemailformTest extends PHPUnit_Framework_TestCase
         $filename = 'desttestfile.txt';
         $fileTmpName = '/tmp/temptestfile.txt';
 
-        $jFileMock = Mockery::mock('alias:JFile');
-        $jFileMock->shouldReceive('makeSafe')
+        $this->jFileMock
+            ->shouldReceive('makeSafe')
             ->times(3)
             ->with($filename)
             ->andReturn($filename);
 
-        $jFileMock->shouldReceive('getExt')
+        $this->jFileMock
+            ->shouldReceive('getExt')
             ->times(3)
             ->with($filename)
             ->andReturn('txt');
 
-        $jFileMock->shouldReceive('upload')
+        $this->jFileMock
+            ->shouldReceive('upload')
             ->twice()
             ->withArgs(array($fileTmpName, Mockery::any()))
             ->andReturnUsing($return_value_generator);
 
         $output = $this->sefv2modsimpleemailformMethods['uploadFile']->invokeArgs(
             $this->sefv2modsimpleemailform,
-            array($filename, $fileTmpName)
+            array($this->jFileMock, $filename, $fileTmpName)
         );
         $this->assertTrue($output);
         $emailMsg = $this->sefv2modsimpleemailformProperties['emailMsg']
@@ -637,13 +640,13 @@ class sefv2modsimpleemailformTest extends PHPUnit_Framework_TestCase
             ->setValue($this->sefv2modsimpleemailform, array('.doc'));
         $output2 = $this->sefv2modsimpleemailformMethods['uploadFile']->invokeArgs(
             $this->sefv2modsimpleemailform,
-            array($filename, $fileTmpName)
+            array($this->jFileMock, $filename, $fileTmpName)
         );
         $this->assertFalse($output2);
 
         $output3 = $this->sefv2modsimpleemailformMethods['uploadFile']->invokeArgs(
             $this->sefv2modsimpleemailform,
-            array($filename, $fileTmpName)
+            array($this->jFileMock, $filename, $fileTmpName)
         );
         $this->assertFalse($output3);
     }
