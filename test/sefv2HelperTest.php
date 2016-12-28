@@ -88,28 +88,36 @@ class sefv2helperTest extends \PHPUnit_Framework_TestCase
         $jApplicationMock = Mockery::mock('overload:JApplication');
         $jApplicationMock->input = $jInputMock;
         $jFactoryMock->shouldReceive('getApplication')->once()->andReturn($jApplicationMock);
+        $jSessionMock = Mockery::mock('overload:JSession');
+        $jFactoryMock->shouldReceive('getSession')->once()->andReturn($jSessionMock);
 
-        $stdClassComponentFake = new \stdClass;
+        /*$stdClassComponentFake = new \stdClass;
         $stdClassComponentFake->id = 10000;
         $jComponentHelperMock = Mockery::mock('overload:JComponentHelper');
-        $jComponentHelperMock->shouldReceive('getComponent')->with('mod_simpleemailform')->once()->andReturn($stdClassComponentFake);
-
-        $stdClassModuleFake = new \stdClass;
-        $stdClassModuleFake->id = 93;
-        $jComponentHelperMock = Mockery::mock('overload:JModuleHelper');
-        $jComponentHelperMock->shouldReceive('getModule')->with('mod_simpleemailform')->once()->andReturn($stdClassModuleFake);
+        $jComponentHelperMock->shouldReceive('getComponent')->with('mod_simpleemailform')->once()->andReturn($stdClassComponentFake);*/
 
         $jTableExtensionMock = Mockery::mock('overload:JTableExtension');
         $jTableModuleMock = Mockery::mock('overload:JTableModule');
         $jTableMock = Mockery::mock('overload:JTable');
         $jTableMock->shouldReceive('getInstance')->with('extension')->once()->andReturn($jTableExtensionMock);
-        $jTableExtensionMock->shouldReceive('load')->with(10000)->once()->andReturn(true);
+        /*$jTableExtensionMock->shouldReceive('load')->with(10000)->once()->andReturn(true);
         $jTableExtensionMock->shouldReceive('check')->once()->andReturn(true);
-        $jTableExtensionMock->shouldReceive('store')->once()->andReturn(true);
+        $jTableExtensionMock->shouldReceive('store')->once()->andReturn(true);*/
         $jTableMock->shouldReceive('getInstance')->with('module')->once()->andReturn($jTableModuleMock);
-        $jTableModuleMock->shouldReceive('load')->with(93)->once()->andReturn(true);
+        /*$jTableModuleMock->shouldReceive('load')->with(93)->once()->andReturn(true);
         $jTableModuleMock->shouldReceive('check')->once()->andReturn(true);
-        $jTableModuleMock->shouldReceive('store')->once()->andReturn(true);
+        $jTableModuleMock->shouldReceive('store')->once()->andReturn(true);*/
+
+        $stdClassModuleHelperResultFake = new \stdClass;
+        $stdClassModuleHelperResultFake->id = 93;
+        $jModuleHelperMock = Mockery::mock('overload:JModuleHelper');
+        $jModuleHelperMock
+            ->shouldReceive('getModule')
+            ->with('mod_simpleemailform')
+            ->once()
+            ->andReturn($stdClassModuleHelperResultFake);
+
+        $jFileMock = Mockery::mock('overload:JFile');
     }
 
     /**

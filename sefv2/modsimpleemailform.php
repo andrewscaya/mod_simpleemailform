@@ -20,7 +20,7 @@ class sefv2modsimpleemailform implements
     protected $jMail;
 
     /**
-     * @var _SimpleEmailForm object
+     * @var sefv2simpleemailformemailmsg
      * @since 2.0.0
      */
     protected $emailMsg;
@@ -50,34 +50,34 @@ class sefv2modsimpleemailform implements
     protected $jInput;
 
     /**
-     * @var bool
+     * @var JTableExtension
      * @since 2.0.0
      */
-    protected $formRendering = true;
+    protected $jTableExtension;
 
     /**
-     * @var int
+     * @var JTableModule
      * @since 2.0.0
      */
-    protected $instance;
+    protected $jTableModule;
 
     /**
-     * @var array (string)
+     * @var stdClass
      * @since 2.0.0
      */
-    protected $activeElements;
+    protected $jModuleHelperResult;
 
     /**
-     * @var int
+     * @var JSession
      * @since 2.0.0
      */
-    protected $activeElementsCount;
+    protected $jSession;
 
     /**
-     * @var array (JTableExtension and JTableModule objects)
+     * @var JSession
      * @since 2.0.0
      */
-    protected $jTables;
+    protected $jFile;
 
     /**
      * @var array (int)
@@ -122,7 +122,7 @@ class sefv2modsimpleemailform implements
      * @var string
      * @since 2.0.0
      */
-    protected $formRenderingName = '_formRendering';
+    protected $formRenderingOverrideName = '_renderingOverride';
 
     /**
      * @var int
@@ -338,6 +338,12 @@ class sefv2modsimpleemailform implements
      * @var string
      * @since 2.0.0
      */
+    protected $addTitleName = '_addTitle';
+
+    /**
+     * @var string
+     * @since 2.0.0
+     */
     protected $emailCopyme = 'N';
 
     /**
@@ -345,12 +351,6 @@ class sefv2modsimpleemailform implements
      * @since 2.0.0
      */
     protected $emailCopymeLabel = '';
-
-    /**
-     * @var string
-     * @since 2.0.0
-     */
-    protected $addTitleName = '_addTitle';
 
     /**
      * @var string
@@ -396,6 +396,36 @@ class sefv2modsimpleemailform implements
      * @since 2.0.0
      */
     protected $uploadAllowedFilesArray = array();
+
+    /**
+     * @var int
+     * @since 2.0.0
+     */
+    protected $formInstance;
+
+    /**
+     * @var string
+     * @since 2.0.0
+     */
+    protected $formAnchor;
+
+    /**
+     * @var bool
+     * @since 2.0.0
+     */
+    protected $formRendering = true;
+
+    /**
+     * @var array (string)
+     * @since 2.0.0
+     */
+    protected $formActiveElements;
+
+    /**
+     * @var int
+     * @since 2.0.0
+     */
+    protected $formActiveElementsCount;
 
     /**
      * @var string
@@ -473,7 +503,7 @@ class sefv2modsimpleemailform implements
      * @var string (html)
      * @since 2.0.0
      */
-    protected $msg = '';
+    public $msg = '';
 
     /**
      * @var string (html)
@@ -490,6 +520,11 @@ class sefv2modsimpleemailform implements
      * @param JLanguage $jLanguage
      * @param Registry $params
      * @param JInput $jInput
+     * @param JTableExtension $jTableExtension
+     * @param JTableModule $jTableModule
+     * @param stdClass $jModuleHelperResult
+     * @param JSession $jSession
+     * @param JFile $jFile
      *
      * @since 2.0.0
      */
@@ -500,7 +535,12 @@ class sefv2modsimpleemailform implements
         \JDocument $jDocument,
         \JLanguage $jLanguage,
         Registry $params,
-        \JInput $jInput
+        \JInput $jInput,
+        \JTableExtension $jTableExtension,
+        \JTableModule $jTableModule,
+        \stdClass $jModuleHelperResult,
+        \JSession $jSession,
+        \JFile $jFile
     ) {
         $this->jForm = $jForm;
         $this->jMail = $jMail;
@@ -510,15 +550,19 @@ class sefv2modsimpleemailform implements
         $this->params = $params;
         $this->paramsArray = $params->toArray();
         $this->jInput = $jInput;
+        $this->jTableExtension = $jTableExtension;
+        $this->jTableModule = $jTableModule;
+        $this->jModuleHelperResult = $jModuleHelperResult;
+        $this->jSession = $jSession;
+        $this->jFile = $jFile;
 
-        // @TODO Turn on rendering checks
         // Check if automatic rendering has been turned off (user defined).
-        /*if ($this->paramsArray[$this->formPrefixName . $this->formRenderingName] == 0) {
-            $this->formRendering = FALSE;
-        }*/
+        if ($this->paramsArray[$this->formPrefixName . $this->formRenderingOverrideName] == 'Y') {
+            $this->formRendering = false;
+        }
 
         // Set the Joomla Registry's ($this->params and $this->paramsArray) property/key names.
-        $this->instance = $this->paramsArray[$this->formPrefixName . $this->formInstanceName];
+        $this->formInstance = $this->paramsArray[$this->formPrefixName . $this->formInstanceName];
 
         $this->formAnchor = $this->paramsArray[$this->formPrefixName . $this->formAnchorName];
 
@@ -557,24 +601,21 @@ class sefv2modsimpleemailform implements
         if ($this->paramsArray[$this->formPrefixName . $this->formDefaultLangName] !== $this->lang) {
             $this->params->set($this->formPrefixName . $this->formDefaultLangName, $this->lang);
 
-            $this->jTables['extension'] = \JTable::getInstance('extension');
-            $this->jComponentIds[0] = $this->jTables['extension']->find(array('element' => 'mod_simpleemailform'));
+            $this->jComponentIds[0] = $this->jTableExtension->find(array('element' => 'mod_simpleemailform'));
 
-            $this->jTables['module'] = \JTable::getInstance('module');
-            $this->module = \JModuleHelper::getModule('mod_simpleemailform');
-            $this->jComponentIds[1] = $this->module->id;
+            $this->jComponentIds[1] = $this->jTableModuleHelper->id;
 
-            $this->jTables['extension']->load($this->jComponentIds[0]);
-            $this->jTables['extension']->bind(array('params' => $this->params->toString()));
+            $this->jTableExtension->load($this->jComponentIds[0]);
+            $this->jTableExtension->bind(array('params' => $this->params->toString()));
 
-            $this->jTables['module']->load($this->jComponentIds[1]);
-            $this->jTables['module']->bind(array('params' => $this->params->toString()));
+            $this->jTableModule->load($this->jComponentIds[1]);
+            $this->jTableModule->bind(array('params' => $this->params->toString()));
 
-            if (!$this->jTables['extension']->check() || !$this->jTables['module']->check()) {
+            if (!$this->jTableExtension->check() || !$this->jTableModule->check()) {
                 die('FATAL ERROR: Schema not ready for update.');
             }
 
-            if (!$this->jTables['extension']->store() || !$this->jTables['module']->store()) {
+            if (!$this->jTableExtension->store() || !$this->jTableModule->store()) {
                 die('FATAL ERROR: Schema not updated.');
             }
 
@@ -601,6 +642,13 @@ class sefv2modsimpleemailform implements
             $this->transLang = parse_ini_file($langFile);
         }
 
+        if (empty($this->paramsArray[$this->formPrefixName . $this->emailToName])) {
+            $this->msg .=
+                "<p style=\"color:{$this->errorColour}\">{$this->transLang['MOD_SIMPLEEMAILFORM_email_invalid']}</p>";
+
+            $this->formRendering = false;
+        }
+
         // Determine the active fields that must be included in the form.
         $this->determineActiveElements($this->paramsArray);
 
@@ -612,10 +660,15 @@ class sefv2modsimpleemailform implements
 
         // Check if $_POST was set.
         if ($this->jInput->getMethod() === 'POST'
-            && isset($_POST[$this->formSubmitButtonName . '_' . $this->instance])
-            && $_POST[$this->formSubmitButtonName . '_' . $this->instance] === 'Submit') {
+            && isset($_POST[$this->formSubmitButtonName . '_' . $this->formInstance])) {
+            // CAUTION : $formDataRaw is not validated and is unfiltered and unsanitized!
+            $formDataRaw = $this->jInput->post->getArray(array(), null, 'raw', true);
+
+            // Check for file uploads
+            $files = $this->jInput->files->getArray(array(), null, 'raw', true);
+
             // Validate, filter, sanitize and process the form data.
-            $formProcessingResult = $this->processFormData();
+            $formProcessingResult = $this->processFormData($formDataRaw, $files, $this->emailMsg, $this->paramsArray);
 
             if ($formProcessingResult) {
                 $this->msg .=
@@ -625,7 +678,7 @@ class sefv2modsimpleemailform implements
             // Reset the form before sending it back to the view.
             $this->reset();
         } elseif ($this->jInput->getMethod() === 'POST'
-                  && isset($_POST[$this->formResetButtonName . '_' . $this->instance])) {
+                  && isset($_POST[$this->formResetButtonName . '_' . $this->formInstance])) {
             $this->reset();
         }
     }
@@ -642,19 +695,19 @@ class sefv2modsimpleemailform implements
         $xmlOutput .= "<form>\n";
         $xmlOutput .= "\t<fieldset name=\"main\">\n";
 
-        for ($i = 1; $i <= $this->activeElementsCount; $i++) {
+        for ($i = 1; $i <= $this->formActiveElementsCount; $i++) {
             $index = $i - 1;
 
-            $labelKey = $this->activeElements[$index] . $this->fieldLabelName;
-            $valueKey = $this->activeElements[$index] . $this->fieldValueName;
-            $sizeKey = $this->activeElements[$index] . $this->fieldSizeName;
-            $maxxKey = $this->activeElements[$index] . $this->fieldMaxxName;
-            $fromKey = $this->activeElements[$index] . $this->fieldFromName;
+            $labelKey = $this->formActiveElements[$index] . $this->fieldLabelName;
+            $valueKey = $this->formActiveElements[$index] . $this->fieldValueName;
+            $sizeKey = $this->formActiveElements[$index] . $this->fieldSizeName;
+            $maxxKey = $this->formActiveElements[$index] . $this->fieldMaxxName;
+            $fromKey = $this->formActiveElements[$index] . $this->fieldFromName;
 
-            $active = $paramsArray[$this->activeElements[$index] . $this->fieldActiveName];
-            $name = $this->activeElements[$index]
+            $active = $paramsArray[$this->formActiveElements[$index] . $this->fieldActiveName];
+            $name = $this->formActiveElements[$index]
                 . '_'
-                . $this->instance;
+                . $this->formInstance;
             $label = $paramsArray[$labelKey];
             $value = $paramsArray[$valueKey];
             $size = $paramsArray[$sizeKey];
@@ -687,7 +740,7 @@ class sefv2modsimpleemailform implements
                     . $this->fieldUploadName
                     . $i
                     . '_'
-                    . $this->instance;
+                    . $this->formInstance;
 
                 if ($i > 1) {
                     $this->uploadLabel = '';
@@ -702,7 +755,7 @@ class sefv2modsimpleemailform implements
         }
 
         if ($paramsArray[$this->formPrefixName . $this->formCopymeActiveName] !== 'N') {
-            $copymeName = $this->formPrefixName . $this->fieldCopymeName . '_' . $this->instance;
+            $copymeName = $this->formPrefixName . $this->fieldCopymeName . '_' . $this->formInstance;
             $xmlOutput .= "\t\t" . $this->getXMLField(
                 'Y',
                 $copymeName,
@@ -715,10 +768,10 @@ class sefv2modsimpleemailform implements
         }
 
         if ($paramsArray[$this->formPrefixName . $this->formUseCaptchaName] !== 'N') {
-            $captchaName = $this->formPrefixName . $this->fieldCaptchaName . '_' . $this->instance;
+            $captchaName = $this->formPrefixName . $this->fieldCaptchaName . '_' . $this->formInstance;
             $xmlOutput .= "\t\t" . $this->getXMLCaptchaField(
                 $captchaName,
-                $this->formPrefixName . '_' . $this->instance
+                $this->formPrefixName . '_' . $this->formInstance
             ) . "\n";
         }
 
@@ -728,7 +781,7 @@ class sefv2modsimpleemailform implements
         return $xmlOutput;
     }
 
-    protected function decorateInput($input, $label = null)
+    public function decorateInput($input, $label = null)
     {
         $decoratedInput = '';
 
@@ -739,6 +792,7 @@ class sefv2modsimpleemailform implements
         $td = "<td class=\"{$this->formTdClass}\">";
         $tdClose = '</td>';
 
+        // @TODO Add multi-select decoration.
         // If no label, field is hidden.
         if (!isset($label)) {
             $decoratedInput .= $tr . $td . $input . $tdClose . $trClose . "\n";
@@ -759,25 +813,25 @@ class sefv2modsimpleemailform implements
 
     protected function determineActiveElements(array $paramsArray)
     {
-        $this->activeElements = array();
+        $this->formActiveElements = array();
+
+        $formActiveElements = array();
 
         // We will use array_walk_recursive() in case we receive a multi-dimensional array.
-        $activeElements = array();
-
         array_walk_recursive(
             $paramsArray,
-            function ($item, $key) use (&$activeElements) {
+            function ($item, $key) use (&$formActiveElements) {
                 if (preg_match("/$this->fieldActiveName/", $key) === 1 && $item !== 'N') {
-                    $activeElements[] = substr($key, 0, strlen($key) - strlen($this->fieldActiveName));
+                    $formActiveElements[] = substr($key, 0, strlen($key) - strlen($this->fieldActiveName));
                 }
             }
         );
 
-        $this->activeElements = $activeElements;
+        $this->formActiveElements = $formActiveElements;
 
-        $this->activeElementsCount = count($this->activeElements);
+        $this->formActiveElementsCount = count($this->formActiveElements);
 
-        if ($this->activeElementsCount === 0) {
+        if ($this->formActiveElementsCount === 0) {
             return false;
         }
 
@@ -960,23 +1014,18 @@ class sefv2modsimpleemailform implements
 
     public function load($xmlConfigString)
     {
-        $xmlConfigString = (string) $xmlConfigString;
-
         $this->jForm->load($xmlConfigString);
     }
 
-    protected function processFormData()
+    protected function processFormData(array $formDataRaw, array $files, sefv2simpleemailformemailmsg $emailMsg, array $paramsArray)
     {
         // Check for CSRF token match.
-        if (!(\JSession::checkToken())) {
+        if (!($this->jSession->checkToken())) {
             $this->msg .=
                 "<p style=\"color:{$this->errorColour}\">\"Invalid Token\" - {$this->transLang['MOD_SIMPLEEMAILFORM_form_unable']}</p>";
 
             return false;
         }
-
-        // CAUTION : $formDataRaw is not validated and is unfiltered and unsanitized!
-        $formDataRaw = $this->jInput->post->getArray(array(), null, 'raw', true);
 
         // Validate the form data.
         if (!$this->validate($formDataRaw)) {
@@ -1006,17 +1055,17 @@ class sefv2modsimpleemailform implements
         });
 
         // Filter active fields by limiting the maximum length of input per field.
-        for ($i = 0; $i < $this->activeElementsCount; $i++) {
-            $maxLength = $this->paramsArray[$this->activeElements[$i] . $this->fieldSizeName];
+        for ($i = 0; $i < $this->formActiveElementsCount; $i++) {
+            $maxLength = $this->paramsArray[$this->formActiveElements[$i] . $this->fieldSizeName];
 
             if (preg_match('/,/', $maxLength) === 1) {
                 $maxLengthArray = explode(',', $maxLength);
                 $maxLength = $maxLengthArray[0] * $maxLengthArray[1];
             }
 
-            $formDataRaw[$this->activeElements[$i] . '_' . $this->instance] =
+            $formDataRaw[$this->formActiveElements[$i] . '_' . $this->formInstance] =
                 substr(
-                    $formDataRaw[$this->activeElements[$i] . '_' . $this->instance],
+                    $formDataRaw[$this->formActiveElements[$i] . '_' . $this->formInstance],
                     0,
                     $maxLength
                 );
@@ -1028,13 +1077,11 @@ class sefv2modsimpleemailform implements
 
         $this->bind($formDataClean);
 
-        // Check for file uploads
-        $files = $this->jInput->files->getArray(array(), null, 'raw', true);
-
         // IMPORTANT : This loop will not run if there are no (0) configured upload fields.
         for ($i = 1; $i <= $this->paramsArray[$this->formPrefixName . $this->formUploadActiveName]; $i++) {
             if (!empty($files[$this->uploadName[$i]]['tmp_name']) && $files[$this->uploadName[$i]]['error'] === 0) {
                 $uploadFileResult = $this->uploadFile(
+                    $this->jFile,
                     $files[$this->uploadName[$i]]['name'],
                     $files[$this->uploadName[$i]]['tmp_name']
                 );
@@ -1052,7 +1099,7 @@ class sefv2modsimpleemailform implements
             }
         }
 
-        $sendFormResult = $this->sendFormData($formDataClean, $this->emailMsg, $this->paramsArray);
+        $sendFormResult = $this->sendFormData($formDataClean, $emailMsg, $paramsArray);
 
         if (!$sendFormResult) {
             return false;
@@ -1071,7 +1118,7 @@ class sefv2modsimpleemailform implements
     public function render()
     {
         if (!$this->formRendering) {
-            return '';
+            return $this->msg;
         }
 
         // Present the Email Form.
@@ -1088,8 +1135,8 @@ class sefv2modsimpleemailform implements
 
         $this->output .= "<form method=\"post\" "
             . "action=\"" . $this->formAnchor . "\" "
-            . "name=\"_SimpleEmailForm_" . $this->instance . "\" "
-            . "id=\"_SimpleEmailForm_" . $this->instance . "\" "
+            . "name=\"_SimpleEmailForm_" . $this->formInstance . "\" "
+            . "id=\"_SimpleEmailForm_" . $this->formInstance . "\" "
             . "enctype=\"multipart/form-data\">\n";
 
         $this->output .= "<table class='" . $this->formTableClass . "'>\n";
@@ -1116,16 +1163,16 @@ class sefv2modsimpleemailform implements
 
         $this->output .= "<br /><input
                                         class=\"{$this->formInputClass}\"
-                                        name=\"{$this->formSubmitButtonName}_{$this->instance}\"
-                                        id=\"{$this->formSubmitButtonName}_{$this->instance}\"
+                                        name=\"{$this->formSubmitButtonName}_{$this->formInstance}\"
+                                        id=\"{$this->formSubmitButtonName}_{$this->formInstance}\"
                                         value=\"{$this->transLang['MOD_SIMPLEEMAILFORM_button_submit']}\"
                                         title=\"{$this->transLang['MOD_SIMPLEEMAILFORM_click_submit']}\"
                                         type=\"submit\">\n";
 
         $this->output .= "<input
                                 class=\"{$this->formInputClass}\"
-                                name=\"{$this->formResetButtonName} . {$this->instance}\"
-                                id=\"{$this->formResetButtonName} . {$this->instance}\"
+                                name=\"{$this->formResetButtonName} . {$this->formInstance}\"
+                                id=\"{$this->formResetButtonName} . {$this->formInstance}\"
                                 value=\"{$this->transLang['MOD_SIMPLEEMAILFORM_button_reset']}\"
                                 title=\"\"
                                 type=\"reset\">\n";
@@ -1214,19 +1261,19 @@ class sefv2modsimpleemailform implements
             }
         }
 
-        for ($i = 1; $i <= $this->activeElementsCount; $i++) {
+        for ($i = 1; $i <= $this->formActiveElementsCount; $i++) {
             $index = $i - 1;
 
-            $activeKey = $this->activeElements[$index] . $this->fieldActiveName;
+            $activeKey = $this->formActiveElements[$index] . $this->fieldActiveName;
             $active = $paramsArray[$activeKey];
 
-            $fromKey = trim($this->activeElements[$index] . $this->fieldFromName);
+            $fromKey = trim($this->formActiveElements[$index] . $this->fieldFromName);
             $from = $paramsArray[$fromKey];
 
-            $labelKey = trim($this->activeElements[$index] . $this->fieldLabelName);
+            $labelKey = trim($this->formActiveElements[$index] . $this->fieldLabelName);
             $label = $paramsArray[$labelKey];
 
-            $postValueKey = $this->activeElements[$index] . '_' . $this->instance;
+            $postValueKey = $this->formActiveElements[$index] . '_' . $this->formInstance;
             $value = $formDataClean[$postValueKey];
 
             // If "active" = hidden, pull in value automatically.
@@ -1293,7 +1340,7 @@ class sefv2modsimpleemailform implements
             }
 
             // Check the copyMe option from the submitted form.
-            $emailMsg->copyMe = (isset($formDataClean[$this->formPrefixName . $this->fieldCopymeName . '_' . $this->instance]))
+            $emailMsg->copyMe = (isset($formDataClean[$this->formPrefixName . $this->fieldCopymeName . '_' . $this->formInstance]))
                 ? true
                 : false;
 
@@ -1366,10 +1413,10 @@ class sefv2modsimpleemailform implements
         return $retval;
     }
 
-    protected function uploadFile($fileName, $fileTmpName)
+    protected function uploadFile(\JFile $jFile, $fileName, $fileTmpName)
     {
         //Clean up filename to get rid of strange characters like spaces, etc.
-        $fileName = JFile::makeSafe($fileName);
+        $fileName = $jFile->makeSafe($fileName);
 
         // Get the file directory's path (user defined)
         $dir = $this->paramsArray[$this->formPrefixName . $this->emailFileName];
@@ -1382,10 +1429,10 @@ class sefv2modsimpleemailform implements
             . $fileName;
 
         //First check if the file has the right extension
-        if (in_array('.' . strtolower(JFile::getExt($fileName)), $this->uploadAllowedFilesArray)
+        if (in_array('.' . strtolower($jFile->getExt($fileName)), $this->uploadAllowedFilesArray)
             || empty($this->uploadAllowedFilesArray)) {
             // Move the file
-            if (JFile::upload($src, $dest)) {
+            if ($jFile->upload($src, $dest)) {
                 // Add the file's attachment
                 $this->emailMsg->attachment[] = $dest;
                 $this->msg .=

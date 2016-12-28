@@ -48,6 +48,9 @@ $sefv2helper = \sefv2helper::getInstance();
 
 // Build the form and render the form's output in order to send it to the view.
 $form = $sefv2helper->buildForm($params);
-$view = $form->render();
+
+if ($form instanceof sefv2formrendererinterface) {
+    $view = $form->render();
+}
 
 require(JModuleHelper::getLayoutPath('mod_simpleemailform'));

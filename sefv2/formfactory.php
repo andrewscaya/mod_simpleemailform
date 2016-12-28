@@ -11,6 +11,8 @@ class sefv2formfactory implements sefv2formfactoryinterface
      */
     public function createSefv2FormObject(\Joomla\Registry\Registry $params)
     {
+        $jForm = new \JForm('simpleemailform');
+
         $jMail = JFactory::getMailer();
 
         $emailMsg = new sefv2simpleemailformemailmsg();
@@ -21,14 +23,29 @@ class sefv2formfactory implements sefv2formfactoryinterface
 
         $jInput = \JFactory::getApplication()->input;
 
+        $jTableExtension = \JTable::getInstance('extension');
+
+        $jTableModule = \JTable::getInstance('module');
+
+        $jModuleHelperResult = \JModuleHelper::getModule('mod_simpleemailform');
+
+        $jSession = \JFactory::getSession();
+
+        $jFile = new \JFile();
+
         return new sefv2modsimpleemailform(
-            new \JForm('simpleemailform'),
+            $jForm,
             $jMail,
             $emailMsg,
             $jDocument,
             $jLanguage,
             $params,
-            $jInput
+            $jInput,
+            $jTableExtension,
+            $jTableModule,
+            $jModuleHelperResult,
+            $jSession,
+            $jFile
         );
     }
 }

@@ -404,6 +404,10 @@
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
 				</field>
+				<field name="mod_simpleemailform_renderingOverride"  	type="radio"	      default="N" 		label="Override rendering" description="Select 'Y' if you want to manually override the module's rendering of its output and create your own template." >
+					<option value="Y">JYES</option>
+					<option value="N">JNO</option>
+				</field>
 			</fieldset>
 		</fields>
 	</config>
