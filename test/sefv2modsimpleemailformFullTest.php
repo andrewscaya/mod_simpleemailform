@@ -20,7 +20,7 @@ use Mockery;
 /**
  * Sefv2Modsimpleemailform test case.
  */
-class sefv2modsimpleemailformTest extends PHPUnit_Framework_TestCase
+class sefv2modsimpleemailformFullTest extends PHPUnit_Framework_TestCase
 {
 
     /**
@@ -152,7 +152,7 @@ class sefv2modsimpleemailformTest extends PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $paramsSerialized = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'serializedParamsObjectJformBasic');
+        $paramsSerialized = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'serializedParamsObjectJformFull');
 
         $this->params = unserialize($paramsSerialized);
 
@@ -334,13 +334,13 @@ class sefv2modsimpleemailformTest extends PHPUnit_Framework_TestCase
             $transLang['MOD_SIMPLEEMAILFORM_upload_success']
         );
         $this->assertEquals(
-            2,
+            5,
             count(
                 $this->sefv2modsimpleemailformProperties['formActiveElements']->getValue($this->sefv2modsimpleemailform)
             )
         );
         $this->assertEquals(
-            2,
+            5,
             $this->sefv2modsimpleemailformProperties['formActiveElementsCount']->getValue($this->sefv2modsimpleemailform)
         );
         $this->assertEquals(
@@ -352,312 +352,90 @@ class sefv2modsimpleemailformTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testBindProxy()
-    {
-        $jFormMock = Mockery::mock('overload:JForm');
-        $jFormMock->shouldReceive('bind')->once();
-
-        $this->sefv2modsimpleemailformProperties['jForm']->setValue($this->sefv2modsimpleemailform, $jFormMock);
-
-        $this->sefv2modsimpleemailform->bind(array());
-    }
-
-    /*public function testCreateXMLConfig(array $paramsArray)
-    {
-
-    }*/
-
-    public function testDecorateInput()
-    {
-        $input = '<input 
-                    name="mod_simpleemailform_field2_1" 
-                    id="mod_simpleemailform_field2_1"
-                    value=""
-                    class="required"
-                    size="40"
-                    required=""
-                    aria-required="true"
-                    type="text">';
-
-        $output = $this->sefv2modsimpleemailformMethods['decorateInput']->invokeArgs(
-            $this->sefv2modsimpleemailform,
-            array($input)
-        );
-
-        $this->assertEquals(
-            1,
-            preg_match(
-                '/<tr class="mod_sef_tr"><td class="mod_sef_td"><input/',
-                $output
-            )
-        );
-
-        $label = 'My Field';
-
-        $output2 = $this->sefv2modsimpleemailformMethods['decorateInput']->invokeArgs(
-            $this->sefv2modsimpleemailform,
-            array($input, $label)
-        );
-
-        $this->assertEquals(
-            1,
-            preg_match(
-                '/<th.+My Field.+<input/s',
-                $output2
-            )
-        );
-    }
-
-    public function testDetermineActiveElementsTrue()
+    public function testCreateXMLConfig()
     {
         $paramsArray = $this->sefv2modsimpleemailformProperties['paramsArray']
             ->getValue($this->sefv2modsimpleemailform);
 
-        $output = $this->sefv2modsimpleemailformMethods['determineActiveElements']->invokeArgs(
+        $output = $this->sefv2modsimpleemailformMethods['createXMLConfig']->invokeArgs(
             $this->sefv2modsimpleemailform,
             array($paramsArray)
         );
 
-        $this->assertTrue($output);
+        $this->assertEquals(
+            1,
+            preg_match('/<fieldset name="main"/is', $output)
+        );
 
-        $activeElements = $this->sefv2modsimpleemailformProperties['formActiveElements']
+        $this->assertEquals(
+            1,
+            preg_match('/<field.+type="email"/is', $output)
+        );
+
+        $this->assertEquals(
+            1,
+            preg_match('/<field.+type="text"/is', $output)
+        );
+
+        $this->assertEquals(
+            1,
+            preg_match('/<field.+type="radio"/is', $output)
+        );
+
+        $this->assertEquals(
+            1,
+            preg_match('/<field.+type="email"/is', $output)
+        );
+
+        $this->assertEquals(
+            1,
+            preg_match('/<field.+type="editor"/is', $output)
+        );
+
+        $this->assertEquals(
+            1,
+            preg_match('/<field.+type="list"/is', $output)
+        );
+
+        $this->assertEquals(
+            1,
+            preg_match('/<field.+type="file".+<field.+type="file".+<field.+type="file"/is', $output)
+        );
+
+        $this->assertEquals(
+            1,
+            preg_match('/<field.+type="file".+accept=".html, .odt"/is', $output)
+        );
+
+        $this->assertEquals(
+            1,
+            preg_match('/<field.+type="checkbox"/is', $output)
+        );
+
+        $this->assertEquals(
+            1,
+            preg_match('/<field.+type="captcha"/is', $output)
+        );
+
+        $formPrefixName = $this->sefv2modsimpleemailformProperties['formPrefixName']
             ->getValue($this->sefv2modsimpleemailform);
 
-        $this->assertEquals(2, count($activeElements));
-    }
-
-    public function testDetermineActiveElementsFalse()
-    {
-        $paramsArray = $this->sefv2modsimpleemailformProperties['paramsArray']
+        $fieldUploadAllowedName = $this->sefv2modsimpleemailformProperties['fieldUploadAllowedName']
             ->getValue($this->sefv2modsimpleemailform);
 
-        $paramsArray['mod_simpleemailform_field1active'] = 'N';
-        $paramsArray['mod_simpleemailform_field2active'] = 'N';
+        $paramsArray[$formPrefixName . $fieldUploadAllowedName] = '';
 
-        $output = $this->sefv2modsimpleemailformMethods['determineActiveElements']->invokeArgs(
+        $this->sefv2modsimpleemailformProperties['paramsArray']
+            ->setValue($this->sefv2modsimpleemailform, $paramsArray);
+
+        $output2 = $this->sefv2modsimpleemailformMethods['createXMLConfig']->invokeArgs(
             $this->sefv2modsimpleemailform,
             array($paramsArray)
         );
 
-        $this->assertFalse($output);
-
-        $activeElements = $this->sefv2modsimpleemailformProperties['formActiveElements']
-            ->getValue($this->sefv2modsimpleemailform);
-
-        $this->assertEquals(0, count($activeElements));
-    }
-
-    public function testFilterProxy()
-    {
-        $jFormMock = Mockery::mock('overload:JForm');
-        $jFormMock->shouldReceive('filter')->once();
-
-        $this->sefv2modsimpleemailformProperties['jForm']->setValue($this->sefv2modsimpleemailform, $jFormMock);
-
-        $this->sefv2modsimpleemailform->filter(array());
-    }
-
-    public function testGetDataProxy()
-    {
-        $jFormMock = Mockery::mock('overload:JForm');
-        $jFormMock->shouldReceive('getData')->once();
-
-        $this->sefv2modsimpleemailformProperties['jForm']->setValue($this->sefv2modsimpleemailform, $jFormMock);
-
-        $this->sefv2modsimpleemailform->getData();
-    }
-
-    public function testGetErrorsProxy()
-    {
-        $jFormMock = Mockery::mock('overload:JForm');
-        $jFormMock->shouldReceive('getErrors')->once();
-
-        $this->sefv2modsimpleemailformProperties['jForm']->setValue($this->sefv2modsimpleemailform, $jFormMock);
-
-        $this->sefv2modsimpleemailform->getErrors();
-    }
-
-    public function testGetFieldProxy()
-    {
-        $jFormMock = Mockery::mock('overload:JForm');
-        $jFormMock->shouldReceive('getField')->once()->withArgs(array('test', null, null));
-
-        $this->sefv2modsimpleemailformProperties['jForm']->setValue($this->sefv2modsimpleemailform, $jFormMock);
-
-        $this->sefv2modsimpleemailform->getField('test');
-    }
-
-    public function testGetFieldsetProxy($set = null)
-    {
-        $jFormMock = Mockery::mock('overload:JForm');
-        $jFormMock->shouldReceive('getFieldset')->once()->with('main');
-
-        $this->sefv2modsimpleemailformProperties['jForm']->setValue($this->sefv2modsimpleemailform, $jFormMock);
-
-        $this->sefv2modsimpleemailform->getFieldset('main');
-    }
-
-    /*public function testGetXMLField($active, $name, $label, $value, $size, $maxx, $from)
-    {
-
-    }
-
-    public function testGetXMLUploadField($uploadName, $uploadLabel, $uploadAllowedFiles)
-    {
-
-    }
-
-    public function testGetXMLCaptchaField($name, $namespace)
-    {
-
-    }*/
-
-    public function testLoadProxy()
-    {
-        $jFormMock = Mockery::mock('overload:JForm');
-        $jFormMock->shouldReceive('load')->once()->with('test');
-
-        $this->sefv2modsimpleemailformProperties['jForm']->setValue($this->sefv2modsimpleemailform, $jFormMock);
-
-        $this->sefv2modsimpleemailform->load('test');
-    }
-
-    /*public function testProcessFormData()
-    {
-        $_POST = array(
-            'mod_simpleemailform_field1_1' => 'admin@localhost.localdomain',
-            'mod_simpleemailform_field2_1' => 'Test',
-            'mod_simpleemailform_field3_1' => 'option1',
-            'mod_simpleemailform_field4_1' => '<p>This is a test.</p>',
-            'mod_simpleemailform_copyMe_1' => '1',
-            'a7843da35a03fb2fbe19834411ec1955' => '1',
-            'mod_simpleemailform_submit_1' => 'Submit'
+        $this->assertEquals(
+            1,
+            preg_match('/<field.+type="file".+accept=""/is', $output2)
         );
-    }*/
-
-    public function testRemoveFieldProxy()
-    {
-        $jFormMock = Mockery::mock('overload:JForm');
-        $jFormMock->shouldReceive('removeField')->once()->withArgs(array('test', null));
-
-        $this->sefv2modsimpleemailformProperties['jForm']->setValue($this->sefv2modsimpleemailform, $jFormMock);
-
-        $this->sefv2modsimpleemailform->removeField('test');
-    }
-
-    public function testRender()
-    {
-        $jFormMock = $this->sefv2modsimpleemailformProperties['jForm']->getValue($this->sefv2modsimpleemailform);
-        $jFormMock->shouldReceive('getFieldset')->once()->with('main')->andReturn(array());
-
-        $this->sefv2modsimpleemailformProperties['jForm']->setValue($this->sefv2modsimpleemailform, $jFormMock);
-
-        $jHtmlMock = Mockery::mock('alias:JHtml');
-        $jHtmlMock->shouldReceive('_')->once()->with('form.token')->andReturn('qwerty');
-
-        $output = $this->sefv2modsimpleemailform->render();
-
-        $this->assertTrue((!empty($output)));
-
-        $this->assertEquals(1, preg_match('/<div class="mod_sef">/', $output));
-
-        $this->assertEquals(0, strpos($output, '/<div class="mod_sef">/'));
-    }
-
-    public function testResetProxy($xml = false)
-    {
-        $jFormMock = Mockery::mock('overload:JForm');
-        $jFormMock->shouldReceive('reset')->once()->with(null);
-
-        $this->sefv2modsimpleemailformProperties['jForm']->setValue($this->sefv2modsimpleemailform, $jFormMock);
-
-        $this->sefv2modsimpleemailform->reset();
-    }
-
-    /*public function testSendFormData(array $formDataClean, stdClass $emailMsg, array $paramsArray)
-    {
-
-    }*/
-
-    public function testTestDump()
-    {
-        $output = $this->sefv2modsimpleemailformMethods['testDump']->invokeArgs(
-            $this->sefv2modsimpleemailform,
-            array($this->sefv2modsimpleemailform)
-        );
-
-        $this->assertEquals(1, preg_match('/Object \(sefv2modsimpleemailform\)/', $output));
-    }
-
-    public function testUploadFile()
-    {
-        $return_value_generator = function () {
-            static $counter = 0;
-
-            $counter++;
-
-            switch ($counter) {
-                case 1:
-                    return true;
-                case 2:
-                    return false;
-                default:
-                    throw new Exception("Should never reach this.");
-            }
-        };
-
-        $filename = 'desttestfile.txt';
-        $fileTmpName = '/tmp/temptestfile.txt';
-
-        $this->jFileMock
-            ->shouldReceive('makeSafe')
-            ->times(3)
-            ->with($filename)
-            ->andReturn($filename);
-
-        $this->jFileMock
-            ->shouldReceive('getExt')
-            ->times(3)
-            ->with($filename)
-            ->andReturn('txt');
-
-        $this->jFileMock
-            ->shouldReceive('upload')
-            ->twice()
-            ->withArgs(array($fileTmpName, Mockery::any()))
-            ->andReturnUsing($return_value_generator);
-
-        $output = $this->sefv2modsimpleemailformMethods['uploadFile']->invokeArgs(
-            $this->sefv2modsimpleemailform,
-            array($this->jFileMock, $filename, $fileTmpName)
-        );
-        $this->assertTrue($output);
-        $emailMsg = $this->sefv2modsimpleemailformProperties['emailMsg']
-            ->getValue($this->sefv2modsimpleemailform);
-        $this->assertEquals(1, count($emailMsg->attachment));
-
-        $this->sefv2modsimpleemailformProperties['uploadAllowedFilesArray']
-            ->setValue($this->sefv2modsimpleemailform, array('.doc'));
-        $output2 = $this->sefv2modsimpleemailformMethods['uploadFile']->invokeArgs(
-            $this->sefv2modsimpleemailform,
-            array($this->jFileMock, $filename, $fileTmpName)
-        );
-        $this->assertFalse($output2);
-
-        $output3 = $this->sefv2modsimpleemailformMethods['uploadFile']->invokeArgs(
-            $this->sefv2modsimpleemailform,
-            array($this->jFileMock, $filename, $fileTmpName)
-        );
-        $this->assertFalse($output3);
-    }
-
-    public function testValidateProxy()
-    {
-        $jFormMock = Mockery::mock('overload:JForm');
-        $jFormMock->shouldReceive('validate')->once()->withArgs(array(array(), null));
-
-        $this->sefv2modsimpleemailformProperties['jForm']->setValue($this->sefv2modsimpleemailform, $jFormMock);
-
-        $this->sefv2modsimpleemailform->validate(array());
     }
 }
