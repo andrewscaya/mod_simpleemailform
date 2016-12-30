@@ -933,6 +933,7 @@ class sefv2modsimpleemailform implements
                 if (count($valueArray) > 1) {
                     foreach ($valueArray as $multiOptions) {
                         $valuesToInsert = explode('=', $multiOptions);
+                        $valuesToInsert = array_map('trim', $valuesToInsert);
                         $multiValue .= "<option value=\"$valuesToInsert[0]\">$valuesToInsert[1]</option>";
                     }
 

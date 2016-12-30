@@ -706,15 +706,110 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    /*public function testGetXMLUploadField($uploadName, $uploadLabel, $uploadAllowedFiles)
+    public function testGetXMLFieldMultipleCheckboxesRadioAndDropdownInputs()
     {
+        $output = $this->sefv2modsimpleemailformMethods['getXMLField']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array('Y', 'R', 'test', 'test', 'option1=Test1,option2=Test2', 50, 50)
+        );
 
+        $radioPattern =
+            "/type=\"radio\".+<option.+value=\"option1\">Test1<\/option><option.+value=\"option2\">Test2/is";
+
+        $this->assertEquals(
+            1,
+            preg_match($radioPattern, $output)
+        );
+
+        $output2 = $this->sefv2modsimpleemailformMethods['getXMLField']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array('Y', 'C', 'test', 'test', 'option1=Test1,option2=Test2', 50, 50)
+        );
+
+        $checkboxesPattern =
+            "/type=\"checkboxes\".+<option.+value=\"option1\">Test1<\/option><option.+value=\"option2\">Test2/is";
+
+        $this->assertEquals(
+            1,
+            preg_match($checkboxesPattern, $output2)
+        );
+
+        $output3 = $this->sefv2modsimpleemailformMethods['getXMLField']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array('Y', 'D', 'test', 'test', 'option1=Test1,option2=Test2', 50, 50)
+        );
+
+        $dropDownPattern =
+            "/type=\"list\".+<option\svalue=\"option1\">Test1<\/option><option\svalue=\"option2\">Test2/is";
+
+        $this->assertEquals(
+            1,
+            preg_match($dropDownPattern, $output3)
+        );
     }
 
-    public function testGetXMLCaptchaField($name, $namespace)
+    /**
+     * @param string $expectedOutput
+     * @param string $uploadName
+     * @param string $uploadLabel
+     * @param string $uploadAllowedFiles
+     *
+     * @dataProvider providerGetXMLUploadField
+     *
+     * @since 2.0.0
+     */
+    public function testGetXMLUploadField($expectedOutput, $uploadName, $uploadLabel, $uploadAllowedFiles)
     {
+        $output = $this->sefv2modsimpleemailformMethods['getXMLUploadField']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array($uploadName, $uploadLabel, $uploadAllowedFiles)
+        );
 
-    }*/
+        $this->assertEquals(
+            1,
+            preg_match($expectedOutput, $output)
+        );
+    }
+
+    public function providerGetXMLUploadField()
+    {
+        return array(
+            array(
+                '/<field.+name="Name1".+type="file".+label="Name1".+accept="".+\/>/is',
+                'Name1',
+                'Name1',
+                ''
+            ),
+            array(
+                '/<field.+name="Name2".+type="file".+label="Name2".+accept="\.doc".+\/>/is',
+                'Name2',
+                'Name2',
+                '.doc'
+            ),
+            array(
+                '/<field.+name="Name3".+type="file".+label="Name3".+accept="\.doc,.*\.odt\".+\/>/is',
+                'Name3',
+                'Name3',
+                '.doc, .odt'
+            ),
+        );
+    }
+
+    public function testGetXMLCaptchaField()
+    {
+        $output = $this->sefv2modsimpleemailformMethods['getXMLCaptchaField']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array('Test1', 'Testnamespace1')
+        );
+
+        $captchaPattern =
+            '/<field.+name="Test1".+type="captcha".+validate="captcha".+namespace="Testnamespace1"/is';
+
+        $this->assertEquals(
+            1,
+            preg_match($captchaPattern, $output)
+        );
+    }
 
     public function testLoadProxy()
     {
