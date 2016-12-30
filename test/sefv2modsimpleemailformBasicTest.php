@@ -273,6 +273,31 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         $this->jFileMock = Mockery::mock('overload:JFile');
     }
 
+    public function arrayCartesianProduct($arrays)
+    {
+        $result = array();
+        $arrays = array_values($arrays);
+        $sizeIn = count($arrays);
+        $size = $sizeIn > 0 ? 1 : 0;
+        foreach ($arrays as $array) {
+            $size = $size * count($array);
+        }
+        for ($i = 0; $i < $size; $i++) {
+            $result[$i] = array();
+            for ($j = 0; $j < $sizeIn; $j++) {
+                array_push($result[$i], current($arrays[$j]));
+            }
+            for ($j = ($sizeIn -1); $j >= 0; $j--) {
+                if (next($arrays[$j])) {
+                    break;
+                } elseif (isset($arrays[$j])) {
+                    reset($arrays[$j]);
+                }
+            }
+        }
+        return $result;
+    }
+
     /**
      * Tests sefv2modsimpleemailform::__construct()
      *
@@ -498,7 +523,7 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         $this->sefv2modsimpleemailform->getField('test');
     }
 
-    public function testGetFieldsetProxy($set = null)
+    public function testGetFieldsetProxy()
     {
         $jFormMock = Mockery::mock('overload:JForm');
         $jFormMock->shouldReceive('getFieldset')->once()->with('main');
@@ -508,12 +533,180 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         $this->sefv2modsimpleemailform->getFieldset('main');
     }
 
-    /*public function testGetXMLField($active, $name, $label, $value, $size, $maxx, $from)
+    /**
+     *
+     * @param $active
+     * @param $from
+     * @param $name
+     * @param $label
+     * @param $value
+     * @param $size
+     * @param $maxx
+     *
+     * @dataProvider providerGetXMLFieldAlmostAllPossibleCombinations
+     *
+     * @since 2.0.0
+     */
+    public function testGetXMLFieldAlmostAllPossibleCombinations($active, $from, $name, $label, $value, $size, $maxx)
     {
+        $output = $this->sefv2modsimpleemailformMethods['getXMLField']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array($active, $from, $name, $label, $value, $size, $maxx)
+        );
 
+        if ($active === 'H') {
+            $this->assertEquals(
+                1,
+                preg_match('/type="hidden"/is', $output)
+            );
+        } elseif ($active === 'R') {
+            $this->assertEquals(
+                1,
+                preg_match('/required="required"/is', $output)
+            );
+        } else {
+            $this->assertEquals(
+                0,
+                preg_match('/type="hidden"/is', $output)
+            );
+            $this->assertEquals(
+                1,
+                preg_match('/required=""/is', $output)
+            );
+        }
+
+        if ($active !== 'H' && $from === 'F') {
+            $this->assertEquals(
+                1,
+                preg_match('/type="email".+validate="email"/is', $output)
+            );
+
+            $namePattern = "/name=\"$name\"/is";
+
+            $this->assertEquals(
+                1,
+                preg_match($namePattern, $output)
+            );
+
+            $labelPattern = "/label=\"$label\"/is";
+
+            $this->assertEquals(
+                1,
+                preg_match($labelPattern, $output)
+            );
+
+            $valuePattern = "/value=\"$value\"/is";
+
+            $this->assertEquals(
+                1,
+                preg_match($valuePattern, $output)
+            );
+
+            $sizePattern = "/size=\"$size\"/is";
+
+            $this->assertEquals(
+                1,
+                preg_match($sizePattern, $output)
+            );
+
+            $maxxPattern = "/maxLength=\"$maxx\"/is";
+
+            $this->assertEquals(
+                1,
+                preg_match($maxxPattern, $output)
+            );
+        } elseif ($active !== 'H' && $from === 'S') {
+            $this->assertEquals(
+                1,
+                preg_match('/type="text"/is', $output)
+            );
+
+            $namePattern = "/name=\"$name\"/is";
+
+            $this->assertEquals(
+                1,
+                preg_match($namePattern, $output)
+            );
+
+            $labelPattern = "/label=\"$label\"/is";
+
+            $this->assertEquals(
+                1,
+                preg_match($labelPattern, $output)
+            );
+
+            $valuePattern = "/value=\"$value\"/is";
+
+            $this->assertEquals(
+                1,
+                preg_match($valuePattern, $output)
+            );
+
+            $sizePattern = "/size=\"$size\"/is";
+
+            $this->assertEquals(
+                1,
+                preg_match($sizePattern, $output)
+            );
+
+            $maxxPattern = "/maxLength=\"$maxx\"/is";
+
+            $this->assertEquals(
+                1,
+                preg_match($maxxPattern, $output)
+            );
+        } elseif ($active !== 'H' && $from === 'R') {
+            $this->assertEquals(
+                1,
+                preg_match('/type="radio"/is', $output)
+            );
+        } elseif ($active !== 'H' && $from === 'C') {
+            $this->assertEquals(
+                1,
+                preg_match('/type="checkbox"/is', $output)
+            );
+        } elseif ($active !== 'H' && $from === 'D') {
+            $this->assertEquals(
+                1,
+                preg_match('/type="list"/is', $output)
+            );
+        } elseif ($active !== 'H' && $from === 'A') {
+            $this->assertEquals(
+                1,
+                preg_match('/type="editor"/is', $output)
+            );
+        }
     }
 
-    public function testGetXMLUploadField($uploadName, $uploadLabel, $uploadAllowedFiles)
+    public function providerGetXMLFieldAlmostAllPossibleCombinations()
+    {
+        $arraysTemp = array(
+            array('Y', 'R', 'H'),
+            array('F', 'S', 'N', 'A', 'D', 'R', 'C', 'U'),
+            array('name1', 'name2'),
+            array('name1', 'name2'),
+            array('value1'),
+            array(0, 50, 100),
+            array(0, 50, 100),
+        );
+
+        return $this->arrayCartesianProduct($arraysTemp);
+    }
+
+    public function testGetXMLFieldUnknownFromParameter()
+    {
+        $output = $this->sefv2modsimpleemailformMethods['getXMLField']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array('Y', 'Z', 'test', 'test', 'Test', 50, 50)
+        );
+
+        $this->assertEquals(
+            1,
+            preg_match('/type="text"/', $output)
+        );
+    }
+
+    /*public function testGetXMLUploadField($uploadName, $uploadLabel, $uploadAllowedFiles)
     {
 
     }

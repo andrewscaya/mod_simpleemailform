@@ -720,7 +720,7 @@ class sefv2modsimpleemailform implements
             $maxx = $paramsArray[$maxxKey];
             $from = $paramsArray[$fromKey];
 
-            $xmlOutput .= "\t\t" . $this->getXMLField($active, $name, $label, $value, $size, $maxx, $from) . "\n";
+            $xmlOutput .= "\t\t" . $this->getXMLField($active, $from, $name, $label, $value, $size, $maxx) . "\n";
         }
 
         if ($paramsArray[$this->formPrefixName . $this->formUploadActiveName] > 0) {
@@ -764,12 +764,12 @@ class sefv2modsimpleemailform implements
             $copymeName = $this->formPrefixName . $this->fieldCopymeName . '_' . $this->formInstance;
             $xmlOutput .= "\t\t" . $this->getXMLField(
                 'Y',
+                'C',
                 $copymeName,
                 $paramsArray[$this->formPrefixName . $this->formCopymeLabelName],
                 '1',
                 '',
-                '',
-                'C'
+                ''
             ) . "\n";
         }
 
@@ -871,18 +871,17 @@ class sefv2modsimpleemailform implements
         return $this->jForm->getFieldset($set);
     }
 
-    protected function getXMLField($active, $name, $label, $value, $size, $maxx, $from)
+    protected function getXMLField($active, $from, $name, $label, $value, $size, $maxx)
     {
         $active = (string) $active;
+        $from = (string) $from;
         $name = (string) $name;
         $label = (string) $label;
         $value = (string) $value;
         $size = (string) $size;
         $maxx = (string) $maxx;
-        $from = (string) $from;
 
         $type = '';
-        $placeholder = '';
         $required = '';
         $validate = '';
         $xmlField = '';
@@ -906,8 +905,8 @@ class sefv2modsimpleemailform implements
                     $validate .= 'email';
                 } else {
                     $type .= 'text';
-                    $placeholder .= 'Subject';
                 }
+
                 $xmlField .= "<field
                     type=\"$type\"
                     name=\"$name\"
@@ -915,7 +914,6 @@ class sefv2modsimpleemailform implements
                     label=\"$label\"
                     size=\"$size\"
                     maxLength=\"$maxx\"
-                    placeholder=\"$placeholder\"
                     required=\"$required\"
                     validate=\"$validate\"
                     value=\"$value\" />";
@@ -925,19 +923,25 @@ class sefv2modsimpleemailform implements
             case 'D':
                 if ($from === 'R') {
                     $type .= 'radio';
-                } elseif ($from === 'C') {
-                    $type .= 'checkbox';
-                } else {
+                } elseif ($from !== 'C') {
                     $type .= 'list';
                 }
 
                 $multiValue = '';
+                $valueArray = explode(',', $value);
 
-                if ($from !== 'C') {
-                    $valueArray = explode(',', $value);
+                if (count($valueArray) > 1) {
                     foreach ($valueArray as $multiOptions) {
                         $valuesToInsert = explode('=', $multiOptions);
                         $multiValue .= "<option value=\"$valuesToInsert[0]\">$valuesToInsert[1]</option>";
+                    }
+
+                    if ($from === 'C') {
+                        $type .= 'checkboxes';
+                    }
+                } else {
+                    if ($from === 'C') {
+                        $type .= 'checkbox';
                     }
                 }
 
@@ -951,17 +955,23 @@ class sefv2modsimpleemailform implements
                     </field>";
                 break;
             case 'A':
-                $areaSize = explode(',', $size);
-                array_walk($areaSize, function (&$item, &$key) {
+                $areaSizeArray = explode(',', $size);
+
+                if (count($areaSizeArray) < 2) {
+                    $areaSizeArray[] = $size;
+                }
+
+                array_walk($areaSizeArray, function (&$item, &$key) {
                     $item = (string) trim($item);
                 });
+
                 $xmlField .= "<field
                     type=\"editor\"
                     name=\"$name\"
                     id=\"$name\"
                     label=\"$label\"
-                    rows=\"{$areaSize[0]}\"
-                    cols=\"{$areaSize[1]}\"
+                    rows=\"{$areaSizeArray[0]}\"
+                    cols=\"{$areaSizeArray[1]}\"
                     required=\"$required\" />";
                 break;
             default:
@@ -973,7 +983,7 @@ class sefv2modsimpleemailform implements
                     size=\"$size\"
                     maxLength=\"$maxx\"
                     value=\"$value\"
-                     required=\"$required\" />";
+                    required=\"$required\" />";
         }
 
         return $xmlField;

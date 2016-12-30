@@ -407,6 +407,11 @@ class sefv2modsimpleemailformFullTest extends PHPUnit_Framework_TestCase
             preg_match('/<field.+type="file".+accept=".html, .odt"/is', $output)
         );
 
+        $this->assertNotEquals(
+            1,
+            preg_match('/<field.+type="file".+accept=".html,.odt"/is', $output)
+        );
+
         $this->assertEquals(
             1,
             preg_match('/<field.+type="checkbox"/is', $output)
