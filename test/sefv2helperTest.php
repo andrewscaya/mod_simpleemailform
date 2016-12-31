@@ -63,13 +63,19 @@ class sefv2helperTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        $this->sefv2helper = null;
+        parent::tearDown();
 
         \Mockery::close();
 
-        parent::tearDown();
+        $this->sefv2helper = null;
     }
 
+    /**
+     * Creates the test doubles that are called in \sefv2helper's
+     * build method.
+     *
+     * @since 2.0.0
+     */
     protected function createJoomlaMocks()
     {
         $jFormMock = Mockery::mock('overload:JForm');
@@ -166,9 +172,33 @@ class sefv2helperTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testCloneMethodIsNotAccessible()
+    /**
+     * Tests static sefv2helper::__clone()
+     *
+     * @since 2.0.0
+     *
+     * @dataProvider providerTestBuildFormIfCorrespondingObjectsAreReturned
+     */
+    public function testCloneMethodIsNotAccessibleAndReturnsNullIfCalled()
     {
-        $reflection = new \ReflectionMethod('\sefv2helper', '__clone');
-        $this->assertTrue($reflection->isPrivate());
+        $reflectionMethodClone = new \ReflectionMethod('\sefv2helper', '__clone');
+        $this->assertTrue($reflectionMethodClone->isPrivate());
+
+        $methodsList = $this->sefv2HelperReflection->getMethods();
+        $foundKey = 0;
+        array_walk_recursive(
+            $methodsList,
+            function ($item, $key) use (&$foundKey) {
+                if ($item->name === '__clone') {
+                    $foundKey = $key;
+                }
+            }
+        );
+        $methodsList[$foundKey]->setAccessible(true);
+        $output = $methodsList[$foundKey]->invokeArgs(
+            $this->sefv2helper,
+            array()
+        );
+        $this->assertNull($output);
     }
 }

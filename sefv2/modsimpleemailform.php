@@ -422,6 +422,12 @@ class sefv2modsimpleemailform implements
     protected $formRendering = true;
 
     /**
+     * @var string
+     * @since 2.0.0
+     */
+    protected $formTestMode = 'N';
+
+    /**
      * @var array (string)
      * @since 2.0.0
      */
@@ -570,7 +576,7 @@ class sefv2modsimpleemailform implements
         // Set the Joomla Registry's ($this->params and $this->paramsArray) property/key names.
         $this->formInstance = $this->paramsArray[$this->formPrefixName . $this->formInstanceName];
 
-        $this->formAnchor = $this->paramsArray[$this->formPrefixName . $this->formAnchorName];
+        $this->formAnchor = '#' . $this->paramsArray[$this->formPrefixName . $this->formAnchorName];
 
         $this->formCssClass = ($this->paramsArray[$this->formPrefixName . $this->formCssClassName])
             ? $this->paramsArray[$this->formPrefixName . $this->formCssClassName]
@@ -663,6 +669,10 @@ class sefv2modsimpleemailform implements
 
         // Load the XML configuration into the JForm object.
         $this->load($this->xmlConfig);
+
+        // Store test mode status.
+
+        $this->formTestMode = $this->paramsArray[$this->formPrefixName . $this->formTestModeName];
 
         // Check if $_POST was set.
         if ($this->jInput->getMethod() === 'POST'
@@ -1149,12 +1159,14 @@ class sefv2modsimpleemailform implements
             ? "<div class=\"" . $this->formCssClass . "\">\n"
             : '';
 
-        // 2012-04-20 DB: Added anchor tag if > 1 (default anchor = #).
-        $this->output .= (strlen($this->formAnchor) > 1)
-            ? "<a name=\""
-                . substr($this->formAnchor, 1)
-                . "\">&nbsp;</a>\n"
-            : '';
+        // 2012-04-20 DB: Added anchor (default anchor = #).
+        $this->output .=
+            '<a id="'
+            . $this->formAnchor
+            . '" name="'
+            . $this->formAnchor
+            . '">&nbsp;</a>'
+            . "\n";
 
         $this->output .= "<form method=\"post\" "
             . "action=\"" . $this->formAnchor . "\" "
@@ -1202,9 +1214,9 @@ class sefv2modsimpleemailform implements
 
         $this->output .= "</form>\n";
 
-        if ($this->paramsArray[$this->formPrefixName . $this->formTestModeName] === 'Y') {
+        if ($this->formTestMode === 'Y') {
             $this->output = htmlspecialchars($this->output);
-            die('<pre>' . htmlspecialchars($this->testDump($this)) . '</pre>');
+            return '<pre>' . htmlspecialchars($this->testDump($this)) . '</pre>';
         }
 
         $this->output .= $this->msg;

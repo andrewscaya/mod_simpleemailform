@@ -20,7 +20,7 @@ use Mockery;
 /**
  * Sefv2Modsimpleemailform test case.
  */
-class sefv2modsimpleemailformFullTest extends PHPUnit_Framework_TestCase
+class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
 {
 
     /**

@@ -15,7 +15,7 @@ use Mockery;
  *
  * @since 1.8.8
  */
-class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
+class sefmodsimpleemailformTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -125,6 +125,10 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        parent::tearDown();
+
+        \Mockery::close();
+
         $this->modsimpleemailform = null;
 
         $this->modsimpleemailformReflection = null;
@@ -132,10 +136,6 @@ class SefModsimpleemailformTest extends PHPUnit_Framework_TestCase
         $this->modsimpleemailformProperties = null;
 
         $this->modsimpleemailformMethods = null;
-
-        \Mockery::close();
-
-        parent::tearDown();
     }
 
     protected function setAllPropertiesAccessible()

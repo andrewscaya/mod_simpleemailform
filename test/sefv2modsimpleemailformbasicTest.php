@@ -20,7 +20,7 @@ use Mockery;
 /**
  * Sefv2Modsimpleemailform test case.
  */
-class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
+class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -30,13 +30,13 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
     private $params;
 
     /**
-     * @var sefv2modsimpleemailform
+     * @var \sefv2modsimpleemailform
      * @since 2.0.0
      */
     private $sefv2modsimpleemailform;
 
     /**
-     * @var sefv2modsimpleemailform reflection
+     * @var \sefv2modsimpleemailform reflection
      * @since 2.0.0
      */
     private $sefv2modsimpleemailformReflection;
@@ -187,6 +187,10 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
+        parent::tearDown();
+
+        \Mockery::close();
+
         $this->sefv2modsimpleemailform = null;
 
         $this->sefv2modsimpleemailformReflection = null;
@@ -194,12 +198,14 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         $this->sefv2modsimpleemailformProperties = null;
 
         $this->sefv2modsimpleemailformMethods = null;
-
-        \Mockery::close();
-
-        parent::tearDown();
     }
 
+    /**
+     * Sets the visibility of all of \sefv2modsimpleemailform object's
+     * properties to public.
+     *
+     * @since 2.0.0
+     */
     public function setAllPropertiesAccessible()
     {
         $propertiesList = $this->sefv2modsimpleemailformReflection->getProperties();
@@ -211,6 +217,12 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * Sets the visibility of all of \sefv2modsimpleemailform object's
+     * methods to public.
+     *
+     * @since 2.0.0
+     */
     public function setAllMethodsAccessible()
     {
         $methodsList = $this->sefv2modsimpleemailformReflection->getMethods();
@@ -222,6 +234,12 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * Creates the test doubles that are called in \sefv2modsimpleemailform's
+     * constructor.
+     *
+     * @since 2.0.0
+     */
     public function createJoomlaMocksAndFakesForConstruct()
     {
         $this->jFormMock = Mockery::mock('overload:JForm');
@@ -273,6 +291,11 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         $this->jFileMock = Mockery::mock('overload:JFile');
     }
 
+    /**
+     * Creates a Cartesian product of passed array of arrays.
+     *
+     * @since 2.0.0
+     */
     public function arrayCartesianProduct($arrays)
     {
         $result = array();
@@ -299,7 +322,20 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::__construct()
+     * Tests sefv2modsimpleemailform::__construct(
+     *                                       \JForm $jForm,
+     *                                       \JMail $jMail,
+     *                                       sefv2simpleemailformemailmsg $emailMsg,
+     *                                       \JDocument $jDocument,
+     *                                       \JLanguage $jLanguage,
+     *                                       Registry $params,
+     *                                       \JInput $jInput,
+     *                                       \JTableExtension $jTableExtension,
+     *                                       \JTableModule $jTableModule,
+     *                                       \stdClass $jModuleHelperResult,
+     *                                       \JSession $jSession,
+     *                                       \JFile $jFile
+     *                                   )
      *
      * @since 2.0.0
      */
@@ -377,6 +413,11 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * Tests sefv2modsimpleemailform::bind($data)
+     *
+     * @since 2.0.0
+     */
     public function testBindProxy()
     {
         $jFormMock = Mockery::mock('overload:JForm');
@@ -387,6 +428,11 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         $this->sefv2modsimpleemailform->bind(array());
     }
 
+    /**
+     * Tests sefv2modsimpleemailform::createXMLConfig(array $paramsArray)
+     *
+     * @since 2.0.0
+     */
     public function testCreateXMLConfig()
     {
         $paramsArray = $this->sefv2modsimpleemailformProperties['paramsArray']
@@ -403,6 +449,11 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * Tests sefv2modsimpleemailform::decorateInput($input, $label = null)
+     *
+     * @since 2.0.0
+     */
     public function testDecorateInput()
     {
         $input = '<input 
@@ -444,6 +495,11 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * Tests sefv2modsimpleemailform::determineActiveElements(array $paramsArray)
+     *
+     * @since 2.0.0
+     */
     public function testDetermineActiveElementsTrue()
     {
         $paramsArray = $this->sefv2modsimpleemailformProperties['paramsArray']
@@ -462,6 +518,11 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(2, count($activeElements));
     }
 
+    /**
+     * Tests sefv2modsimpleemailform::determineActiveElements(array $paramsArray)
+     *
+     * @since 2.0.0
+     */
     public function testDetermineActiveElementsFalse()
     {
         $paramsArray = $this->sefv2modsimpleemailformProperties['paramsArray']
@@ -483,6 +544,11 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(0, count($activeElements));
     }
 
+    /**
+     * Tests sefv2modsimpleemailform::filter(array $data, $group = null)
+     *
+     * @since 2.0.0
+     */
     public function testFilterProxy()
     {
         $jFormMock = Mockery::mock('overload:JForm');
@@ -493,6 +559,11 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         $this->sefv2modsimpleemailform->filter(array());
     }
 
+    /**
+     * Tests sefv2modsimpleemailform::getData()
+     *
+     * @since 2.0.0
+     */
     public function testGetDataProxy()
     {
         $jFormMock = Mockery::mock('overload:JForm');
@@ -503,6 +574,11 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         $this->sefv2modsimpleemailform->getData();
     }
 
+    /**
+     * Tests sefv2modsimpleemailform::getErrors()
+     *
+     * @since 2.0.0
+     */
     public function testGetErrorsProxy()
     {
         $jFormMock = Mockery::mock('overload:JForm');
@@ -513,6 +589,11 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         $this->sefv2modsimpleemailform->getErrors();
     }
 
+    /**
+     * Tests sefv2modsimpleemailform::getField($name, $group = null, $value = null)
+     *
+     * @since 2.0.0
+     */
     public function testGetFieldProxy()
     {
         $jFormMock = Mockery::mock('overload:JForm');
@@ -523,6 +604,11 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         $this->sefv2modsimpleemailform->getField('test');
     }
 
+    /**
+     * Tests sefv2modsimpleemailform::getFieldset($set = null)
+     *
+     * @since 2.0.0
+     */
     public function testGetFieldsetProxy()
     {
         $jFormMock = Mockery::mock('overload:JForm');
@@ -534,6 +620,7 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests sefv2modsimpleemailform::getXMLField($active, $from, $name, $label, $value, $size, $maxx)
      *
      * @param $active
      * @param $from
@@ -543,9 +630,9 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
      * @param $size
      * @param $maxx
      *
-     * @dataProvider providerGetXMLFieldAlmostAllPossibleCombinations
-     *
      * @since 2.0.0
+     *
+     * @dataProvider providerGetXMLFieldAlmostAllPossibleCombinations
      */
     public function testGetXMLFieldAlmostAllPossibleCombinations($active, $from, $name, $label, $value, $size, $maxx)
     {
@@ -693,6 +780,11 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         return $this->arrayCartesianProduct($arraysTemp);
     }
 
+    /**
+     * Tests sefv2modsimpleemailform::getXMLField($active, $from, $name, $label, $value, $size, $maxx)
+     *
+     * @since 2.0.0
+     */
     public function testGetXMLFieldUnknownFromParameter()
     {
         $output = $this->sefv2modsimpleemailformMethods['getXMLField']->invokeArgs(
@@ -706,6 +798,11 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * Tests sefv2modsimpleemailform::getXMLField($active, $from, $name, $label, $value, $size, $maxx)
+     *
+     * @since 2.0.0
+     */
     public function testGetXMLFieldMultipleCheckboxesRadioAndDropdownInputs()
     {
         $output = $this->sefv2modsimpleemailformMethods['getXMLField']->invokeArgs(
@@ -749,14 +846,16 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests sefv2modsimpleemailform::getXMLUploadField($uploadName, $uploadLabel, $uploadAllowedFiles)
+     *
      * @param string $expectedOutput
      * @param string $uploadName
      * @param string $uploadLabel
      * @param string $uploadAllowedFiles
      *
-     * @dataProvider providerGetXMLUploadField
-     *
      * @since 2.0.0
+     *
+     * @dataProvider providerGetXMLUploadField
      */
     public function testGetXMLUploadField($expectedOutput, $uploadName, $uploadLabel, $uploadAllowedFiles)
     {
@@ -795,6 +894,11 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * Tests sefv2modsimpleemailform::getXMLCaptchaField($name, $namespace)
+     *
+     * @since 2.0.0
+     */
     public function testGetXMLCaptchaField()
     {
         $output = $this->sefv2modsimpleemailformMethods['getXMLCaptchaField']->invokeArgs(
@@ -811,6 +915,11 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * Tests sefv2modsimpleemailform::load($xmlConfigString)
+     *
+     * @since 2.0.0
+     */
     public function testLoadProxy()
     {
         $jFormMock = Mockery::mock('overload:JForm');
@@ -821,6 +930,16 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         $this->sefv2modsimpleemailform->load('test');
     }
 
+    /**
+     * Tests sefv2modsimpleemailform::processFormData(
+     *                                      array $formDataRaw,
+     *                                      array $files,
+     *                                      sefv2simpleemailformemailmsg $emailMsg,
+     *                                      array $paramsArray
+     *                                  )
+     *
+     * @since 2.0.0
+     */
     /*public function testProcessFormData()
     {
         $_POST = array(
@@ -834,6 +953,11 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         );
     }*/
 
+    /**
+     * Tests sefv2modsimpleemailform::removeField($name, $group = null)
+     *
+     * @since 2.0.0
+     */
     public function testRemoveFieldProxy()
     {
         $jFormMock = Mockery::mock('overload:JForm');
@@ -844,25 +968,93 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         $this->sefv2modsimpleemailform->removeField('test');
     }
 
-    public function testRender()
+    /**
+     * Tests sefv2modsimpleemailform::render()
+     *
+     * @since 2.0.0
+     */
+    public function testRenderWithoutFields()
     {
-        $jFormMock = $this->sefv2modsimpleemailformProperties['jForm']->getValue($this->sefv2modsimpleemailform);
-        $jFormMock->shouldReceive('getFieldset')->once()->with('main')->andReturn(array());
-
-        $this->sefv2modsimpleemailformProperties['jForm']->setValue($this->sefv2modsimpleemailform, $jFormMock);
-
+        // Test with and without a fieldset.
+        $jFormMock = $this->sefv2modsimpleemailformProperties['jForm']
+            ->getValue($this->sefv2modsimpleemailform);
+        $jFormMock
+            ->shouldReceive('getFieldset')
+            ->twice()
+            ->with('main')
+            ->andReturn(array());
+        $this->sefv2modsimpleemailformProperties['jForm']
+            ->setValue(
+                $this->sefv2modsimpleemailform,
+                $jFormMock
+            );
         $jHtmlMock = Mockery::mock('alias:JHtml');
-        $jHtmlMock->shouldReceive('_')->once()->with('form.token')->andReturn('qwerty');
-
+        $jHtmlMock
+            ->shouldReceive('_')
+            ->times(3)
+            ->with('form.token')
+            ->andReturn('qwerty');
         $output = $this->sefv2modsimpleemailform->render();
+        $this->assertNotEmpty($output);
+        $this->assertEquals(
+            1,
+            preg_match('/<div class="mod_sef">(?!type="email")/', $output)
+        );
+        $this->assertStringStartsWith('<div class="mod_sef">', $output);
 
-        $this->assertTrue((!empty($output)));
+        // Test the form anchor.
+        $this->sefv2modsimpleemailformProperties['formAnchor']
+            ->setValue(
+                $this->sefv2modsimpleemailform,
+                '#testanchor'
+            );
+        $output3 = $this->sefv2modsimpleemailform->render();
+        $this->assertEquals(
+            1,
+            preg_match('/<a.+id="#testanchor".+name="#testanchor".+<form.+action="#testanchor"/is', $output3)
+        );
+        $this->sefv2modsimpleemailformProperties['formAnchor']
+            ->setValue(
+                $this->sefv2modsimpleemailform,
+                '#'
+            );
 
-        $this->assertEquals(1, preg_match('/<div class="mod_sef">/', $output));
+        // Test turning off rendering.
+        $this->sefv2modsimpleemailformProperties['formRendering']
+            ->setValue(
+                $this->sefv2modsimpleemailform,
+                false
+            );
+        $output4 = $this->sefv2modsimpleemailform->render();
+        $this->assertEmpty($output4);
 
-        $this->assertEquals(0, strpos($output, '/<div class="mod_sef">/'));
+        // Test turning on test mode while rendering is still off.
+        $this->sefv2modsimpleemailformProperties['formTestMode']
+            ->setValue(
+                $this->sefv2modsimpleemailform,
+                'Y'
+            );
+        $output5 = $this->sefv2modsimpleemailform->render();
+        $this->assertEmpty($output5);
+
+        // Test test mode if rendering is back on.
+        $this->sefv2modsimpleemailformProperties['formRendering']
+            ->setValue(
+                $this->sefv2modsimpleemailform,
+                true
+            );
+        $output6 = $this->sefv2modsimpleemailform->render();
+        $this->assertStringStartsWith(
+            '<pre>Object (sefv2modsimpleemailform)',
+            $output6
+        );
     }
 
+    /**
+     * Tests sefv2modsimpleemailform::reset($xml = false)
+     *
+     * @since 2.0.0
+     */
     public function testResetProxy($xml = false)
     {
         $jFormMock = Mockery::mock('overload:JForm');
@@ -873,11 +1065,25 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         $this->sefv2modsimpleemailform->reset();
     }
 
+    /**
+     * Tests sefv2modsimpleemailform::sendFormData(
+     *                                      array $formDataClean,
+     *                                      sefv2simpleemailformemailmsg $emailMsg,
+     *                                      array $paramsArray
+     *                                  )
+     *
+     * @since 2.0.0
+     */
     /*public function testSendFormData(array $formDataClean, stdClass $emailMsg, array $paramsArray)
     {
 
     }*/
 
+    /**
+     * Tests sefv2modsimpleemailform::testDump($data, $indent = 0)
+     *
+     * @since 2.0.0
+     */
     public function testTestDump()
     {
         $output = $this->sefv2modsimpleemailformMethods['testDump']->invokeArgs(
@@ -888,6 +1094,11 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1, preg_match('/Object \(sefv2modsimpleemailform\)/', $output));
     }
 
+    /**
+     * Tests sefv2modsimpleemailform::uploadFile(\JFile $jFile, $fileName, $fileTmpName)
+     *
+     * @since 2.0.0
+     */
     public function testUploadFile()
     {
         $return_value_generator = function () {
@@ -935,6 +1146,7 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
             ->getValue($this->sefv2modsimpleemailform);
         $this->assertEquals(1, count($emailMsg->attachment));
 
+        $emailMsg->attachment = array();
         $this->sefv2modsimpleemailformProperties['uploadAllowedFilesArray']
             ->setValue($this->sefv2modsimpleemailform, array('.doc'));
         $output2 = $this->sefv2modsimpleemailformMethods['uploadFile']->invokeArgs(
@@ -942,14 +1154,27 @@ class sefv2modsimpleemailformBasicTest extends PHPUnit_Framework_TestCase
             array($this->jFileMock, $filename, $fileTmpName)
         );
         $this->assertFalse($output2);
+        $emailMsg = $this->sefv2modsimpleemailformProperties['emailMsg']
+            ->getValue($this->sefv2modsimpleemailform);
+        $this->assertEquals(0, count($emailMsg->attachment));
 
+        $this->sefv2modsimpleemailformProperties['uploadAllowedFilesArray']
+            ->setValue($this->sefv2modsimpleemailform, array());
         $output3 = $this->sefv2modsimpleemailformMethods['uploadFile']->invokeArgs(
             $this->sefv2modsimpleemailform,
             array($this->jFileMock, $filename, $fileTmpName)
         );
         $this->assertFalse($output3);
+        $emailMsg = $this->sefv2modsimpleemailformProperties['emailMsg']
+            ->getValue($this->sefv2modsimpleemailform);
+        $this->assertEquals(0, count($emailMsg->attachment));
     }
 
+    /**
+     * Tests sefv2modsimpleemailform::validate(array $data, $group = null)
+     *
+     * @since 2.0.0
+     */
     public function testValidateProxy()
     {
         $jFormMock = Mockery::mock('overload:JForm');

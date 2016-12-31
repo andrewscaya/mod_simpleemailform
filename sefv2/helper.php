@@ -35,17 +35,10 @@ class sefv2helper implements sefv2helperfactoryinterface
     {
     }
 
-    /**
-     * @codeCoverageIgnoreStart
-     */
-
     private function __clone()
     {
+        return;
     }
-
-    /**
-     * @codeCoverageIgnoreEnd
-     */
 
     public static function getInstance()
     {
