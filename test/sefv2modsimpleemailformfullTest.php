@@ -443,4 +443,210 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
             preg_match('/<field.+type="file".+accept=""/is', $output2)
         );
     }
+
+    /**
+     * Tests sefv2modsimpleemailform::sendFormData(
+     *                                      array $formDataClean,
+     *                                      sefv2simpleemailformemailmsg $emailMsg,
+     *                                      array $paramsArray
+     *                                  )
+     *
+     * @since 2.0.0
+     */
+    public function testSendFormData()
+    {
+        define('JVERSION', '3.0');
+        $formCleanData = array(
+            'mod_simpleemailform_field1_1' => 'root@localhost',
+            'mod_simpleemailform_field2_1' => 'Test',
+            'mod_simpleemailform_field3_1' => 'option1',
+            'mod_simpleemailform_field4_1' => '<p>This is a test.</p>',
+            'mod_simpleemailform_field5_1' => 'Test: option1',
+            'mod_simpleemailform_copyMe_1' => '1',
+            'a7843da35a03fb2fbe19834411ec1955' => '1',
+            'mod_simpleemailform_submit_1' => 'Submit'
+        );
+        $emailMsg = $this->sefv2modsimpleemailformProperties['emailMsg']
+            ->getValue($this->sefv2modsimpleemailform);
+        $paramsArray = $this->sefv2modsimpleemailformProperties['paramsArray']
+            ->getValue($this->sefv2modsimpleemailform);
+        $formPrefixName = $this->sefv2modsimpleemailformProperties['formPrefixName']
+            ->getValue($this->sefv2modsimpleemailform);
+        $emailToName = $this->sefv2modsimpleemailformProperties['emailToName']
+            ->getValue($this->sefv2modsimpleemailform);
+        $emailCCName = $this->sefv2modsimpleemailformProperties['emailCCName']
+            ->getValue($this->sefv2modsimpleemailform);
+        $emailBCCName = $this->sefv2modsimpleemailformProperties['emailBCCName']
+            ->getValue($this->sefv2modsimpleemailform);
+        $paramsArray[$formPrefixName . $emailToName] = 'root@localhost';
+        $paramsArray[$formPrefixName . $emailCCName] = 'root@localhost';
+        $paramsArray[$formPrefixName . $emailBCCName] = 'root@localhost';
+        $jDocumentMock = $this->sefv2modsimpleemailformProperties['jDocument']
+            ->getValue($this->sefv2modsimpleemailform);
+        $jDocumentMock
+            ->shouldReceive('getTitle')
+            ->once()
+            ->andReturn('Home: Article');
+
+        $jMailMock = $this->sefv2modsimpleemailformProperties['jMail']
+            ->getValue($this->sefv2modsimpleemailform);
+        $jMailMock
+            ->shouldReceive('setSender')
+            ->once()
+            ->with('root@localhost')
+            ->andReturn($jMailMock);
+        $jMailMock
+            ->shouldReceive('addCC')
+            ->once()
+            ->with(array('root@localhost'))
+            ->andReturn($jMailMock);
+        $jMailMock
+            ->shouldReceive('addBCC')
+            ->once()
+            ->with(array('root@localhost'))
+            ->andReturn($jMailMock);
+        $jMailMock
+            ->shouldReceive('setSubject')
+            ->once()
+            ->with('Test')
+            ->andReturn($jMailMock);
+        $jMailMock
+            ->shouldReceive('setBody')
+            ->once()
+            ->with(
+                "\nArticle Title: Home: Article\nTest: option1\nComments: <p>This is a test.</p>\nField 5: Test: option1"
+            )
+            ->andReturn($jMailMock);
+        $jMailMock
+            ->shouldReceive('clearAllRecipients')
+            ->once();
+        $jMailMock
+            ->shouldReceive('addRecipient')
+            ->once()
+            ->with(array('root@localhost'))
+            ->andReturn($jMailMock);
+        $jMailMock
+            ->shouldReceive('addRecipient')
+            ->once()
+            ->withArgs(array('root@localhost', null))
+            ->andReturn($jMailMock);
+        $jMailMock
+            ->shouldReceive('addReplyTo')
+            ->once()
+            ->andReturn($jMailMock);
+        $jMailMock
+            ->shouldReceive('send')
+            ->twice()
+            ->andReturn(true);
+        $this->sefv2modsimpleemailformProperties['jMail']
+            ->setValue(
+                $this->sefv2modsimpleemailform,
+                $jMailMock
+            );
+        $output = $this->sefv2modsimpleemailformMethods['sendFormData']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array($formCleanData, $emailMsg, $paramsArray)
+        );
+        $this->assertTrue($output);
+
+        $jMailMock
+            ->shouldReceive('send')
+            ->once()
+            ->andReturn(false);
+        $this->sefv2modsimpleemailformProperties['jMail']
+            ->setValue(
+                $this->sefv2modsimpleemailform,
+                $jMailMock
+            );
+        $output2 = $this->sefv2modsimpleemailformMethods['sendFormData']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array($formCleanData, $emailMsg, $paramsArray)
+        );
+        $this->assertFalse($output2);
+
+        $jMailMock
+            ->shouldReceive('send')
+            ->once()
+            ->andReturn(true);
+        $jMailMock
+            ->shouldReceive('send')
+            ->once()
+            ->andReturn(false);
+        $this->sefv2modsimpleemailformProperties['jMail']
+            ->setValue(
+                $this->sefv2modsimpleemailform,
+                $jMailMock
+            );
+        $output3 = $this->sefv2modsimpleemailformMethods['sendFormData']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array($formCleanData, $emailMsg, $paramsArray)
+        );
+        $this->assertFalse($output3);
+
+        $this->setExpectedException('Exception');
+        $jMailMock2 = Mockery::Mock('overload:JMail');
+        $jMailMock2
+            ->shouldReceive('setSender')
+            ->once()
+            ->with('root@localhost')
+            ->andReturn($jMailMock2);
+        $jMailMock2
+            ->shouldReceive('setSubject')
+            ->once()
+            ->with('Test')
+            ->andReturn($jMailMock2);
+        $jMailMock2
+            ->shouldReceive('addCC')
+            ->once()
+            ->with(array('root@localhost'))
+            ->andReturn($jMailMock2);
+        $jMailMock2
+            ->shouldReceive('addBCC')
+            ->once()
+            ->with(array('root@localhost'))
+            ->andReturn($jMailMock2);
+        $jMailMock2
+            ->shouldReceive('setBody')
+            ->once()
+            ->with(
+                "\nArticle Title: Home: Article\nTest: option1\nComments: <p>This is a test.</p>\nField 5: Test: option1"
+            )
+            ->andReturn($jMailMock);
+        $jMailMock2
+            ->shouldReceive('clearAllRecipients')
+            ->once();
+        $jMailMock2
+            ->shouldReceive('addRecipient')
+            ->once()
+            ->withArgs(array('root@localhost', null))
+            ->andReturn($jMailMock2);
+        $jMailMock2
+            ->shouldReceive('addReplyTo')
+            ->once()
+            ->andReturn($jMailMock2);
+        $jMailMock2
+            ->shouldReceive('addRecipient')
+            ->once()
+            ->withArgs(array('thisaddress@doesnotexist', null))
+            ->andReturn($jMailMock2);
+        $jMailMock2
+            ->shouldReceive('send')
+            ->once()
+            ->andReturn(true);
+        $jMailMock2
+            ->shouldReceive('send')
+            ->once()
+            ->andReturn(true)
+            ->andThrow('Exception');
+        $this->sefv2modsimpleemailformProperties['jMail']
+            ->setValue(
+                $this->sefv2modsimpleemailform,
+                $jMailMock2
+            );
+        $output4 = $this->sefv2modsimpleemailformMethods['sendFormData']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array($formCleanData, $emailMsg, $paramsArray)
+        );
+        $this->assertFalse($output4);
+    }
 }

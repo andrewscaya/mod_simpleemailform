@@ -834,14 +834,11 @@ class sefv2modsimpleemailform implements
         $formActiveElements = array();
 
         // We will use array_walk_recursive() in case we receive a multi-dimensional array.
-        array_walk_recursive(
-            $paramsArray,
-            function ($item, $key) use (&$formActiveElements) {
-                if (preg_match("/$this->fieldActiveName/", $key) === 1 && $item !== 'N') {
-                    $formActiveElements[] = substr($key, 0, strlen($key) - strlen($this->fieldActiveName));
-                }
+        array_walk_recursive($paramsArray, function ($item, $key) use (&$formActiveElements) {
+            if (preg_match("/$this->fieldActiveName/", $key) === 1 && $item !== 'N') {
+                $formActiveElements[] = substr($key, 0, strlen($key) - strlen($this->fieldActiveName));
             }
-        );
+        });
 
         $this->formActiveElements = $formActiveElements;
 
@@ -1206,8 +1203,8 @@ class sefv2modsimpleemailform implements
 
         $this->output .= "<input
                                 class=\"{$this->formInputClass}\"
-                                name=\"{$this->formResetButtonName} . {$this->formInstance}\"
-                                id=\"{$this->formResetButtonName} . {$this->formInstance}\"
+                                name=\"{$this->formResetButtonName}_{$this->formInstance}\"
+                                id=\"{$this->formResetButtonName}_{$this->formInstance}\"
                                 value=\"{$this->transLang['MOD_SIMPLEEMAILFORM_button_reset']}\"
                                 title=\"\"
                                 type=\"reset\">\n";
@@ -1232,7 +1229,7 @@ class sefv2modsimpleemailform implements
     protected function sendFormData(array $formDataClean, sefv2simpleemailformemailmsg $emailMsg, array $paramsArray)
     {
         // 2012-02-15 DB: Override unwanted error messages originating from JMail.
-        ob_start();
+        //ob_start();
 
         /*
          *  Configure the email message's general options.
@@ -1292,6 +1289,7 @@ class sefv2modsimpleemailform implements
                     . ' : '
                     . JFactory::getDocument()->getTitle()
                     . '</p>';
+                //ob_end_clean();
                 return false;
             }
         }
@@ -1321,7 +1319,6 @@ class sefv2modsimpleemailform implements
             } else {
                 // Otherwise, pull value from filtered and sanitized $_POST.
                 // 2013-04-20 DB: Added check for array -- to account for checkboxes / multi-select.
-
                 if (isset($value)) {
                     if (is_array($value)) {
                         $value = implode(" / ", $value);
@@ -1371,6 +1368,7 @@ class sefv2modsimpleemailform implements
 
         try {
             if (!$sent = $this->jMail->send()) {
+                //ob_end_clean();
                 return false;
             }
 
@@ -1387,9 +1385,10 @@ class sefv2modsimpleemailform implements
             // Send copyMe email if copyMe or copyMeAuto are set to TRUE.
             // 2011-08-12 DB: added option for copyMeAuto
             if ($emailMsg->copyMe === true || $emailMsg->copyMeAuto === true) {
-                $this->jMail->ClearAllRecipients();
+                $this->jMail->clearAllRecipients();
                 $this->jMail->addRecipient($emailMsg->from, $emailMsg->fromName);
                 if (!$sent = $this->jMail->send()) {
+                    //ob_end_clean();
                     return false;
                 }
             }
@@ -1402,11 +1401,11 @@ class sefv2modsimpleemailform implements
                 $this->msg .= '<p style="color:' . $this->errorColour . '">' . $e->getMessage() . "</p>\n";
                 $this->msg .= '<p style="color:' . $this->errorColour . '">' . $e->getTraceAsString() . "</p>\n";
             }
+            //ob_end_clean();
             return false;
         }
 
-        ob_end_clean();
-
+        //ob_end_clean();
         return true;
     }
 

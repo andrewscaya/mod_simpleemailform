@@ -973,14 +973,21 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *
      * @since 2.0.0
      */
-    public function testRenderWithoutFields()
+    public function testRender()
     {
-        // Test with and without a fieldset.
+        $jHtmlMock = Mockery::mock('alias:JHtml');
+        $jHtmlMock
+            ->shouldReceive('_')
+            ->times(4)
+            ->with('form.token')
+            ->andReturn('qwerty');
+
+        // Test with an empty fieldset.
         $jFormMock = $this->sefv2modsimpleemailformProperties['jForm']
             ->getValue($this->sefv2modsimpleemailform);
         $jFormMock
             ->shouldReceive('getFieldset')
-            ->twice()
+            ->once()
             ->with('main')
             ->andReturn(array());
         $this->sefv2modsimpleemailformProperties['jForm']
@@ -988,19 +995,63 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
                 $this->sefv2modsimpleemailform,
                 $jFormMock
             );
-        $jHtmlMock = Mockery::mock('alias:JHtml');
-        $jHtmlMock
-            ->shouldReceive('_')
-            ->times(3)
-            ->with('form.token')
-            ->andReturn('qwerty');
         $output = $this->sefv2modsimpleemailform->render();
         $this->assertNotEmpty($output);
+        $this->assertStringStartsWith('<div class="mod_sef">', $output);
         $this->assertEquals(
             1,
-            preg_match('/<div class="mod_sef">(?!type="email")/', $output)
+            preg_match('/<div class="mod_sef">(?!type="email".+type="text".+name="subject")/', $output)
         );
-        $this->assertStringStartsWith('<div class="mod_sef">', $output);
+        $this->sefv2modsimpleemailformProperties['output']
+            ->setValue(
+                $this->sefv2modsimpleemailform,
+                ''
+            );
+
+        // Test with a fieldset.
+        $inputObject1 = new \stdClass();
+        $inputObject1->input = '<input type="email" name="test">';
+        $inputObject1->hidden = false;
+        $inputObject1->label = 'From';
+        $inputObject2 = new \stdClass();
+        $inputObject2->input = '<input type="text" name="subject">';
+        $inputObject2->hidden = false;
+        $inputObject2->label = 'Subject';
+        $inputObject3 = new \stdClass();
+        $inputObject3->input = '<input type="hidden" name="hiddentest">';
+        $inputObject3->hidden = true;
+        $fakeFieldSet = array(
+            $inputObject1,
+            $inputObject2,
+            $inputObject3,
+        );
+        $jFormMock = $this->sefv2modsimpleemailformProperties['jForm']
+            ->getValue($this->sefv2modsimpleemailform);
+        $jFormMock
+            ->shouldReceive('getFieldset')
+            ->once()
+            ->with('main')
+            ->andReturn($fakeFieldSet);
+        $this->sefv2modsimpleemailformProperties['jForm']
+            ->setValue(
+                $this->sefv2modsimpleemailform,
+                $jFormMock
+            );
+        $output2 = $this->sefv2modsimpleemailform->render();
+        $this->assertNotEmpty($output2);
+        $this->assertStringStartsWith('<div class="mod_sef">', $output2);
+        $this->assertEquals(
+            1,
+            preg_match(
+                '/<div class="mod_sef">.+type="email".+type="text".+name="subject".+type="hidden"/is',
+                $output2
+            )
+        );
+        $this->sefv2modsimpleemailformProperties['output']
+            ->setValue(
+                $this->sefv2modsimpleemailform,
+                ''
+            );
 
         // Test the form anchor.
         $this->sefv2modsimpleemailformProperties['formAnchor']
@@ -1018,6 +1069,11 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
                 $this->sefv2modsimpleemailform,
                 '#'
             );
+        $this->sefv2modsimpleemailformProperties['output']
+            ->setValue(
+                $this->sefv2modsimpleemailform,
+                ''
+            );
 
         // Test turning off rendering.
         $this->sefv2modsimpleemailformProperties['formRendering']
@@ -1027,6 +1083,11 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
             );
         $output4 = $this->sefv2modsimpleemailform->render();
         $this->assertEmpty($output4);
+        $this->sefv2modsimpleemailformProperties['output']
+            ->setValue(
+                $this->sefv2modsimpleemailform,
+                ''
+            );
 
         // Test turning on test mode while rendering is still off.
         $this->sefv2modsimpleemailformProperties['formTestMode']
@@ -1036,6 +1097,11 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
             );
         $output5 = $this->sefv2modsimpleemailform->render();
         $this->assertEmpty($output5);
+        $this->sefv2modsimpleemailformProperties['output']
+            ->setValue(
+                $this->sefv2modsimpleemailform,
+                ''
+            );
 
         // Test test mode if rendering is back on.
         $this->sefv2modsimpleemailformProperties['formRendering']
@@ -1048,6 +1114,11 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
             '<pre>Object (sefv2modsimpleemailform)',
             $output6
         );
+        $this->sefv2modsimpleemailformProperties['output']
+            ->setValue(
+                $this->sefv2modsimpleemailform,
+                ''
+            );
     }
 
     /**
@@ -1074,10 +1145,79 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *
      * @since 2.0.0
      */
-    /*public function testSendFormData(array $formDataClean, stdClass $emailMsg, array $paramsArray)
+    public function testSendFormData()
     {
+        // array $formDataClean, stdClass $emailMsg, array $paramsArray
 
-    }*/
+        $jDocumentMock = $this->sefv2modsimpleemailformProperties['jDocument']
+            ->getValue($this->sefv2modsimpleemailform);
+        $jDocumentMock
+            ->shouldReceive('getTitle')
+            ->once()
+            ->andReturn('Home: Article');
+
+        $jMailMock = $this->sefv2modsimpleemailformProperties['jMail']
+            ->getValue($this->sefv2modsimpleemailform);
+        $jMailMock
+            ->shouldReceive('addRecipient')
+            ->once()
+            ->with(array('vagrant@localhost'))
+            ->andReturn($jMailMock);
+        $jMailMock
+            ->shouldReceive('setSender')
+            ->once()
+            ->with('root@localhost')
+            ->andReturn($jMailMock);
+        $jMailMock
+            ->shouldReceive('setSubject')
+            ->once()
+            ->with('Test')
+            ->andReturn($jMailMock);
+        $jMailMock
+            ->shouldReceive('setBody')
+            ->once()
+            ->with("\nArticle Title: Home: Article")
+            ->andReturn($jMailMock);
+        $jMailMock
+            ->shouldReceive('send')
+            ->twice()
+            ->andReturn(true);
+        $jMailMock
+            ->shouldReceive('clearAllRecipients')
+            ->once();
+        $jMailMock
+            ->shouldReceive('addRecipient')
+            ->once()
+            ->withArgs(array('root@localhost', null))
+            ->andReturn($jMailMock);
+        $this->sefv2modsimpleemailformProperties['jMail']
+            ->setValue(
+                $this->sefv2modsimpleemailform,
+                $jMailMock
+            );
+
+        $formCleanData = array(
+            'mod_simpleemailform_field1_1' => 'root@localhost',
+            'mod_simpleemailform_field2_1' => 'Test',
+            'mod_simpleemailform_field3_1' => 'option1',
+            'mod_simpleemailform_field4_1' => '<p>This is a test.</p>',
+            'mod_simpleemailform_copyMe_1' => '1',
+            'a7843da35a03fb2fbe19834411ec1955' => '1',
+            'mod_simpleemailform_submit_1' => 'Submit'
+        );
+        $emailMsg = $this->sefv2modsimpleemailformProperties['emailMsg']
+            ->getValue($this->sefv2modsimpleemailform);
+        $paramsArray = $this->sefv2modsimpleemailformProperties['paramsArray']
+            ->getValue($this->sefv2modsimpleemailform);
+
+
+        $output = $this->sefv2modsimpleemailformMethods['sendFormData']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array($formCleanData, $emailMsg, $paramsArray)
+        );
+
+        $this->assertTrue($output);
+    }
 
     /**
      * Tests sefv2modsimpleemailform::testDump($data, $indent = 0)

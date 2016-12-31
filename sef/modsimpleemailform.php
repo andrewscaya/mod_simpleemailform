@@ -637,7 +637,7 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
                             ? (int) $_POST['mod_simpleemailform_copyMe_' . $this->_instance] : 0;
             // 2011-08-12 DB: added option for copyMeAuto
             if ($msg->copyMe || $msg->copyMeAuto) {
-                $message->ClearAllRecipients();
+                $message->clearAllRecipients();
                 $message->addRecipient($msg->from, $msg->fromName);
                 if (!$sent = $message->send()) {
                     throw new Exception($this->_transLang['MOD_SIMPLEEMAILFORM_error']);
