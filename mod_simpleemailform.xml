@@ -20,15 +20,23 @@
 	</description>
 	<files>
 		<filename module="mod_simpleemailform">mod_simpleemailform.php</filename>
-		<filename>sefv2/helper.php</filename>
 		<filename>index.html</filename>
+		<filename>sefv2/formfactory.php</filename>
+		<filename>sefv2/formfactoryinterface.php</filename>
+		<filename>sefv2/formrendererinterface.php</filename>
+		<filename>sefv2/helper.php</filename>
+		<filename>sefv2/helperfactoryinterface.php</filename>
+		<filename>sefv2/jformproxyinterface.php</filename>
+		<filename>sefv2/modsimpleemailform.php</filename>
+		<filename>sefv2/simpleemailformemailmsg.php</filename>
+		<filename>sef/CAPTCHA.php</filename>
 		<filename>sef/FreeSansBold.ttf</filename>
 		<filename>sef/Image.php</filename>
-		<filename>sef/Text.php</filename>
-		<filename>sef/CAPTCHA.php</filename>
+		<filename>sef/modsimpleemailform.php</filename>
 		<filename>sef/Password.php</filename>
 		<filename>sef/PEAR.php</filename>
 		<filename>sef/PEAR5.php</filename>
+		<filename>sef/Text.php</filename>
 		<filename>tmpl/default.php</filename>
 		<filename>tmpl/index.html</filename>
 		<filename>language_files/af-ZA.mod_simpleemailform.ini</filename>
