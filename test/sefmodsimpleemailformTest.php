@@ -6,18 +6,12 @@ use PHPUnit_Framework_TestCase;
 use Mockery;
 
 /**
- * @runTestsInSeparateProcesses
- * @preserveGlobalState disabled
- */
-
-/**
  * SefModsimpleemailform test case.
  *
  * @since 1.8.8
  */
 class sefmodsimpleemailformTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var \Joomla\Registry\Registry
      * @since 1.8.8

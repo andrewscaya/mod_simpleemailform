@@ -1087,12 +1087,18 @@ class sefv2modsimpleemailform implements
                 $maxLength = $maxLengthArray[0] * $maxLengthArray[1];
             }
 
-            $formDataRaw[$this->formActiveElements[$i] . '_' . $this->formInstance] =
-                substr(
-                    $formDataRaw[$this->formActiveElements[$i] . '_' . $this->formInstance],
-                    0,
-                    $maxLength
-                );
+            if (is_array($formDataRaw[$this->formActiveElements[$i] . '_' . $this->formInstance])) {
+                foreach ($formDataRaw[$this->formActiveElements[$i] . '_' . $this->formInstance] as $value) {
+                    $value = substr($value, 0, $maxLength);
+                }
+            } else {
+                $formDataRaw[$this->formActiveElements[$i] . '_' . $this->formInstance] =
+                    substr(
+                        $formDataRaw[$this->formActiveElements[$i] . '_' . $this->formInstance],
+                        0,
+                        $maxLength
+                    );
+            }
         }
 
         // Move clean data to a new variable.
@@ -1129,7 +1135,12 @@ class sefv2modsimpleemailform implements
             }
         }
 
+        // 2012-02-15 DB: Override unwanted error messages originating from JMail.
+        ob_start();
+
         $sendFormResult = $this->sendFormData($formDataClean, $emailMsg, $paramsArray);
+
+        ob_end_clean();
 
         if (!$sendFormResult) {
             return false;
@@ -1228,14 +1239,7 @@ class sefv2modsimpleemailform implements
 
     protected function sendFormData(array $formDataClean, sefv2simpleemailformemailmsg $emailMsg, array $paramsArray)
     {
-        // 2012-02-15 DB: Override unwanted error messages originating from JMail.
-        //ob_start();
-
-        /*
-         *  Configure the email message's general options.
-         *  The other options will be set by the sendFormData() method
-         *  once the form will be submitted.
-         */
+        //Configure the email message's general options.
         $emailMsg->to = trim($paramsArray[$this->formPrefixName . $this->emailToName]);
         $emailMsg->to = (preg_match('/[\s,]+/', $emailMsg->to))
             ? preg_split('/[\s,]+/', $emailMsg->to)
@@ -1281,17 +1285,7 @@ class sefv2modsimpleemailform implements
 
         // 2013-09-01 DB: Added article title.
         if ($paramsArray[$this->formPrefixName . $this->addTitleName]) {
-            try {
-                $emailMsg->body .= "\nArticle Title: " . $this->jDocument->getTitle();
-            } catch (Exception $e) {
-                $this->msg .= '<p style="color:' . $this->errorColour . '">'
-                    . $this->transLang['MOD_SIMPLEEMAILFORM_error']
-                    . ' : '
-                    . JFactory::getDocument()->getTitle()
-                    . '</p>';
-                //ob_end_clean();
-                return false;
-            }
+            $emailMsg->body .= "\nArticle Title: " . $this->jDocument->getTitle();
         }
 
         for ($i = 1; $i <= $this->formActiveElementsCount; $i++) {
@@ -1309,10 +1303,7 @@ class sefv2modsimpleemailform implements
             $postValueKey = $this->formActiveElements[$index] . '_' . $this->formInstance;
             $value = $formDataClean[$postValueKey];
 
-            // If "active" = hidden, pull in value automatically.
-            if ($active === 'H') {
-                $emailMsg->body .= "\n" . $label . ': ' . $value;
-            } elseif ($active !== 'H' && $from === 'F') {
+            if ($active !== 'H' && $from === 'F') {
                 $emailMsg->from = $value;
             } elseif ($active !== 'H' && $from === 'S') {
                 $emailMsg->subject = $value;
@@ -1368,7 +1359,6 @@ class sefv2modsimpleemailform implements
 
         try {
             if (!$sent = $this->jMail->send()) {
-                //ob_end_clean();
                 return false;
             }
 
@@ -1388,7 +1378,6 @@ class sefv2modsimpleemailform implements
                 $this->jMail->clearAllRecipients();
                 $this->jMail->addRecipient($emailMsg->from, $emailMsg->fromName);
                 if (!$sent = $this->jMail->send()) {
-                    //ob_end_clean();
                     return false;
                 }
             }
@@ -1397,15 +1386,13 @@ class sefv2modsimpleemailform implements
                 . $this->transLang['MOD_SIMPLEEMAILFORM_error'] . ' : Mail Server</p>';
             $this->msg .= '<p style="color:' . $this->errorColour . '">'
                 . $this->transLang['MOD_SIMPLEEMAILFORM_email_invalid'];
-            if ($this->paramsArray[$this->formPrefixName . $this->formTestModeName] == 'Y') {
+            /*if ($this->paramsArray[$this->formPrefixName . $this->formTestModeName] == 'Y') {
                 $this->msg .= '<p style="color:' . $this->errorColour . '">' . $e->getMessage() . "</p>\n";
                 $this->msg .= '<p style="color:' . $this->errorColour . '">' . $e->getTraceAsString() . "</p>\n";
-            }
-            //ob_end_clean();
+            }*/
             return false;
         }
 
-        //ob_end_clean();
         return true;
     }
 

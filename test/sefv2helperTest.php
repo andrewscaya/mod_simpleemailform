@@ -6,18 +6,12 @@ use Mockery;
 use Joomla\Registry\Registry;
 
 /**
- * @runTestsInSeparateProcesses
- * @preserveGlobalState disabled
- */
-
-/**
  * Helper test case.
  *
  * @since 2.0.0
  */
 class sefv2helperTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var \Joomla\Registry\Registry
      * @since 2.0.0
@@ -182,10 +176,13 @@ class sefv2helperTest extends \PHPUnit_Framework_TestCase
     public function testCloneMethodIsNotAccessibleAndReturnsNullIfCalled()
     {
         $reflectionMethodClone = new \ReflectionMethod('\sefv2helper', '__clone');
+
         $this->assertTrue($reflectionMethodClone->isPrivate());
 
         $methodsList = $this->sefv2HelperReflection->getMethods();
+
         $foundKey = 0;
+
         array_walk_recursive(
             $methodsList,
             function ($item, $key) use (&$foundKey) {
@@ -194,11 +191,14 @@ class sefv2helperTest extends \PHPUnit_Framework_TestCase
                 }
             }
         );
+
         $methodsList[$foundKey]->setAccessible(true);
+
         $output = $methodsList[$foundKey]->invokeArgs(
             $this->sefv2helper,
             array()
         );
+
         $this->assertNull($output);
     }
 }
