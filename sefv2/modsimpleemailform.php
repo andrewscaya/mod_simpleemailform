@@ -1059,7 +1059,7 @@ class sefv2modsimpleemailform implements
             foreach ($errors as $error) {
                 $errorMsg = $error->getMessage();
 
-                if (preg_match('/:/', $errorMsg) === 1) {
+                if (strpos($errorMsg, ':') !== false) {
                     $fieldNameArray = explode(':', $error->getMessage());
                     $errorMsg = trim(end($fieldNameArray));
                 } else {
@@ -1115,13 +1115,11 @@ class sefv2modsimpleemailform implements
                     $files[$this->uploadName[$i]]['tmp_name'],
                     $this->jFile
                 );
-            } elseif (!empty($files['tmp_name']) && $files['error'] !== 0) {
+            } elseif (!empty($files[$this->uploadName[$i]]['tmp_name']) && $files[$this->uploadName[$i]]['error'] !== 0) {
                 $uploadFileResult = false;
             } else {
                 if ($paramsArray[$this->formPrefixName . $this->fieldUploadRequiredName] === 'Y') {
                     $uploadFileResult = false;
-                    $this->msg .=
-                        "<p style=\"color:{$this->errorColour}\">{$this->transLang['MOD_SIMPLEEMAILFORM_upload_error']}</p>";
                 } else {
                     // IMPORTANT : Must return true if no file was submitted (i.e. optional field(s)).
                     $uploadFileResult = true;
@@ -1129,8 +1127,8 @@ class sefv2modsimpleemailform implements
             }
 
             if (!$uploadFileResult) {
-                $this->msg .=
-                    "<p style=\"color:{$this->errorColour}\">{$this->transLang['MOD_SIMPLEEMAILFORM_upload_failure']}</p>";
+                $this->msg =
+                    "<p style=\"color:{$this->errorColour}\">{$this->transLang['MOD_SIMPLEEMAILFORM_upload_error']}</p>";
                 return false;
             }
         }
