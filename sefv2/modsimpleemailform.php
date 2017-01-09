@@ -684,7 +684,7 @@ class sefv2modsimpleemailform implements
             $files = $this->jInput->files->getArray(array(), null, 'raw', true);
 
             // Validate, filter, sanitize and process the form data.
-            $formProcessingResult = $this->processFormData($formDataRaw, $files, $this->emailMsg, $this->paramsArray);
+            $formProcessingResult = $this->processFormData($formDataRaw, $files, $this->paramsArray, $this->emailMsg);
 
             if ($formProcessingResult) {
                 $this->msg .=
@@ -1041,7 +1041,7 @@ class sefv2modsimpleemailform implements
         $this->jForm->load($xmlConfigString);
     }
 
-    protected function processFormData(array $formDataRaw, array $files, sefv2simpleemailformemailmsg $emailMsg, array $paramsArray)
+    protected function processFormData(array $formDataRaw, array $files, array $paramsArray, sefv2simpleemailformemailmsg $emailMsg)
     {
         // Check for CSRF token match.
         if (!($this->jSession->checkToken())) {
@@ -1082,7 +1082,7 @@ class sefv2modsimpleemailform implements
         for ($i = 0; $i < $this->formActiveElementsCount; $i++) {
             $maxLength = $paramsArray[$this->formActiveElements[$i] . $this->fieldSizeName];
 
-            if (preg_match('/,/', $maxLength) === 1) {
+            if (strpos($maxLength, ',') !== false) {
                 $maxLengthArray = explode(',', $maxLength);
                 $maxLength = $maxLengthArray[0] * $maxLengthArray[1];
             }
@@ -1111,9 +1111,9 @@ class sefv2modsimpleemailform implements
         for ($i = 1; $i <= $paramsArray[$this->formPrefixName . $this->formUploadActiveName]; $i++) {
             if (!empty($files[$this->uploadName[$i]]['tmp_name']) && $files[$this->uploadName[$i]]['error'] === 0) {
                 $uploadFileResult = $this->uploadFile(
-                    $this->jFile,
                     $files[$this->uploadName[$i]]['name'],
-                    $files[$this->uploadName[$i]]['tmp_name']
+                    $files[$this->uploadName[$i]]['tmp_name'],
+                    $this->jFile
                 );
             } elseif (!empty($files['tmp_name']) && $files['error'] !== 0) {
                 $uploadFileResult = false;
@@ -1138,7 +1138,7 @@ class sefv2modsimpleemailform implements
         // 2012-02-15 DB: Override unwanted error messages originating from JMail.
         ob_start();
 
-        $sendFormResult = $this->sendFormData($formDataClean, $emailMsg, $paramsArray);
+        $sendFormResult = $this->sendFormData($formDataClean, $paramsArray, $emailMsg, $this->jMail);
 
         ob_end_clean();
 
@@ -1237,7 +1237,7 @@ class sefv2modsimpleemailform implements
         return $this->jForm->reset($xml);
     }
 
-    protected function sendFormData(array $formDataClean, sefv2simpleemailformemailmsg $emailMsg, array $paramsArray)
+    protected function sendFormData(array $formDataClean, array $paramsArray, sefv2simpleemailformemailmsg $emailMsg, \JMail $jMail)
     {
         //Configure the email message's general options.
         $emailMsg->to = trim($paramsArray[$this->formPrefixName . $this->emailToName]);
@@ -1284,7 +1284,7 @@ class sefv2modsimpleemailform implements
         $emailMsg->body =  '';
 
         // 2013-09-01 DB: Added article title.
-        if ($paramsArray[$this->formPrefixName . $this->addTitleName]) {
+        if ($paramsArray[$this->formPrefixName . $this->addTitleName] === 'Y') {
             $emailMsg->body .= "\nArticle Title: " . $this->jDocument->getTitle();
         }
 
@@ -1329,22 +1329,22 @@ class sefv2modsimpleemailform implements
         $emailMsg->body = stripslashes($emailMsg->body);
 
         // Send mail.
-        $this->jMail->addRecipient($emailMsg->to);
-        $this->jMail->setSender($emailMsg->from);
-        $this->jMail->setSubject($emailMsg->subject);
-        $this->jMail->setBody($emailMsg->body);
+        $jMail->addRecipient($emailMsg->to);
+        $jMail->setSender($emailMsg->from);
+        $jMail->setSubject($emailMsg->subject);
+        $jMail->setBody($emailMsg->body);
 
         // 2012-02-03 DB: Added reply to field (has to be an array).
         if ($emailMsg->cc) {
-            $this->jMail->addCC($emailMsg->cc);
+            $jMail->addCC($emailMsg->cc);
         }
 
         if ($emailMsg->bcc) {
-            $this->jMail->addBCC($emailMsg->bcc);
+            $jMail->addBCC($emailMsg->bcc);
         }
 
         if ($emailMsg->replyTo) {
-            $this->jMail->addReplyTo($emailMsg->replyTo);
+            $jMail->addReplyTo($emailMsg->replyTo);
         }
 
         // 2012-02-15 DB: Set up attachments as an array.
@@ -1352,13 +1352,13 @@ class sefv2modsimpleemailform implements
             // Attach files.
             foreach ($emailMsg->attachment as $fullPathFileName) {
                 if (isset($fullPathFileName)) {
-                    $this->jMail->addAttachment($fullPathFileName);
+                    $jMail->addAttachment($fullPathFileName);
                 }
             }
         }
 
         try {
-            if (!$sent = $this->jMail->send()) {
+            if (!$sent = $jMail->send()) {
                 return false;
             }
 
@@ -1375,9 +1375,9 @@ class sefv2modsimpleemailform implements
             // Send copyMe email if copyMe or copyMeAuto are set to TRUE.
             // 2011-08-12 DB: added option for copyMeAuto
             if ($emailMsg->copyMe === true || $emailMsg->copyMeAuto === true) {
-                $this->jMail->clearAllRecipients();
-                $this->jMail->addRecipient($emailMsg->from, $emailMsg->fromName);
-                if (!$sent = $this->jMail->send()) {
+                $jMail->clearAllRecipients();
+                $jMail->addRecipient($emailMsg->from, $emailMsg->fromName);
+                if (!$sent = $jMail->send()) {
                     return false;
                 }
             }
@@ -1434,7 +1434,7 @@ class sefv2modsimpleemailform implements
         return $retval;
     }
 
-    protected function uploadFile(\JFile $jFile, $fileName, $fileTmpName)
+    protected function uploadFile($fileName, $fileTmpName, \JFile $jFile)
     {
         //Clean up filename to get rid of strange characters like spaces, etc.
         $fileName = $jFile->makeSafe($fileName);

@@ -957,8 +957,8 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      * Tests sefv2modsimpleemailform::processFormData(
      *                                      array $formDataRaw,
      *                                      array $files,
-     *                                      sefv2simpleemailformemailmsg $emailMsg,
-     *                                      array $paramsArray
+     *                                      array $paramsArray,
+     *                                      sefv2simpleemailformemailmsg $emailMsg
      *                                  )
      *
      * @since 2.0.0
@@ -1164,38 +1164,70 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests sefv2modsimpleemailform::sendFormData(
      *                                      array $formDataClean,
+     *                                      array $paramsArray,
      *                                      sefv2simpleemailformemailmsg $emailMsg,
-     *                                      array $paramsArray
+     *                                      \JMail $jMail
      *                                  )
      *
      * @since 2.0.0
      */
     public function testSendFormData()
     {
-        $jDocumentMock = $this->sefv2modsimpleemailformProperties['jDocument']
+        list(
+            $formCleanData,
+            $emailMsg,
+            $paramsArray,
+            $formPrefixName,
+            $emailToName,
+            $jDocumentMock,
+            $jMailMock
+            ) = $this->setUpSendFormDataTests();
+
+        $jMailMock
+            ->shouldReceive('send')
+            ->twice()
+            ->andReturn(true);
+
+        $output = $this->sefv2modsimpleemailformMethods['sendFormData']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array($formCleanData, $paramsArray, $emailMsg, $jMailMock)
+        );
+
+        $this->assertTrue($output);
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::sendFormData(
+     *                                      array $formDataClean,
+     *                                      array $paramsArray,
+     *                                      sefv2simpleemailformemailmsg $emailMsg,
+     *                                      \JMail $jMail
+     *                                  )
+     *
+     * @since 2.0.0
+     */
+    public function testSendFormDataAndIncludeArticleTitle()
+    {
+        list(
+            $formCleanData,
+            $emailMsg,
+            $paramsArray,
+            $formPrefixName,
+            $emailToName,
+            $jDocumentMock,
+            $jMailMock
+            ) = $this->setUpSendFormDataTests();
+
+        $addTitleName = $this->sefv2modsimpleemailformProperties['addTitleName']
             ->getValue($this->sefv2modsimpleemailform);
+
+        $paramsArray[$formPrefixName . $addTitleName] = 'Y';
+
         $jDocumentMock
             ->shouldReceive('getTitle')
             ->once()
             ->andReturn('Home: Article');
 
-        $jMailMock = $this->sefv2modsimpleemailformProperties['jMail']
-            ->getValue($this->sefv2modsimpleemailform);
-        $jMailMock
-            ->shouldReceive('addRecipient')
-            ->once()
-            ->with(array('vagrant@localhost'))
-            ->andReturn($jMailMock);
-        $jMailMock
-            ->shouldReceive('setSender')
-            ->once()
-            ->with('root@localhost')
-            ->andReturn($jMailMock);
-        $jMailMock
-            ->shouldReceive('setSubject')
-            ->once()
-            ->with('Test')
-            ->andReturn($jMailMock);
         $jMailMock
             ->shouldReceive('setBody')
             ->once()
@@ -1205,38 +1237,10 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('send')
             ->twice()
             ->andReturn(true);
-        $jMailMock
-            ->shouldReceive('clearAllRecipients')
-            ->once();
-        $jMailMock
-            ->shouldReceive('addRecipient')
-            ->once()
-            ->withArgs(array('root@localhost', null))
-            ->andReturn($jMailMock);
-        $this->sefv2modsimpleemailformProperties['jMail']
-            ->setValue(
-                $this->sefv2modsimpleemailform,
-                $jMailMock
-            );
-
-        $formCleanData = array(
-            'mod_simpleemailform_field1_1' => 'root@localhost',
-            'mod_simpleemailform_field2_1' => 'Test',
-            'mod_simpleemailform_field3_1' => 'option1',
-            'mod_simpleemailform_field4_1' => '<p>This is a test.</p>',
-            'mod_simpleemailform_copyMe_1' => '1',
-            'a7843da35a03fb2fbe19834411ec1955' => '1',
-            'mod_simpleemailform_submit_1' => 'Submit'
-        );
-        $emailMsg = $this->sefv2modsimpleemailformProperties['emailMsg']
-            ->getValue($this->sefv2modsimpleemailform);
-        $paramsArray = $this->sefv2modsimpleemailformProperties['paramsArray']
-            ->getValue($this->sefv2modsimpleemailform);
-
 
         $output = $this->sefv2modsimpleemailformMethods['sendFormData']->invokeArgs(
             $this->sefv2modsimpleemailform,
-            array($formCleanData, $emailMsg, $paramsArray)
+            array($formCleanData, $paramsArray, $emailMsg, $jMailMock)
         );
 
         $this->assertTrue($output);
@@ -1245,8 +1249,9 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests sefv2modsimpleemailform::sendFormData(
      *                                      array $formDataClean,
+     *                                      array $paramsArray,
      *                                      sefv2simpleemailformemailmsg $emailMsg,
-     *                                      array $paramsArray
+     *                                      \JMail $jMail
      *                                  )
      *
      * @since 2.0.0
@@ -1263,11 +1268,6 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
             $jMailMock
             ) = $this->setUpSendFormDataTests();
 
-        $jDocumentMock
-            ->shouldReceive('getTitle')
-            ->once()
-            ->andReturn('Home: Article');
-
         $jMailMock
             ->shouldReceive('send')
             ->once()
@@ -1275,7 +1275,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
 
         $output = $this->sefv2modsimpleemailformMethods['sendFormData']->invokeArgs(
             $this->sefv2modsimpleemailform,
-            array($formCleanData, $emailMsg, $paramsArray)
+            array($formCleanData, $paramsArray, $emailMsg, $jMailMock)
         );
         $this->assertFalse($output);
     }
@@ -1324,10 +1324,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
         $jMailMock
             ->shouldReceive('setBody')
             ->once()
-            ->with(
-                "\n"
-                . "Article Title: Home: Article"
-            )
+            ->with('')
             ->andReturn($jMailMock);
         $jMailMock
             ->shouldReceive('addRecipient')
@@ -1362,7 +1359,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::uploadFile(\JFile $jFile, $fileName, $fileTmpName)
+     * Tests sefv2modsimpleemailform::uploadFile($fileName, $fileTmpName, \JFile $jFile)
      *
      * @since 2.0.0
      */
@@ -1407,7 +1404,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
         // Test a normal upload
         $output = $this->sefv2modsimpleemailformMethods['uploadFile']->invokeArgs(
             $this->sefv2modsimpleemailform,
-            array($this->jFileMock, $filename, $fileTmpName)
+            array($filename, $fileTmpName, $this->jFileMock)
         );
         $this->assertTrue($output);
         $emailMsg = $this->sefv2modsimpleemailformProperties['emailMsg']
@@ -1420,7 +1417,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
             ->setValue($this->sefv2modsimpleemailform, array('.doc'));
         $output2 = $this->sefv2modsimpleemailformMethods['uploadFile']->invokeArgs(
             $this->sefv2modsimpleemailform,
-            array($this->jFileMock, $filename, $fileTmpName)
+            array($filename, $fileTmpName, $this->jFileMock)
         );
         $this->assertFalse($output2);
         $emailMsg = $this->sefv2modsimpleemailformProperties['emailMsg']
@@ -1432,7 +1429,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
             ->setValue($this->sefv2modsimpleemailform, array());
         $output3 = $this->sefv2modsimpleemailformMethods['uploadFile']->invokeArgs(
             $this->sefv2modsimpleemailform,
-            array($this->jFileMock, $filename, $fileTmpName)
+            array($filename, $fileTmpName, $this->jFileMock)
         );
         $this->assertFalse($output3);
         $emailMsg = $this->sefv2modsimpleemailformProperties['emailMsg']
