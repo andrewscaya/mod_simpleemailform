@@ -569,7 +569,7 @@ class sefv2modsimpleemailform implements
         $this->jFile = $jFile;
 
         // Check if automatic rendering has been turned off (user defined).
-        if ($this->paramsArray[$this->formPrefixName . $this->formRenderingOverrideName] == 'Y') {
+        if ($this->paramsArray[$this->formPrefixName . $this->formRenderingOverrideName] === 'Y') {
             $this->formRendering = false;
         }
 
@@ -615,7 +615,7 @@ class sefv2modsimpleemailform implements
 
             $this->jComponentIds[0] = $this->jTableExtension->find(array('element' => 'mod_simpleemailform'));
 
-            $this->jComponentIds[1] = $this->jTableModuleHelper->id;
+            $this->jComponentIds[1] = $this->jModuleHelperResult->id;
 
             $this->jTableExtension->load($this->jComponentIds[0]);
             $this->jTableExtension->bind(array('params' => $this->params->toString()));
@@ -624,11 +624,17 @@ class sefv2modsimpleemailform implements
             $this->jTableModule->bind(array('params' => $this->params->toString()));
 
             if (!$this->jTableExtension->check() || !$this->jTableModule->check()) {
-                die('FATAL ERROR: Schema not ready for update.');
+                $this->msg .=
+                    "<p style=\"color:{$this->errorColour}\">FATAL ERROR: Schema not ready for update.</p>";
+
+                $this->formRendering = false;
             }
 
             if (!$this->jTableExtension->store() || !$this->jTableModule->store()) {
-                die('FATAL ERROR: Schema not updated.');
+                $this->msg .=
+                    "<p style=\"color:{$this->errorColour}\">FATAL ERROR: Schema not updated.</p>";
+
+                $this->formRendering = false;
             }
 
             $this->paramsArray[$this->formPrefixName . $this->formDefaultLangName] = $this->lang;
@@ -699,11 +705,25 @@ class sefv2modsimpleemailform implements
         }
     }
 
+    /**
+     * @param array $data
+     *
+     * @return bool
+     *
+     * @since 2.0.0
+     */
     public function bind($data)
     {
         return $this->jForm->bind($data);
     }
 
+    /**
+     * @param array $paramsArray
+     *
+     * @return string
+     *
+     * @since 2.0.0
+     */
     protected function createXMLConfig(array $paramsArray)
     {
         $xmlOutput = '';
@@ -797,6 +817,14 @@ class sefv2modsimpleemailform implements
         return $xmlOutput;
     }
 
+    /**
+     * @param string $input
+     * @param null $label
+     *
+     * @return string
+     *
+     * @since 2.0.0
+     */
     public function decorateInput($input, $label = null)
     {
         $decoratedInput = '';
@@ -827,6 +855,13 @@ class sefv2modsimpleemailform implements
         return $decoratedInput;
     }
 
+    /**
+     * @param array $paramsArray
+     *
+     * @return bool
+     *
+     * @since 2.0.0
+     */
     protected function determineActiveElements(array $paramsArray)
     {
         $this->formActiveElements = array();
@@ -851,21 +886,50 @@ class sefv2modsimpleemailform implements
         return true;
     }
 
+    /**
+     * @param array $data
+     * @param null $group
+     *
+     * @return mixed
+     *
+     * @since 2.0.0
+     */
     public function filter(array $data, $group = null)
     {
         return $this->jForm->filter($data, $group);
     }
 
+    /**
+     *
+     * @return Registry
+     *
+     * @since 2.0.0
+     */
     public function getData()
     {
         return $this->jForm->getData();
     }
 
+    /**
+     *
+     * @return array
+     *
+     * @since 2.0.0
+     */
     public function getErrors()
     {
         return $this->jForm->getErrors();
     }
 
+    /**
+     * @param string $name
+     * @param null $group
+     * @param null $value
+     *
+     * @return bool|JFormField
+     *
+     * @since 2.0.0
+     */
     public function getField($name, $group = null, $value = null)
     {
         $name = (string) $name;
@@ -873,11 +937,31 @@ class sefv2modsimpleemailform implements
         return $this->jForm->getField($name, $group, $value);
     }
 
+    /**
+     * @param null $set
+     *
+     * @return array
+     *
+     * @since 2.0.0
+     */
     public function getFieldset($set = null)
     {
         return $this->jForm->getFieldset($set);
     }
 
+    /**
+     * @param string $active
+     * @param string $from
+     * @param string $name
+     * @param string $label
+     * @param string $value
+     * @param string $size
+     * @param string $maxx
+     *
+     * @return string
+     *
+     * @since 2.0.0
+     */
     protected function getXMLField($active, $from, $name, $label, $value, $size, $maxx)
     {
         $active = (string) $active;
@@ -997,6 +1081,15 @@ class sefv2modsimpleemailform implements
         return $xmlField;
     }
 
+    /**
+     * @param string $uploadName
+     * @param string $uploadLabel
+     * @param string $uploadAllowedFiles
+     *
+     * @return string
+     *
+     * @since 2.0.0
+     */
     protected function getXMLUploadField($uploadName, $uploadLabel, $uploadAllowedFiles)
     {
         $uploadName = (string) $uploadName;
@@ -1016,6 +1109,14 @@ class sefv2modsimpleemailform implements
         return $uploadField;
     }
 
+    /**
+     * @param string $name
+     * @param string $namespace
+     *
+     * @return string
+     *
+     * @since 2.0.0
+     */
     protected function getXMLCaptchaField($name, $namespace)
     {
         $name = (string) $name;
@@ -1036,11 +1137,27 @@ class sefv2modsimpleemailform implements
         return $captchaField;
     }
 
+    /**
+     * @param string $xmlConfigString
+     *
+     *
+     * @since 2.0.0
+     */
     public function load($xmlConfigString)
     {
         $this->jForm->load($xmlConfigString);
     }
 
+    /**
+     * @param array $formDataRaw
+     * @param array $files
+     * @param array $paramsArray
+     * @param sefv2simpleemailformemailmsg $emailMsg
+     *
+     * @return bool
+     *
+     * @since 2.0.0
+     */
     protected function processFormData(array $formDataRaw, array $files, array $paramsArray, sefv2simpleemailformemailmsg $emailMsg)
     {
         // Check for CSRF token match.
@@ -1147,6 +1264,14 @@ class sefv2modsimpleemailform implements
         return true;
     }
 
+    /**
+     * @param string $name
+     * @param null $group
+     *
+     * @return bool
+     *
+     * @since 2.0.0
+     */
     public function removeField($name, $group = null)
     {
         $name = (string) $name;
@@ -1154,6 +1279,12 @@ class sefv2modsimpleemailform implements
         return $this->jForm->removeField($name, $group);
     }
 
+    /**
+     *
+     * @return string
+     *
+     * @since 2.0.0
+     */
     public function render()
     {
         if (!$this->formRendering) {
@@ -1230,11 +1361,28 @@ class sefv2modsimpleemailform implements
         return $this->output;
     }
 
+    /**
+     * @param bool $xml
+     *
+     * @return bool
+     *
+     * @since 2.0.0
+     */
     public function reset($xml = false)
     {
         return $this->jForm->reset($xml);
     }
 
+    /**
+     * @param array $formDataClean
+     * @param array $paramsArray
+     * @param sefv2simpleemailformemailmsg $emailMsg
+     * @param JMail $jMail
+     *
+     * @return bool
+     *
+     * @since 2.0.0
+     */
     protected function sendFormData(array $formDataClean, array $paramsArray, sefv2simpleemailformemailmsg $emailMsg, \JMail $jMail)
     {
         //Configure the email message's general options.
@@ -1395,6 +1543,14 @@ class sefv2modsimpleemailform implements
     }
 
     // 2016-12-21 AC: Thanks to Anthony Scaife for this method.
+    /**
+     * @param mixed $data
+     * @param int $indent
+     *
+     * @return string
+     *
+     * @since 2.0.0
+     */
     protected function testDump($data, $indent = 0)
     {
         $retval = '';
@@ -1432,8 +1588,20 @@ class sefv2modsimpleemailform implements
         return $retval;
     }
 
+    /**
+     * @param string fileName
+     * @param string $fileTmpName
+     * @param JFile $jFile
+     *
+     * @return bool
+     *
+     * @since 2.0.0
+     */
     protected function uploadFile($fileName, $fileTmpName, \JFile $jFile)
     {
+        $fileName = (string) $fileName;
+        $fileTmpName = (string) $fileTmpName;
+
         //Clean up filename to get rid of strange characters like spaces, etc.
         $fileName = $jFile->makeSafe($fileName);
 
@@ -1469,6 +1637,14 @@ class sefv2modsimpleemailform implements
         }
     }
 
+    /**
+     * @param array $data
+     * @param null $group
+     *
+     * @return bool
+     *
+     * @since 2.0.0
+     */
     public function validate(array $data, $group = null)
     {
         return $this->jForm->validate($data, $group);

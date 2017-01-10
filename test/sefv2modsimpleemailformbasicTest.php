@@ -229,7 +229,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Creates the test doubles that are called in \sefv2modsimpleemailform's
+     * Creates the test doubles that are called from \sefv2modsimpleemailform's
      * constructor.
      *
      * @since 2.0.0
@@ -237,50 +237,57 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     public function createJoomlaMocksAndFakesForConstruct()
     {
         $this->jFormMock = Mockery::mock('overload:JForm');
-        $this->jFormMock->shouldReceive('load')->once()->andReturn(true);
+        $this->jFormMock
+            ->shouldReceive('load')
+            ->once()
+            ->andReturn(true);
 
         $this->jFactoryMock = Mockery::mock('overload:JFactory');
         $this->jMailMock = Mockery::mock('overload:JMail');
-        $this->jFactoryMock->shouldReceive('getMailer')->once()->andReturn($this->jMailMock);
+        $this->jFactoryMock
+            ->shouldReceive('getMailer')
+            ->once()
+            ->andReturn($this->jMailMock);
 
         $this->emailMsgFake = new \sefv2simpleemailformemailmsg;
 
         $this->jDocumentMock = Mockery::mock('overload:JDocument');
-        $this->jFactoryMock->shouldReceive('getDocument')->once()->andReturn($this->jDocumentMock);
+        $this->jFactoryMock
+            ->shouldReceive('getDocument')
+            ->once()
+            ->andReturn($this->jDocumentMock);
+
         $this->jLanguageMock = Mockery::mock('overload:JLanguage');
-        $this->jLanguageMock->shouldReceive('getTag')->once()->andReturn('en-GB');
-        $this->jFactoryMock->shouldReceive('getLanguage')->once()->andReturn($this->jLanguageMock);
+        $this->jLanguageMock
+            ->shouldReceive('getTag')
+            ->once()
+            ->andReturn('en-GB');
+        $this->jFactoryMock
+            ->shouldReceive('getLanguage')
+            ->once()
+            ->andReturn($this->jLanguageMock);
+
         $this->jInputMock = Mockery::mock('overload:JInput');
-        $this->jInputMock->shouldReceive('getMethod')->once()->andReturn('POST');
+        $this->jInputMock
+            ->shouldReceive('getMethod')
+            ->once()
+            ->andReturn('POST');
         $jApplicationMock = Mockery::mock('overload:JApplication');
         $jApplicationMock->input = $this->jInputMock;
-        $this->jApplicationMock =$jApplicationMock;
-        $this->jFactoryMock->shouldReceive('getApplication')->once()->andReturn($this->jApplicationMock);
+        $this->jApplicationMock = $jApplicationMock;
+        $this->jFactoryMock
+            ->shouldReceive('getApplication')
+            ->once()
+            ->andReturn($this->jApplicationMock);
 
         $this->stdClassModuleHelperResultFake = new \stdClass;
         $this->stdClassModuleHelperResultFake->id = 93;
         $this->jModuleHelperMock = Mockery::mock('overload:JModuleHelper');
-        $this->jModuleHelperMock
-            ->shouldReceive('getModule')
-            ->with('mod_simpleemailform')
-            ->once()
-            ->andReturn($this->stdClassModuleHelperResultFake);
         $this->jTableMock = Mockery::mock('overload:JTable');
         $this->jTableExtensionMock = Mockery::mock('overload:JTableExtension');
-        $this->jTableExtensionMock->shouldReceive('find')->withArgs(array('element' => 'mod_simpleemailform'))->once()->andReturn(10000);
-        $this->jTableExtensionMock->shouldReceive('load')->with(10000)->once()->andReturn(true);
-        $this->jTableExtensionMock->shouldReceive('check')->once()->andReturn(true);
-        $this->jTableExtensionMock->shouldReceive('store')->once()->andReturn(true);
-        $this->jTableMock->shouldReceive('getInstance')->with('extension')->once()->andReturn($this->jTableExtensionMock);
         $this->jTableModuleMock = Mockery::mock('overload:JTableModule');
-        $this->jTableModuleMock->shouldReceive('load')->with(93)->once()->andReturn(true);
-        $this->jTableModuleMock->shouldReceive('check')->once()->andReturn(true);
-        $this->jTableModuleMock->shouldReceive('store')->once()->andReturn(true);
-        $this->jTableMock->shouldReceive('getInstance')->with('module')->once()->andReturn($this->jTableModuleMock);
 
         $this->jSessionMock = Mockery::mock('overload:JSession');
-        $this->jSessionMock->shouldReceive('getToken')->once()->andReturn(md5('test'));
-        $this->jFactoryMock->shouldReceive('getSession')->once()->andReturn($this->jSessionMock);
 
         $this->jFileMock = Mockery::mock('overload:JFile');
     }
@@ -425,6 +432,688 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *
      * @since 2.0.0
      */
+    public function testSefv2modsimpleemailformConstructWithRenderingDisabled()
+    {
+        list(
+            $formDataRaw,
+            $formCleanData,
+            $emailMsg,
+            $paramsArray,
+            $formPrefixName,
+            $jSessionMock,
+            $jFormMock,
+            $jDocumentMock,
+            $jMailMock
+            ) = $this->setUpProcessFormDataTests();
+
+        $formRendering = $this->sefv2modsimpleemailformProperties['formRendering']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertTrue($formRendering);
+
+        $formRenderingOverrideName = $this->sefv2modsimpleemailformProperties['formRenderingOverrideName']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $params = $this->sefv2modsimpleemailformProperties['params']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $params[$formPrefixName . $formRenderingOverrideName] = 'Y';
+
+        $this->sefv2modsimpleemailformMethods['__construct']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array(
+                $this->jFormMock,
+                $this->jMailMock,
+                $this->emailMsgFake,
+                $this->jDocumentMock,
+                $this->jLanguageMock,
+                $params,
+                $this->jInputMock,
+                $this->jTableExtensionMock,
+                $this->jTableModuleMock,
+                $this->stdClassModuleHelperResultFake,
+                $this->jSessionMock,
+                $this->jFileMock
+            )
+        );
+
+        $formRendering = $this->sefv2modsimpleemailformProperties['formRendering']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertFalse($formRendering);
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::__construct(
+     *                                       \JForm $jForm,
+     *                                       \JMail $jMail,
+     *                                       sefv2simpleemailformemailmsg $emailMsg,
+     *                                       \JDocument $jDocument,
+     *                                       \JLanguage $jLanguage,
+     *                                       Registry $params,
+     *                                       \JInput $jInput,
+     *                                       \JTableExtension $jTableExtension,
+     *                                       \JTableModule $jTableModule,
+     *                                       \stdClass $jModuleHelperResult,
+     *                                       \JSession $jSession,
+     *                                       \JFile $jFile
+     *                                   )
+     *
+     * @since 2.0.0
+     */
+    public function testSefv2modsimpleemailformConstructWithAllPossibleFormAlignLabels()
+    {
+        list(
+            $formDataRaw,
+            $formCleanData,
+            $emailMsg,
+            $paramsArray,
+            $formPrefixName,
+            $jSessionMock,
+            $jFormMock,
+            $jDocumentMock,
+            $jMailMock
+            ) = $this->setUpProcessFormDataTests();
+
+        $formLabelAlignName = $this->sefv2modsimpleemailformProperties['formLabelAlignName']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $params = $this->sefv2modsimpleemailformProperties['params']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $formLabelAlign = $this->sefv2modsimpleemailformProperties['formLabelAlign']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        // Align left by default
+        $this->assertSame('left', $formLabelAlign);
+
+        // Align right
+        $params[$formPrefixName . $formLabelAlignName] = 'R';
+
+        $this->sefv2modsimpleemailformMethods['__construct']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array(
+                $this->jFormMock,
+                $this->jMailMock,
+                $this->emailMsgFake,
+                $this->jDocumentMock,
+                $this->jLanguageMock,
+                $params,
+                $this->jInputMock,
+                $this->jTableExtensionMock,
+                $this->jTableModuleMock,
+                $this->stdClassModuleHelperResultFake,
+                $this->jSessionMock,
+                $this->jFileMock
+            )
+        );
+
+        $formLabelAlign = $this->sefv2modsimpleemailformProperties['formLabelAlign']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame('right', $formLabelAlign);
+
+        // Align center
+        $params[$formPrefixName . $formLabelAlignName] = 'C';
+
+        $this->sefv2modsimpleemailformMethods['__construct']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array(
+                $this->jFormMock,
+                $this->jMailMock,
+                $this->emailMsgFake,
+                $this->jDocumentMock,
+                $this->jLanguageMock,
+                $params,
+                $this->jInputMock,
+                $this->jTableExtensionMock,
+                $this->jTableModuleMock,
+                $this->stdClassModuleHelperResultFake,
+                $this->jSessionMock,
+                $this->jFileMock
+            )
+        );
+
+        $formLabelAlign = $this->sefv2modsimpleemailformProperties['formLabelAlign']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame('center', $formLabelAlign);
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::__construct(
+     *                                       \JForm $jForm,
+     *                                       \JMail $jMail,
+     *                                       sefv2simpleemailformemailmsg $emailMsg,
+     *                                       \JDocument $jDocument,
+     *                                       \JLanguage $jLanguage,
+     *                                       Registry $params,
+     *                                       \JInput $jInput,
+     *                                       \JTableExtension $jTableExtension,
+     *                                       \JTableModule $jTableModule,
+     *                                       \stdClass $jModuleHelperResult,
+     *                                       \JSession $jSession,
+     *                                       \JFile $jFile
+     *                                   )
+     *
+     * @since 2.0.0
+     */
+    public function testSefv2modsimpleemailformConstructWithUnsetEmailTo()
+    {
+        list(
+            $formDataRaw,
+            $formCleanData,
+            $emailMsg,
+            $paramsArray,
+            $formPrefixName,
+            $jSessionMock,
+            $jFormMock,
+            $jDocumentMock,
+            $jMailMock
+            ) = $this->setUpProcessFormDataTests();
+
+        $emailToName = $this->sefv2modsimpleemailformProperties['emailToName']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $params = $this->sefv2modsimpleemailformProperties['params']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $params[$formPrefixName . $emailToName] = '';
+
+        $this->sefv2modsimpleemailformMethods['__construct']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array(
+                $this->jFormMock,
+                $this->jMailMock,
+                $this->emailMsgFake,
+                $this->jDocumentMock,
+                $this->jLanguageMock,
+                $params,
+                $this->jInputMock,
+                $this->jTableExtensionMock,
+                $this->jTableModuleMock,
+                $this->stdClassModuleHelperResultFake,
+                $this->jSessionMock,
+                $this->jFileMock
+            )
+        );
+
+        $formRendering = $this->sefv2modsimpleemailformProperties['formRendering']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertFalse($formRendering);
+
+        $msg = $this->sefv2modsimpleemailformProperties['msg']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame(
+            '<p style="color:red">SORRY: This email address is invalid!  Please re-enter your email address.</p>',
+            $msg
+        );
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::__construct(
+     *                                       \JForm $jForm,
+     *                                       \JMail $jMail,
+     *                                       sefv2simpleemailformemailmsg $emailMsg,
+     *                                       \JDocument $jDocument,
+     *                                       \JLanguage $jLanguage,
+     *                                       Registry $params,
+     *                                       \JInput $jInput,
+     *                                       \JTableExtension $jTableExtension,
+     *                                       \JTableModule $jTableModule,
+     *                                       \stdClass $jModuleHelperResult,
+     *                                       \JSession $jSession,
+     *                                       \JFile $jFile
+     *                                   )
+     *
+     * @since 2.0.0
+     */
+    public function testSefv2modsimpleemailformConstructWithChangedLanguageSetting()
+    {
+        list(
+            $formDataRaw,
+            $formCleanData,
+            $emailMsg,
+            $paramsArray,
+            $formPrefixName,
+            $jSessionMock,
+            $jFormMock,
+            $jDocumentMock,
+            $jMailMock
+            ) = $this->setUpProcessFormDataTests();
+
+        $formDefaultLangName = $this->sefv2modsimpleemailformProperties['formDefaultLangName']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $params = $this->sefv2modsimpleemailformProperties['params']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame(
+            'en-GB',
+            $params[$formPrefixName . $formDefaultLangName]
+        );
+
+        $jLanguageMock = Mockery::mock('overload:JLanguage');
+        $jLanguageMock
+            ->shouldReceive('getTag')
+            ->once()
+            ->andReturn('fr-FR');
+
+        $this->setUpSefv2modsimpleemailformConstructWithChangedLanguageSettingTests();
+
+        $this->jTableModuleMock
+            ->shouldReceive('check')
+            ->once()
+            ->andReturn(true);
+        $this->jTableModuleMock
+            ->shouldReceive('store')
+            ->once()
+            ->andReturn(true);
+
+        $this->sefv2modsimpleemailformMethods['__construct']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array(
+                $this->jFormMock,
+                $this->jMailMock,
+                $this->emailMsgFake,
+                $this->jDocumentMock,
+                $jLanguageMock,
+                $this->params,
+                $this->jInputMock,
+                $this->jTableExtensionMock,
+                $this->jTableModuleMock,
+                $this->stdClassModuleHelperResultFake,
+                $this->jSessionMock,
+                $this->jFileMock
+            )
+        );
+
+        $params = $this->sefv2modsimpleemailformProperties['params']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame(
+            'fr-FR',
+            $params[$formPrefixName . $formDefaultLangName]
+        );
+
+        $paramsArray = $this->sefv2modsimpleemailformProperties['paramsArray']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame(
+            'fr-FR',
+            $paramsArray[$formPrefixName . $formDefaultLangName]
+        );
+
+        $transLang = $this->sefv2modsimpleemailformProperties['transLang']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame(
+            'Transfert du fichier réussi.',
+            $transLang['MOD_SIMPLEEMAILFORM_upload_success']
+        );
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::__construct(
+     *                                       \JForm $jForm,
+     *                                       \JMail $jMail,
+     *                                       sefv2simpleemailformemailmsg $emailMsg,
+     *                                       \JDocument $jDocument,
+     *                                       \JLanguage $jLanguage,
+     *                                       Registry $params,
+     *                                       \JInput $jInput,
+     *                                       \JTableExtension $jTableExtension,
+     *                                       \JTableModule $jTableModule,
+     *                                       \stdClass $jModuleHelperResult,
+     *                                       \JSession $jSession,
+     *                                       \JFile $jFile
+     *                                   )
+     *
+     * @since 2.0.0
+     */
+    public function testSefv2modsimpleemailformConstructWithChangedLanguageSettingWithBackendFailureOnCheck()
+    {
+        list(
+            $formDataRaw,
+            $formCleanData,
+            $emailMsg,
+            $paramsArray,
+            $formPrefixName,
+            $jSessionMock,
+            $jFormMock,
+            $jDocumentMock,
+            $jMailMock
+            ) = $this->setUpProcessFormDataTests();
+
+        $formDefaultLangName = $this->sefv2modsimpleemailformProperties['formDefaultLangName']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $params = $this->sefv2modsimpleemailformProperties['params']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame(
+            'en-GB',
+            $params[$formPrefixName . $formDefaultLangName]
+        );
+
+        $jLanguageMock = Mockery::mock('overload:JLanguage');
+        $jLanguageMock
+            ->shouldReceive('getTag')
+            ->once()
+            ->andReturn('fr-FR');
+
+        $this->setUpSefv2modsimpleemailformConstructWithChangedLanguageSettingTests();
+
+        $this->jTableModuleMock
+            ->shouldReceive('check')
+            ->once()
+            ->andReturn(false);
+        $this->jTableModuleMock
+            ->shouldReceive('store')
+            ->once()
+            ->andReturn(true);
+
+        $this->sefv2modsimpleemailformMethods['__construct']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array(
+                $this->jFormMock,
+                $this->jMailMock,
+                $this->emailMsgFake,
+                $this->jDocumentMock,
+                $jLanguageMock,
+                $this->params,
+                $this->jInputMock,
+                $this->jTableExtensionMock,
+                $this->jTableModuleMock,
+                $this->stdClassModuleHelperResultFake,
+                $this->jSessionMock,
+                $this->jFileMock
+            )
+        );
+
+        $params = $this->sefv2modsimpleemailformProperties['params']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame(
+            'fr-FR',
+            $params[$formPrefixName . $formDefaultLangName]
+        );
+
+        $formRendering = $this->sefv2modsimpleemailformProperties['formRendering']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertFalse($formRendering);
+
+        $msg = $this->sefv2modsimpleemailformProperties['msg']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame(
+            '<p style="color:red">FATAL ERROR: Schema not ready for update.</p>',
+            $msg
+        );
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::__construct(
+     *                                       \JForm $jForm,
+     *                                       \JMail $jMail,
+     *                                       sefv2simpleemailformemailmsg $emailMsg,
+     *                                       \JDocument $jDocument,
+     *                                       \JLanguage $jLanguage,
+     *                                       Registry $params,
+     *                                       \JInput $jInput,
+     *                                       \JTableExtension $jTableExtension,
+     *                                       \JTableModule $jTableModule,
+     *                                       \stdClass $jModuleHelperResult,
+     *                                       \JSession $jSession,
+     *                                       \JFile $jFile
+     *                                   )
+     *
+     * @since 2.0.0
+     */
+    public function testSefv2modsimpleemailformConstructWithChangedLanguageSettingWithBackendFailureOnStore()
+    {
+        list(
+            $formDataRaw,
+            $formCleanData,
+            $emailMsg,
+            $paramsArray,
+            $formPrefixName,
+            $jSessionMock,
+            $jFormMock,
+            $jDocumentMock,
+            $jMailMock
+            ) = $this->setUpProcessFormDataTests();
+
+        $formDefaultLangName = $this->sefv2modsimpleemailformProperties['formDefaultLangName']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $params = $this->sefv2modsimpleemailformProperties['params']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame(
+            'en-GB',
+            $params[$formPrefixName . $formDefaultLangName]
+        );
+
+        $jLanguageMock = Mockery::mock('overload:JLanguage');
+        $jLanguageMock
+            ->shouldReceive('getTag')
+            ->once()
+            ->andReturn('fr-FR');
+
+        $this->setUpSefv2modsimpleemailformConstructWithChangedLanguageSettingTests();
+
+        $this->jTableModuleMock
+            ->shouldReceive('check')
+            ->once()
+            ->andReturn(true);
+        $this->jTableModuleMock
+            ->shouldReceive('store')
+            ->once()
+            ->andReturn(false);
+
+        $this->sefv2modsimpleemailformMethods['__construct']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array(
+                $this->jFormMock,
+                $this->jMailMock,
+                $this->emailMsgFake,
+                $this->jDocumentMock,
+                $jLanguageMock,
+                $this->params,
+                $this->jInputMock,
+                $this->jTableExtensionMock,
+                $this->jTableModuleMock,
+                $this->stdClassModuleHelperResultFake,
+                $this->jSessionMock,
+                $this->jFileMock
+            )
+        );
+
+        $params = $this->sefv2modsimpleemailformProperties['params']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame(
+            'fr-FR',
+            $params[$formPrefixName . $formDefaultLangName]
+        );
+
+        $formRendering = $this->sefv2modsimpleemailformProperties['formRendering']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertFalse($formRendering);
+
+        $msg = $this->sefv2modsimpleemailformProperties['msg']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame(
+            '<p style="color:red">FATAL ERROR: Schema not updated.</p>',
+            $msg
+        );
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::__construct(
+     *                                       \JForm $jForm,
+     *                                       \JMail $jMail,
+     *                                       sefv2simpleemailformemailmsg $emailMsg,
+     *                                       \JDocument $jDocument,
+     *                                       \JLanguage $jLanguage,
+     *                                       Registry $params,
+     *                                       \JInput $jInput,
+     *                                       \JTableExtension $jTableExtension,
+     *                                       \JTableModule $jTableModule,
+     *                                       \stdClass $jModuleHelperResult,
+     *                                       \JSession $jSession,
+     *                                       \JFile $jFile
+     *                                   )
+     *
+     * @since 2.0.0
+     */
+    public function testSefv2modsimpleemailformConstructWithChangedAndInvalidLanguageSettingLanguage()
+    {
+        list(
+            $formDataRaw,
+            $formCleanData,
+            $emailMsg,
+            $paramsArray,
+            $formPrefixName,
+            $jSessionMock,
+            $jFormMock,
+            $jDocumentMock,
+            $jMailMock
+            ) = $this->setUpProcessFormDataTests();
+
+        $formDefaultLangName = $this->sefv2modsimpleemailformProperties['formDefaultLangName']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $params = $this->sefv2modsimpleemailformProperties['params']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame(
+            'en-GB',
+            $params[$formPrefixName . $formDefaultLangName]
+        );
+
+        $jLanguageMock = Mockery::mock('overload:JLanguage');
+        $jLanguageMock
+            ->shouldReceive('getTag')
+            ->once()
+            ->andReturn('zz-ZZ');
+
+        $this->setUpSefv2modsimpleemailformConstructWithChangedLanguageSettingTests();
+
+        $this->jTableModuleMock
+            ->shouldReceive('check')
+            ->once()
+            ->andReturn(true);
+        $this->jTableModuleMock
+            ->shouldReceive('store')
+            ->once()
+            ->andReturn(true);
+
+        $this->sefv2modsimpleemailformMethods['__construct']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array(
+                $this->jFormMock,
+                $this->jMailMock,
+                $this->emailMsgFake,
+                $this->jDocumentMock,
+                $jLanguageMock,
+                $this->params,
+                $this->jInputMock,
+                $this->jTableExtensionMock,
+                $this->jTableModuleMock,
+                $this->stdClassModuleHelperResultFake,
+                $this->jSessionMock,
+                $this->jFileMock
+            )
+        );
+
+        $params = $this->sefv2modsimpleemailformProperties['params']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame(
+            'zz-ZZ',
+            $params[$formPrefixName . $formDefaultLangName]
+        );
+
+        $transLang = $this->sefv2modsimpleemailformProperties['transLang']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame(
+            'Successfully uploaded',
+            $transLang['MOD_SIMPLEEMAILFORM_upload_success']
+        );
+    }
+
+    /**
+     * Creates the test doubles that are called from \sefv2modsimpleemailform's
+     * __construct when tests change the language settings.
+     *
+     * @since 2.0.0
+     */
+    public function setUpSefv2modsimpleemailformConstructWithChangedLanguageSettingTests()
+    {
+        $this->jModuleHelperMock
+            ->shouldReceive('getModule')
+            ->with('mod_simpleemailform')
+            ->once()
+            ->andReturn($this->stdClassModuleHelperResultFake);
+        $this->jTableExtensionMock
+            ->shouldReceive('find')
+            ->with(array('element' => 'mod_simpleemailform'))
+            ->once()
+            ->andReturn(10000);
+        $this->jTableExtensionMock
+            ->shouldReceive('load')
+            ->with(10000)
+            ->once()
+            ->andReturn(true);
+        $this->jTableExtensionMock
+            ->shouldReceive('bind')
+            ->with(Mockery::any())
+            ->once();
+        $this->jTableExtensionMock
+            ->shouldReceive('check')
+            ->once()
+            ->andReturn(true);
+        $this->jTableExtensionMock
+            ->shouldReceive('store')
+            ->once()
+            ->andReturn(true);
+        $this->jTableModuleMock
+            ->shouldReceive('load')
+            ->with(93)
+            ->once()
+            ->andReturn(true);
+        $this->jTableModuleMock
+            ->shouldReceive('bind')
+            ->with(Mockery::any())
+            ->once();
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::__construct(
+     *                                       \JForm $jForm,
+     *                                       \JMail $jMail,
+     *                                       sefv2simpleemailformemailmsg $emailMsg,
+     *                                       \JDocument $jDocument,
+     *                                       \JLanguage $jLanguage,
+     *                                       Registry $params,
+     *                                       \JInput $jInput,
+     *                                       \JTableExtension $jTableExtension,
+     *                                       \JTableModule $jTableModule,
+     *                                       \stdClass $jModuleHelperResult,
+     *                                       \JSession $jSession,
+     *                                       \JFile $jFile
+     *                                   )
+     *
+     * @since 2.0.0
+     */
     public function testSefv2modsimpleemailformConstructWithPOST()
     {
         list(
@@ -502,6 +1191,88 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
             ->getValue($this->sefv2modsimpleemailform);
 
         $this->assertSame('<p style="color:green">Form Successfully Submitted!</p>', $msg);
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::__construct(
+     *                                       \JForm $jForm,
+     *                                       \JMail $jMail,
+     *                                       sefv2simpleemailformemailmsg $emailMsg,
+     *                                       \JDocument $jDocument,
+     *                                       \JLanguage $jLanguage,
+     *                                       Registry $params,
+     *                                       \JInput $jInput,
+     *                                       \JTableExtension $jTableExtension,
+     *                                       \JTableModule $jTableModule,
+     *                                       \stdClass $jModuleHelperResult,
+     *                                       \JSession $jSession,
+     *                                       \JFile $jFile
+     *                                   )
+     *
+     * @since 2.0.0
+     */
+    public function testSefv2modsimpleemailformConstructWithPOSTAndResetButton()
+    {
+        list(
+            $formDataRaw,
+            $formCleanData,
+            $emailMsg,
+            $paramsArray,
+            $formPrefixName,
+            $jSessionMock,
+            $jFormMock,
+            $jDocumentMock,
+            $jMailMock
+            ) = $this->setUpProcessFormDataTests();
+
+        $jFormMock
+            ->shouldReceive('reset')
+            ->once()
+            ->andReturn(true);
+
+        $_POST = array(
+            'mod_simpleemailform_field1_1' => 'root@localhost',
+            'mod_simpleemailform_field2_1' => 'Test',
+            'a7843da35a03fb2fbe19834411ec1955' => '1',
+            'mod_simpleemailform_reset_1' => 'Reset'
+        );
+
+        $jInputMock = $this->jInputMock;
+        $jInputMock->post = $jInputMock;
+        $jInputMock->files = $jInputMock;
+        $jInputMock
+            ->shouldReceive('getArray')
+            ->once()
+            ->withArgs(array(array(), null, 'raw', true))
+            ->andReturn($_POST);
+        $jInputMock
+            ->shouldReceive('getArray')
+            ->once()
+            ->withArgs(array(array(), null, 'raw', true))
+            ->andReturn(array());
+
+        $this->sefv2modsimpleemailformMethods['__construct']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array(
+                $this->jFormMock,
+                $this->jMailMock,
+                $this->emailMsgFake,
+                $this->jDocumentMock,
+                $this->jLanguageMock,
+                $this->params,
+                $this->jInputMock,
+                $this->jTableExtensionMock,
+                $this->jTableModuleMock,
+                $this->stdClassModuleHelperResultFake,
+                $this->jSessionMock,
+                $this->jFileMock
+            )
+        );
+
+        $msg = $this->sefv2modsimpleemailformProperties['msg']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame('', $msg);
     }
 
     /**
@@ -747,9 +1518,9 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *
      * @since 2.0.0
      *
-     * @dataProvider providerGetXMLFieldAlmostAllPossibleCombinations
+     * @dataProvider providerGetXMLFieldAllPossibleCombinations
      */
-    public function testGetXMLFieldAlmostAllPossibleCombinations($active, $from, $name, $label, $value, $size, $maxx)
+    public function testGetXMLFieldAllPossibleCombinations($active, $from, $name, $label, $value, $size, $maxx)
     {
         $output = $this->sefv2modsimpleemailformMethods['getXMLField']->invokeArgs(
             $this->sefv2modsimpleemailform,
@@ -885,7 +1656,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function providerGetXMLFieldAlmostAllPossibleCombinations()
+    public function providerGetXMLFieldAllPossibleCombinations()
     {
         $arraysTemp = array(
             array('Y', 'R', 'H'),
@@ -1297,6 +2068,12 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($output);
     }
 
+    /**
+     * Creates the test doubles that are called from \sefv2modsimpleemailform's
+     * processFormData tests.
+     *
+     * @since 2.0.0
+     */
     public function setUpProcessFormDataTests()
     {
         defined('JVERSION') || define('JVERSION', '3.0');
@@ -1672,6 +2449,12 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($output);
     }
 
+    /**
+     * Creates the test doubles that are called from \sefv2modsimpleemailform's
+     * sendFormData tests.
+     *
+     * @since 2.0.0
+     */
     public function setUpSendFormDataTests()
     {
         defined('JVERSION') || define('JVERSION', '3.0');

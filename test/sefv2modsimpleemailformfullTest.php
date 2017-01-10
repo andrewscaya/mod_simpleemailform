@@ -207,6 +207,12 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
         parent::tearDown();
     }
 
+    /**
+     * Sets the visibility of all of \sefv2modsimpleemailform object's
+     * properties to public.
+     *
+     * @since 2.0.0
+     */
     public function setAllPropertiesAccessible()
     {
         $propertiesList = $this->sefv2modsimpleemailformReflection->getProperties();
@@ -218,6 +224,12 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * Sets the visibility of all of \sefv2modsimpleemailform object's
+     * methods to public.
+     *
+     * @since 2.0.0
+     */
     public function setAllMethodsAccessible()
     {
         $methodsList = $this->sefv2modsimpleemailformReflection->getMethods();
@@ -229,53 +241,66 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    /**
+     * Creates the test doubles that are called from \sefv2modsimpleemailform's
+     * constructor.
+     *
+     * @since 2.0.0
+     */
     public function createJoomlaMocksAndFakesForConstruct()
     {
         $this->jFormMock = Mockery::mock('overload:JForm');
-        $this->jFormMock->shouldReceive('load')->once()->andReturn(true);
+        $this->jFormMock
+            ->shouldReceive('load')
+            ->once()
+            ->andReturn(true);
 
         $this->jFactoryMock = Mockery::mock('overload:JFactory');
         $this->jMailMock = Mockery::mock('overload:JMail');
-        $this->jFactoryMock->shouldReceive('getMailer')->once()->andReturn($this->jMailMock);
+        $this->jFactoryMock
+            ->shouldReceive('getMailer')
+            ->once()
+            ->andReturn($this->jMailMock);
 
         $this->emailMsgFake = new \sefv2simpleemailformemailmsg;
 
         $this->jDocumentMock = Mockery::mock('overload:JDocument');
-        $this->jFactoryMock->shouldReceive('getDocument')->once()->andReturn($this->jDocumentMock);
+        $this->jFactoryMock
+            ->shouldReceive('getDocument')
+            ->once()
+            ->andReturn($this->jDocumentMock);
+
         $this->jLanguageMock = Mockery::mock('overload:JLanguage');
-        $this->jLanguageMock->shouldReceive('getTag')->once()->andReturn('en-GB');
-        $this->jFactoryMock->shouldReceive('getLanguage')->once()->andReturn($this->jLanguageMock);
+        $this->jLanguageMock
+            ->shouldReceive('getTag')
+            ->once()
+            ->andReturn('en-GB');
+        $this->jFactoryMock
+            ->shouldReceive('getLanguage')
+            ->once()
+            ->andReturn($this->jLanguageMock);
+
         $this->jInputMock = Mockery::mock('overload:JInput');
-        $this->jInputMock->shouldReceive('getMethod')->once()->andReturn('POST');
+        $this->jInputMock
+            ->shouldReceive('getMethod')
+            ->once()
+            ->andReturn('POST');
         $jApplicationMock = Mockery::mock('overload:JApplication');
         $jApplicationMock->input = $this->jInputMock;
-        $this->jApplicationMock =$jApplicationMock;
-        $this->jFactoryMock->shouldReceive('getApplication')->once()->andReturn($this->jApplicationMock);
+        $this->jApplicationMock = $jApplicationMock;
+        $this->jFactoryMock
+            ->shouldReceive('getApplication')
+            ->once()
+            ->andReturn($this->jApplicationMock);
 
         $this->stdClassModuleHelperResultFake = new \stdClass;
         $this->stdClassModuleHelperResultFake->id = 93;
         $this->jModuleHelperMock = Mockery::mock('overload:JModuleHelper');
-        $this->jModuleHelperMock
-            ->shouldReceive('getModule')
-            ->with('mod_simpleemailform')
-            ->once()
-            ->andReturn($this->stdClassModuleHelperResultFake);
         $this->jTableMock = Mockery::mock('overload:JTable');
         $this->jTableExtensionMock = Mockery::mock('overload:JTableExtension');
-        $this->jTableExtensionMock->shouldReceive('find')->withArgs(array('element' => 'mod_simpleemailform'))->once()->andReturn(10000);
-        $this->jTableExtensionMock->shouldReceive('load')->with(10000)->once()->andReturn(true);
-        $this->jTableExtensionMock->shouldReceive('check')->once()->andReturn(true);
-        $this->jTableExtensionMock->shouldReceive('store')->once()->andReturn(true);
-        $this->jTableMock->shouldReceive('getInstance')->with('extension')->once()->andReturn($this->jTableExtensionMock);
         $this->jTableModuleMock = Mockery::mock('overload:JTableModule');
-        $this->jTableModuleMock->shouldReceive('load')->with(93)->once()->andReturn(true);
-        $this->jTableModuleMock->shouldReceive('check')->once()->andReturn(true);
-        $this->jTableModuleMock->shouldReceive('store')->once()->andReturn(true);
-        $this->jTableMock->shouldReceive('getInstance')->with('module')->once()->andReturn($this->jTableModuleMock);
 
         $this->jSessionMock = Mockery::mock('overload:JSession');
-        $this->jSessionMock->shouldReceive('getToken')->once()->andReturn(md5('test'));
-        $this->jFactoryMock->shouldReceive('getSession')->once()->andReturn($this->jSessionMock);
 
         $this->jFileMock = Mockery::mock('overload:JFile');
     }
@@ -703,6 +728,12 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('<p style="color:red">Error uploading file</p>', $msg);
     }
 
+    /**
+     * Creates the test doubles that are called from \sefv2modsimpleemailform's
+     * processFormData tests.
+     *
+     * @since 2.0.0
+     */
     public function setUpProcessFormDataTests()
     {
         defined('JVERSION') || define('JVERSION', '3.0');
@@ -1461,6 +1492,12 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * Creates the test doubles that are called from \sefv2modsimpleemailform's
+     * sendFormData tests.
+     *
+     * @since 2.0.0
+     */
     public function setUpSendFormDataTests()
     {
         $formCleanData = array(

@@ -189,12 +189,12 @@ class sefmodsimpleemailformTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests sefmodsimpleemailform::formatRow()
      *
-     * @since 1.8.8
-     *
      * @param string containing the expected result
      * @param string signifying object's $_field property value
      *
      * @dataProvider providerTestFormatRow
+     *
+     * @since 1.8.8
      */
     public function testFormatRow($expectedResult, $fieldPropertyValue)
     {
@@ -333,13 +333,13 @@ class sefmodsimpleemailformTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests sefmodsimpleemailform::buildCheckRadioField()
      *
-     * @since 1.8.8
-     *
      * @param string containing the expected result
      * @param string signifying form disposition
      * @param string signifying label position
      *
      * @dataProvider providerTestBuildCheckRadioField
+     *
+     * @since 1.8.8
      */
     public function testBuildCheckRadioField($expectedResult, $ckRfmt, $ckRpos)
     {
@@ -484,11 +484,11 @@ class sefmodsimpleemailformTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests sefmodsimpleemailform::imageCaptcha()
      *
-     * @since 1.8.8
-     *
      * @param string containing Captcha's URL
      *
      * @dataProvider providerTestImageCaptcha
+     *
+     * @since 1.8.8
      */
     public function testImageCaptcha($captchaURL)
     {
@@ -535,11 +535,11 @@ class sefmodsimpleemailformTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests sefmodsimpleemailform::textCaptcha()
      *
-     * @since 1.8.8
-     *
      * @param int representing the captcha's length
      *
      * @dataProvider providerTestTextCaptcha
+     *
+     * @since 1.8.8
      */
     public function testTextCaptcha($captchaLen)
     {
@@ -586,14 +586,14 @@ class sefmodsimpleemailformTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests sefmodsimpleemailform::FormatErrorMessage()
      *
-     * @since 1.8.8
-     *
      * @param string we expect to be returned by formatErrorMessage
      * @param string representing the color sent as an argument to formatErrorMessage
      * @param string representing the message sent as an argument to formatErrorMessage
      * @param string representing the filename sent as an argument to formatErrorMessage
 
      * @dataProvider providerTestFormatErrorMessage
+     *
+     * @since 1.8.8
      */
     public function testFormatErrorMessage($expectedResult, $color, $message, $fn = '')
     {
@@ -649,9 +649,9 @@ class sefmodsimpleemailformTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests sefmodsimpleemailform::autoResetForm()
      *
-     * @since 1.8.8
-     *
      * Tests if form is reset in POST
+     *
+     * @since 1.8.8
      */
     public function testAutoResetForm()
     {
@@ -672,11 +672,11 @@ class sefmodsimpleemailformTest extends \PHPUnit_Framework_TestCase
      *
      * Tests if email address is valid
      *
-     * @since 1.8.8
-     *
      * @param string representing an email address
      *
      * @dataProvider providerTestIsEmailAddressValid
+     *
+     * @since 1.8.8
      */
     public function testIsEmailAddressValid($email)
     {
@@ -703,11 +703,11 @@ class sefmodsimpleemailformTest extends \PHPUnit_Framework_TestCase
      *
      * Tests if email address is invalid
      *
-     * @since 1.8.8
-     *
      * @param string representing an email address
      *
      * @dataProvider providerTestIsEmailAddressInvalid
+     *
+     * @since 1.8.8
      */
     public function testIsEmailAddressInvalid($email)
     {
@@ -959,13 +959,13 @@ class sefmodsimpleemailformTest extends \PHPUnit_Framework_TestCase
     /**
      * Tests sefmodsimpleemailform::compareCsrfHash()
      *
-     * @since 1.8.8
-     *
      * @param bool representing the expected result
      * @param string representing the form's CSRF
      * @param string representing the session's CSRF
      *
      * @dataProvider providerTestCompareCsrfHash
+     *
+     * @since 1.8.8
      */
     public function testCompareCsrfHash($expected, $formCsrf, $formSess)
     {
