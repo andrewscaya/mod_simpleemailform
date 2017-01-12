@@ -7,3 +7,4 @@ composer.lock
 deployment.xml
 deployment.properties
 .idea/
+tests/_output/*
