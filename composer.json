@@ -30,17 +30,25 @@
         }
     ],
     "require": {
-        "php": "^5.3 || ^7.0",
-        "joomla/framework": "dev-master"
+        "php": "^5.3 || ^7.0"
     },
     "require-dev": {
+        "joomla/framework": "dev-master",
         "phpunit/phpunit": "^4.8",
         "mockery/mockery": "dev-master",
-        "squizlabs/php_codesniffer": "^2.3"
+        "squizlabs/php_codesniffer": "^2.3",
+        "codeception/codeception": "^2.2"
     },
     "autoload": {
-        "psr-0": { "": "./" },
-        "classmap": ["./", "./test"]
+        "psr-0": {
+            "sef": "./sef",
+            "sefv2": "./sefv2",
+            "joomla": "./lib"
+        },
+        "classmap": ["./", "./test"],
+        "exclude-from-classmap": [
+            "./vendor/codeception"
+        ]
     },
     "scripts": {
         "check": [
