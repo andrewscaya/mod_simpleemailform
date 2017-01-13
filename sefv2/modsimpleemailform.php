@@ -74,7 +74,7 @@ class sefv2modsimpleemailform implements
     protected $jSession;
 
     /**
-     * @var JSession
+     * @var JFile
      * @since 2.0.0
      */
     protected $jFile;
