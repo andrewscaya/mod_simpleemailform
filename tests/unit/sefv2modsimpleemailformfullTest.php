@@ -157,7 +157,7 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
 
         // Define directory constant
         defined('MOD_SIMPLEEMAILFORM_DIR')
-        || define('MOD_SIMPLEEMAILFORM_DIR', dirname(dirname(__FILE__)));
+        || define('MOD_SIMPLEEMAILFORM_DIR', dirname(dirname(dirname(__FILE__))));
 
         $paramsSerialized = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'serializedParamsObjectJformFull');
 

@@ -21,7 +21,7 @@
         </properties>
     </rule>
     
-    <!-- Lines can be 200 chars long, but never show errors -->
+    <!-- Lines can be 200 chars long and never show errors -->
     <rule ref="Generic.Files.LineLength">
         <properties>
             <property name="lineLimit" value="200"/>
@@ -41,6 +41,7 @@
     <exclude-pattern>*/vendor/*</exclude-pattern>
     <exclude-pattern>*/lib/*</exclude-pattern>
     <exclude-pattern>*/docs/*</exclude-pattern>
+    <exclude-pattern>*/data/*</exclude-pattern>
     <exclude-pattern>PEAR.php</exclude-pattern>
     <exclude-pattern>PEAR5.php</exclude-pattern>
 </ruleset>

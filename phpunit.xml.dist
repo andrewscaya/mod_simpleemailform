@@ -6,7 +6,7 @@
          verbose="true">
     <testsuites>
         <testsuite name="Main Simple Email Form Module Tests">
-            <directory>test</directory>
+            <directory>tests/unit</directory>
         </testsuite>
     </testsuites>
 

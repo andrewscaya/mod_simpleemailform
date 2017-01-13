@@ -6,6 +6,10 @@ cache:
     directories:
         - $HOME/.composer/cache
         - vendor
+
+services:
+  - mysql
+
 matrix:
     fast_finish: true
     include:
@@ -14,6 +18,7 @@ matrix:
         - php: 5.6
           env:
             - CS_CHECK=true
+            - CC_CHECK=true
         - php: 7
         - php: hhvm
     allow_failures:
@@ -23,6 +28,9 @@ matrix:
 before_install:
     - phpenv config-rm xdebug.ini || return 0
     - travis_retry composer self-update
+    - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1024x768x16"
+    - $TRAVIS_BUILD_DIR/codeception-setup.sh
+    - sleep 30 # gives enough time to Selenium to start
     
 install:
     - travis_retry composer install --no-interaction
@@ -30,3 +38,4 @@ install:
 script:
     - composer test
     - if [[ $CS_CHECK == 'true' ]]; then composer cs ; fi
+    - if [[ $CC_CHECK == 'true' ]]; then composer cc ; fi

@@ -16,21 +16,18 @@ Upload
 ------WebKitFormBoundaryfywL8UCjFtqUBTQn--
 --FILE--
 <?php
-ini_set('display_errors', 0);
-require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+require __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
 $paramsSerialized = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'serializedParamsObject'); 
 $params = unserialize($paramsSerialized);
 
 $message = '';
 
-$_FILES['mod_simpleemailform_upload_1_1']['name'] = '';
-
 $obj = new \sefmodsimpleemailform($params);
 
-$testResult = $obj->uploadAttachment('/tmp', '', 'RED', 'GREEN', $message, 1);
+$testResult = $obj->uploadAttachment('/tmp', '', 'RED', 'GREEN', $message, 1);;
 
 var_dump($testResult);
 ?>
 --EXPECT--
-NULL
+string(11) "example.txt"
