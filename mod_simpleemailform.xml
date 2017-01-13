@@ -18,6 +18,9 @@
 	<li>Make sure Extensions - Plugin Manager - Content - Load Module is active.</li>
 	</ul>]]>
 	</description>
+	<updateservers>
+		<server type="extension" priority="1" name="Simple Email Form's Updates">https://raw.githubusercontent.com/andrewscaya/mod_simpleemailform/master/extension.xml</server>
+	</updateservers>
 	<files>
 		<filename module="mod_simpleemailform">mod_simpleemailform.php</filename>
 		<filename>index.html</filename>
