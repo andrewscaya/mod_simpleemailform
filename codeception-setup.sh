@@ -13,3 +13,6 @@ mkdir joomla
 cd joomla
 unzip ../joomla_3-6-4-stable-full_package.zip
 (php -S localhost:8181 > /dev/null 2>&1) &
+rm -rf /tmp/joomla
+rm -rf /tmp/mod_simpleemailform
+exit 0
