@@ -28,10 +28,17 @@ matrix:
         - php: 7
         
 before_install:
-    - export DISPLAY=localhost:0.0
     - phpenv config-rm xdebug.ini || return 0
     - travis_retry composer self-update
-    - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1024x768x16"
+    # "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1024x768x16"
+    # XVFB
+    - "export DISPLAY=:99.0"
+    - "Xvfb :99.0 -extension RANDR > /dev/null &"
+    # Window manager
+    - echo "c10"
+    - "sudo apt-get install fluxbox -y --force-yes"
+    - echo "c11"
+    - "fluxbox &"
     - $TRAVIS_BUILD_DIR/codeception-setup.sh
     - sleep 30 # gives enough time to Selenium to start
     
