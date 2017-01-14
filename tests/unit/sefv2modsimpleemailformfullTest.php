@@ -681,12 +681,10 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
                 . '<\/label>.*'
                 . '<\/th>.*'
                 . '<td.+'
-                . '<table.+'
                 . '<label.+'
                 . '<input.+'
                 . '<label.+'
-                . '<input.+'
-                . '<\/table>/is';
+                . '<input/is';
         } elseif ($ckRfmt === 'C' && $ckRpos === 'A') {
             $pattern =
                 '/<tr.+'
@@ -696,12 +694,10 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
                 . '<\/label>.*'
                 . '<\/th>.*'
                 . '<td.+'
-                . '<table.+'
                 . '<input.+'
                 . '<label.+'
                 . '<input.+'
-                . '<label.+'
-                . '<\/table>/is';
+                . '<label/is';
         }
 
         $this->assertEquals(
@@ -848,12 +844,10 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
                 . '<\/label>.*'
                 . '<\/th>.*'
                 . '<td.+'
-                . '<table.+'
                 . '<label.+'
                 . '<input.+'
                 . '<label.+'
-                . '<input.+'
-                . '<\/table>/is';
+                . '<input/is';
         } elseif ($ckRfmt === 'C' && $ckRpos === 'A') {
             $pattern =
                 '/<tr.+'
@@ -863,12 +857,10 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
                 . '<\/label>.*'
                 . '<\/th>.*'
                 . '<td.+'
-                . '<table.+'
                 . '<input.+'
                 . '<label.+'
                 . '<input.+'
-                . '<label.+'
-                . '<\/table>/is';
+                . '<label/is';
         }
 
         $this->assertEquals(

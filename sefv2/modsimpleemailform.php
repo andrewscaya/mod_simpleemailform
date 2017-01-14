@@ -849,6 +849,8 @@ class sefv2modsimpleemailform implements
             $resultInput = preg_match_all('/<input.+?>/is', $input, $matchesInput);
 
             if ($resultInput > 1) {
+                $multiInput = '';
+
                 $lookBehind = $this->formPrefixName . $this->fieldPrefixName;
 
                 $pattern = "/(?<=$lookBehind)[0-9]{1}(?=_[0-9])/is";
@@ -871,10 +873,6 @@ class sefv2modsimpleemailform implements
                     . $this->fieldCkrposName
                 ];
 
-                $th = '';
-
-                $multiInput = '<table>';
-
                 if (strpos($input, 'type="checkbox"') !== false) {
                     preg_match_all('/(?<=>).{1,40}(?=<\/label>)/is', $input, $matchesLabel);
                 } else {
@@ -884,6 +882,10 @@ class sefv2modsimpleemailform implements
                 preg_match_all('/<label.+?>/is', $input, $matchesLabelTag);
 
                 for ($i = 0; $i < $resultInput; $i++) {
+                    if ($i === 0 && $ckRfmt !== 'C') {
+                        $multiInput = '<table>';
+                    }
+
                     if ($ckRfmt === 'H' && $i === 0) {
                         $multiInputFormat = '';
                     }
@@ -920,10 +922,12 @@ class sefv2modsimpleemailform implements
                         $multiInputFormat2 = str_replace('%BEFORE%', $inputLabel, $multiInputFormat);
                         $multiInput .= str_replace('%AFTER%', $matchesInput[0][$i], $multiInputFormat2);
                     }
-                }
 
-                $multiInput .= '</table>';
-                $multiInput .= "\n";
+                    if ($i === $resultInput - 1 && $ckRfmt !== 'C') {
+                        $multiInput .= '</table>';
+                        $multiInput .= "\n";
+                    }
+                }
 
                 $input = $multiInput;
             }
