@@ -836,17 +836,99 @@ class sefv2modsimpleemailform implements
         $td = "<td class=\"{$this->formTdClass}\">";
         $tdClose = '</td>';
 
-        // @TODO Add multi-select decoration.
         // If no label, field is hidden.
         if (!isset($label)) {
             $decoratedInput .= $tr . $td . $input . $tdClose . $trClose . "\n";
         } else {
             $label = (string) $label;
 
+            $matchesInput = array();
+            $matchesLabel = array();
+            $matchesLabelTag = array();
+
+            $resultInput = preg_match_all('/<input.+?>/is', $input, $matchesInput);
+
+            if ($resultInput > 1) {
+                $lookBehind = $this->formPrefixName . $this->fieldPrefixName;
+
+                $pattern = "/(?<=$lookBehind)[0-9]{1}(?=_[0-9])/is";
+
+                $fieldNumberArray = array();
+
+                preg_match($pattern, $input, $fieldNumberArray);
+
+                $ckRfmt = $this->paramsArray[
+                    $this->formPrefixName
+                    . $this->fieldPrefixName
+                    . $fieldNumberArray[0]
+                    . $this->fieldCkrfmtName
+                ];
+
+                $ckRpos = $this->paramsArray[
+                    $this->formPrefixName
+                    . $this->fieldPrefixName
+                    . $fieldNumberArray[0]
+                    . $this->fieldCkrposName
+                ];
+
+                $th = '';
+
+                $multiInput = '<table>';
+
+                if (strpos($input, 'type="checkbox"') !== false) {
+                    preg_match_all('/(?<=>).{1,40}(?=<\/label>)/is', $input, $matchesLabel);
+                } else {
+                    preg_match_all('/(?<=\s>).{1,100}(?=<\/label>)/is', $input, $matchesLabel);
+                }
+
+                preg_match_all('/<label.+?>/is', $input, $matchesLabelTag);
+
+                for ($i = 0; $i < $resultInput; $i++) {
+                    if ($ckRfmt === 'H') {
+                        $multiInputFormat = $tr
+                            . $td
+                            . '%BEFORE%'
+                            . $tdClose
+                            . $td
+                            . '%AFTER%'
+                            . $tdClose
+                            . $trClose;
+                    } elseif ($ckRfmt === 'V') {
+                        $multiInputFormat = $tr
+                            . $td
+                            . '%BEFORE%'
+                            . $tdClose
+                            . $trClose
+                            . $tr
+                            . $td
+                            . '%AFTER%'
+                            . $tdClose
+                            . $trClose;
+                    } else {
+                        $multiInputFormat = '%BEFORE%%AFTER%';
+                    }
+
+                    $inputLabel = $matchesLabelTag[0][$i] . $matchesLabel[0][$i] . '</label>';
+
+                    if ($ckRpos === 'A') {
+                        $multiInputFormat2 = str_replace('%AFTER%', $inputLabel, $multiInputFormat);
+                        $multiInput .= str_replace('%BEFORE%', $matchesInput[0][$i], $multiInputFormat2);
+                    } else {
+                        $multiInputFormat2 = str_replace('%BEFORE%', $inputLabel, $multiInputFormat);
+                        $multiInput .= str_replace('%AFTER%', $matchesInput[0][$i], $multiInputFormat2);
+                    }
+                }
+
+                $multiInput .= '</table>';
+                $multiInput .= "\n";
+
+                $input = $multiInput;
+            }
+
             $th = "<th align=\"{$this->formLabelAlign}\" 
-                   style=\"text-align:{$this->formLabelAlign};\" 
-                   class=\"{$this->formThClass}\">
-                $label
+                        style=\"text-align:{$this->formLabelAlign};\" 
+                        class=\"{$this->formThClass}\">
+                    $label
                 </th>";
 
             $decoratedInput .= $tr . $th . $td . $input . $tdClose . $trClose . "\n";
