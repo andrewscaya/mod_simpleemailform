@@ -32,6 +32,8 @@ UPGRADE.txt export-ignore
 web.config export-ignore
 MAINTAINERS.txt export-ignore
 INSTALL*.txt export-ignore
+# libs
+lib export-ignore
 # tests
 test export-ignore
 # docs

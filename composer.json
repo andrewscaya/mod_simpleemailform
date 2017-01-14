@@ -13,7 +13,7 @@
     "authors": [
         {
             "name": "Doug Bierer",
-            "email": "doug@unlikelysource.org",
+            "email": "doug@unlikelysource.com",
             "homepage": "http://unlikelysource.net/"
         },
         {
@@ -30,25 +30,42 @@
         }
     ],
     "require": {
-        "php": "^5.3 || ^7.0",
-        "joomla/framework": "dev-master"
+        "php": "^5.3 || ^7.0"
     },
     "require-dev": {
+        "joomla/framework": "dev-master",
         "phpunit/phpunit": "^4.8",
         "mockery/mockery": "dev-master",
-        "squizlabs/php_codesniffer": "^2.3"
+        "squizlabs/php_codesniffer": "^2.3",
+        "se/selenium-server-standalone": "^2.53",
+        "codeception/codeception": "^2.2",
+        "joomla-projects/joomla-browser": "v3.6.5.1"
     },
     "autoload": {
-        "psr-4": { "": "./" },
-        "classmap": ["./", "./test"]
+        "psr-0": {
+            "sef": "./sef",
+            "sefv2": "./sefv2",
+            "joomla": "./lib"
+        },
+        "classmap": [
+            "./",
+            "./tests/unit"
+        ],
+        "exclude-from-classmap": [
+            "./vendor/codeception",
+            "./vendor/joomla-projects",
+            "./vendor/consolidation"
+        ]
     },
     "scripts": {
         "check": [
             "@cs",
-            "@test"
+            "@test",
+            "@cc"
         ],
         "cs": "phpcs",
         "cs-fix": "phpcbf",
-        "test": "phpunit"
+        "test": "phpunit",
+        "cc": "codecept run acceptance"
     }
 }

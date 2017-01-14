@@ -2,17 +2,20 @@
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          bootstrap="vendor/autoload.php"
-         colors="true">
+         colors="true"
+         verbose="true">
     <testsuites>
         <testsuite name="Main Simple Email Form Module Tests">
-            <directory>test</directory>
+            <directory>tests/unit</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <!-- <directory suffix=".php">.</directory> -->
-            <file>helper.php</file>
+            <file>sefv2/helper.php</file>
+            <file>sefv2/modsimpleemailform.php</file>
+            <file>sef/modsimpleemailform.php</file>
         </whitelist>
     </filter>
     <!-- <logging>
