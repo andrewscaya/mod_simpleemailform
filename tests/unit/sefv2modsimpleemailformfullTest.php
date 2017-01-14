@@ -306,6 +306,36 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Creates a Cartesian product of passed array of arrays.
+     *
+     * @since 2.0.0
+     */
+    public function arrayCartesianProduct($arrays)
+    {
+        $result = array();
+        $arrays = array_values($arrays);
+        $sizeIn = count($arrays);
+        $size = $sizeIn > 0 ? 1 : 0;
+        foreach ($arrays as $array) {
+            $size = $size * count($array);
+        }
+        for ($i = 0; $i < $size; $i++) {
+            $result[$i] = array();
+            for ($j = 0; $j < $sizeIn; $j++) {
+                array_push($result[$i], current($arrays[$j]));
+            }
+            for ($j = ($sizeIn -1); $j >= 0; $j--) {
+                if (next($arrays[$j])) {
+                    break;
+                } elseif (isset($arrays[$j])) {
+                    reset($arrays[$j]);
+                }
+            }
+        }
+        return $result;
+    }
+
+    /**
      * Tests sefv2modsimpleemailform::__construct()
      *
      * @since 2.0.0
@@ -516,6 +546,348 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
             1,
             preg_match('/<field.+type="file".+accept=""/is', $output)
         );
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::decorateInput($input, $label = null)
+     *
+     * @param string $ckRfmt
+     * @param string $ckRpos
+     *
+     * @since 2.0.0
+     *
+     * @dataProvider providerDecorateInputWithLabelAndWithAMultiSelectField
+     */
+    public function testDecorateInputWithLabelAndWithAMultiSelectRadioField($ckRfmt, $ckRpos)
+    {
+        $paramsArray = $this->sefv2modsimpleemailformProperties['paramsArray']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $paramsArray['mod_simpleemailform_field6ckRfmt'] = $ckRfmt;
+
+        $paramsArray['mod_simpleemailform_field6ckRpos'] = $ckRpos;
+
+        $this->sefv2modsimpleemailformProperties['paramsArray']
+            ->setValue($this->sefv2modsimpleemailform, $paramsArray);
+
+        $input = '<fieldset id="mod_simpleemailform_field6_1" class="radio" >'
+            . '<input
+                type="radio"
+                id="mod_simpleemailform_field6_10"
+                name="mod_simpleemailform_field6_1"
+                value="option3" />'
+            . '<label for="mod_simpleemailform_field6_10" >Value3</label>'
+            . '<input
+                type="radio"
+                id="mod_simpleemailform_field6_11"
+                name="mod_simpleemailform_field6_1"
+                value="option4" />'
+            . '<label for="mod_simpleemailform_field6_11" >Value4</label>'
+            . '</fieldset>';
+
+        $label = '<label>My Field</label>';
+
+        $output = $this->sefv2modsimpleemailformMethods['decorateInput']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array($input, $label)
+        );
+
+        if ($ckRfmt === 'H' && $ckRpos === 'B') {
+            $pattern =
+                '/<tr.+'
+                . '<th.+'
+                . '<label.+'
+                . 'My\sField'
+                . '<\/label>.*'
+                . '<\/th>.*'
+                . '<td.+'
+                . '<table.+'
+                . '<td.+'
+                . '<label.+'
+                . '<td.+'
+                . '<input.+'
+                . '<td.+'
+                . '<label.+'
+                . '<td.+'
+                . '<input.+'
+                . '<\/table>/is';
+        } elseif ($ckRfmt === 'H' && $ckRpos === 'A') {
+            $pattern =
+                '/<tr.+'
+                . '<th.+'
+                . '<label.+'
+                . 'My\sField'
+                . '<\/label>.*'
+                . '<\/th>.*'
+                . '<td.+'
+                . '<table.+'
+                . '<td.+'
+                . '<input.+'
+                . '<td.+'
+                . '<label.+'
+                . '<td.+'
+                . '<input.+'
+                . '<td.+'
+                . '<label.+'
+                . '<\/table>/is';
+        } elseif ($ckRfmt === 'V' && $ckRpos === 'B') {
+            $pattern =
+                '/<tr.+'
+                . '<th.+'
+                . '<label.+'
+                . 'My\sField'
+                . '<\/label>.*'
+                . '<\/th>.*'
+                . '<td.+'
+                . '<table.+'
+                . '<tr.+'
+                . '<td.+'
+                . '<label.+'
+                . '<td.+'
+                . '<input.+'
+                . '<tr.+'
+                . '<td.+'
+                . '<label.+'
+                . '<td.+'
+                . '<input.+'
+                . '<\/table>/is';
+        } elseif ($ckRfmt === 'V' && $ckRpos === 'A') {
+            $pattern =
+                '/<tr.+'
+                . '<th.+'
+                . '<label.+'
+                . 'My\sField'
+                . '<\/label>.*'
+                . '<\/th>.*'
+                . '<td.+'
+                . '<table.+'
+                . '<tr.+'
+                . '<td.+'
+                . '<input.+'
+                . '<td.+'
+                . '<label.+'
+                . '<tr.+'
+                . '<td.+'
+                . '<input.+'
+                . '<td.+'
+                . '<label.+'
+                . '<\/table>/is';
+        } elseif ($ckRfmt === 'C' && $ckRpos === 'B') {
+            $pattern =
+                '/<tr.+'
+                . '<th.+'
+                . '<label.+'
+                . 'My\sField'
+                . '<\/label>.*'
+                . '<\/th>.*'
+                . '<td.+'
+                . '<table.+'
+                . '<label.+'
+                . '<input.+'
+                . '<label.+'
+                . '<input.+'
+                . '<\/table>/is';
+        } elseif ($ckRfmt === 'C' && $ckRpos === 'A') {
+            $pattern =
+                '/<tr.+'
+                . '<th.+'
+                . '<label.+'
+                . 'My\sField'
+                . '<\/label>.*'
+                . '<\/th>.*'
+                . '<td.+'
+                . '<table.+'
+                . '<input.+'
+                . '<label.+'
+                . '<input.+'
+                . '<label.+'
+                . '<\/table>/is';
+        }
+
+        $this->assertEquals(
+            1,
+            preg_match(
+                $pattern,
+                $output
+            )
+        );
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::decorateInput($input, $label = null)
+     *
+     * @param string $ckRfmt
+     * @param string $ckRpos
+     *
+     * @since 2.0.0
+     *
+     * @dataProvider providerDecorateInputWithLabelAndWithAMultiSelectField
+     */
+    public function testDecorateInputWithLabelAndWithAMultiSelectCheckboxesField($ckRfmt, $ckRpos)
+    {
+        $paramsArray = $this->sefv2modsimpleemailformProperties['paramsArray']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $paramsArray['mod_simpleemailform_field6ckRfmt'] = $ckRfmt;
+
+        $paramsArray['mod_simpleemailform_field6ckRpos'] = $ckRpos;
+
+        $this->sefv2modsimpleemailformProperties['paramsArray']
+            ->setValue($this->sefv2modsimpleemailform, $paramsArray);
+
+        $input = '<fieldset id="mod_simpleemailform_field6_1" class="checkboxes">'
+            . '<label class="checkbox" for="mod_simpleemailform_field6_10">'
+            . '<input
+                type="checkbox"
+                id="mod_simpleemailform_field6_10"
+                name="mod_simpleemailform_field6_1[]"
+                value="option3" />'
+            . 'Value3</label>'
+            . '<label class="checkbox" for="mod_simpleemailform_field6_11">'
+            . '<input
+                type="checkbox"
+                id="mod_simpleemailform_field6_11"
+                name="mod_simpleemailform_field6_1[]"
+                value="option4" />'
+            . 'Value4</label>'
+            . '</fieldset>';
+
+        $label = '<label>My Field</label>';
+
+        $output = $this->sefv2modsimpleemailformMethods['decorateInput']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array($input, $label)
+        );
+
+        if ($ckRfmt === 'H' && $ckRpos === 'B') {
+            $pattern =
+                '/<tr.+'
+                . '<th.+'
+                . '<label.+'
+                . 'My\sField'
+                . '<\/label>.*'
+                . '<\/th>.*'
+                . '<td.+'
+                . '<table.+'
+                . '<td.+'
+                . '<label.+'
+                . '<td.+'
+                . '<input.+'
+                . '<td.+'
+                . '<label.+'
+                . '<td.+'
+                . '<input.+'
+                . '<\/table>/is';
+        } elseif ($ckRfmt === 'H' && $ckRpos === 'A') {
+            $pattern =
+                '/<tr.+'
+                . '<th.+'
+                . '<label.+'
+                . 'My\sField'
+                . '<\/label>.*'
+                . '<\/th>.*'
+                . '<td.+'
+                . '<table.+'
+                . '<td.+'
+                . '<input.+'
+                . '<td.+'
+                . '<label.+'
+                . '<td.+'
+                . '<input.+'
+                . '<td.+'
+                . '<label.+'
+                . '<\/table>/is';
+        } elseif ($ckRfmt === 'V' && $ckRpos === 'B') {
+            $pattern =
+                '/<tr.+'
+                . '<th.+'
+                . '<label.+'
+                . 'My\sField'
+                . '<\/label>.*'
+                . '<\/th>.*'
+                . '<td.+'
+                . '<table.+'
+                . '<tr.+'
+                . '<td.+'
+                . '<label.+'
+                . '<td.+'
+                . '<input.+'
+                . '<tr.+'
+                . '<td.+'
+                . '<label.+'
+                . '<td.+'
+                . '<input.+'
+                . '<\/table>/is';
+        } elseif ($ckRfmt === 'V' && $ckRpos === 'A') {
+            $pattern =
+                '/<tr.+'
+                . '<th.+'
+                . '<label.+'
+                . 'My\sField'
+                . '<\/label>.*'
+                . '<\/th>.*'
+                . '<td.+'
+                . '<table.+'
+                . '<tr.+'
+                . '<td.+'
+                . '<input.+'
+                . '<td.+'
+                . '<label.+'
+                . '<tr.+'
+                . '<td.+'
+                . '<input.+'
+                . '<td.+'
+                . '<label.+'
+                . '<\/table>/is';
+        } elseif ($ckRfmt === 'C' && $ckRpos === 'B') {
+            $pattern =
+                '/<tr.+'
+                . '<th.+'
+                . '<label.+'
+                . 'My\sField'
+                . '<\/label>.*'
+                . '<\/th>.*'
+                . '<td.+'
+                . '<table.+'
+                . '<label.+'
+                . '<input.+'
+                . '<label.+'
+                . '<input.+'
+                . '<\/table>/is';
+        } elseif ($ckRfmt === 'C' && $ckRpos === 'A') {
+            $pattern =
+                '/<tr.+'
+                . '<th.+'
+                . '<label.+'
+                . 'My\sField'
+                . '<\/label>.*'
+                . '<\/th>.*'
+                . '<td.+'
+                . '<table.+'
+                . '<input.+'
+                . '<label.+'
+                . '<input.+'
+                . '<label.+'
+                . '<\/table>/is';
+        }
+
+        $this->assertEquals(
+            1,
+            preg_match(
+                $pattern,
+                $output
+            )
+        );
+    }
+
+    public function providerDecorateInputWithLabelAndWithAMultiSelectField()
+    {
+        $arraysTemp = array(
+            array('H', 'V', 'C'),
+            array('B', 'A'),
+        );
+
+        return $this->arrayCartesianProduct($arraysTemp);
     }
 
     /**

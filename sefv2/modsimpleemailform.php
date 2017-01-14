@@ -884,22 +884,22 @@ class sefv2modsimpleemailform implements
                 preg_match_all('/<label.+?>/is', $input, $matchesLabelTag);
 
                 for ($i = 0; $i < $resultInput; $i++) {
+                    if ($ckRfmt === 'H' && $i === 0) {
+                        $multiInputFormat = '';
+                    }
+
                     if ($ckRfmt === 'H') {
-                        $multiInputFormat = $tr
-                            . $td
+                        $multiInputFormat = $td
                             . '%BEFORE%'
                             . $tdClose
                             . $td
                             . '%AFTER%'
-                            . $tdClose
-                            . $trClose;
+                            . $tdClose;
                     } elseif ($ckRfmt === 'V') {
                         $multiInputFormat = $tr
                             . $td
                             . '%BEFORE%'
                             . $tdClose
-                            . $trClose
-                            . $tr
                             . $td
                             . '%AFTER%'
                             . $tdClose

@@ -1286,7 +1286,8 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
 
         $jFormMock->shouldReceive('bind')->once();
 
-        $this->sefv2modsimpleemailformProperties['jForm']->setValue($this->sefv2modsimpleemailform, $jFormMock);
+        $this->sefv2modsimpleemailformProperties['jForm']
+            ->setValue($this->sefv2modsimpleemailform, $jFormMock);
 
         $this->sefv2modsimpleemailform->bind(array());
     }
@@ -1360,9 +1361,9 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
                     aria-required="true"
                     type="text">';
 
-        $label = 'My Field';
+        $label = '<label>My Field</label>';
 
-        $output2 = $this->sefv2modsimpleemailformMethods['decorateInput']->invokeArgs(
+        $output = $this->sefv2modsimpleemailformMethods['decorateInput']->invokeArgs(
             $this->sefv2modsimpleemailform,
             array($input, $label)
         );
@@ -1370,8 +1371,8 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             1,
             preg_match(
-                '/<th.+My Field.+<input/s',
-                $output2
+                '/<th.+<label>My\sField<\/label>.+<input/s',
+                $output
             )
         );
     }
@@ -1436,7 +1437,8 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
 
         $jFormMock->shouldReceive('filter')->once();
 
-        $this->sefv2modsimpleemailformProperties['jForm']->setValue($this->sefv2modsimpleemailform, $jFormMock);
+        $this->sefv2modsimpleemailformProperties['jForm']
+            ->setValue($this->sefv2modsimpleemailform, $jFormMock);
 
         $this->sefv2modsimpleemailform->filter(array());
     }
@@ -1452,7 +1454,8 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
 
         $jFormMock->shouldReceive('getData')->once();
 
-        $this->sefv2modsimpleemailformProperties['jForm']->setValue($this->sefv2modsimpleemailform, $jFormMock);
+        $this->sefv2modsimpleemailformProperties['jForm']
+            ->setValue($this->sefv2modsimpleemailform, $jFormMock);
 
         $this->sefv2modsimpleemailform->getData();
     }
@@ -1468,7 +1471,8 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
 
         $jFormMock->shouldReceive('getErrors')->once();
 
-        $this->sefv2modsimpleemailformProperties['jForm']->setValue($this->sefv2modsimpleemailform, $jFormMock);
+        $this->sefv2modsimpleemailformProperties['jForm']
+            ->setValue($this->sefv2modsimpleemailform, $jFormMock);
 
         $this->sefv2modsimpleemailform->getErrors();
     }
@@ -1484,7 +1488,8 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
 
         $jFormMock->shouldReceive('getField')->once()->withArgs(array('test', null, null));
 
-        $this->sefv2modsimpleemailformProperties['jForm']->setValue($this->sefv2modsimpleemailform, $jFormMock);
+        $this->sefv2modsimpleemailformProperties['jForm']
+            ->setValue($this->sefv2modsimpleemailform, $jFormMock);
 
         $this->sefv2modsimpleemailform->getField('test');
     }
@@ -1500,7 +1505,8 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
 
         $jFormMock->shouldReceive('getFieldset')->once()->with('main');
 
-        $this->sefv2modsimpleemailformProperties['jForm']->setValue($this->sefv2modsimpleemailform, $jFormMock);
+        $this->sefv2modsimpleemailformProperties['jForm']
+            ->setValue($this->sefv2modsimpleemailform, $jFormMock);
 
         $this->sefv2modsimpleemailform->getFieldset('main');
     }
@@ -1817,7 +1823,8 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
 
         $jFormMock->shouldReceive('load')->once()->with('test');
 
-        $this->sefv2modsimpleemailformProperties['jForm']->setValue($this->sefv2modsimpleemailform, $jFormMock);
+        $this->sefv2modsimpleemailformProperties['jForm']
+            ->setValue($this->sefv2modsimpleemailform, $jFormMock);
 
         $this->sefv2modsimpleemailform->load('test');
     }
@@ -2158,7 +2165,8 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
 
         $jFormMock->shouldReceive('removeField')->once()->withArgs(array('test', null));
 
-        $this->sefv2modsimpleemailformProperties['jForm']->setValue($this->sefv2modsimpleemailform, $jFormMock);
+        $this->sefv2modsimpleemailformProperties['jForm']
+            ->setValue($this->sefv2modsimpleemailform, $jFormMock);
 
         $this->sefv2modsimpleemailform->removeField('test');
     }
@@ -2325,7 +2333,8 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
 
         $jFormMock->shouldReceive('reset')->once()->with(null);
 
-        $this->sefv2modsimpleemailformProperties['jForm']->setValue($this->sefv2modsimpleemailform, $jFormMock);
+        $this->sefv2modsimpleemailformProperties['jForm']
+            ->setValue($this->sefv2modsimpleemailform, $jFormMock);
 
         $this->sefv2modsimpleemailform->reset();
     }
@@ -2618,7 +2627,8 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
         $jFormMock = Mockery::mock('overload:JForm');
         $jFormMock->shouldReceive('validate')->once()->withArgs(array(array(), null));
 
-        $this->sefv2modsimpleemailformProperties['jForm']->setValue($this->sefv2modsimpleemailform, $jFormMock);
+        $this->sefv2modsimpleemailformProperties['jForm']
+            ->setValue($this->sefv2modsimpleemailform, $jFormMock);
 
         $this->sefv2modsimpleemailform->validate(array());
     }
