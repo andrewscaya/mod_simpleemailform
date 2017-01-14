@@ -894,6 +894,9 @@ class sefv2modsimpleemailform implements
                             . $tdClose
                             . $td
                             . '%AFTER%'
+                            . $tdClose
+                            . $td
+                            . '&nbsp;&nbsp'
                             . $tdClose;
                     } elseif ($ckRfmt === 'V') {
                         $multiInputFormat = $tr
