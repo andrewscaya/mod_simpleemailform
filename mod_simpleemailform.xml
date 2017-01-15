@@ -380,7 +380,7 @@
 				</field>
 				<field name="mod_simpleemailform_captchaDir"   		type="text" size="60" default=""        label="Directory to Write Captchas" description="Enter the absolute directory path where the module can write 'captchas' (i.e. /var/www/application/images" />
 				<field name="mod_simpleemailform_captchaURL"   		type="text" size="60" default=""        label="URL for Captcha Directory" description="Enter a URL which corresponds with the Captcha Directory (above)" />
-				<field name="mod_simpleemailform_captchaLen"   		type="text" size="4"  default="8"       label="Captcha Word Lengh" description="Enter the desired Captcha word length (number of characters)" />
+				<field name="mod_simpleemailform_captchaLen"   		type="text" size="4"  default="8"       label="Captcha Word Length" description="Enter the desired Captcha word length (number of characters)" />
 				<field name="mod_simpleemailform_captchaSize"  		type="text" size="4"  default="24"      label="Captcha Font Size" description="Enter the desired Captcha font size" />
 				<field name="mod_simpleemailform_captchaWidth"  	type="text" size="4"  default="200"     label="Captcha Width" description="Enter the desired Captcha width in pixels" />
 				<field name="mod_simpleemailform_captchaHeight"  	type="text" size="4"  default="80"      label="Captcha Height" description="Enter the desired Captcha height in pixels" />
