@@ -2,6 +2,13 @@
 
 use \Joomla\Registry\Registry;
 
+/**
+ * Main implementation of version 2 of the Simple Email Form module
+ *
+ * @package     Simple Email Form
+ *
+ * @since 2.0.0
+ */
 class sefv2modsimpleemailform implements
     sefv2jformproxyinterface,
     sefv2formrendererinterface
