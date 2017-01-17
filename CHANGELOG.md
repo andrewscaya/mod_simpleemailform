@@ -13,7 +13,7 @@
 - Fixes issue #11 - Add a Required/Optional selector to the upload field settings.
 - Fixes issue #13 - Warn the administrator before saving if "Send Results To" field is empty or invalid.
 - Adds a new translation (Belarusian - Thanks to Yury <y.sapozhkov@gmail.com>).
-- Makes the module compliant with the new JED requirements as of 2017-01-10 (https://extensions.joomla.org/support/knowledgebase/item/joomla-update-system-requirement).
+- Makes the module compliant with the new JED requirements of the 10th of January 2017 (https://extensions.joomla.org/support/knowledgebase/item/joomla-update-system-requirement).
 
 ## 1.8.9 (2016-07-23)
 
