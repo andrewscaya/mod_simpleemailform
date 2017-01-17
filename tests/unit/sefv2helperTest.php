@@ -74,6 +74,7 @@ class sefv2helperTest extends \PHPUnit_Framework_TestCase
     {
         $jFormMock = Mockery::mock('overload:JForm');
         $jFormMock->shouldReceive('load')->once()->andReturn(true);
+        $jFormMock->shouldReceive('setValue')->twice()->withArgs(array(Mockery::any(), null, Mockery::any()));
 
         $jFactoryMock = Mockery::mock('overload:JFactory');
         $jMailMock = Mockery::mock('overload:JMail');

@@ -254,6 +254,10 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('load')
             ->once()
             ->andReturn(true);
+        $this->jFormMock
+            ->shouldReceive('setValue')
+            ->times(8)
+            ->withArgs(array(Mockery::any(), null, Mockery::any()));
 
         $this->jFactoryMock = Mockery::mock('overload:JFactory');
         $this->jMailMock = Mockery::mock('overload:JMail');

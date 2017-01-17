@@ -241,6 +241,10 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('load')
             ->once()
             ->andReturn(true);
+        $this->jFormMock
+            ->shouldReceive('setValue')
+            ->twice()
+            ->withArgs(array(Mockery::any(), null, Mockery::any()));
 
         $this->jFactoryMock = Mockery::mock('overload:JFactory');
         $this->jMailMock = Mockery::mock('overload:JMail');
@@ -2337,6 +2341,61 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
             ->setValue($this->sefv2modsimpleemailform, $jFormMock);
 
         $this->sefv2modsimpleemailform->reset();
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::setDefaultValuesOfActiveElements(
+     *                                      array $formActiveElements,
+     *                                      $formActiveElementsCount,
+     *                                      array $paramsArray,
+     *                                      \Jform $jForm
+     *                                  )
+     *
+     * @param int $count
+     *
+     * @since 2.0.0
+     */
+    public function testSetDefaultValuesOfActiveElements()
+    {
+        $formActiveElements = $this->sefv2modsimpleemailformProperties['formActiveElements']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $formActiveElementsCount = $this->sefv2modsimpleemailformProperties['formActiveElementsCount']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $instance = $this->sefv2modsimpleemailformProperties['formInstance']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $fieldValueName = $this->sefv2modsimpleemailformProperties['fieldValueName']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $paramsArray = $this->sefv2modsimpleemailformProperties['paramsArray']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $paramsArray[$formActiveElements[0] . $fieldValueName] = 'Test value';
+        $paramsArray[$formActiveElements[1] . $fieldValueName] = 'Another test value';
+
+        $this->sefv2modsimpleemailformProperties['paramsArray']
+            ->setValue(
+                $this->sefv2modsimpleemailform,
+                $paramsArray
+            );
+
+        $jFormMock = Mockery::mock('overload:JForm');
+        $jFormMock
+            ->shouldReceive('setValue')
+            ->twice()
+            ->withArgs(array($formActiveElements[0] . '_' . $instance, '', 'Test value'));
+
+        $jFormMock
+            ->shouldReceive('setValue')
+            ->twice()
+            ->withArgs(array($formActiveElements[1] . '_' . $instance, '', 'Another test value'));
+
+        $this->sefv2modsimpleemailformMethods['setDefaultValuesOfActiveElements']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array($formActiveElements, $formActiveElementsCount, $paramsArray, $jFormMock)
+        );
     }
 
     /**

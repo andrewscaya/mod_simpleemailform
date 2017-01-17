@@ -676,6 +676,14 @@ class sefv2modsimpleemailform implements
         // Load the XML configuration into the JForm object.
         $this->load($this->xmlConfig);
 
+        // Set default values of all of the form's active elements.
+        $this->setDefaultValuesOfActiveElements(
+            $this->formActiveElements,
+            $this->formActiveElementsCount,
+            $this->paramsArray,
+            $this->jForm
+        );
+
         // Store test mode status.
 
         $this->formTestMode = $this->paramsArray[$this->formPrefixName . $this->formTestModeName];
@@ -1460,6 +1468,33 @@ class sefv2modsimpleemailform implements
     public function reset($xml = false)
     {
         return $this->jForm->reset($xml);
+    }
+
+    /**
+     * @param array $formActiveElements
+     * @param $formActiveElementsCount
+     * @param array $paramsArray
+     * @param Jform $jForm
+     *
+     * @since 2.0.0
+     */
+    protected function setDefaultValuesOfActiveElements(array $formActiveElements, $formActiveElementsCount, array $paramsArray, \Jform $jForm)
+    {
+        for ($i = 1; $i <= $formActiveElementsCount; $i++) {
+            $index = $i - 1;
+
+            $active = $paramsArray[$formActiveElements[$index] . $this->fieldActiveName];
+
+            $name = $formActiveElements[$index]
+                . '_'
+                . $this->formInstance;
+
+            $valueKey = $formActiveElements[$index] . $this->fieldValueName;
+
+            $value = $paramsArray[$valueKey];
+
+            $jForm->setValue($name, '', $value);
+        }
     }
 
     /**
