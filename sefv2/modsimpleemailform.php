@@ -1480,6 +1480,8 @@ class sefv2modsimpleemailform implements
      */
     protected function setDefaultValuesOfActiveElements(array $formActiveElements, $formActiveElementsCount, array $paramsArray, \Jform $jForm)
     {
+        $formActiveElementsCount = (int) $formActiveElementsCount;
+
         for ($i = 1; $i <= $formActiveElementsCount; $i++) {
             $index = $i - 1;
 

@@ -2375,12 +2375,6 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
         $paramsArray[$formActiveElements[0] . $fieldValueName] = 'Test value';
         $paramsArray[$formActiveElements[1] . $fieldValueName] = 'Another test value';
 
-        $this->sefv2modsimpleemailformProperties['paramsArray']
-            ->setValue(
-                $this->sefv2modsimpleemailform,
-                $paramsArray
-            );
-
         $jFormMock = Mockery::mock('overload:JForm');
         $jFormMock
             ->shouldReceive('setValue')
