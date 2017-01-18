@@ -719,9 +719,9 @@ class sefv2modsimpleemailform implements
             $this->reset();
 
             if ($formProcessingResult) {
+                // Redirect if the redirectURL parameter is set.
                 $redirectURL = $this->paramsArray[$this->formPrefixName . $this->formRedirectURLName];
 
-                // Redirect if the redirectURL is set.
                 if ($redirectURL !== '') {
                     $this->redirectedToURL = $redirectURL;
                     header('Location: ' . $redirectURL);
@@ -729,6 +729,7 @@ class sefv2modsimpleemailform implements
                     return;
                 }
 
+                // If not redirected, send a success message to the view.
                 $this->msg .=
                     "<p style=\"color:{$this->successColour}\">{$this->transLang['MOD_SIMPLEEMAILFORM_form_success']}</p>";
             }
