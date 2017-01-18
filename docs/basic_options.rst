@@ -278,8 +278,3 @@ selected and visibleX  is what is visible on the user screen.
 **After** means that the label appears to the right of the button.
 
 .. image:: /images/installation_options08.png
-
-
-
-
-
