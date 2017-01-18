@@ -1280,6 +1280,118 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests sefv2modsimpleemailform::__construct(
+     *                                       \JForm $jForm,
+     *                                       \JMail $jMail,
+     *                                       sefv2simpleemailformemailmsg $emailMsg,
+     *                                       \JDocument $jDocument,
+     *                                       \JLanguage $jLanguage,
+     *                                       Registry $params,
+     *                                       \JInput $jInput,
+     *                                       \JTableExtension $jTableExtension,
+     *                                       \JTableModule $jTableModule,
+     *                                       \stdClass $jModuleHelperResult,
+     *                                       \JSession $jSession,
+     *                                       \JFile $jFile
+     *                                   )
+     *
+     * @since 2.0.0
+     *
+     * @runInSeparateProcess
+     */
+    public function testSefv2modsimpleemailformConstructWithPOSTAndWithARedirectURL()
+    {
+        list(
+            $formDataRaw,
+            $formCleanData,
+            $emailMsg,
+            $paramsArray,
+            $formPrefixName,
+            $jSessionMock,
+            $jFormMock,
+            $jDocumentMock,
+            $jMailMock
+            ) = $this->setUpProcessFormDataTests();
+
+        $jSessionMock
+            ->shouldReceive('checkToken')
+            ->once()
+            ->andReturn(true);
+
+        $jFormMock
+            ->shouldReceive('validate')
+            ->once()
+            ->withArgs(array($formDataRaw, null))
+            ->andReturn(true);
+        $jFormMock
+            ->shouldReceive('reset')
+            ->once()
+            ->andReturn(true);
+
+        $jMailMock
+            ->shouldReceive('send')
+            ->once()
+            ->andReturn(true);
+
+        $_POST = array(
+            'mod_simpleemailform_field1_1' => 'root@localhost',
+            'mod_simpleemailform_field2_1' => 'Test',
+            'a7843da35a03fb2fbe19834411ec1955' => '1',
+            'mod_simpleemailform_submit_1' => 'Submit'
+        );
+
+        $jInputMock = $this->jInputMock;
+        $jInputMock->post = $jInputMock;
+        $jInputMock->files = $jInputMock;
+        $jInputMock
+            ->shouldReceive('getArray')
+            ->once()
+            ->withArgs(array(array(), null, 'raw', true))
+            ->andReturn($_POST);
+        $jInputMock
+            ->shouldReceive('getArray')
+            ->once()
+            ->withArgs(array(array(), null, 'raw', true))
+            ->andReturn(array());
+
+        $formPrefixName = $this->sefv2modsimpleemailformProperties['formPrefixName']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $formRedirectURLName = $this->sefv2modsimpleemailformProperties['formRedirectURLName']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->params->set($formPrefixName . $formRedirectURLName, 'http://localhost:8181/redirecturl');
+
+        $redirectedToURL = $this->sefv2modsimpleemailformProperties['redirectedToURL']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame('', $redirectedToURL);
+
+        $output = $this->sefv2modsimpleemailformMethods['__construct']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array(
+                $this->jFormMock,
+                $this->jMailMock,
+                $this->emailMsgFake,
+                $this->jDocumentMock,
+                $this->jLanguageMock,
+                $this->params,
+                $this->jInputMock,
+                $this->jTableExtensionMock,
+                $this->jTableModuleMock,
+                $this->stdClassModuleHelperResultFake,
+                $this->jSessionMock,
+                $this->jFileMock
+            )
+        );
+
+        $redirectedToURL = $this->sefv2modsimpleemailformProperties['redirectedToURL']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame('http://localhost:8181/redirecturl', $redirectedToURL);
+    }
+
+    /**
      * Tests sefv2modsimpleemailform::bind($data)
      *
      * @since 2.0.0

@@ -152,6 +152,12 @@ class sefv2modsimpleemailform implements
      * @var string
      * @since 2.0.0
      */
+    protected $formRedirectURLName = '_redirectURL';
+
+    /**
+     * @var string
+     * @since 2.0.0
+     */
     protected $formCol2SpaceName = '_col2space';
 
     /**
@@ -512,6 +518,12 @@ class sefv2modsimpleemailform implements
     protected $errorColour = 'red';
 
     /**
+     * @var string
+     * @since 2.0.0
+     */
+    protected $redirectedToURL = '';
+
+    /**
      * @var string (html)
      * @since 2.0.0
      */
@@ -691,6 +703,9 @@ class sefv2modsimpleemailform implements
         // Check if $_POST was set.
         if ($this->jInput->getMethod() === 'POST'
             && isset($_POST[$this->formSubmitButtonName . '_' . $this->formInstance])) {
+            // 2012-02-15 DB: Override unwanted error messages originating from JMail.
+            ob_start();
+
             // CAUTION : $formDataRaw is not validated and is unfiltered and unsanitized!
             $formDataRaw = $this->jInput->post->getArray(array(), null, 'raw', true);
 
@@ -700,13 +715,25 @@ class sefv2modsimpleemailform implements
             // Validate, filter, sanitize and process the form data.
             $formProcessingResult = $this->processFormData($formDataRaw, $files, $this->paramsArray, $this->emailMsg);
 
+            // Reset the form before sending it back to the view.
+            $this->reset();
+
             if ($formProcessingResult) {
+                $redirectURL = $this->paramsArray[$this->formPrefixName . $this->formRedirectURLName];
+
+                // Redirect if the redirectURL is set.
+                if ($redirectURL !== '') {
+                    $this->redirectedToURL = $redirectURL;
+                    header('Location: ' . $redirectURL);
+                    ob_end_clean();
+                    return;
+                }
+
                 $this->msg .=
                     "<p style=\"color:{$this->successColour}\">{$this->transLang['MOD_SIMPLEEMAILFORM_form_success']}</p>";
             }
 
-            // Reset the form before sending it back to the view.
-            $this->reset();
+            ob_end_clean();
         } elseif ($this->jInput->getMethod() === 'POST'
                   && isset($_POST[$this->formResetButtonName . '_' . $this->formInstance])) {
             $this->reset();
@@ -1347,12 +1374,7 @@ class sefv2modsimpleemailform implements
             }
         }
 
-        // 2012-02-15 DB: Override unwanted error messages originating from JMail.
-        ob_start();
-
         $sendFormResult = $this->sendFormData($formDataClean, $paramsArray, $emailMsg, $this->jMail);
-
-        ob_end_clean();
 
         if (!$sendFormResult) {
             return false;
