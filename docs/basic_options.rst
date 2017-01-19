@@ -5,7 +5,7 @@ Configuration options
 
 .. note:: When you move the pointer over a field, an explanation box pops up to assist you during module configuration.
 
-.. image:: /image 01 d'une boîte d'explication
+.. image:: /images/basic_options01.png
 
 .. index:: Form type
 
@@ -16,7 +16,7 @@ First, the form type must be chosen. **Classic** shows the form as it used to be
 This option is deprecated and won't be available in version 3.0 of the module.
 **JForm** is the new version that integrates the new Joomla requirements.
 
-..image:: /image 02/du/nouveau champ
+.. image:: /images/basic_options02.png
 
 .. index:: Language
 
@@ -28,7 +28,7 @@ Language files can be found and edited at
 
 You can choose from 30 different languages.
 
-.. image:: /image/du champ langue
+.. image:: /images/basic_options03.png
 
 .. note:: The module is now integrated with Joomla native language support.
 
@@ -41,7 +41,7 @@ Next to **Send Results To**, you **must** enter an email address where
 information gathered by the simple email form will be sent.
 If there's more than one address, separate them with commas or spaces.
 
-.. image:: /images/installation_options01.png/image/avec/plusieurs/adresses
+.. image:: /images/basic_options04.png
 
 .. index:: Label alignment
 
@@ -49,7 +49,7 @@ Label alignment
 ---------------
 Choose to have the labels aligned LEFT, RIGHT or CENTER.
 
-.. image:: /image du champ aligment
+.. image:: /images/basic_options05.png
 
 Field options
 =============
@@ -65,7 +65,7 @@ Eight options can be used to configure each field:
 * Field X Format
 * Field X Before/After
 
-.. image:: /les 8 champs 1
+.. image:: /images/basic_options06.png
 
 .. index:: Activate Field X
 
@@ -73,13 +73,15 @@ Activate Field X
 ----------------
 
 Set this option to **Yes** to add field X to your form.
+
 **No** means that field X won't appear in the form.
+
 **Required** means that the user won't be able to send the form if the field is empty.
 These fields are marked with an asterisk (*).
 
-.. image:: /images/installation_options/champrequiredvide
+.. image:: /images/basic_options07.png
 
-**Hidden** fields don't appear on screen. The value is automatically added in the email sent to you.
+**Hidden** fields don't appear on screen. The value is automatically added in the email that is sent to you.
 
 .. index:: Label for Field X
 
@@ -93,12 +95,8 @@ Short description of the information to be entered by the user in this field.
 Default Value for Field X
 -------------------------
 
-With field types **Subject**, **Normal**, **Text Area** and **User defined**, the value inserted here will appear
-automatically in the field. It disappears as soon as the user enters some information.
-
-.. image:: /image dans le formulaire
-
-.. note:: This option is only available with the **Classic** type.
+With field types **Subject**, **Normal**, **Text Area** and **User defined**, the default value appears
+automatically in the form.
 
 .. note:: Since version **1.8.5**, default values don't appear in Textarea fields. The HTML5 placeholder attribute is used instead.
 
@@ -110,8 +108,6 @@ available to the user in this format:
 In this case, the user will see Apple, Banana and Cantelope on screen.
 If "Apple" is chosen, "A" is returned.
 
-.. image:: /image de checkbox ou radio rempli avec apple, b et C
-
 .. note:: To set a default for a **Drop**, **Radio** or **Checkbox** field, just make sure the desired default value is the first one specified.
 
 .. index:: Display Size of Field X
@@ -119,10 +115,12 @@ If "Apple" is chosen, "A" is returned.
 Display Size of Field X
 -----------------------
 
-Size, in rows and columns, of a **Text area** field. Size is entered in the following format: row,column
+Size, in rows and columns, of a **Text area** field.
+Size is entered in the following format: row,column
 
-With field types **Radio** and **Checkbox**, you can enter the width, in pixels, of the labels besides each radio button
-or box.
+With field types **Radio** and **Checkbox**,
+you can enter the width, in pixels,
+of the labels besides each radio button or box.
 
 **Display Size** has no effect on other field types.
 
@@ -134,9 +132,7 @@ Maximum Length of Field X
 -------------------------
 
 Highest number of characters accepted from the user.
-Works only with field types **From**, **Subject** and **User defined**.
-
-.. note:: This option is only available with the **Classic** type.
+This field isn't used with field types **Drop**, **Radio** and **Checkbox**.
 
 .. index:: Field Type
 
@@ -144,18 +140,23 @@ Field Type
 ----------
 
 Different types of input you may offer to the user.
-For more details about each one, see the **Field Type** section.
+For more details about each one of them, see the **Field Type** section.
 
 .. index:: Field X Format
 
 Field X Format
 --------------
 
-Works only with **Radio** and **Checkbox** field types.
+Only works with **Radio** and **Checkbox** field types.
+
 * **Horizontal** means that all radio buttons or checkboxes are on the same row.
-.. image:: boîtes horizontales
+
+.. image:: /images/basic_options08.png
+
 * **Vertical** means that the various button-label pairs are displayed one above the other.
-.. image:: boîtes verticales
+
+.. image:: /images/basic_options09.png
+
 * **Use CSS** means that you use your custom CSS to display the buttons or boxes.
 
 .. index:: Field X Before/After
@@ -163,7 +164,8 @@ Works only with **Radio** and **Checkbox** field types.
 Field X Before/After
 --------------------
 
-Works only with **Radio** and **Checkbox** field types.
+Only used with **Radio** and **Checkbox** field types.
+
 * **Before** means that labels are displayed to the left of their respective buttons or checkboxes.
 * **After** means that they are displayed to the right.
 
@@ -186,9 +188,10 @@ In version **2.0**, available field types are:
 FROM field
 ^^^^^^^^^^
 
-This field type is used to get the email address of the user filling out the form. The first field defaults to **From**.
+This field type is used to get the email address of the user filling out the form.
+The first field defaults to **From**.
 
-.. image:: /images/installation_options03.png
+.. image:: /images/installation_options10.png
 
 .. index:: SUBJECT field
 
@@ -198,7 +201,7 @@ SUBJECT field
 Whatever the user enters here will become the "Subject" in the email sent to you.
 The second field defaults to **Subject**.
 
-.. image:: /images/installation_options04.png
+.. image:: /images/installation_options11.png
 
 .. index:: Normal field
 
@@ -209,9 +212,7 @@ This field will appear as one line on your input form.
 
 If you do not wish to enter a **default value**, make sure to hit the **spacebar**.
 
-**Maximum length** is the number of characters allowed in this field (only available in the **Classic** form type).
-
-.. image:: /images/installation_options05.png
+.. image:: /images/installation_options12.png
 
 .. index:: Textarea field
 
@@ -223,9 +224,7 @@ Creates a text box in which the user can type a message.
 
 .. note:: The new JForm type displays an HTML editor.
 
-.. note:: In the **Classic** form type, you can also set a default value.
-
-.. image:: /images/installation_options06.png
+.. image:: /images/installation_options13.png
 
 .. index:: Drop (Select)
 
@@ -234,12 +233,10 @@ Drop (Select)
 
 In the **Default Value** field, enter options separated by commas as follows: Return1=Visible1,Return2=Visible2.
 
-ReturnX will be the value returned in the email message.
+ReturnX is the value returned in the email message.
 VisibleX is the value appearing in the form.
 
-Format and Before/After are ignored for this field type.
-
-.. image:: /images/installation_options09.png
+.. image:: /images/installation_options14.png
 
 .. index:: Radio buttons
 
@@ -258,7 +255,7 @@ is selected and visibleX  is what is visible on the user screen.
 **Before** means that the label appears to the left of the button.
 **After** means that the label appears to the right of the button.
 
-.. image:: /images/installation_options07.png
+.. image:: /images/installation_options15.png
 
 .. index:: Checkboxes
 
@@ -277,4 +274,6 @@ selected and visibleX  is what is visible on the user screen.
 **Before** means that the label appears to the left of the button.
 **After** means that the label appears to the right of the button.
 
-.. image:: /images/installation_options08.png
+.. image:: /images/installation_options16.png
+
+For more information, see the next article on :doc:`advanced_options`.

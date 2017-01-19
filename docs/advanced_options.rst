@@ -28,7 +28,7 @@ Enter email addresses here if you want the form to be sent in carbon copy.
 Send Results BCC
 ================
 
-Enter email addresses here if you want the form to be sent in blank carbon copy.
+Enter email addresses here if you want the form to be sent in blind carbon copy.
 
 .. index:: Reply To this address
 
@@ -49,10 +49,10 @@ If set to **Yes**, a "Reply to" field will appear when the email is sent.
 Auto Reset Fields
 =================
 
-**Yes** means that all fields will be reset when the user submits the form.
+**Yes** means that all fields will be cleared when the user submits the form.
 **No** means that the values entered by the user will remain after the form is submitted.
 
-.. note:: This option only works with the **Classic** form type. With JForm, **No** is automatically used.
+.. note:: With the **JForm** type, **No** is automatically used.
 
 .. index:: Name of CSS Class
 
@@ -66,7 +66,7 @@ Enter the name of the CSS class that will be used with the form.
 Space After Labels
 ==================
 
-Amount of pixels between the labels to left of the form and their input fields.
+Amount of pixels between the labels to the left of the form and their input fields.
 
 .. index:: Redirect URL
 
@@ -81,15 +81,29 @@ Make sure you enter a **fully formed** URL. Example: http://www.unlikelysource.c
 Use Captcha
 ===========
 
-Set to **No Captcha** if you don't want any Captcha protection.
-**Image Captcha** creates an image including a background rectangle, characters the user
-will have to type and lines blurring the image.
-**Text Captcha** creates a simple character string that the user has to type.
+With the **JForm** type:
 
 To be able to use Captcha, you can follow the procedure on the Joomla Website:
 https://docs.joomla.org/How_do_you_use_Recaptcha_in_Joomla%3F
 
-.. note:: If you don't have a Google account and don't want to create one, you can use a Captcha extension in the [https://extensions.joomla.org/tags/captcha Joomla] directory.
+This will give you a captcha looking like this:
+
+.. image:: /images/advanced_options01.png
+
+.. note:: If you don't have a Google account and don't want to create one, you can use a Captcha extension available in the [https://extensions.joomla.org/tags/captcha Joomla] directory.
+
+With the **Classic** form type:
+
+Set to **No Captcha** if you don't want any Captcha protection.
+
+**Image Captcha** creates an image including a background rectangle, characters the user
+will have to type and lines blurring the image.
+
+.. image:: /images/advanced_options02.png
+
+**Text Captcha** creates a simple character string the user has to type.
+
+.. image:: /images/advanced_options03.png
 
 .. index:: Directory to Write Captchas
 
@@ -167,7 +181,7 @@ The color in which error messages are displayed to the user.
 Success Text Color
 ==================
 
-The color in which sucess messages are displayed to the user.
+The color in which success messages are displayed to the user.
 
 .. index:: Name of Anchor Tag
 
@@ -195,7 +209,7 @@ The label for the upload fields.
 Allowed Attachment Filenames
 ============================
 
-List of approved filename extensions, seperated by commas.
+List of approved filename extensions, separated by commas.
 
 .. index:: Are upload fields required
 
@@ -203,7 +217,9 @@ Are upload fields required?
 ===========================
 
 If set to **Yes**, submitting the form will fail with an error if
-at least one upload field is empty.
+an upload field is empty.
+
+.. note:: This new feature is only available with the **JForm** type.
 
 .. index:: Directory to Save Attachments
 
@@ -292,7 +308,7 @@ The HTML tag used for module headers and titles.
 Header Class
 ============
 
-CSS class used for module headers and titles.
+The CSS class used for module headers and titles.
 
 .. index:: Module Style
 
