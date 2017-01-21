@@ -1,0 +1,348 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Basic configuration options &#8212; Simple Email Form 2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Advanced configuration options" href="advanced_options.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="advanced_options.html" title="Advanced configuration options"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Simple Email Form 2.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="basic-configuration-options">
+<span id="basicoptionsanchor"></span><h1>Basic configuration options<a class="headerlink" href="#basic-configuration-options" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When you move the pointer over a field label, an explanation box pops up to assist you during module configuration.</p>
+</div>
+<img alt="_images/basic_options01.png" src="_images/basic_options01.png" />
+<div class="section" id="form-type">
+<span id="index-0"></span><h2>Form type<a class="headerlink" href="#form-type" title="Permalink to this headline">¶</a></h2>
+<p>First, the form type must be chosen.</p>
+<p><strong>Classic</strong> shows the form as it used to be.
+This option is deprecated and won&#8217;t be available in version 3.0 of the module.</p>
+<p><strong>JForm</strong> is the most recent version that integrates new Joomla requirements.</p>
+<img alt="_images/basic_options02.png" src="_images/basic_options02.png" />
+</div>
+<div class="section" id="language">
+<span id="index-1"></span><h2>Language<a class="headerlink" href="#language" title="Permalink to this headline">¶</a></h2>
+<p>You can then set the language used in the form.
+Language files can be found and edited at
+<code class="docutils literal"><span class="pre">/path/to/joomla/modules/mod_simpleemailform/language_files</span></code>.</p>
+<p>You can choose from 30 different languages.</p>
+<img alt="_images/basic_options03.png" src="_images/basic_options03.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The module is now integrated with Joomla native language support.</p>
+</div>
+<span class="target" id="index-2"></span></div>
+<div class="section" id="email-address">
+<span id="index-3"></span><h2>Email address<a class="headerlink" href="#email-address" title="Permalink to this headline">¶</a></h2>
+<p>Next to <strong>Send Results To</strong>, you <strong>must</strong> enter an email address where
+information gathered by the simple email form will be sent.
+If there&#8217;s more than one address, separate them with commas or spaces.</p>
+<img alt="_images/basic_options04.png" src="_images/basic_options04.png" />
+<p>An empty <strong>Email address</strong> field will prevent the form from displaying and generate a
+&#8220;SORRY: This email address is invalid! Please re-enter your email address&#8221; error.</p>
+</div>
+<div class="section" id="label-alignment">
+<span id="index-4"></span><h2>Label alignment<a class="headerlink" href="#label-alignment" title="Permalink to this headline">¶</a></h2>
+<p>Choose to have the labels aligned LEFT, RIGHT or CENTER.</p>
+<img alt="_images/basic_options05.png" src="_images/basic_options05.png" />
+</div>
+</div>
+<div class="section" id="field-options">
+<h1>Field options<a class="headerlink" href="#field-options" title="Permalink to this headline">¶</a></h1>
+<p>Eight options can be used to configure each field:</p>
+<ul class="simple">
+<li>Activate Field X</li>
+<li>Label for Field X</li>
+<li>Default Value for Field X</li>
+<li>Display Size of Field X</li>
+<li>Maximum Length of Field X</li>
+<li>Field Type</li>
+<li>Field X Format</li>
+<li>Field X Before/After</li>
+</ul>
+<img alt="_images/basic_options06.png" src="_images/basic_options06.png" />
+<div class="section" id="activate-field-x">
+<span id="index-5"></span><h2>Activate Field X<a class="headerlink" href="#activate-field-x" title="Permalink to this headline">¶</a></h2>
+<p>Set this option to <strong>Yes</strong> to add field X to your form.</p>
+<p><strong>No</strong> means that field X won&#8217;t appear in the form.</p>
+<p><strong>Required</strong> means that the user won&#8217;t be able to submit the form if the field is empty.
+These fields are marked with an asterisk (*).</p>
+<img alt="_images/basic_options07.png" src="_images/basic_options07.png" />
+<p><strong>Hidden</strong> fields don&#8217;t appear on screen. The value is automatically added in the email that is sent to you.</p>
+</div>
+<div class="section" id="label-for-field-x">
+<span id="index-6"></span><h2>Label for Field X<a class="headerlink" href="#label-for-field-x" title="Permalink to this headline">¶</a></h2>
+<p>Short description of the information to be entered in this field.</p>
+</div>
+<div class="section" id="default-value-for-field-x">
+<span id="index-7"></span><h2>Default Value for Field X<a class="headerlink" href="#default-value-for-field-x" title="Permalink to this headline">¶</a></h2>
+<p>With field types <strong>Subject</strong>, <strong>Normal</strong> and <strong>Textarea</strong>, the default value appears
+automatically in the form.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Since version <strong>1.8.5</strong>, default values don&#8217;t appear in <strong>Textarea</strong> fields. The HTML5 placeholder attribute is used instead.</p>
+</div>
+<p>With field types <strong>Drop</strong>, <strong>Radio</strong> and <strong>Checkbox</strong>, this option populates the answers
+available to the user in this format:</p>
+<p><code class="docutils literal"><span class="pre">A=Apple,B=Banana,C=Cantelope</span></code></p>
+<p>In this case, the user will see Apple, Banana and Cantelope on screen.
+If &#8220;Apple&#8221; is chosen, &#8220;A&#8221; is returned.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To set a default for a <strong>Drop</strong>, <strong>Radio</strong> or <strong>Checkbox</strong> field, just make sure the desired default value is the first one specified.</p>
+</div>
+</div>
+<div class="section" id="display-size-of-field-x">
+<span id="index-8"></span><h2>Display Size of Field X<a class="headerlink" href="#display-size-of-field-x" title="Permalink to this headline">¶</a></h2>
+<p>Size, in rows and columns, of a <strong>Textarea</strong> field.
+Size is entered in the following format: row,column</p>
+<p>With field types <strong>Radio</strong> and <strong>Checkbox</strong>,
+you can enter the width, in pixels,
+of the labels besides each radio button or box.</p>
+<p><strong>Display Size</strong> has no effect on other field types.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This option is only available with the <strong>Classic</strong> form type.</p>
+</div>
+</div>
+<div class="section" id="maximum-length-of-field-x">
+<span id="index-9"></span><h2>Maximum Length of Field X<a class="headerlink" href="#maximum-length-of-field-x" title="Permalink to this headline">¶</a></h2>
+<p>Highest number of characters accepted from the user.
+This field isn&#8217;t used with field types <strong>Drop</strong>, <strong>Radio</strong> and <strong>Checkbox</strong>.</p>
+</div>
+<div class="section" id="field-type">
+<span id="index-10"></span><h2>Field Type<a class="headerlink" href="#field-type" title="Permalink to this headline">¶</a></h2>
+<p>Different types of input you may offer to the user.
+For more details about each one of them, see the <strong>Field Type</strong> section.</p>
+</div>
+<div class="section" id="field-x-format">
+<span id="index-11"></span><h2>Field X Format<a class="headerlink" href="#field-x-format" title="Permalink to this headline">¶</a></h2>
+<p>Only works with <strong>Radio</strong> and <strong>Checkbox</strong> field types.</p>
+<ul class="simple">
+<li><strong>Horizontal</strong> means that all radio buttons or checkboxes are on the same row.</li>
+</ul>
+<img alt="_images/basic_options08.png" src="_images/basic_options08.png" />
+<ul class="simple">
+<li><strong>Vertical</strong> means that the various button-label pairs are displayed one above the other.</li>
+</ul>
+<img alt="_images/basic_options09.png" src="_images/basic_options09.png" />
+<ul class="simple">
+<li><strong>Use CSS</strong> means that you use your custom CSS to display the buttons or boxes.</li>
+</ul>
+</div>
+<div class="section" id="field-x-before-after">
+<span id="index-12"></span><h2>Field X Before/After<a class="headerlink" href="#field-x-before-after" title="Permalink to this headline">¶</a></h2>
+<p>Only used with <strong>Radio</strong> and <strong>Checkbox</strong> field types.</p>
+<ul class="simple">
+<li><strong>Before</strong> means that labels are displayed to the left of their respective buttons or checkboxes.</li>
+<li><strong>After</strong> means that they are displayed to the right.</li>
+</ul>
+</div>
+<div class="section" id="field-types">
+<span id="index-13"></span><h2>Field types<a class="headerlink" href="#field-types" title="Permalink to this headline">¶</a></h2>
+<p>In version <strong>2.0</strong>, available field types are:</p>
+<ul class="simple">
+<li>From</li>
+<li>Subject</li>
+<li>Normal (text)</li>
+<li>Textarea</li>
+<li>Drop (select)</li>
+<li>Radio</li>
+<li>Checkbox</li>
+</ul>
+<div class="section" id="from">
+<span id="index-14"></span><h3>From<a class="headerlink" href="#from" title="Permalink to this headline">¶</a></h3>
+<p>This field type is used to get the email address of the user filling out the form.
+The first field defaults to <strong>From</strong>.</p>
+<img alt="_images/basic_options10.png" src="_images/basic_options10.png" />
+</div>
+<div class="section" id="subject">
+<span id="index-15"></span><h3>Subject<a class="headerlink" href="#subject" title="Permalink to this headline">¶</a></h3>
+<p>Whatever the user enters here will become the &#8220;Subject&#8221; in the email sent to you.
+The second field defaults to <strong>Subject</strong>.</p>
+<img alt="_images/basic_options11.png" src="_images/basic_options11.png" />
+</div>
+<div class="section" id="normal">
+<span id="index-16"></span><h3>Normal<a class="headerlink" href="#normal" title="Permalink to this headline">¶</a></h3>
+<p>This field will appear as one line on your input form.</p>
+<p>If you do not wish to enter a <strong>default value</strong>, make sure to hit the <strong>spacebar</strong>.</p>
+<img alt="_images/basic_options12.png" src="_images/basic_options12.png" />
+</div>
+<div class="section" id="textarea">
+<span id="index-17"></span><h3>Textarea<a class="headerlink" href="#textarea" title="Permalink to this headline">¶</a></h3>
+<p>Creates a text box in which the user can type a message.
+<strong>Label</strong> is the only field that is not ignored by this field type.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The new JForm type displays an HTML editor.</p>
+</div>
+<img alt="_images/basic_options13.png" src="_images/basic_options13.png" />
+</div>
+<div class="section" id="drop">
+<span id="index-18"></span><h3>Drop<a class="headerlink" href="#drop" title="Permalink to this headline">¶</a></h3>
+<p>In the <strong>Default Value</strong> field, enter options separated by commas as follows: Return1=Visible1,Return2=Visible2.</p>
+<p>ReturnX is the value returned in the email message.
+VisibleX is the value appearing in the form.</p>
+<img alt="_images/basic_options14.png" src="_images/basic_options14.png" />
+</div>
+<div class="section" id="radio">
+<span id="index-19"></span><h3>Radio<a class="headerlink" href="#radio" title="Permalink to this headline">¶</a></h3>
+<p>In the <strong>Default Value</strong> field, enter options separated by commas as follows:
+Return1=Visible1,Return2=Visible2.</p>
+<p>ReturnX is the value returned in the email message sent when that button
+is selected. VisibleX is the value appearing in the form.</p>
+<p><strong>Horizontal</strong> format is table/row/col/col/col.</p>
+<p><strong>Vertical</strong> format is table/row/col/col/row/col/col.</p>
+<p><strong>Use CSS</strong> (default) assumes you will use your custom CSS.</p>
+<p><strong>Before</strong> means that the label appears to the left of the button.</p>
+<p><strong>After</strong> means that the label appears to the right of the button.</p>
+<img alt="_images/basic_options15.png" src="_images/basic_options15.png" />
+</div>
+<div class="section" id="checkbox">
+<span id="index-20"></span><h3>Checkbox<a class="headerlink" href="#checkbox" title="Permalink to this headline">¶</a></h3>
+<p>In the <strong>Default Value</strong> field, enter options separated by commas as follows:
+Return1=Visible1,Return2=Visible2.</p>
+<p>ReturnX is the value returned in the email message sent when that box is checked.
+VisibleX is the value appearing in the form.</p>
+<p><strong>Horizontal</strong> format is table/row/col/col/col.</p>
+<p><strong>Vertical</strong> format is table/row/col/col/row/col/col.</p>
+<p><strong>Use CSS</strong> (default) assumes you will use your custom CSS.</p>
+<p><strong>Before</strong> means that the label appears to the left of the box.</p>
+<p><strong>After</strong> means that the label appears to the right of the box.</p>
+<img alt="_images/basic_options16.png" src="_images/basic_options16.png" />
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Basic configuration options</a><ul>
+<li><a class="reference internal" href="#form-type">Form type</a></li>
+<li><a class="reference internal" href="#language">Language</a></li>
+<li><a class="reference internal" href="#email-address">Email address</a></li>
+<li><a class="reference internal" href="#label-alignment">Label alignment</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#field-options">Field options</a><ul>
+<li><a class="reference internal" href="#activate-field-x">Activate Field X</a></li>
+<li><a class="reference internal" href="#label-for-field-x">Label for Field X</a></li>
+<li><a class="reference internal" href="#default-value-for-field-x">Default Value for Field X</a></li>
+<li><a class="reference internal" href="#display-size-of-field-x">Display Size of Field X</a></li>
+<li><a class="reference internal" href="#maximum-length-of-field-x">Maximum Length of Field X</a></li>
+<li><a class="reference internal" href="#field-type">Field Type</a></li>
+<li><a class="reference internal" href="#field-x-format">Field X Format</a></li>
+<li><a class="reference internal" href="#field-x-before-after">Field X Before/After</a></li>
+<li><a class="reference internal" href="#field-types">Field types</a><ul>
+<li><a class="reference internal" href="#from">From</a></li>
+<li><a class="reference internal" href="#subject">Subject</a></li>
+<li><a class="reference internal" href="#normal">Normal</a></li>
+<li><a class="reference internal" href="#textarea">Textarea</a></li>
+<li><a class="reference internal" href="#drop">Drop</a></li>
+<li><a class="reference internal" href="#radio">Radio</a></li>
+<li><a class="reference internal" href="#checkbox">Checkbox</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="previous chapter">Installation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="advanced_options.html"
+                        title="next chapter">Advanced configuration options</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/basic_options.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="advanced_options.html" title="Advanced configuration options"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Simple Email Form 2.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Doug Bierer, Andrew Caya and Martin Beaudry.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

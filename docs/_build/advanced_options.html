@@ -1,0 +1,355 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Advanced configuration options &#8212; Simple Email Form 2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Configuration Example" href="demo_config.html" />
+    <link rel="prev" title="Basic configuration options" href="basic_options.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="demo_config.html" title="Configuration Example"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="basic_options.html" title="Basic configuration options"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Simple Email Form 2.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="advanced-configuration-options">
+<span id="advancedoptionsanchor"></span><h1>Advanced configuration options<a class="headerlink" href="#advanced-configuration-options" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="caching">
+<span id="index-0"></span><h2>Caching<a class="headerlink" href="#caching" title="Permalink to this headline">¶</a></h2>
+<p><strong>Use global</strong> means that this module&#8217;s content will be cached according to your Joomla&#8217;s global cache setings.</p>
+<p><strong>No caching</strong> means that no content from this module will be cached.</p>
+</div>
+<div class="section" id="form-instance">
+<span id="index-1"></span><h2>Form Instance<a class="headerlink" href="#form-instance" title="Permalink to this headline">¶</a></h2>
+<p>If you use more than one simple email form on the same page, you need to
+give each one a unique number to differentiate them from the other forms.</p>
+</div>
+<div class="section" id="send-results-cc">
+<span id="index-2"></span><h2>Send Results CC<a class="headerlink" href="#send-results-cc" title="Permalink to this headline">¶</a></h2>
+<p>Enter email addresses here if you want the form to be sent in carbon copy.</p>
+</div>
+<div class="section" id="send-results-bcc">
+<span id="index-3"></span><h2>Send Results BCC<a class="headerlink" href="#send-results-bcc" title="Permalink to this headline">¶</a></h2>
+<p>Enter email addresses here if you want the form to be sent in blind carbon copy.</p>
+</div>
+<div class="section" id="reply-to-this-address">
+<span id="index-4"></span><h2>Reply To this address<a class="headerlink" href="#reply-to-this-address" title="Permalink to this headline">¶</a></h2>
+<p>Enter email addresses where replies should be sent to.</p>
+</div>
+<div class="section" id="activate-reply-to">
+<span id="index-5"></span><h2>Activate Reply To<a class="headerlink" href="#activate-reply-to" title="Permalink to this headline">¶</a></h2>
+<p>If set to <strong>Yes</strong>, a &#8220;Reply to&#8221; field will appear when the email is sent.</p>
+</div>
+<div class="section" id="auto-reset-fields">
+<span id="index-6"></span><h2>Auto Reset Fields<a class="headerlink" href="#auto-reset-fields" title="Permalink to this headline">¶</a></h2>
+<p><strong>Yes</strong> means that all fields will be cleared when the user submits the form.</p>
+<p><strong>No</strong> means that the values entered by the user will remain after the form is submitted.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">With the <strong>JForm</strong> type, <strong>No</strong> is automatically used.</p>
+</div>
+</div>
+<div class="section" id="name-of-css-class">
+<span id="index-7"></span><h2>Name of CSS Class<a class="headerlink" href="#name-of-css-class" title="Permalink to this headline">¶</a></h2>
+<p>Enter the name of the CSS class that will be used with the form.</p>
+</div>
+<div class="section" id="space-after-labels">
+<span id="index-8"></span><h2>Space After Labels<a class="headerlink" href="#space-after-labels" title="Permalink to this headline">¶</a></h2>
+<p>Amount of pixels between the labels to the left of the form and their input fields.</p>
+</div>
+<div class="section" id="redirect-url">
+<span id="index-9"></span><h2>Redirect URL<a class="headerlink" href="#redirect-url" title="Permalink to this headline">¶</a></h2>
+<p>Enter a Website address where the user should be redirected after submitting the form.
+Make sure you enter a <strong>fully formed</strong> URL.</p>
+<p>Example: <a class="reference external" href="http://www.unlikelysource.com/">http://www.unlikelysource.com/</a></p>
+</div>
+<div class="section" id="use-captcha">
+<span id="index-10"></span><h2>Use Captcha<a class="headerlink" href="#use-captcha" title="Permalink to this headline">¶</a></h2>
+<p>With the <strong>JForm</strong> type:</p>
+<p>To be able to use Captcha, you can follow the procedure on the <a class="reference external" href="https://docs.joomla.org/How_do_you_use_Recaptcha_in_Joomla%3F">Joomla Website</a></p>
+<p>This will produce a captcha looking like this:</p>
+<img alt="_images/advanced_options01.png" src="_images/advanced_options01.png" />
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you don&#8217;t have a Google account and don&#8217;t want to create one, you can use a Captcha extension available in the <a class="reference external" href="https://extensions.joomla.org/tags/captcha">Joomla Extenstions Directory</a>.</p>
+</div>
+<p>With the <strong>Classic</strong> form type:</p>
+<p>Set to <strong>No Captcha</strong> if you don&#8217;t want any Captcha protection.</p>
+<p><strong>Image Captcha</strong> creates an image including a background rectangle, characters the user
+will have to type and lines blurring the image.</p>
+<img alt="_images/advanced_options02.png" src="_images/advanced_options02.png" />
+<p><strong>Text Captcha</strong> creates a simple character string the user has to type.</p>
+<img alt="_images/advanced_options03.png" src="_images/advanced_options03.png" />
+</div>
+<div class="section" id="directory-to-write-captchas">
+<span id="index-11"></span><h2>Directory to Write Captchas<a class="headerlink" href="#directory-to-write-captchas" title="Permalink to this headline">¶</a></h2>
+<p>An absolute path where captchas will be written.</p>
+<p>Example : /var/www/application/images</p>
+<p>Make sure that the repository is writable.</p>
+</div>
+<div class="section" id="url-for-captcha-directory">
+<span id="index-12"></span><h2>URL for Captcha Directory<a class="headerlink" href="#url-for-captcha-directory" title="Permalink to this headline">¶</a></h2>
+<p>URL matching the directory specified above.</p>
+</div>
+<div class="section" id="captcha-word-length">
+<span id="index-13"></span><h2>Captcha Word Length<a class="headerlink" href="#captcha-word-length" title="Permalink to this headline">¶</a></h2>
+<p>Number of characters the user will need to enter.</p>
+</div>
+<div class="section" id="captcha-font-size">
+<span id="index-14"></span><h2>Captcha Font Size<a class="headerlink" href="#captcha-font-size" title="Permalink to this headline">¶</a></h2>
+<p>Size of the characters in the captcha image.</p>
+</div>
+<div class="section" id="captcha-width">
+<span id="index-15"></span><h2>Captcha Width<a class="headerlink" href="#captcha-width" title="Permalink to this headline">¶</a></h2>
+<p>Width in pixels of the captcha image.</p>
+</div>
+<div class="section" id="captcha-height">
+<span id="index-16"></span><h2>Captcha Height<a class="headerlink" href="#captcha-height" title="Permalink to this headline">¶</a></h2>
+<p>Height in pixels of the captcha image.</p>
+</div>
+<div class="section" id="captcha-text-color">
+<span id="index-17"></span><h2>Captcha Text Color<a class="headerlink" href="#captcha-text-color" title="Permalink to this headline">¶</a></h2>
+<p>The color of the characters in the captcha image.</p>
+</div>
+<div class="section" id="captcha-lines-color">
+<span id="index-18"></span><h2>Captcha Lines Color<a class="headerlink" href="#captcha-lines-color" title="Permalink to this headline">¶</a></h2>
+<p>The color of the lines partially hiding the characters in the captcha image.</p>
+</div>
+<div class="section" id="captcha-background-color">
+<span id="index-19"></span><h2>Captcha Background Color<a class="headerlink" href="#captcha-background-color" title="Permalink to this headline">¶</a></h2>
+<p>The color of the captcha image background.</p>
+</div>
+<div class="section" id="error-text-color">
+<span id="index-20"></span><h2>Error Text Color<a class="headerlink" href="#error-text-color" title="Permalink to this headline">¶</a></h2>
+<p>The color in which error messages are displayed to the user.</p>
+</div>
+<div class="section" id="success-text-color">
+<span id="index-21"></span><h2>Success Text Color<a class="headerlink" href="#success-text-color" title="Permalink to this headline">¶</a></h2>
+<p>The color in which success messages are displayed to the user.</p>
+</div>
+<div class="section" id="name-of-anchor-tag">
+<span id="index-22"></span><h2>Name of Anchor Tag<a class="headerlink" href="#name-of-anchor-tag" title="Permalink to this headline">¶</a></h2>
+<p>When form is submitted, it redirects to the anchor tag mentioned here.</p>
+</div>
+<div class="section" id="number-of-upload-fields">
+<span id="index-23"></span><h2>Number of Upload Fields<a class="headerlink" href="#number-of-upload-fields" title="Permalink to this headline">¶</a></h2>
+<p>Determines the number of attachments users can or must send through the form.</p>
+</div>
+<div class="section" id="upload-field-label">
+<span id="index-24"></span><h2>Upload Field Label<a class="headerlink" href="#upload-field-label" title="Permalink to this headline">¶</a></h2>
+<p>The label for the upload fields.</p>
+</div>
+<div class="section" id="allowed-attachment-filenames">
+<span id="index-25"></span><h2>Allowed Attachment Filenames<a class="headerlink" href="#allowed-attachment-filenames" title="Permalink to this headline">¶</a></h2>
+<p>List of approved filename extensions, separated by commas.</p>
+</div>
+<div class="section" id="are-upload-fields-required">
+<span id="index-26"></span><h2>Are upload fields required?<a class="headerlink" href="#are-upload-fields-required" title="Permalink to this headline">¶</a></h2>
+<p>If set to <strong>Yes</strong>, submitting the form will fail with an error if
+an upload field is empty.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This new feature is only available with the <strong>JForm</strong> type.</p>
+</div>
+</div>
+<div class="section" id="directory-to-save-attachments">
+<span id="index-27"></span><h2>Directory to Save Attachments<a class="headerlink" href="#directory-to-save-attachments" title="Permalink to this headline">¶</a></h2>
+<p>An absolute path to the directory in which attachments sent by users will be saved.</p>
+</div>
+<div class="section" id="send-me-a-copy-field-label">
+<span id="index-28"></span><h2>Send Me A Copy Field Label<a class="headerlink" href="#send-me-a-copy-field-label" title="Permalink to this headline">¶</a></h2>
+<p>The label for field <strong>Send Me A Copy</strong>, set below.</p>
+</div>
+<div class="section" id="send-me-a-copy-field">
+<span id="index-29"></span><h2>Send Me A Copy Field<a class="headerlink" href="#send-me-a-copy-field" title="Permalink to this headline">¶</a></h2>
+<p>If set to <strong>Yes</strong>, users can ask to receive a copy of the form that they send.</p>
+</div>
+<div class="section" id="send-user-a-copy-automatically">
+<span id="index-30"></span><h2>Send User a Copy Automatically<a class="headerlink" href="#send-user-a-copy-automatically" title="Permalink to this headline">¶</a></h2>
+<p>If set to <strong>Yes</strong>, users will always receive a copy of the form that they send.</p>
+</div>
+<div class="section" id="email-check">
+<span id="index-31"></span><h2>Email Check<a class="headerlink" href="#email-check" title="Permalink to this headline">¶</a></h2>
+<p>If set to <strong>Yes</strong>, the data entered in the <strong>From</strong> field is validated and must
+follow the format <a class="reference external" href="mailto:emailaccount&#37;&#52;&#48;domain">emailaccount<span>&#64;</span>domain</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">With the <strong>JForm</strong> type, this validation occurs automatically.</p>
+</div>
+</div>
+<div class="section" id="include-article-title">
+<span id="index-32"></span><h2>Include Article Title<a class="headerlink" href="#include-article-title" title="Permalink to this headline">¶</a></h2>
+<p>If set to <strong>Yes</strong>, the Joomla article title is automatically included
+in a hidden field added to the email.</p>
+</div>
+<div class="section" id="test-mode">
+<span id="index-33"></span><h2>Test Mode<a class="headerlink" href="#test-mode" title="Permalink to this headline">¶</a></h2>
+<p>If set to <strong>Yes</strong>, the form is used in test mode.</p>
+</div>
+<div class="section" id="override-rendering">
+<span id="index-34"></span><h2>Override rendering<a class="headerlink" href="#override-rendering" title="Permalink to this headline">¶</a></h2>
+<p>Set this option to <strong>Yes</strong> if you want to use your own template to
+modify the module&#8217;s display.</p>
+</div>
+<div class="section" id="module-tag">
+<span id="index-35"></span><h2>Module Tag<a class="headerlink" href="#module-tag" title="Permalink to this headline">¶</a></h2>
+<p>The html tag used for the module.</p>
+</div>
+<div class="section" id="bootstrap-size">
+<span id="index-36"></span><h2>Bootstrap Size<a class="headerlink" href="#bootstrap-size" title="Permalink to this headline">¶</a></h2>
+<p>The number of columns used in the module.</p>
+</div>
+<div class="section" id="header-tag">
+<span id="index-37"></span><h2>Header Tag<a class="headerlink" href="#header-tag" title="Permalink to this headline">¶</a></h2>
+<p>The HTML tag used for module headers and titles.</p>
+</div>
+<div class="section" id="header-class">
+<span id="index-38"></span><h2>Header Class<a class="headerlink" href="#header-class" title="Permalink to this headline">¶</a></h2>
+<p>The CSS class used for module headers and titles.</p>
+</div>
+<div class="section" id="module-style">
+<span id="index-39"></span><h2>Module Style<a class="headerlink" href="#module-style" title="Permalink to this headline">¶</a></h2>
+<p>This option is used to override the template style.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Advanced configuration options</a><ul>
+<li><a class="reference internal" href="#caching">Caching</a></li>
+<li><a class="reference internal" href="#form-instance">Form Instance</a></li>
+<li><a class="reference internal" href="#send-results-cc">Send Results CC</a></li>
+<li><a class="reference internal" href="#send-results-bcc">Send Results BCC</a></li>
+<li><a class="reference internal" href="#reply-to-this-address">Reply To this address</a></li>
+<li><a class="reference internal" href="#activate-reply-to">Activate Reply To</a></li>
+<li><a class="reference internal" href="#auto-reset-fields">Auto Reset Fields</a></li>
+<li><a class="reference internal" href="#name-of-css-class">Name of CSS Class</a></li>
+<li><a class="reference internal" href="#space-after-labels">Space After Labels</a></li>
+<li><a class="reference internal" href="#redirect-url">Redirect URL</a></li>
+<li><a class="reference internal" href="#use-captcha">Use Captcha</a></li>
+<li><a class="reference internal" href="#directory-to-write-captchas">Directory to Write Captchas</a></li>
+<li><a class="reference internal" href="#url-for-captcha-directory">URL for Captcha Directory</a></li>
+<li><a class="reference internal" href="#captcha-word-length">Captcha Word Length</a></li>
+<li><a class="reference internal" href="#captcha-font-size">Captcha Font Size</a></li>
+<li><a class="reference internal" href="#captcha-width">Captcha Width</a></li>
+<li><a class="reference internal" href="#captcha-height">Captcha Height</a></li>
+<li><a class="reference internal" href="#captcha-text-color">Captcha Text Color</a></li>
+<li><a class="reference internal" href="#captcha-lines-color">Captcha Lines Color</a></li>
+<li><a class="reference internal" href="#captcha-background-color">Captcha Background Color</a></li>
+<li><a class="reference internal" href="#error-text-color">Error Text Color</a></li>
+<li><a class="reference internal" href="#success-text-color">Success Text Color</a></li>
+<li><a class="reference internal" href="#name-of-anchor-tag">Name of Anchor Tag</a></li>
+<li><a class="reference internal" href="#number-of-upload-fields">Number of Upload Fields</a></li>
+<li><a class="reference internal" href="#upload-field-label">Upload Field Label</a></li>
+<li><a class="reference internal" href="#allowed-attachment-filenames">Allowed Attachment Filenames</a></li>
+<li><a class="reference internal" href="#are-upload-fields-required">Are upload fields required?</a></li>
+<li><a class="reference internal" href="#directory-to-save-attachments">Directory to Save Attachments</a></li>
+<li><a class="reference internal" href="#send-me-a-copy-field-label">Send Me A Copy Field Label</a></li>
+<li><a class="reference internal" href="#send-me-a-copy-field">Send Me A Copy Field</a></li>
+<li><a class="reference internal" href="#send-user-a-copy-automatically">Send User a Copy Automatically</a></li>
+<li><a class="reference internal" href="#email-check">Email Check</a></li>
+<li><a class="reference internal" href="#include-article-title">Include Article Title</a></li>
+<li><a class="reference internal" href="#test-mode">Test Mode</a></li>
+<li><a class="reference internal" href="#override-rendering">Override rendering</a></li>
+<li><a class="reference internal" href="#module-tag">Module Tag</a></li>
+<li><a class="reference internal" href="#bootstrap-size">Bootstrap Size</a></li>
+<li><a class="reference internal" href="#header-tag">Header Tag</a></li>
+<li><a class="reference internal" href="#header-class">Header Class</a></li>
+<li><a class="reference internal" href="#module-style">Module Style</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="basic_options.html"
+                        title="previous chapter">Basic configuration options</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="demo_config.html"
+                        title="next chapter">Configuration Example</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/advanced_options.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="demo_config.html" title="Configuration Example"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="basic_options.html" title="Basic configuration options"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Simple Email Form 2.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2017, Doug Bierer, Andrew Caya and Martin Beaudry.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>
