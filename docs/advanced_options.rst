@@ -97,7 +97,7 @@ This will produce a captcha looking like this:
 
 .. image:: /images/advanced_options01.png
 
-.. note:: If you don't have a Google account and don't want to create one, you can use a Captcha extension available in the `Joomla directory <https://extensions.joomla.org/tags/captcha>`_.
+.. note:: If you don't have a Google account and don't want to create one, you can use a Captcha extension available in the `Joomla Extenstions Directory <https://extensions.joomla.org/tags/captcha>`_.
 
 With the **Classic** form type:
 

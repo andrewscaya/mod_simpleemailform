@@ -82,7 +82,7 @@ Set this option to **Yes** to add field X to your form.
 
 **No** means that field X won't appear in the form.
 
-**Required** means that the user won't be able to send the form if the field is empty.
+**Required** means that the user won't be able to submit the form if the field is empty.
 These fields are marked with an asterisk (*).
 
 .. image:: /images/basic_options07.png
