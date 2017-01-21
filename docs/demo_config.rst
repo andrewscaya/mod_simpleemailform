@@ -3,23 +3,23 @@
 Configuration Example
 =====================
 
-.. image:: /images/demo_config1.png
+.. image:: /images/demo_config01.png
 
-.. image:: /images/demo_config2.png
+.. image:: /images/demo_config02.png
 
-.. image:: /images/demo_config3.png
+.. image:: /images/demo_config03.png
 
-.. image:: /images/demo_config4.png
+.. image:: /images/demo_config04.png
 
-.. image:: /images/demo_config5.png
+.. image:: /images/demo_config05.png
 
-.. image:: /images/demo_config6.png
+.. image:: /images/demo_config06.png
 
-.. image:: /images/demo_config7.png
+.. image:: /images/demo_config07.png
 
-.. image:: /images/demo_config8.png
+.. image:: /images/demo_config08.png
 
-.. image:: /images/demo_config9.png
+.. image:: /images/demo_config09.png
 
 .. image:: /images/demo_config10.png
 
