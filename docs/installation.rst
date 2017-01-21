@@ -33,7 +33,7 @@ Select ``Extensions`` - ``Manage`` - ``Manage``
 
 .. image:: /images/installation02.png
 
-Make sure the **Status** is **Published** (green check in the **Status** column).
+Make sure the Simple Email Form's **Status** is **Published** (green check in the Status column).
 
 .. image:: /images/installation04.png
 
@@ -72,7 +72,5 @@ Make sure that the **Content - Load Modules** plug-in is enabled.
 
 .. image:: /images/installation09.png
 
-You're now ready to configure the basic options in the **Module** tab
+You are now ready to configure the basic options in the **Module** tab
 and the advanced options in the **Advanced** tab.
-
-For more information, see the next article on :doc:`basic_options`.
