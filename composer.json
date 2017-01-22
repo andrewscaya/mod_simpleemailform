@@ -35,7 +35,7 @@
     "require-dev": {
         "joomla/framework": "dev-master",
         "phpunit/phpunit": "^4.8",
-        "mockery/mockery": "dev-master",
+        "mockery/mockery": "0.9.7",
         "squizlabs/php_codesniffer": "^2.3",
         "se/selenium-server-standalone": "^2.53",
         "codeception/codeception": "^2.2",
