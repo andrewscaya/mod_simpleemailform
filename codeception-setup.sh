@@ -5,7 +5,7 @@ mv joomla_3-6-4-stable-full_package-zip\?format\=zip joomla_3-6-4-stable-full_pa
 git clone https://github.com/andrewscaya/mod_simpleemailform
 cd mod_simpleemailform
 git fetch --all
-git checkout 2.0-dev
+git checkout codefreeze
 cd /tmp
 wget http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar
 java -Xms40m -Xmx256m -jar /tmp/selenium-server-standalone-2.53.1.jar > /dev/null 2>&1 &
