@@ -884,7 +884,7 @@ class sefv2modsimpleemailform implements
 
             $resultInput = preg_match_all('/<input.+?>/is', $input, $matchesInput);
 
-            if ($resultInput > 1) {
+            if ($resultInput > 1 || strpos($input, 'type="checkbox"') !== false) {
                 $multiInput = '';
 
                 $lookBehind = $this->formPrefixName . $this->fieldPrefixName;
@@ -1141,24 +1141,28 @@ class sefv2modsimpleemailform implements
                     $type .= 'radio';
                 } elseif ($from !== 'C') {
                     $type .= 'list';
+                } else {
+                    $type .= 'checkboxes';
                 }
 
                 $multiValue = '';
                 $valueArray = explode(',', $value);
 
                 if (count($valueArray) > 1) {
-                    foreach ($valueArray as $multiOptions) {
-                        $valuesToInsert = explode('=', $multiOptions);
-                        $valuesToInsert = array_map('trim', $valuesToInsert);
-                        $multiValue .= "<option value=\"$valuesToInsert[0]\">$valuesToInsert[1]</option>";
-                    }
-
-                    if ($from === 'C') {
-                        $type .= 'checkboxes';
+                    foreach ($valueArray as $multiValues) {
+                        $valuesToInsert = explode('=', $multiValues);
+                        if (count($valuesToInsert) > 1) {
+                            $valuesToInsert = array_map('trim', $valuesToInsert);
+                            $multiValue .= "<option value=\"$valuesToInsert[0]\">$valuesToInsert[1]</option>";
+                        }
                     }
                 } else {
                     if ($from === 'C') {
-                        $type .= 'checkbox';
+                        $valuesToInsert = explode('=', $valueArray[0]);
+                        if (count($valuesToInsert) > 1) {
+                            $valuesToInsert = array_map('trim', $valuesToInsert);
+                            $multiValue .= "<option value=\"$valuesToInsert[0]\">$valuesToInsert[1]</option>";
+                        }
                     }
                 }
 

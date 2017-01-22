@@ -1763,7 +1763,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
         } elseif ($active !== 'H' && $from === 'C' && strpos($value, ',') === false) {
             $this->assertEquals(
                 1,
-                preg_match('/type="checkbox"/is', $output)
+                preg_match('/type="checkboxes"/is', $output)
             );
         } elseif ($active !== 'H' && $from === 'D') {
             $this->assertEquals(

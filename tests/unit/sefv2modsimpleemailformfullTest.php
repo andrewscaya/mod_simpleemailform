@@ -511,7 +511,7 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             1,
-            preg_match('/<field.+type="checkbox"/is', $output)
+            preg_match('/<field.+type="checkboxes"/is', $output)
         );
 
         $this->assertEquals(
