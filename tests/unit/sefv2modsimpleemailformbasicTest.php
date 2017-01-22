@@ -1451,10 +1451,16 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
             array($input)
         );
 
+        $expectedPattern = '/<tr\sclass="mod_sef_tr">.*'
+            . '<td\sclass="mod_sef_td">.*'
+            . '<td\swidth="5">.*'
+            . '<td\sclass="mod_sef_td">.*'
+            . '<input.+name="mod_simpleemailform_field2_1".+type="text">/is';
+
         $this->assertEquals(
             1,
             preg_match(
-                '/<tr class="mod_sef_tr"><td class="mod_sef_td"><input/',
+                $expectedPattern,
                 $output
             )
         );
@@ -1488,6 +1494,74 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
             1,
             preg_match(
                 '/<th.+<label>My\sField<\/label>.+<input/s',
+                $output
+            )
+        );
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::decorateInput($input, $label = null)
+     *
+     * @since 2.0.0
+     */
+    public function testDecorateInputTypeSubmitWithLabel()
+    {
+        $input = '<input 
+                    name="mod_simpleemailform_submit_1" 
+                    id="mod_simpleemailform_submit_1"
+                    value="Submit"
+                    class="required"
+                    type="submit">';
+
+        $output = $this->sefv2modsimpleemailformMethods['decorateInput']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array($input, 'test')
+        );
+
+        $expectedPattern = '/<tr\sclass="mod_sef_tr">.*'
+            . '<td\sclass="mod_sef_td">.*'
+            . '<td\swidth="5">.*'
+            . '<td\sclass="mod_sef_td">.*'
+            . '<input.+name="mod_simpleemailform_submit_1".+type="submit">/is';
+
+        $this->assertEquals(
+            1,
+            preg_match(
+                $expectedPattern,
+                $output
+            )
+        );
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::decorateInput($input, $label = null)
+     *
+     * @since 2.0.0
+     */
+    public function testDecorateInputTypeResetWithLabel()
+    {
+        $input = '<input 
+                    name="mod_simpleemailform_reset_1" 
+                    id="mod_simpleemailform_reset_1"
+                    value="Submit"
+                    class="required"
+                    type="reset">';
+
+        $output = $this->sefv2modsimpleemailformMethods['decorateInput']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array($input, 'test')
+        );
+
+        $expectedPattern = '/<tr\sclass="mod_sef_tr">.*'
+            . '<td\sclass="mod_sef_td">.*'
+            . '<td\swidth="5">.*'
+            . '<td\sclass="mod_sef_td">.*'
+            . '<input.+name="mod_simpleemailform_reset_1".+type="reset">/is';
+
+        $this->assertEquals(
+            1,
+            preg_match(
+                $expectedPattern,
                 $output
             )
         );

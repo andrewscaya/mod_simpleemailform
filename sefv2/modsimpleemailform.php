@@ -872,9 +872,18 @@ class sefv2modsimpleemailform implements
         $td = "<td class=\"{$this->formTdClass}\">";
         $tdClose = '</td>';
 
-        // If no label, field is hidden.
-        if (!isset($label)) {
-            $decoratedInput .= $tr . $td . $input . $tdClose . $trClose . "\n";
+        // If no label, field is hidden or of types "submit" or "reset".
+        if (!isset($label) || preg_match('/type="submit|reset"/is', $input) === 1) {
+            // Submit and reset buttons.
+            $decoratedInput .= $tr
+                . $td
+                . $tdClose
+                . '<td width="' . $this->formCol2Space  . '">&nbsp;</td>'
+                . $td
+                . $input
+                . $tdClose
+                . $trClose
+                . "\n";
         } else {
             $label = (string) $label;
 
@@ -974,7 +983,14 @@ class sefv2modsimpleemailform implements
                     $label
                 </th>";
 
-            $decoratedInput .= $tr . $th . $td . $input . $tdClose . $trClose . "\n";
+            $decoratedInput .= $tr
+                . $th
+                . '<td width="' . $this->formCol2Space  . '">&nbsp;</td>'
+                . $td
+                . $input
+                . $tdClose
+                . $trClose
+                . "\n";
         }
 
         return $decoratedInput;
@@ -1441,6 +1457,22 @@ class sefv2modsimpleemailform implements
 
         $fieldSets = $this->getFieldset('main');
 
+        $submitandReset = "<br /><input
+                                class=\"{$this->formInputClass}\"
+                                name=\"{$this->formSubmitButtonName}_{$this->formInstance}\"
+                                id=\"{$this->formSubmitButtonName}_{$this->formInstance}\"
+                                value=\"{$this->transLang['MOD_SIMPLEEMAILFORM_button_submit']}\"
+                                title=\"{$this->transLang['MOD_SIMPLEEMAILFORM_click_submit']}\"
+                                type=\"submit\">\n";
+
+        $submitandReset .= "<input
+                                class=\"{$this->formInputClass}\"
+                                name=\"{$this->formResetButtonName}_{$this->formInstance}\"
+                                id=\"{$this->formResetButtonName}_{$this->formInstance}\"
+                                value=\"{$this->transLang['MOD_SIMPLEEMAILFORM_button_reset']}\"
+                                title=\"\"
+                                type=\"reset\">\n";
+
         if (!empty($fieldSets)) {
             foreach ($fieldSets as $fieldName => $field) {
                 if ($field->hidden) {
@@ -1453,25 +1485,11 @@ class sefv2modsimpleemailform implements
 
         $this->output .= $this->decorateInput(\JHtml::_('form.token'));
 
+        $this->output .= $this->decorateInput($submitandReset);
+
         $this->output .= "\t</tbody>\n";
 
         $this->output .= "</table>\n";
-
-        $this->output .= "<br /><input
-                                        class=\"{$this->formInputClass}\"
-                                        name=\"{$this->formSubmitButtonName}_{$this->formInstance}\"
-                                        id=\"{$this->formSubmitButtonName}_{$this->formInstance}\"
-                                        value=\"{$this->transLang['MOD_SIMPLEEMAILFORM_button_submit']}\"
-                                        title=\"{$this->transLang['MOD_SIMPLEEMAILFORM_click_submit']}\"
-                                        type=\"submit\">\n";
-
-        $this->output .= "<input
-                                class=\"{$this->formInputClass}\"
-                                name=\"{$this->formResetButtonName}_{$this->formInstance}\"
-                                id=\"{$this->formResetButtonName}_{$this->formInstance}\"
-                                value=\"{$this->transLang['MOD_SIMPLEEMAILFORM_button_reset']}\"
-                                title=\"\"
-                                type=\"reset\">\n";
 
         $this->output .= "</form>\n";
 
