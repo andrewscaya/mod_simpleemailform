@@ -1872,6 +1872,27 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *
      * @since 2.0.0
      */
+    public function testGetXMLFieldSingleCheckbox()
+    {
+        $output = $this->sefv2modsimpleemailformMethods['getXMLField']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array('Y', 'C', 'test', 'test', 'option1=Value1', 50, 50)
+        );
+
+        $this->assertEquals(
+            1,
+            preg_match(
+                '/type="checkboxes".+<option.+value="option1">Value1<\/option>/is',
+                $output
+            )
+        );
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::getXMLField($active, $from, $name, $label, $value, $size, $maxx)
+     *
+     * @since 2.0.0
+     */
     public function testGetXMLFieldUnknownFromParameter()
     {
         $output = $this->sefv2modsimpleemailformMethods['getXMLField']->invokeArgs(
