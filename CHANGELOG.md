@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## 2.0.0-beta (2017-01-13)
+
+- Fixes issue #3 - Make the module compliant to Joomla standards (https://joomla.github.io/coding-standards/).
+- Fixes issue #4 - Make the module more compliant to PSR-2 standards.
+- Fixes issue #5 - Isolate initialization and library code from the module's main implementation.
+- Fixes issue #6 - Replace all direct usage of global variables by the appropriate Joomla objects.
+- Fixes issue #7 - Replace all hard-coded form elements by the JForm element objects.
+- Fixes issue #8 - Refactor language support in order to give the user the option of using the built-in Joomla language capabilities.
+- Fixes issue #9 - Get unit test code coverage up to at least 70%.
+- Fixes issue #10 - Use Git version control and phpDocumentor to generate the project's User Guide and Developer Documentation.
+- Fixes issue #11 - Add a Required/Optional selector to the upload field settings.
+- Fixes issue #13 - Warn the administrator before saving if "Send Results To" field is empty or invalid.
+- Adds a new translation (Belarusian - Thanks to Yury <y.sapozhkov@gmail.com>).
+- Makes the module compliant with the new JED requirements of the 10th of January 2017 (https://extensions.joomla.org/support/knowledgebase/item/joomla-update-system-requirement).
+
 ## 1.8.9 (2016-07-23)
 
 - Fixes issue #2 - Confirmation messages when uploading more than one file.

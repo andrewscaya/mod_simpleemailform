@@ -1,3 +1,11 @@
+branches:
+  except:
+    - latest
+    - 1.8.9
+    - 1.8.8
+    - 1.8.7
+    - develop
+
 sudo: false
 
 language: php
@@ -6,22 +14,36 @@ cache:
     directories:
         - $HOME/.composer/cache
         - vendor
+
+services:
+  - mysql
+
+addons:
+  firefox: "31.6"
+
 matrix:
     fast_finish: true
     include:
-        - php: 5.4
         - php: 5.5
         - php: 5.6
           env:
             - CS_CHECK=true
+            - CC_CHECK=true
         - php: 7
         - php: hhvm
     allow_failures:
         - php: hhvm
+        - php: 7
         
 before_install:
     - phpenv config-rm xdebug.ini || return 0
+    # XVFB
+    - "export DISPLAY=:99.0"
+    - "sh -e /etc/init.d/xvfb start"
+    - sleep 5 # give xvfb some time to start
     - travis_retry composer self-update
+    - $TRAVIS_BUILD_DIR/codeception-setup.sh
+    - sleep 5 # gives enough time to Selenium to start
     
 install:
     - travis_retry composer install --no-interaction
@@ -29,3 +51,4 @@ install:
 script:
     - composer test
     - if [[ $CS_CHECK == 'true' ]]; then composer cs ; fi
+    - if [[ $CC_CHECK == 'true' ]]; then composer cc ; fi

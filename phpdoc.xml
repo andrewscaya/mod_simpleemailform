@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdoc>
+    <parser>
+        <target>docs-api/output</target>
+    </parser>
+    <transformer>
+        <target>docs-api/build</target>
+    </transformer>
+    <files>
+        <directory>./sefv2</directory>
+    </files>
+</phpdoc>
