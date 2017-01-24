@@ -2496,7 +2496,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
         $output3 = $this->sefv2modsimpleemailform->render();
         $this->assertEquals(
             1,
-            preg_match('/<a.+id="#testanchor".+name="#testanchor".+<form.+action="#testanchor"/is', $output3)
+            preg_match('/<a.+name="testanchor".+<form.+action="#testanchor"/is', $output3)
         );
         $this->sefv2modsimpleemailformProperties['formAnchor']
             ->setValue(

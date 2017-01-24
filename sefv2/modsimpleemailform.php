@@ -624,7 +624,9 @@ class sefv2modsimpleemailform implements
         // Set the Joomla Registry's ($this->params and $this->paramsArray) property/key names.
         $this->formInstance = $this->paramsArray[$this->formPrefixName . $this->formInstanceName];
 
-        $this->formAnchor = '#' . $this->paramsArray[$this->formPrefixName . $this->formAnchorName];
+        $this->formAnchor = strlen($this->paramsArray[$this->formPrefixName . $this->formAnchorName]) > 1
+            ? '#' . $this->paramsArray[$this->formPrefixName . $this->formAnchorName]
+            : '#';
 
         $this->formCssClass = ($this->paramsArray[$this->formPrefixName . $this->formCssClassName])
             ? $this->paramsArray[$this->formPrefixName . $this->formCssClassName]
@@ -1505,10 +1507,8 @@ class sefv2modsimpleemailform implements
 
         // 2012-04-20 DB: Added anchor (default anchor = #).
         $this->output .=
-            '<a id="'
-            . $this->formAnchor
-            . '" name="'
-            . $this->formAnchor
+            '<a name="'
+            . substr($this->formAnchor, 1)
             . '">&nbsp;</a>'
             . "\n";
 
