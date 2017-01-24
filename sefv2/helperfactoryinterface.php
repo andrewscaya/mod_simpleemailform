@@ -22,12 +22,30 @@
  * MA 02110-1301, USA.
  *
  * @package    Simple Email Form
+ * @copyright  Copyright 2010 - 2017 D. Bierer <doug@unlikelysource.com>
  * @subpackage Modules
  * @link       http://joomla.unlikelysource.com/
  * @license    GNU/GPLv2, see above
+ * @since 2.0.0
  */
 
+/**
+ * The Simple Email Form Helper Interface.
+ *
+ * @package Simple Email Form
+ *
+ * @since 2.0.0
+ */
 interface sefv2helperfactoryinterface
 {
+    /**
+     * Builds the Simple Email Form.
+     *
+     * @param \Joomla\Registry\Registry $params
+     *
+     * @return mixed
+     *
+     * @since 2.0.0
+     */
     public function buildForm(\Joomla\Registry\Registry $params);
 }

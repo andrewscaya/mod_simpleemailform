@@ -1,11 +1,39 @@
 <?php
 
+/**
+ * modsimpleemailform.php
+ *
+ * Copyright 2010 - 2017 D. Bierer <doug@unlikelysource.com>
+ * Version 2.0.0
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ * @package    Simple Email Form
+ * @copyright  Copyright 2010 - 2017 D. Bierer <doug@unlikelysource.com>
+ * @link       http://joomla.unlikelysource.org/
+ * @license    GNU/GPLv2, see above
+ * @since 2.0.0
+ */
+
 use \Joomla\Registry\Registry;
 
 /**
- * Main implementation of version 2 of the Simple Email Form module
+ * Main implementation of version 2 of the Simple Email Form module.
  *
- * @package     Simple Email Form
+ * @package Simple Email Form
  *
  * @since 2.0.0
  */
@@ -105,7 +133,7 @@ class sefv2modsimpleemailform implements
     protected $paramsArray = array();
 
     /**
-     * @var string (xml)
+     * @var string
      * @since 2.0.0
      */
     protected $xmlConfig = '';
@@ -531,19 +559,20 @@ class sefv2modsimpleemailform implements
     protected $redirectedToURL = '';
 
     /**
-     * @var string (html)
+     * @var string
      * @since 2.0.0
      */
     public $msg = '';
 
     /**
-     * @var string (html)
+     * @var string
      * @since 2.0.0
      */
     protected $output = '';
 
     /**
      * sefv2modsimpleemailform constructor.
+     *
      * @param JForm $jForm
      * @param JMail $jMail
      * @param sefv2simpleemailformemailmsg $emailMsg
@@ -749,9 +778,11 @@ class sefv2modsimpleemailform implements
     }
 
     /**
-     * @param array $data
+     * Method to bind data to the form.
      *
-     * @return bool
+     * @param $data
+     *
+     * @return mixed
      *
      * @since 2.0.0
      */
@@ -761,6 +792,8 @@ class sefv2modsimpleemailform implements
     }
 
     /**
+     * Creates the XML configuration string.
+     *
      * @param array $paramsArray
      *
      * @return string
@@ -861,6 +894,8 @@ class sefv2modsimpleemailform implements
     }
 
     /**
+     * Decorates the HTML input fields and their corresponding labels (if any).
+     *
      * @param string $input
      * @param null $label
      *
@@ -1004,6 +1039,8 @@ class sefv2modsimpleemailform implements
     }
 
     /**
+     * Determines which of the Simple Email Form fields are active.
+     *
      * @param array $paramsArray
      *
      * @return bool
@@ -1035,6 +1072,8 @@ class sefv2modsimpleemailform implements
     }
 
     /**
+     * Method to filter the form data.
+     *
      * @param array $data
      * @param null $group
      *
@@ -1048,8 +1087,9 @@ class sefv2modsimpleemailform implements
     }
 
     /**
+     * Getter for the form data
      *
-     * @return Registry
+     * @return mixed
      *
      * @since 2.0.0
      */
@@ -1059,8 +1099,9 @@ class sefv2modsimpleemailform implements
     }
 
     /**
+     * Return all errors, if any.
      *
-     * @return array
+     * @return mixed
      *
      * @since 2.0.0
      */
@@ -1070,11 +1111,13 @@ class sefv2modsimpleemailform implements
     }
 
     /**
-     * @param string $name
+     * Method to get a form field represented as a JFormField object.
+     *
+     * @param $name
      * @param null $group
      * @param null $value
      *
-     * @return bool|JFormField
+     * @return mixed
      *
      * @since 2.0.0
      */
@@ -1086,9 +1129,12 @@ class sefv2modsimpleemailform implements
     }
 
     /**
-     * @param null $set
+     * Method to get an array of JFormField objects in a given fieldset by name.
+     * If no name is given then all fields are returned.
      *
-     * @return array
+     * @param $set
+     *
+     * @return mixed
      *
      * @since 2.0.0
      */
@@ -1098,6 +1144,8 @@ class sefv2modsimpleemailform implements
     }
 
     /**
+     * Returns a field's XML configuration string.
+     *
      * @param string $active
      * @param string $from
      * @param string $name
@@ -1234,6 +1282,8 @@ class sefv2modsimpleemailform implements
     }
 
     /**
+     * Returns an upload field's XML configuration string.
+     *
      * @param string $uploadName
      * @param string $uploadLabel
      * @param string $uploadAllowedFiles
@@ -1262,6 +1312,8 @@ class sefv2modsimpleemailform implements
     }
 
     /**
+     * Returns a CAPTCHA field's XML configuration string.
+     *
      * @param string $name
      * @param string $namespace
      *
@@ -1290,17 +1342,22 @@ class sefv2modsimpleemailform implements
     }
 
     /**
-     * @param string $xmlConfigString
+     * Method to load the form description from an XML string or object.
      *
+     * @param $xmlConfigString
+     *
+     * @return mixed
      *
      * @since 2.0.0
      */
     public function load($xmlConfigString)
     {
-        $this->jForm->load($xmlConfigString);
+        return $this->jForm->load($xmlConfigString);
     }
 
     /**
+     * Processes the user's submitted data.
+     *
      * @param array $formDataRaw
      * @param array $files
      * @param array $paramsArray
@@ -1412,10 +1469,12 @@ class sefv2modsimpleemailform implements
     }
 
     /**
-     * @param string $name
+     * Method to remove a field from the form definition.
+     *
+     * @param $name
      * @param null $group
      *
-     * @return bool
+     * @return mixed
      *
      * @since 2.0.0
      */
@@ -1427,6 +1486,7 @@ class sefv2modsimpleemailform implements
     }
 
     /**
+     * Render the Simple Email Form.
      *
      * @return string
      *
@@ -1511,9 +1571,11 @@ class sefv2modsimpleemailform implements
     }
 
     /**
+     * Method to reset the form data store and optionally the form XML definition.
+     *
      * @param bool $xml
      *
-     * @return bool
+     * @return mixed
      *
      * @since 2.0.0
      */
@@ -1523,6 +1585,8 @@ class sefv2modsimpleemailform implements
     }
 
     /**
+     * Sets the default values of the form's active elements.
+     *
      * @param array $formActiveElements
      * @param $formActiveElementsCount
      * @param array $paramsArray
@@ -1552,6 +1616,8 @@ class sefv2modsimpleemailform implements
     }
 
     /**
+     * Sends an email with the user's submitted data.
+     *
      * @param array $formDataClean
      * @param array $paramsArray
      * @param sefv2simpleemailformemailmsg $emailMsg
@@ -1722,6 +1788,8 @@ class sefv2modsimpleemailform implements
 
     // 2016-12-21 AC: Thanks to Anthony Scaife for this method.
     /**
+     * Formats the data obtained in test mode.
+     *
      * @param mixed $data
      * @param int $indent
      *
@@ -1767,6 +1835,8 @@ class sefv2modsimpleemailform implements
     }
 
     /**
+     * Prepares the uploaded files to be attached to the email.
+     *
      * @param string fileName
      * @param string $fileTmpName
      * @param JFile $jFile
@@ -1816,10 +1886,12 @@ class sefv2modsimpleemailform implements
     }
 
     /**
+     * Method to validate form data.
+     *
      * @param array $data
      * @param null $group
      *
-     * @return bool
+     * @return mixed
      *
      * @since 2.0.0
      */

@@ -1,10 +1,31 @@
 <?php
+
 /**
- * @package     ModsimpleemailformTest
- * @subpackage
+ * sefv2modsimpleemailformbasicTest.php
  *
- * @copyright   A copyright
- * @license     A "Slug" license name e.g. GPL2
+ * Copyright 2010 - 2017 D. Bierer <doug@unlikelysource.com>
+ * Version 2.0.0
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ * @package    Simple Email Form Test Suite
+ * @copyright  Copyright 2010 - 2017 D. Bierer <doug@unlikelysource.com>
+ * @link       http://joomla.unlikelysource.org/
+ * @license    GNU/GPLv2, see above
+ * @since 2.0.0
  */
 
 namespace ModsimpleemailformTest;
@@ -13,7 +34,9 @@ use PHPUnit_Framework_TestCase;
 use Mockery;
 
 /**
- * Sefv2Modsimpleemailform test case.
+ * sefv2modsimpleemailform test case.
+ *
+ * @since 2.0.0
  */
 class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
 {
@@ -340,7 +363,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *                                       \stdClass $jModuleHelperResult,
      *                                       \JSession $jSession,
      *                                       \JFile $jFile
-     *                                   )
+     *                                   ).
      *
      * @since 2.0.0
      */
@@ -432,7 +455,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *                                       \stdClass $jModuleHelperResult,
      *                                       \JSession $jSession,
      *                                       \JFile $jFile
-     *                                   )
+     *                                   ).
      *
      * @since 2.0.0
      */
@@ -501,7 +524,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *                                       \stdClass $jModuleHelperResult,
      *                                       \JSession $jSession,
      *                                       \JFile $jFile
-     *                                   )
+     *                                   ).
      *
      * @since 2.0.0
      */
@@ -598,7 +621,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *                                       \stdClass $jModuleHelperResult,
      *                                       \JSession $jSession,
      *                                       \JFile $jFile
-     *                                   )
+     *                                   ).
      *
      * @since 2.0.0
      */
@@ -670,7 +693,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *                                       \stdClass $jModuleHelperResult,
      *                                       \JSession $jSession,
      *                                       \JFile $jFile
-     *                                   )
+     *                                   ).
      *
      * @since 2.0.0
      */
@@ -773,7 +796,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *                                       \stdClass $jModuleHelperResult,
      *                                       \JSession $jSession,
      *                                       \JFile $jFile
-     *                                   )
+     *                                   ).
      *
      * @since 2.0.0
      */
@@ -873,7 +896,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *                                       \stdClass $jModuleHelperResult,
      *                                       \JSession $jSession,
      *                                       \JFile $jFile
-     *                                   )
+     *                                   ).
      *
      * @since 2.0.0
      */
@@ -973,7 +996,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *                                       \stdClass $jModuleHelperResult,
      *                                       \JSession $jSession,
      *                                       \JFile $jFile
-     *                                   )
+     *                                   ).
      *
      * @since 2.0.0
      */
@@ -1056,7 +1079,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Creates the test doubles that are called from \sefv2modsimpleemailform's
-     * __construct when tests change the language settings.
+     * constructor when tests change the language settings.
      *
      * @since 2.0.0
      */
@@ -1114,7 +1137,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *                                       \stdClass $jModuleHelperResult,
      *                                       \JSession $jSession,
      *                                       \JFile $jFile
-     *                                   )
+     *                                   ).
      *
      * @since 2.0.0
      */
@@ -1211,7 +1234,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *                                       \stdClass $jModuleHelperResult,
      *                                       \JSession $jSession,
      *                                       \JFile $jFile
-     *                                   )
+     *                                   ).
      *
      * @since 2.0.0
      */
@@ -1293,7 +1316,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *                                       \stdClass $jModuleHelperResult,
      *                                       \JSession $jSession,
      *                                       \JFile $jFile
-     *                                   )
+     *                                   ).
      *
      * @since 2.0.0
      *
@@ -1392,7 +1415,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::bind($data)
+     * Tests sefv2modsimpleemailform::bind($data).
      *
      * @since 2.0.0
      */
@@ -1409,7 +1432,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::createXMLConfig(array $paramsArray)
+     * Tests sefv2modsimpleemailform::createXMLConfig(array $paramsArray).
      *
      * @since 2.0.0
      */
@@ -1467,7 +1490,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::decorateInput($input, $label = null)
+     * Tests sefv2modsimpleemailform::decorateInput($input, $label = null).
      *
      * @since 2.0.0
      */
@@ -1500,7 +1523,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::decorateInput($input, $label = null)
+     * Tests sefv2modsimpleemailform::decorateInput($input, $label = null).
      *
      * @since 2.0.0
      */
@@ -1534,7 +1557,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::decorateInput($input, $label = null)
+     * Tests sefv2modsimpleemailform::decorateInput($input, $label = null).
      *
      * @since 2.0.0
      */
@@ -1568,7 +1591,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::determineActiveElements(array $paramsArray)
+     * Tests sefv2modsimpleemailform::determineActiveElements(array $paramsArray).
      *
      * @since 2.0.0
      */
@@ -1591,7 +1614,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::determineActiveElements(array $paramsArray)
+     * Tests sefv2modsimpleemailform::determineActiveElements(array $paramsArray).
      *
      * @since 2.0.0
      */
@@ -1617,7 +1640,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::filter(array $data, $group = null)
+     * Tests sefv2modsimpleemailform::filter(array $data, $group = null).
      *
      * @since 2.0.0
      */
@@ -1634,7 +1657,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::getData()
+     * Tests sefv2modsimpleemailform::getData().
      *
      * @since 2.0.0
      */
@@ -1651,7 +1674,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::getErrors()
+     * Tests sefv2modsimpleemailform::getErrors().
      *
      * @since 2.0.0
      */
@@ -1668,7 +1691,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::getField($name, $group = null, $value = null)
+     * Tests sefv2modsimpleemailform::getField($name, $group = null, $value = null).
      *
      * @since 2.0.0
      */
@@ -1685,7 +1708,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::getFieldset($set = null)
+     * Tests sefv2modsimpleemailform::getFieldset($set = null).
      *
      * @since 2.0.0
      */
@@ -1702,7 +1725,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::getXMLField($active, $from, $name, $label, $value, $size, $maxx)
+     * Tests sefv2modsimpleemailform::getXMLField($active, $from, $name, $label, $value, $size, $maxx).
      *
      * @param $active
      * @param $from
@@ -1868,7 +1891,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::getXMLField($active, $from, $name, $label, $value, $size, $maxx)
+     * Tests sefv2modsimpleemailform::getXMLField($active, $from, $name, $label, $value, $size, $maxx).
      *
      * @since 2.0.0
      */
@@ -1889,7 +1912,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::getXMLField($active, $from, $name, $label, $value, $size, $maxx)
+     * Tests sefv2modsimpleemailform::getXMLField($active, $from, $name, $label, $value, $size, $maxx).
      *
      * @since 2.0.0
      */
@@ -1907,7 +1930,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::getXMLField($active, $from, $name, $label, $value, $size, $maxx)
+     * Tests sefv2modsimpleemailform::getXMLField($active, $from, $name, $label, $value, $size, $maxx).
      *
      * @since 2.0.0
      */
@@ -1954,7 +1977,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::getXMLUploadField($uploadName, $uploadLabel, $uploadAllowedFiles)
+     * Tests sefv2modsimpleemailform::getXMLUploadField($uploadName, $uploadLabel, $uploadAllowedFiles).
      *
      * @param string $expectedOutput
      * @param string $uploadName
@@ -2003,7 +2026,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::getXMLCaptchaField($name, $namespace)
+     * Tests sefv2modsimpleemailform::getXMLCaptchaField($name, $namespace).
      *
      * @since 2.0.0
      */
@@ -2024,7 +2047,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::load($xmlConfigString)
+     * Tests sefv2modsimpleemailform::load($xmlConfigString).
      *
      * @since 2.0.0
      */
@@ -2046,7 +2069,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *                                      array $files,
      *                                      array $paramsArray,
      *                                      sefv2simpleemailformemailmsg $emailMsg
-     *                                  )
+     *                                  ).
      *
      * @since 2.0.0
      */
@@ -2096,7 +2119,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *                                      array $files,
      *                                      array $paramsArray,
      *                                      sefv2simpleemailformemailmsg $emailMsg
-     *                                  )
+     *                                  ).
      *
      * @since 2.0.0
      */
@@ -2151,7 +2174,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *                                      array $files,
      *                                      array $paramsArray,
      *                                      sefv2simpleemailformemailmsg $emailMsg
-     *                                  )
+     *                                  ).
      *
      * @since 2.0.0
      */
@@ -2242,7 +2265,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *                                      array $files,
      *                                      array $paramsArray,
      *                                      sefv2simpleemailformemailmsg $emailMsg
-     *                                  )
+     *                                  ).
      *
      * @since 2.0.0
      */
@@ -2287,8 +2310,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Creates the test doubles that are called from \sefv2modsimpleemailform's
-     * processFormData tests.
+     * Creates the test doubles that are called from \sefv2modsimpleemailform's processFormData tests.
      *
      * @since 2.0.0
      */
@@ -2366,7 +2388,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::removeField($name, $group = null)
+     * Tests sefv2modsimpleemailform::removeField($name, $group = null).
      *
      * @since 2.0.0
      */
@@ -2534,7 +2556,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::reset($xml = false)
+     * Tests sefv2modsimpleemailform::reset($xml = false).
      *
      * @since 2.0.0
      */
@@ -2556,7 +2578,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *                                      $formActiveElementsCount,
      *                                      array $paramsArray,
      *                                      \Jform $jForm
-     *                                  )
+     *                                  ).
      *
      * @param int $count
      *
@@ -2605,7 +2627,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *                                      array $paramsArray,
      *                                      sefv2simpleemailformemailmsg $emailMsg,
      *                                      \JMail $jMail
-     *                                  )
+     *                                  ).
      *
      * @since 2.0.0
      */
@@ -2640,7 +2662,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *                                      array $paramsArray,
      *                                      sefv2simpleemailformemailmsg $emailMsg,
      *                                      \JMail $jMail
-     *                                  )
+     *                                  ).
      *
      * @since 2.0.0
      */
@@ -2690,7 +2712,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *                                      array $paramsArray,
      *                                      sefv2simpleemailformemailmsg $emailMsg,
      *                                      \JMail $jMail
-     *                                  )
+     *                                  ).
      *
      * @since 2.0.0
      */
@@ -2719,8 +2741,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Creates the test doubles that are called from \sefv2modsimpleemailform's
-     * sendFormData tests.
+     * Creates the test doubles that are called from \sefv2modsimpleemailform's sendFormData tests.
      *
      * @since 2.0.0
      */
@@ -2785,7 +2806,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::testDump($data, $indent = 0)
+     * Tests sefv2modsimpleemailform::testDump($data, $indent = 0).
      *
      * @since 2.0.0
      */
@@ -2878,7 +2899,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests sefv2modsimpleemailform::validate(array $data, $group = null)
+     * Tests sefv2modsimpleemailform::validate(array $data, $group = null).
      *
      * @since 2.0.0
      */
