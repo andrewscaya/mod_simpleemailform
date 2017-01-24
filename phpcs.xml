@@ -41,6 +41,7 @@
     <exclude-pattern>*/vendor/*</exclude-pattern>
     <exclude-pattern>*/lib/*</exclude-pattern>
     <exclude-pattern>*/docs/*</exclude-pattern>
+    <exclude-pattern>*/docs-api/*</exclude-pattern>
     <exclude-pattern>*/data/*</exclude-pattern>
     <exclude-pattern>PEAR.php</exclude-pattern>
     <exclude-pattern>PEAR5.php</exclude-pattern>
