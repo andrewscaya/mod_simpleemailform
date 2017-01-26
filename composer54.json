@@ -33,11 +33,11 @@
         "php": "^5.3 || ^7.0"
     },
     "require-dev": {
-        "joomla/framework": "1.1.0",
-        "squizlabs/php_codesniffer": "^2.3",
-        "se/selenium-server-standalone": "^2.53",
-        "codeception/codeception": "^2.2",
-        "joomla-projects/joomla-browser": "v3.6.5.1"
+        "joomla/framework": "*",
+        "squizlabs/php_codesniffer": "*",
+        "se/selenium-server-standalone": "*",
+        "codeception/codeception": "*",
+        "joomla-projects/joomla-browser": "*"
     },
     "autoload": {
         "psr-0": {
