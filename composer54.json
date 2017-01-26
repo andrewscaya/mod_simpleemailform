@@ -1,0 +1,70 @@
+{
+    "name": "mod_simpleemailform",
+    "description": "Joomla module: mod_simpleemailform",
+    "type": "project",
+    "license": "GPL-2.0",
+    "keywords": [
+        "joomla",
+        "simple email form",
+        "module",
+        "extension"
+    ],
+    "homepage": "http://joomla.unlikelysource.org/",
+    "authors": [
+        {
+            "name": "Doug Bierer",
+            "email": "doug@unlikelysource.com",
+            "homepage": "http://unlikelysource.net/"
+        },
+        {
+            "name": "Andrew Caya",
+            "email": "andrewscaya@yahoo.ca",
+            "homepage": "https://github.com/andrewscaya",
+            "role": "Developer"
+        },
+        {
+            "name": "Martin Beaudry",
+            "email": "martinbeaudry@hotmail.com",
+            "homepage": "https://github.com/martinbeaudry",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^5.3 || ^7.0"
+    },
+    "require-dev": {
+        "joomla/framework": "1.1.0",
+        "squizlabs/php_codesniffer": "^2.3",
+        "se/selenium-server-standalone": "^2.53",
+        "codeception/codeception": "^2.2",
+        "joomla-projects/joomla-browser": "v3.6.5.1"
+    },
+    "autoload": {
+        "psr-0": {
+            "sef": "./sef",
+            "sefv2": "./sefv2",
+            "joomla": "./lib"
+        },
+        "classmap": [
+            "./",
+            "./tests/unit"
+        ],
+        "exclude-from-classmap": [
+            "./vendor/codeception",
+            "./vendor/joomla-projects",
+            "./vendor/consolidation"
+        ]
+    },
+    "scripts": {
+        "check": [
+            "@cs",
+            "@test",
+            "@cc"
+        ],
+        "cs": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit",
+        "cc": "codecept run acceptance",
+        "apidocs": "phpdoc --template=responsive-twig"
+    }
+}
