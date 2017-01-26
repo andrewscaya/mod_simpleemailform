@@ -45,7 +45,7 @@ class AdminLoginCest
         $I->click(['link' => $module]);
         $I->waitForElement(['id' => 'general'], 30);
         $I->fillField('#jform_params_mod_simpleemailform_emailTo', $adminEmail);
-        $I->checkOption("#jform_params_mod_simpleemailform_formType1");
+        $I->checkOption("#jform_params_mod_simpleemailform_formType0");
         $I->click(['xpath' => "//div[@id='toolbar-apply']/button"]);
         $I->amOnPage('/');
         $I->see('From');

@@ -5,7 +5,7 @@ modules:
         - Helper\Acceptance
     config:
         JoomlaBrowser:
-            url: 'http://localhost:8181/'          # the url that points to the joomla installation at /tests/system/joomla-cms
+            url: 'http://localhost:8181/'                      # the url that points to the joomla installation at /tests/system/joomla-cms
             browser: 'firefox'
             window_size: 1024x768
             capabilities:
