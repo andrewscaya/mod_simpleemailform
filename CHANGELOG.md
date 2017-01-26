@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 2.0.0-beta (2017-01-13)
+## 2.0.0 (2017-01-28)
 
 - Fixes issue #3 - Make the module compliant to Joomla standards (https://joomla.github.io/coding-standards/).
 - Fixes issue #4 - Make the module more compliant to PSR-2 standards.
@@ -14,6 +14,7 @@
 - Fixes issue #13 - Warn the administrator before saving if "Send Results To" field is empty or invalid.
 - Adds a new translation (Belarusian - Thanks to Yury <y.sapozhkov@gmail.com>).
 - Makes the module compliant with the new JED requirements of the 10th of January 2017 (https://extensions.joomla.org/support/knowledgebase/item/joomla-update-system-requirement).
+- DEPRECATED : Simple Email Form's Classic form.  It will be removed in version 3.0.0.
 
 ## 1.8.9 (2016-07-23)
 
