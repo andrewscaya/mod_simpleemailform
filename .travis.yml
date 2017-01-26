@@ -55,6 +55,8 @@ before_install:
     - "sh -e /etc/init.d/xvfb start"
     - sleep 5 # give xvfb some time to start
     - travis_retry composer self-update
+    - if [[ $TEST_CHECK == 'false' ]]; then rm $TRAVIS_BUILD_DIR/composer.json ; fi
+    - if [[ $TEST_CHECK == 'false' ]]; then mv $TRAVIS_BUILD_DIR/composer54.json $TRAVIS_BUILD_DIR/composer.json ; fi
     - $TRAVIS_BUILD_DIR/codeception-setup.sh
     - sleep 5 # gives enough time to Selenium to start
     
