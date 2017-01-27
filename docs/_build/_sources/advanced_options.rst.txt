@@ -83,9 +83,9 @@ Make sure you enter a **fully formed** URL.
 
 Example: http://www.unlikelysource.com/
 
-.. index:: Use Captcha
+.. index:: Captcha Use
 
-Use Captcha
+Captcha Use
 -----------
 
 With the **JForm** type:
@@ -198,7 +198,8 @@ The color in which success messages are displayed to the user.
 Name of Anchor Tag
 ------------------
 
-When form is submitted, it redirects to the anchor tag mentioned here.
+After submitting the form, the user is redirected to the anchor tag mentioned here.
+By default, this tag is placed at the beginning of the form.
 
 .. index:: Number of Upload Fields
 
