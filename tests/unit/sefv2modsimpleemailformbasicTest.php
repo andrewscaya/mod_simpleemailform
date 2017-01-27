@@ -2414,7 +2414,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
         $jHtmlMock = Mockery::mock('alias:JHtml');
         $jHtmlMock
             ->shouldReceive('_')
-            ->times(4)
+            ->times(3)
             ->with('form.token')
             ->andReturn('qwerty');
 
@@ -2487,28 +2487,6 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
                 ''
             );
 
-        // Test the form anchor.
-        $this->sefv2modsimpleemailformProperties['formAnchor']
-            ->setValue(
-                $this->sefv2modsimpleemailform,
-                '#testanchor'
-            );
-        $output3 = $this->sefv2modsimpleemailform->render();
-        $this->assertEquals(
-            1,
-            preg_match('/<a.+name="testanchor".+<form.+action="#testanchor"/is', $output3)
-        );
-        $this->sefv2modsimpleemailformProperties['formAnchor']
-            ->setValue(
-                $this->sefv2modsimpleemailform,
-                '#'
-            );
-        $this->sefv2modsimpleemailformProperties['output']
-            ->setValue(
-                $this->sefv2modsimpleemailform,
-                ''
-            );
-
         // Test turning off rendering.
         $this->sefv2modsimpleemailformProperties['formRendering']
             ->setValue(
@@ -2553,6 +2531,254 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
                 $this->sefv2modsimpleemailform,
                 ''
             );
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::render()
+     *
+     * @since 2.0.0
+     */
+    public function testRenderAnchorIsCorrectlyFormattedWithFullAnchorParam()
+    {
+        // Test the form anchor.
+        list(
+            $formDataRaw,
+            $formCleanData,
+            $emailMsg,
+            $paramsArray,
+            $formPrefixName,
+            $jSessionMock,
+            $jFormMock,
+            $jDocumentMock,
+            $jMailMock
+            ) = $this->setUpProcessFormDataTests();
+
+        $jHtmlMock = Mockery::mock('alias:JHtml');
+        $jHtmlMock
+            ->shouldReceive('_')
+            ->once()
+            ->with('form.token')
+            ->andReturn('qwerty');
+
+        $jFormMock = $this->jFormMock;
+        $jFormMock
+            ->shouldReceive('getFieldset')
+            ->once()
+            ->with('main')
+            ->andReturn(array());
+
+        $this->params->set('mod_simpleemailform_anchor', '#testanchor');
+
+        $this->sefv2modsimpleemailformMethods['__construct']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array(
+                $this->jFormMock,
+                $this->jMailMock,
+                $this->emailMsgFake,
+                $this->jDocumentMock,
+                $this->jLanguageMock,
+                $this->params,
+                $this->jInputMock,
+                $this->jTableExtensionMock,
+                $this->jTableModuleMock,
+                $this->stdClassModuleHelperResultFake,
+                $this->jSessionMock,
+                $this->jFileMock
+            )
+        );
+
+        $output = $this->sefv2modsimpleemailform->render();
+
+        $this->assertEquals(
+            1,
+            preg_match('/<a.+name="testanchor".+<form.+action="#testanchor"/is', $output)
+        );
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::render()
+     *
+     * @since 2.0.0
+     */
+    public function testRenderAnchorIsCorrectlyFormattedWithNameButWithoutHashTagParam()
+    {
+        // Test the form anchor.
+        list(
+            $formDataRaw,
+            $formCleanData,
+            $emailMsg,
+            $paramsArray,
+            $formPrefixName,
+            $jSessionMock,
+            $jFormMock,
+            $jDocumentMock,
+            $jMailMock
+            ) = $this->setUpProcessFormDataTests();
+
+        $jHtmlMock = Mockery::mock('alias:JHtml');
+        $jHtmlMock
+            ->shouldReceive('_')
+            ->once()
+            ->with('form.token')
+            ->andReturn('qwerty');
+
+        $jFormMock = $this->jFormMock;
+        $jFormMock
+            ->shouldReceive('getFieldset')
+            ->once()
+            ->with('main')
+            ->andReturn(array());
+
+        $this->params->set('mod_simpleemailform_anchor', 'testanchor');
+
+        $this->sefv2modsimpleemailformMethods['__construct']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array(
+                $this->jFormMock,
+                $this->jMailMock,
+                $this->emailMsgFake,
+                $this->jDocumentMock,
+                $this->jLanguageMock,
+                $this->params,
+                $this->jInputMock,
+                $this->jTableExtensionMock,
+                $this->jTableModuleMock,
+                $this->stdClassModuleHelperResultFake,
+                $this->jSessionMock,
+                $this->jFileMock
+            )
+        );
+
+        $output = $this->sefv2modsimpleemailform->render();
+
+        $this->assertEquals(
+            1,
+            preg_match('/<a.+name="".+<form.+action="#"/is', $output)
+        );
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::render()
+     *
+     * @since 2.0.0
+     */
+    public function testRenderAnchorIsCorrectlyFormattedWithHashTagAnchorParam()
+    {
+        // Test the form anchor.
+        list(
+            $formDataRaw,
+            $formCleanData,
+            $emailMsg,
+            $paramsArray,
+            $formPrefixName,
+            $jSessionMock,
+            $jFormMock,
+            $jDocumentMock,
+            $jMailMock
+            ) = $this->setUpProcessFormDataTests();
+
+        $jHtmlMock = Mockery::mock('alias:JHtml');
+        $jHtmlMock
+            ->shouldReceive('_')
+            ->once()
+            ->with('form.token')
+            ->andReturn('qwerty');
+
+        $jFormMock = $this->jFormMock;
+        $jFormMock
+            ->shouldReceive('getFieldset')
+            ->once()
+            ->with('main')
+            ->andReturn(array());
+
+        $this->params->set('mod_simpleemailform_anchor', '#');
+
+        $this->sefv2modsimpleemailformMethods['__construct']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array(
+                $this->jFormMock,
+                $this->jMailMock,
+                $this->emailMsgFake,
+                $this->jDocumentMock,
+                $this->jLanguageMock,
+                $this->params,
+                $this->jInputMock,
+                $this->jTableExtensionMock,
+                $this->jTableModuleMock,
+                $this->stdClassModuleHelperResultFake,
+                $this->jSessionMock,
+                $this->jFileMock
+            )
+        );
+
+        $output = $this->sefv2modsimpleemailform->render();
+
+        $this->assertEquals(
+            1,
+            preg_match('/<a.+name="".+<form.+action="#"/is', $output)
+        );
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::render()
+     *
+     * @since 2.0.0
+     */
+    public function testRenderAnchorIsCorrectlyFormattedWithEmptyAnchorParam()
+    {
+        // Test the form anchor.
+        list(
+            $formDataRaw,
+            $formCleanData,
+            $emailMsg,
+            $paramsArray,
+            $formPrefixName,
+            $jSessionMock,
+            $jFormMock,
+            $jDocumentMock,
+            $jMailMock
+            ) = $this->setUpProcessFormDataTests();
+
+        $jHtmlMock = Mockery::mock('alias:JHtml');
+        $jHtmlMock
+            ->shouldReceive('_')
+            ->once()
+            ->with('form.token')
+            ->andReturn('qwerty');
+
+        $jFormMock = $this->jFormMock;
+        $jFormMock
+            ->shouldReceive('getFieldset')
+            ->once()
+            ->with('main')
+            ->andReturn(array());
+
+        $this->params->set('mod_simpleemailform_anchor', '');
+
+        $this->sefv2modsimpleemailformMethods['__construct']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array(
+                $this->jFormMock,
+                $this->jMailMock,
+                $this->emailMsgFake,
+                $this->jDocumentMock,
+                $this->jLanguageMock,
+                $this->params,
+                $this->jInputMock,
+                $this->jTableExtensionMock,
+                $this->jTableModuleMock,
+                $this->stdClassModuleHelperResultFake,
+                $this->jSessionMock,
+                $this->jFileMock
+            )
+        );
+
+        $output = $this->sefv2modsimpleemailform->render();
+
+        $this->assertEquals(
+            1,
+            preg_match('/<a.+name="".+<form.+action="#"/is', $output)
+        );
     }
 
     /**
