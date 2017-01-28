@@ -205,6 +205,18 @@ class sefv2modsimpleemailform implements
      * @var string
      * @since 2.0.0
      */
+    protected $formErrorColourName = '_errorTxtColor';
+
+    /**
+     * @var string
+     * @since 2.0.0
+     */
+    protected $formSuccessColourName = '_successTxtColor';
+
+    /**
+     * @var string
+     * @since 2.0.0
+     */
     protected $formAnchorName = '_anchor';
 
     /**
@@ -615,6 +627,9 @@ class sefv2modsimpleemailform implements
         $this->jModuleHelperResult = $jModuleHelperResult;
         $this->jSession = $jSession;
         $this->jFile = $jFile;
+
+        $this->errorColour = $this->paramsArray[$this->formPrefixName . $this->formErrorColourName];
+        $this->successColour = $this->paramsArray[$this->formPrefixName . $this->formSuccessColourName];
 
         // Check if automatic rendering has been turned off (user defined).
         if ($this->paramsArray[$this->formPrefixName . $this->formRenderingOverrideName] === 'Y') {
