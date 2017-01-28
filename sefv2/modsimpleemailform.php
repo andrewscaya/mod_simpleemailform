@@ -858,7 +858,8 @@ class sefv2modsimpleemailform implements
 
             if (!empty($this->uploadAllowedFilesArray)) {
                 array_walk($this->uploadAllowedFilesArray, function (&$item, &$key) {
-                    $item = '.' . strtolower($item);
+                    $item = strtolower(trim($item));
+                    $item = (strpos($item, '.') === 0) ? '.' . trim(substr($item, 1)) : '.' . $item;
                 });
 
                 $this->uploadAllowedFiles = implode(", ", $this->uploadAllowedFilesArray);
@@ -965,14 +966,7 @@ class sefv2modsimpleemailform implements
 
                 preg_match($pattern, $input, $fieldNumberArray);
 
-                $ckRfmt =
-                    !empty($fieldNumberArray) &&
-                    isset($this->paramsArray[
-                        $this->formPrefixName
-                        . $this->fieldPrefixName
-                        . $fieldNumberArray[0]
-                        . $this->fieldCkrfmtName
-                    ])
+                $ckRfmt = (!empty($fieldNumberArray))
                     ? $this->paramsArray[
                         $this->formPrefixName
                         . $this->fieldPrefixName
@@ -981,14 +975,7 @@ class sefv2modsimpleemailform implements
                     ]
                     : 'H';
 
-                $ckRpos =
-                    !empty($fieldNumberArray) &&
-                    isset($this->paramsArray[
-                        $this->formPrefixName
-                        . $this->fieldPrefixName
-                        . $fieldNumberArray[0]
-                        . $this->fieldCkrposName
-                    ])
+                $ckRpos = (!empty($fieldNumberArray))
                     ? $this->paramsArray[
                         $this->formPrefixName
                         . $this->fieldPrefixName
