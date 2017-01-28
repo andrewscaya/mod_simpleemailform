@@ -418,13 +418,13 @@ class sefv2modsimpleemailform implements
     protected $lang = '';
 
     /**
-     * @var array (string)
+     * @var array
      * @since 2.0.0
      */
     protected $transLang = array();
 
     /**
-     * @var array (string)
+     * @var array
      * @since 2.0.0
      */
     protected $allowedHtmlTags = '<p><a><strong><span><em>
@@ -451,7 +451,7 @@ class sefv2modsimpleemailform implements
     protected $uploadAllowedFiles = '';
 
     /**
-     * @var array (string)
+     * @var array
      * @since 2.0.0
      */
     protected $uploadAllowedFilesArray = array();
@@ -481,7 +481,7 @@ class sefv2modsimpleemailform implements
     protected $formTestMode = 'N';
 
     /**
-     * @var array (string)
+     * @var array
      * @since 2.0.0
      */
     protected $formActiveElements;
