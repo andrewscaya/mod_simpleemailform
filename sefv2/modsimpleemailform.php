@@ -918,7 +918,7 @@ class sefv2modsimpleemailform implements
         $td = "<td class=\"{$this->formTdClass}\">";
         $tdClose = '</td>';
 
-        // If no label, field is hidden or of types "submit" or "reset".
+        // If no label, field is hidden or field is of types "submit" or "reset".
         if (!isset($label) || preg_match('/type="submit|reset"/is', $input) === 1) {
             // Submit and reset buttons.
             $decoratedInput .= $tr
@@ -950,19 +950,37 @@ class sefv2modsimpleemailform implements
 
                 preg_match($pattern, $input, $fieldNumberArray);
 
-                $ckRfmt = $this->paramsArray[
-                    $this->formPrefixName
-                    . $this->fieldPrefixName
-                    . $fieldNumberArray[0]
-                    . $this->fieldCkrfmtName
-                ];
+                $ckRfmt =
+                    !empty($fieldNumberArray) &&
+                    isset($this->paramsArray[
+                        $this->formPrefixName
+                        . $this->fieldPrefixName
+                        . $fieldNumberArray[0]
+                        . $this->fieldCkrfmtName
+                    ])
+                    ? $this->paramsArray[
+                        $this->formPrefixName
+                        . $this->fieldPrefixName
+                        . $fieldNumberArray[0]
+                        . $this->fieldCkrfmtName
+                    ]
+                    : 'H';
 
-                $ckRpos = $this->paramsArray[
-                    $this->formPrefixName
-                    . $this->fieldPrefixName
-                    . $fieldNumberArray[0]
-                    . $this->fieldCkrposName
-                ];
+                $ckRpos =
+                    !empty($fieldNumberArray) &&
+                    isset($this->paramsArray[
+                        $this->formPrefixName
+                        . $this->fieldPrefixName
+                        . $fieldNumberArray[0]
+                        . $this->fieldCkrposName
+                    ])
+                    ? $this->paramsArray[
+                        $this->formPrefixName
+                        . $this->fieldPrefixName
+                        . $fieldNumberArray[0]
+                        . $this->fieldCkrposName
+                    ]
+                    : 'B';
 
                 if (strpos($input, 'type="checkbox"') !== false) {
                     preg_match_all('/(?<=>).{1,40}(?=<\/label>)/is', $input, $matchesLabel);
@@ -970,57 +988,57 @@ class sefv2modsimpleemailform implements
                     preg_match_all('/(?<=\s>).{1,100}(?=<\/label>)/is', $input, $matchesLabel);
                 }
 
-                preg_match_all('/<label.+?>/is', $input, $matchesLabelTag);
+                $labelTagCount = preg_match_all('/<label.+?>/is', $input, $matchesLabelTag);
 
-                for ($i = 0; $i < $resultInput; $i++) {
-                    if ($i === 0 && $ckRfmt !== 'C') {
-                        $multiInput = '<table>';
+                $multiInputFormat = '';
+
+                if ($labelTagCount > 0) {
+                    for ($i = 0; $i < $resultInput; $i++) {
+                        if ($i === 0 && $ckRfmt !== 'C') {
+                            $multiInput = '<table>';
+                        }
+
+                        if ($ckRfmt === 'H') {
+                            $multiInputFormat = $td
+                                . '%BEFORE%'
+                                . $tdClose
+                                . $td
+                                . '%AFTER%'
+                                . $tdClose
+                                . $td
+                                . '&nbsp;&nbsp;'
+                                . $tdClose;
+                        } elseif ($ckRfmt === 'V') {
+                            $multiInputFormat = $tr
+                                . $td
+                                . '%BEFORE%'
+                                . $tdClose
+                                . $td
+                                . '%AFTER%'
+                                . $tdClose
+                                . $trClose;
+                        } else {
+                            $multiInputFormat = '%BEFORE%%AFTER%';
+                        }
+
+                        $inputLabel = $matchesLabelTag[0][$i] . $matchesLabel[0][$i] . '</label>';
+
+                        if ($ckRpos === 'A') {
+                            $multiInputFormat2 = str_replace('%AFTER%', $inputLabel, $multiInputFormat);
+                            $multiInput .= str_replace('%BEFORE%', $matchesInput[0][$i], $multiInputFormat2);
+                        } else {
+                            $multiInputFormat2 = str_replace('%BEFORE%', $inputLabel, $multiInputFormat);
+                            $multiInput .= str_replace('%AFTER%', $matchesInput[0][$i], $multiInputFormat2);
+                        }
+
+                        if ($i === $resultInput - 1 && $ckRfmt !== 'C') {
+                            $multiInput .= '</table>';
+                            $multiInput .= "\n";
+                        }
                     }
 
-                    if ($ckRfmt === 'H' && $i === 0) {
-                        $multiInputFormat = '';
-                    }
-
-                    if ($ckRfmt === 'H') {
-                        $multiInputFormat = $td
-                            . '%BEFORE%'
-                            . $tdClose
-                            . $td
-                            . '%AFTER%'
-                            . $tdClose
-                            . $td
-                            . '&nbsp;&nbsp'
-                            . $tdClose;
-                    } elseif ($ckRfmt === 'V') {
-                        $multiInputFormat = $tr
-                            . $td
-                            . '%BEFORE%'
-                            . $tdClose
-                            . $td
-                            . '%AFTER%'
-                            . $tdClose
-                            . $trClose;
-                    } else {
-                        $multiInputFormat = '%BEFORE%%AFTER%';
-                    }
-
-                    $inputLabel = $matchesLabelTag[0][$i] . $matchesLabel[0][$i] . '</label>';
-
-                    if ($ckRpos === 'A') {
-                        $multiInputFormat2 = str_replace('%AFTER%', $inputLabel, $multiInputFormat);
-                        $multiInput .= str_replace('%BEFORE%', $matchesInput[0][$i], $multiInputFormat2);
-                    } else {
-                        $multiInputFormat2 = str_replace('%BEFORE%', $inputLabel, $multiInputFormat);
-                        $multiInput .= str_replace('%AFTER%', $matchesInput[0][$i], $multiInputFormat2);
-                    }
-
-                    if ($i === $resultInput - 1 && $ckRfmt !== 'C') {
-                        $multiInput .= '</table>';
-                        $multiInput .= "\n";
-                    }
+                    $input = $multiInput;
                 }
-
-                $input = $multiInput;
             }
 
             $th = "<th align=\"{$this->formLabelAlign}\" 
@@ -1234,9 +1252,11 @@ class sefv2modsimpleemailform implements
                 } else {
                     if ($from === 'C') {
                         $valuesToInsert = explode('=', $valueArray[0]);
+                        $valuesToInsert = array_map('trim', $valuesToInsert);
                         if (count($valuesToInsert) > 1) {
-                            $valuesToInsert = array_map('trim', $valuesToInsert);
                             $multiValue .= "<option value=\"$valuesToInsert[0]\">$valuesToInsert[1]</option>";
+                        } else {
+                            $type = 'checkbox';
                         }
                     }
                 }

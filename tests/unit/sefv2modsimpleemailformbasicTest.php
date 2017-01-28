@@ -1857,10 +1857,12 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
                 1,
                 preg_match('/type="checkboxes"/is', $output)
             );
-        } elseif ($active !== 'H' && $from === 'C' && strpos($value, ',') === false) {
+        } elseif ($active !== 'H' && $from === 'C'
+            && strpos($value, ',') === false
+            && strpos($value, '=') === false) {
             $this->assertEquals(
                 1,
-                preg_match('/type="checkboxes"/is', $output)
+                preg_match('/type="checkbox"/is', $output)
             );
         } elseif ($active !== 'H' && $from === 'D') {
             $this->assertEquals(
@@ -1882,7 +1884,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
             array('F', 'S', 'N', 'A', 'D', 'R', 'C', 'U'),
             array('name1', 'name2'),
             array('name1', 'name2'),
-            array('value1', 'value1=Value1,value2=Value2'),
+            array('1', 'value1', 'value1=Value1,value2=Value2'),
             array(0, 50, 100),
             array(0, 50, 100),
         );
