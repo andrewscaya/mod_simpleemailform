@@ -459,6 +459,103 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      *
      * @since 2.0.0
      */
+    public function testSefv2modsimpleemailformConstructWithModifiedErrorMessageAndSuccessMessageColours()
+    {
+        list(
+            $formDataRaw,
+            $formCleanData,
+            $emailMsg,
+            $paramsArray,
+            $formPrefixName,
+            $jSessionMock,
+            $jFormMock,
+            $jDocumentMock,
+            $jMailMock
+            ) = $this->setUpProcessFormDataTests();
+
+        $errorColour = $this->sefv2modsimpleemailformProperties['errorColour']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame('red', $errorColour);
+
+        $params = $this->sefv2modsimpleemailformProperties['params']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $params->set('mod_simpleemailform_errorTxtColor', 'blue');
+
+        $this->sefv2modsimpleemailformMethods['__construct']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array(
+                $this->jFormMock,
+                $this->jMailMock,
+                $this->emailMsgFake,
+                $this->jDocumentMock,
+                $this->jLanguageMock,
+                $params,
+                $this->jInputMock,
+                $this->jTableExtensionMock,
+                $this->jTableModuleMock,
+                $this->stdClassModuleHelperResultFake,
+                $this->jSessionMock,
+                $this->jFileMock
+            )
+        );
+
+        $errorColour = $this->sefv2modsimpleemailformProperties['errorColour']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame('blue', $errorColour);
+
+        // Test success message colour
+        $errorColour = $this->sefv2modsimpleemailformProperties['successColour']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame('green', $errorColour);
+
+        $params->set('mod_simpleemailform_successTxtColor', 'yellow');
+
+        $this->sefv2modsimpleemailformMethods['__construct']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array(
+                $this->jFormMock,
+                $this->jMailMock,
+                $this->emailMsgFake,
+                $this->jDocumentMock,
+                $this->jLanguageMock,
+                $params,
+                $this->jInputMock,
+                $this->jTableExtensionMock,
+                $this->jTableModuleMock,
+                $this->stdClassModuleHelperResultFake,
+                $this->jSessionMock,
+                $this->jFileMock
+            )
+        );
+
+        $errorColour = $this->sefv2modsimpleemailformProperties['successColour']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame('yellow', $errorColour);
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::__construct(
+     *                                       \JForm $jForm,
+     *                                       \JMail $jMail,
+     *                                       sefv2simpleemailformemailmsg $emailMsg,
+     *                                       \JDocument $jDocument,
+     *                                       \JLanguage $jLanguage,
+     *                                       Registry $params,
+     *                                       \JInput $jInput,
+     *                                       \JTableExtension $jTableExtension,
+     *                                       \JTableModule $jTableModule,
+     *                                       \stdClass $jModuleHelperResult,
+     *                                       \JSession $jSession,
+     *                                       \JFile $jFile
+     *                                   ).
+     *
+     * @since 2.0.0
+     */
     public function testSefv2modsimpleemailformConstructWithRenderingDisabled()
     {
         list(
@@ -484,7 +581,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
         $params = $this->sefv2modsimpleemailformProperties['params']
             ->getValue($this->sefv2modsimpleemailform);
 
-        $params[$formPrefixName . $formRenderingOverrideName] = 'Y';
+        $params->set($formPrefixName . $formRenderingOverrideName, 'Y');
 
         $this->sefv2modsimpleemailformMethods['__construct']->invokeArgs(
             $this->sefv2modsimpleemailform,
@@ -555,7 +652,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('left', $formLabelAlign);
 
         // Align right
-        $params[$formPrefixName . $formLabelAlignName] = 'R';
+        $params->set($formPrefixName . $formLabelAlignName, 'R');
 
         $this->sefv2modsimpleemailformMethods['__construct']->invokeArgs(
             $this->sefv2modsimpleemailform,
@@ -581,7 +678,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('right', $formLabelAlign);
 
         // Align center
-        $params[$formPrefixName . $formLabelAlignName] = 'C';
+        $params->set($formPrefixName . $formLabelAlignName, 'C');
 
         $this->sefv2modsimpleemailformMethods['__construct']->invokeArgs(
             $this->sefv2modsimpleemailform,
@@ -645,7 +742,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
         $params = $this->sefv2modsimpleemailformProperties['params']
             ->getValue($this->sefv2modsimpleemailform);
 
-        $params[$formPrefixName . $emailToName] = '';
+        $params->set($formPrefixName . $emailToName, '');
 
         $this->sefv2modsimpleemailformMethods['__construct']->invokeArgs(
             $this->sefv2modsimpleemailform,
