@@ -12,6 +12,8 @@ Caching
 
 **No caching** means that no content from this module will be cached.
 
+This option is provided by Joomla.
+
 .. index:: Form Instance
 
 Form Instance
@@ -300,32 +302,32 @@ modify the module's display.
 Module Tag
 ----------
 
-The html tag used for the module.
+The html tag used for the module. This option is provided by Joomla.
 
 .. index:: Bootstrap Size
 
 Bootstrap Size
 --------------
 
-The number of columns used in the module.
+The number of columns used in the module. This option is provided by Joomla.
 
 .. index:: Header Tag
 
 Header Tag
 ----------
 
-The HTML tag used for module headers and titles.
+The HTML tag used for module headers and titles. This option is provided by Joomla.
 
 .. index:: Header Class
 
 Header Class
 ------------
 
-The CSS class used for module headers and titles.
+The CSS class used for module headers and titles. This option is provided by Joomla.
 
 .. index:: Module Style
 
 Module Style
 ------------
 
-This option is used to override the template style.
+This option is used to override the template style. It is provided by Joomla.
