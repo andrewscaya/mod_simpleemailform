@@ -201,6 +201,8 @@ Name of Anchor Tag
 After submitting the form, the user is redirected to the anchor tag mentioned here.
 By default, this tag is placed at the beginning of the form.
 
+The name of the tag must start with #. Example : #tag
+
 .. index:: Number of Upload Fields
 
 Number of Upload Fields
