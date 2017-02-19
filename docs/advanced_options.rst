@@ -8,11 +8,11 @@ Advanced configuration options
 Caching
 -------
 
-**Use global** means that this module's content will be cached according to your Joomla's global cache setings.
+**Use global** means that this module's content will be cached according to your Joomla's global cache settings.
 
 **No caching** means that no content from this module will be cached.
 
-This option is provided by Joomla.
+This option is provided by `Joomla <https://docs.joomla.org/Help36:Extensions_Module_Manager_Tags_Popular#Advanced>`_.
 
 .. index:: Form Instance
 
@@ -93,13 +93,13 @@ Captcha Use
 With the **JForm** type:
 
 To be able to use Captcha, you can follow the procedure on the `Joomla Website
-<https://docs.joomla.org/How_do_you_use_Recaptcha_in_Joomla%3F>`_
+<https://docs.joomla.org/How_do_you_use_Recaptcha_in_Joomla%3F>`_.
 
 This will produce a captcha looking like this:
 
 .. image:: /images/advanced_options01.png
 
-.. note:: If you don't have a Google account and don't want to create one, you can use a Captcha extension available in the `Joomla Extenstions Directory <https://extensions.joomla.org/tags/captcha>`_.
+.. note:: If you don't have a Google account and don't want to create one, you can use a Captcha extension available in the `Joomla Extensions Directory <https://extensions.joomla.org/tags/captcha>`_.
 
 With the **Classic** form type:
 
@@ -302,32 +302,32 @@ modify the module's display.
 Module Tag
 ----------
 
-The html tag used for the module. This option is provided by Joomla.
+The html tag used for the module. This option is provided by `Joomla <https://docs.joomla.org/Help36:Extensions_Module_Manager_Tags_Popular#Advanced>`_.
 
 .. index:: Bootstrap Size
 
 Bootstrap Size
 --------------
 
-The number of columns used in the module. This option is provided by Joomla.
+The number of columns used in the module. This option is provided by `Joomla <https://docs.joomla.org/Help36:Extensions_Module_Manager_Tags_Popular#Advanced>`_.
 
 .. index:: Header Tag
 
 Header Tag
 ----------
 
-The HTML tag used for module headers and titles. This option is provided by Joomla.
+The HTML tag used for module headers and titles. This option is provided by `Joomla <https://docs.joomla.org/Help36:Extensions_Module_Manager_Tags_Popular#Advanced>`_.
 
 .. index:: Header Class
 
 Header Class
 ------------
 
-The CSS class used for module headers and titles. This option is provided by Joomla.
+The CSS class used for module headers and titles. This option is provided by `Joomla <https://docs.joomla.org/Help36:Extensions_Module_Manager_Tags_Popular#Advanced>`_.
 
 .. index:: Module Style
 
 Module Style
 ------------
 
-This option is used to override the template style. It is provided by Joomla.
+The option used to override the template style. It is provided by `Joomla <https://docs.joomla.org/Help36:Extensions_Module_Manager_Tags_Popular#Advanced>`_.

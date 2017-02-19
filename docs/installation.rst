@@ -8,6 +8,8 @@ Installation
 Here is the installation procedure for Joomla 3.x.  The procedure is very
 similar for Joomla 2.5, but the screens look slightly different.
 
+Download the module on the `Simple Email Form page <http://joomla.unlikelysource.org/>`_.
+
 Login as the Joomla administrator
 
 .. image:: /images/installation01.png
