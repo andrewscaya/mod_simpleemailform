@@ -3,8 +3,8 @@
 /**
  * helperfactoryinterface.php
  *
- * Copyright 2010 - 2016 D. Bierer <doug@unlikelysource.com>
- * Version 1.8.9
+ * Copyright 2010 - 2017 D. Bierer <doug@unlikelysource.com>
+ * Version 2.0.1
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

@@ -14,10 +14,10 @@ Form type
 
 First, the form type must be chosen.
 
+**JForm** is the most recent version that integrates new Joomla requirements.
+
 **Classic** shows the form as it used to be.
 This option is deprecated and won't be available in version 3.0 of the module.
-
-**JForm** is the most recent version that integrates new Joomla requirements.
 
 .. image:: /images/basic_options02.png
 
@@ -29,11 +29,11 @@ You can then set the language used in the form.
 Language files can be found and edited at
 ``/path/to/joomla/modules/mod_simpleemailform/language_files``.
 
-You can choose from 30 different languages.
+Thirty languages are available.
 
 .. image:: /images/basic_options03.png
 
-.. note:: The module is now integrated with Joomla native language support.
+.. note:: The module is now integrated with Joomla native language support, so this field has no effect on the JForm type.
 
 .. index:: Send Results To
 .. index:: Email address

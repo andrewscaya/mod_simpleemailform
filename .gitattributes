@@ -53,4 +53,4 @@ docs-api export-ignore
 # vendor
 vendor export-ignore
 # scripts
-createpack.sh export-ignore
+bin export-ignore
