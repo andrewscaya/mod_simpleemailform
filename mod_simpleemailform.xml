@@ -24,6 +24,7 @@
 	<files>
 		<filename module="mod_simpleemailform">mod_simpleemailform.php</filename>
 		<filename>index.html</filename>
+		<filename>extension.xml</filename>
 		<filename>sefv2/formfactory.php</filename>
 		<filename>sefv2/formfactoryinterface.php</filename>
 		<filename>sefv2/formrendererinterface.php</filename>
