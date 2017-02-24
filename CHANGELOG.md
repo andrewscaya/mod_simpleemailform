@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2.0.1 (2017-02-24)
+
+- Fixes issue #17 - JForm translations not explained well enough in documentation.
+- Makes the module compliant with PHP-PDS 1.0 standards.
+- Fixes a minor issue concerning the extension.xml file. 
+
 ## 2.0.0 (2017-01-28)
 
 - Fixes issue #3 - Make the module compliant to Joomla standards (https://joomla.github.io/coding-standards/).
