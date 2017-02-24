@@ -4,7 +4,7 @@
  * sefv2modsimpleemailformbasicTest.php
  *
  * Copyright 2010 - 2017 D. Bierer <doug@unlikelysource.com>
- * Version 2.0.0
+ * Version 2.0.1
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -1528,6 +1528,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
         $this->sefv2modsimpleemailform->bind(array());
     }
 
+    // @TODO Add tests for the createXMLConfig method.
     /**
      * Tests sefv2modsimpleemailform::createXMLConfig(array $paramsArray).
      *
