@@ -15,7 +15,7 @@
     <version>2.0.1</version>
     <infourl title="Simple Email Form">http://joomla.unlikelysource.org/</infourl>
     <downloads>
-        <downloadurl type="full" format="tar.gz">https://github.com/andrewscaya/mod_simpleemailform/archive/2.0.0.tar.gz</downloadurl>
+        <downloadurl type="full" format="tar.gz">https://github.com/andrewscaya/mod_simpleemailform/archive/latest.tar.gz</downloadurl>
     </downloads>
     <tags>
         <tag>stable</tag>
