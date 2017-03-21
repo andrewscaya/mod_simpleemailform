@@ -1584,6 +1584,9 @@ class sefv2modsimpleemailform implements
 
         $this->output .= "</form>\n";
 
+        # FLS: Added missing closing div tag (HTML validation error).  Thanks to Thonal for this fix!
+        $this->output .= "</div>\n";
+
         if ($this->formTestMode === 'Y') {
             $this->output = htmlspecialchars($this->output);
             return '<pre>' . htmlspecialchars($this->testDump($this)) . '</pre>';
