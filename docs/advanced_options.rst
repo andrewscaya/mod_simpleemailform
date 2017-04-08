@@ -19,8 +19,8 @@ This option is provided by `Joomla <https://docs.joomla.org/Help36:Extensions_Mo
 Form Instance
 -------------
 
-If you use more than one simple email form on the same page, you need to
-give each one a unique number to differentiate them from the other forms.
+If you use more than one **Classic** forms on your website, even on different pages, you need to give
+each one of them a unique number to differentiate them from each other.
 
 .. index:: Send Results CC
 
