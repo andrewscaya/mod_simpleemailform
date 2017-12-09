@@ -39,7 +39,8 @@ use \Joomla\Registry\Registry;
  */
 class sefv2modsimpleemailform implements
     sefv2jformproxyinterface,
-    sefv2formrendererinterface
+    sefv2formrendererinterface,
+    sefv2customrenderinginterface
 {
 
     /**
@@ -166,13 +167,13 @@ class sefv2modsimpleemailform implements
     protected $formInstanceName = '_instance';
 
     /**
-     * @var int
+     * @var string
      * @since 2.0.0
      */
     protected $formSubmitButtonName = 'mod_simpleemailform_submit';
 
     /**
-     * @var int
+     * @var string
      * @since 2.0.0
      */
     protected $formResetButtonName = 'mod_simpleemailform_reset';
@@ -752,7 +753,6 @@ class sefv2modsimpleemailform implements
         );
 
         // Store test mode status.
-
         $this->formTestMode = $this->paramsArray[$this->formPrefixName . $this->formTestModeName];
 
         // Check if $_POST was set.
@@ -1167,6 +1167,43 @@ class sefv2modsimpleemailform implements
         return $this->jForm->getFieldset($set);
     }
 
+    public function getFormAnchor()
+    {
+        return $this->formAnchor;
+    }
+
+    public function getFormInstance()
+    {
+        return $this->formInstance;
+    }
+
+    public function getFormRendering()
+    {
+        return $this->formRendering;
+    }
+
+    public function getFormResetButtonName()
+    {
+        return $this->formResetButtonName;
+    }
+
+    public function getFormSubmitButtonName()
+    {
+        return $this->formSubmitButtonName;
+    }
+
+    public function getMsg()
+    {
+        return $this->msg;
+    }
+
+    public function getTransLang($index)
+    {
+        $index = (string) $index;
+
+        return $this->transLang[$index];
+    }
+
     /**
      * Returns a field's XML configuration string.
      *
@@ -1520,8 +1557,8 @@ class sefv2modsimpleemailform implements
      */
     public function render()
     {
-        if (!$this->formRendering) {
-            return $this->msg;
+        if (!$this->getFormRendering()) {
+            return;
         }
 
         // Present the Email Form.
@@ -1532,17 +1569,17 @@ class sefv2modsimpleemailform implements
         // 2012-04-20 DB: Added anchor (default anchor = #).
         $this->output .=
             '<a name="'
-            . substr($this->formAnchor, 1)
+            . substr($this->getFormAnchor(), 1)
             . '">&nbsp;</a>'
             . "\n";
 
         $this->output .= "<form method=\"post\" "
-            . "action=\"" . $this->formAnchor . "\" "
-            . "name=\"_SimpleEmailForm_" . $this->formInstance . "\" "
-            . "id=\"_SimpleEmailForm_" . $this->formInstance . "\" "
+            . "action=\"" . $this->getFormAnchor() . "\" "
+            . "name=\"_SimpleEmailForm_" . $this->getFormInstance() . "\" "
+            . "id=\"_SimpleEmailForm_" . $this->getFormInstance() . "\" "
             . "enctype=\"multipart/form-data\">\n";
 
-        $this->output .= "<table class='" . $this->formTableClass . "'>\n";
+        $this->output .= "<table class=\"" . $this->formTableClass . "\">\n";
 
         $this->output .= "\t<tbody>\n";
 
@@ -1550,17 +1587,17 @@ class sefv2modsimpleemailform implements
 
         $submitandReset = "<br /><input
                                 class=\"{$this->formInputClass}\"
-                                name=\"{$this->formSubmitButtonName}_{$this->formInstance}\"
-                                id=\"{$this->formSubmitButtonName}_{$this->formInstance}\"
-                                value=\"{$this->transLang['MOD_SIMPLEEMAILFORM_button_submit']}\"
-                                title=\"{$this->transLang['MOD_SIMPLEEMAILFORM_click_submit']}\"
+                                name=\"{$this->formSubmitButtonName}_{$this->getFormInstance()}\"
+                                id=\"{$this->formSubmitButtonName}_{$this->getFormInstance()}\"
+                                value=\"{$this->getTransLang('MOD_SIMPLEEMAILFORM_button_submit')}\"
+                                title=\"{$this->getTransLang('MOD_SIMPLEEMAILFORM_click_submit')}\"
                                 type=\"submit\">\n";
 
         $submitandReset .= "<input
                                 class=\"{$this->formInputClass}\"
-                                name=\"{$this->formResetButtonName}_{$this->formInstance}\"
-                                id=\"{$this->formResetButtonName}_{$this->formInstance}\"
-                                value=\"{$this->transLang['MOD_SIMPLEEMAILFORM_button_reset']}\"
+                                name=\"{$this->formResetButtonName}_{$this->getFormInstance()}\"
+                                id=\"{$this->formResetButtonName}_{$this->getFormInstance()}\"
+                                value=\"{$this->getTransLang('MOD_SIMPLEEMAILFORM_button_reset')}\"
                                 title=\"\"
                                 type=\"reset\">\n";
 
@@ -1592,7 +1629,7 @@ class sefv2modsimpleemailform implements
             return '<pre>' . htmlspecialchars($this->testDump($this)) . '</pre>';
         }
 
-        $this->output .= $this->msg;
+        $this->output .= $this->getMsg();
 
         return $this->output;
     }
