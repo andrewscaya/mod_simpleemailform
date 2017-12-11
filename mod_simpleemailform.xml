@@ -80,7 +80,7 @@
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
-				<field name="mod_simpleemailform_formType" type="radio" default="classic" label="Form Type" description="Choose the default form type" >
+				<field name="mod_simpleemailform_formType" type="radio" default="jform" label="Form Type" description="Choose the default form type" >
 					<option value="jform">JForm</option>
 					<option value="classic">Classic (TO BE REMOVED mid-2019)</option>
 				</field>
