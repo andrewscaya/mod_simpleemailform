@@ -35,7 +35,8 @@
  *
  * @since 2.1.0
  */
-interface sefv2customrenderinginterface {
+interface sefv2customrenderinginterface
+{
 
     /**
      * Gets the value of the formAnchor property.
@@ -101,5 +102,4 @@ interface sefv2customrenderinginterface {
      * @since 2.1.0
      */
     public function getTransLang($index);
-
 }

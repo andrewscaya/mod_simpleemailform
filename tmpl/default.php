@@ -3,10 +3,8 @@ defined('_JEXEC') or die('Restricted access'); ?>
 
 <?php
 
-if(!$form->getFormRendering()) {
-
+if (!$form->getFormRendering()) {
     $view = require_once 'default_custom.php';
-
 }
 
 echo $view;
