@@ -56,7 +56,7 @@ before_install:
     - travis_retry composer self-update
     - if [[ $TEST_CHECK == 'false' ]]; then rm $TRAVIS_BUILD_DIR/composer.json && mv $TRAVIS_BUILD_DIR/composer.php54.json $TRAVIS_BUILD_DIR/composer.json ; fi
     - if [[ -z "$TEST_CHECK_COVER" ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
-    - $TRAVIS_BUILD_DIR/bin/codeception-setup.sh
+    - if [[ $CC_CHECK == 'true' ]]; then $TRAVIS_BUILD_DIR/bin/codeception-setup.sh ; fi
     - sleep 5 # gives enough time to Selenium to start
     
 install:
