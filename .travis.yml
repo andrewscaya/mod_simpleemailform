@@ -27,23 +27,23 @@ matrix:
           env:
             - TEST_CHECK=false
             - CS_CHECK=true
-            - CC_CHECK=true
+            - CC_CHECK=false
         - php: 5.5
           env:
             - TEST_CHECK=true
             - CS_CHECK=true
-            - CC_CHECK=true
+            - CC_CHECK=false
         - php: 5.6
           env:
             - COMPOSER_PROCESS_TIMEOUT=600
             - TEST_CHECK_COVER=true
             - CS_CHECK=true
-            - CC_CHECK=true
+            - CC_CHECK=false
             - CODECLIMATE_REPO_TOKEN=cdf9d20bb5113bdc18f79b722ca5a54c965e2ccae2912ba40d92d0651cf8affa
         - php: 7
           env:
             - CS_CHECK=true
-            - CC_CHECK=true
+            - CC_CHECK=false
         - php: hhvm
     allow_failures:
         - php: hhvm
