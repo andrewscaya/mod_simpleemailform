@@ -23,11 +23,6 @@ addons:
 matrix:
     fast_finish: true
     include:
-        - php: 5.4
-          env:
-            - TEST_CHECK_54=true
-            - CS_CHECK=true
-            - CC_CHECK=false
         - php: 5.5
           env:
             - COMPOSER_PROCESS_TIMEOUT=600
