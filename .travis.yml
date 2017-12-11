@@ -25,11 +25,12 @@ matrix:
     include:
         - php: 5.4
           env:
-            - TEST_CHECK=false
+            - TEST_CHECK_54=true
             - CS_CHECK=true
             - CC_CHECK=false
         - php: 5.5
           env:
+            - COMPOSER_PROCESS_TIMEOUT=600
             - TEST_CHECK=true
             - CS_CHECK=true
             - CC_CHECK=false
@@ -42,6 +43,7 @@ matrix:
             - CODECLIMATE_REPO_TOKEN=cdf9d20bb5113bdc18f79b722ca5a54c965e2ccae2912ba40d92d0651cf8affa
         - php: 7
           env:
+            - TEST_CHECK=false
             - CS_CHECK=true
             - CC_CHECK=false
         - php: hhvm
@@ -54,7 +56,7 @@ before_install:
     - "sh -e /etc/init.d/xvfb start"
     - sleep 5 # give xvfb some time to start
     - travis_retry composer self-update
-    - if [[ $TEST_CHECK == 'false' ]]; then rm $TRAVIS_BUILD_DIR/composer.json && mv $TRAVIS_BUILD_DIR/composer.php54.json $TRAVIS_BUILD_DIR/composer.json ; fi
+    - if [[ $TEST_CHECK_54 == 'true' ]]; then rm $TRAVIS_BUILD_DIR/composer.json && mv $TRAVIS_BUILD_DIR/composer.php54.json $TRAVIS_BUILD_DIR/composer.json ; fi
     - if [[ -z "$TEST_CHECK_COVER" ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
     - if [[ $CC_CHECK == 'true' ]]; then $TRAVIS_BUILD_DIR/bin/codeception-setup.sh ; fi
     - sleep 5 # gives enough time to Selenium to start
@@ -63,7 +65,7 @@ install:
     - travis_retry composer install --no-interaction
     
 script:
-    - if [[ $TEST_CHECK == 'true' ]]; then composer test ; fi
+    - if [[ $TEST_CHECK == 'true' || $TEST_CHECK_54 == 'true' ]]; then composer test ; fi
     - if [[ $TEST_CHECK_COVER == 'true' ]]; then composer test-cover ; fi
     - if [[ $CS_CHECK == 'true' ]]; then composer cs ; fi
     - if [[ $CC_CHECK == 'true' ]]; then composer cc ; fi

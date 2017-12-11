@@ -3,14 +3,14 @@
 	<name>Simple Email Form</name> 
 	<author>joomla.unlikelysource.org</author>
 	<creationDate>2014-05-21</creationDate>
-	<copyright>All rights reserved by unlikelysource.com (c) 2010 - 2017</copyright>
+	<copyright>All rights reserved by unlikelysource.com (c) 2010 - 2018</copyright>
 	<license>GNU General Public License version 2</license>
-	<authorEmail>info@unlikelysource.org</authorEmail> 
+	<authorEmail>info@unlikelysource.com</authorEmail>
 	<authorUrl>www.unlikelysource.com</authorUrl> 
-	<version>2.0.1</version>
+	<version>2.1.0-dev</version>
 	<description><![CDATA[ 
-	A simple email form from unlikelysource.com with up to 8 fields + CAPTCHA + 32 languages.
-	<br />Version 2.0.1 -- works on 3.x (1.8.1-1x supports Joomla 1.x)!
+	A simple email form from unlikelysource.com with up to 8 fields + Joomla CAPTCHA + 32 languages.
+	<br />Version 2.1.0-dev -- works on 3.x.
 	<br />REQUIRES a web server running at a minimum PHP 5.3!!!
 	<br />TO LOAD IN AN ARTICLE (most common): 
 	<ul><li>In the Details box, modify Position to user99 (or whatever).  </li>
@@ -42,6 +42,7 @@
 		<filename>sef/PEAR5.php</filename>
 		<filename>sef/Text.php</filename>
 		<filename>tmpl/default.php</filename>
+		<filename>tmpl/default_custom.php.dist</filename>
 		<filename>tmpl/index.html</filename>
 		<filename>language_files/af-ZA.mod_simpleemailform.ini</filename>
 		<filename>language_files/ar-EG.mod_simpleemailform.ini</filename>
@@ -81,9 +82,9 @@
 			<fieldset name="basic">
 				<field name="mod_simpleemailform_formType" type="radio" default="classic" label="Form Type" description="Choose the default form type" >
 					<option value="jform">JForm</option>
-					<option value="classic">Classic (DEPRECATED)</option>
+					<option value="classic">Classic (TO BE REMOVED mid-2019)</option>
 				</field>
-				<field name="mod_simpleemailform_defaultLang" type="list" default="en" label="Default Language" description="Choose the default language" >
+				<field name="mod_simpleemailform_defaultLang (Classic)" type="list" default="en" label="Default Language" description="Choose the default language" >
 					<option value="en-GB">English</option>
 					<option value="af-ZA">Afrikaans</option>
 					<option value="ar-SA">Arabic</option>
@@ -367,7 +368,7 @@
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
 				</field>
-				<field name="mod_simpleemailform_autoreset"    type="radio"          default="N" 		label="Auto Reset Fields" description="Select 'Y' if you want all form fields to be automatically reset (cleared) after successful form submission" >
+				<field name="mod_simpleemailform_autoreset (Classic)"    type="radio"          default="N" 		label="Auto Reset Fields" description="Select 'Y' if you want all form fields to be automatically reset (cleared) after successful form submission" >
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
 				</field>
@@ -379,17 +380,17 @@
 					<option value="I">Image Captcha</option>
 					<option value="T">Text Captcha</option>
 				</field>
-				<field name="mod_simpleemailform_captchaDir"   		type="text" size="60" default=""        label="Directory to Write Captchas" description="Enter the absolute directory path where the module can write 'captchas' (i.e. /var/www/application/images" />
-				<field name="mod_simpleemailform_captchaURL"   		type="text" size="60" default=""        label="URL for Captcha Directory" description="Enter a URL which corresponds with the Captcha Directory (above)" />
-				<field name="mod_simpleemailform_captchaLen"   		type="text" size="4"  default="8"       label="Captcha Word Length" description="Enter the desired Captcha word length (number of characters)" />
-				<field name="mod_simpleemailform_captchaSize"  		type="text" size="4"  default="24"      label="Captcha Font Size" description="Enter the desired Captcha font size" />
-				<field name="mod_simpleemailform_captchaWidth"  	type="text" size="4"  default="200"     label="Captcha Width" description="Enter the desired Captcha width in pixels" />
-				<field name="mod_simpleemailform_captchaHeight"  	type="text" size="4"  default="80"      label="Captcha Height" description="Enter the desired Captcha height in pixels" />
-				<field name="mod_simpleemailform_captchaTxtColor"  	type="text" size="8"  default="#000000" label="Captcha Text Color" description="Enter the desired Captcha text color" />
-				<field name="mod_simpleemailform_captchaLinesColor" type="text" size="8"  default="#FFFF00" label="Captcha Lines Color" description="Enter the desired Captcha lines color" />
-				<field name="mod_simpleemailform_captchaBgColor"  	type="text" size="8"  default="#BFBFBF" label="Captcha Background Color" description="Enter the desired Captcha background color" />
+				<field name="mod_simpleemailform_captchaDir (Classic)"   		type="text" size="60" default=""        label="Directory to Write Captchas" description="Enter the absolute directory path where the module can write 'captchas' (i.e. /var/www/application/images" />
+				<field name="mod_simpleemailform_captchaURL (Classic)"   		type="text" size="60" default=""        label="URL for Captcha Directory" description="Enter a URL which corresponds with the Captcha Directory (above)" />
+				<field name="mod_simpleemailform_captchaLen (Classic)"   		type="text" size="4"  default="8"       label="Captcha Word Length" description="Enter the desired Captcha word length (number of characters)" />
+				<field name="mod_simpleemailform_captchaSize (Classic)"  		type="text" size="4"  default="24"      label="Captcha Font Size" description="Enter the desired Captcha font size" />
+				<field name="mod_simpleemailform_captchaWidth (Classic)"  	type="text" size="4"  default="200"     label="Captcha Width" description="Enter the desired Captcha width in pixels" />
+				<field name="mod_simpleemailform_captchaHeight (Classic)"  	type="text" size="4"  default="80"      label="Captcha Height" description="Enter the desired Captcha height in pixels" />
+				<field name="mod_simpleemailform_captchaTxtColor (Classic)"  	type="text" size="8"  default="#000000" label="Captcha Text Color" description="Enter the desired Captcha text color" />
+				<field name="mod_simpleemailform_captchaLinesColor (Classic)" type="text" size="8"  default="#FFFF00" label="Captcha Lines Color" description="Enter the desired Captcha lines color" />
+				<field name="mod_simpleemailform_captchaBgColor (Classic)"  	type="text" size="8"  default="#BFBFBF" label="Captcha Background Color" description="Enter the desired Captcha background color" />
 				<field name="mod_simpleemailform_errorTxtColor"  	type="text" size="8"  default="red"     label="Error Text Color" description="Enter the desired HTML text color for errors" />
-				<field name="mod_simpleemailform_successTxtColor"  	type="text" size="8"  default="green"   label="Success Text Color" description="Enter the desired HTML text color for success" />                
+				<field name="mod_simpleemailform_successTxtColor"  	type="text" size="8"  default="green"   label="Success Text Color" description="Enter the desired HTML text color for success" />
 				<field name="mod_simpleemailform_anchor"  			type="text" size="8"  default=""   	    label="Name of Anchor Tag" description="Enter the name of any anchor tags associated with the form. When form is submitted, redirects back to this anchor." />
 				<field name="mod_simpleemailform_uploadActive"      type="text"	size="4"  default="0"       label="Number of Upload Fields" description="Enter a number greater than 0 which represents how many file upload fields you want to have for email attachments" />
 				<field name="mod_simpleemailform_uploadLabel" 		type="text" size="20" default="Attachment"     	label="Upload Field Label" description="Enter a label for the file upload fields (if any)." />
@@ -408,7 +409,7 @@
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
 				</field>
-				<field name="mod_simpleemailform_emailCheck"	type="radio"	      default="Y" 			label="Email Check" description="Select 'Y' if you want to check the 'From' email address.  Set to 'N' to disable this check.  If email check is disabled, the 'From' field will automatically take its value from what you entered as a default value for the 'From' field." >
+				<field name="mod_simpleemailform_emailCheck (Classic)"	type="radio"	      default="Y" 			label="Email Check" description="Select 'Y' if you want to check the 'From' email address.  Set to 'N' to disable this check.  If email check is disabled, the 'From' field will automatically take its value from what you entered as a default value for the 'From' field." >
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
 				</field>

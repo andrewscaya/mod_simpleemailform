@@ -3,8 +3,8 @@
 /**
  * mod_simpleemailform.php
  *
- * Copyright 2010 - 2017 D. Bierer <doug@unlikelysource.com>
- * Version 2.0.1
+ * Copyright 2010 - 2018 D. Bierer <doug@unlikelysource.com>
+ * Version 2.1.0
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,11 +22,11 @@
  * MA 02110-1301, USA.
  *
  * @package    Simple Email Form
- * @copyright  Copyright 2010 - 2017 D. Bierer <doug@unlikelysource.com>
+ * @copyright  Copyright 2010 - 2018 D. Bierer <doug@unlikelysource.com>
  * @link       http://joomla.unlikelysource.org/
  * @license    GNU/GPLv2, see above
  * @since 1.0.0
- * @version 2.0
+ * @version 2.1.0
  */
 
 // no direct access
