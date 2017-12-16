@@ -25,13 +25,13 @@ matrix:
     include:
         - php: 5.5
           env:
-            - COMPOSER_PROCESS_TIMEOUT=600
+            - COMPOSER_PROCESS_TIMEOUT=1200
             - TEST_CHECK=true
             - CS_CHECK=true
             - CC_CHECK=false
         - php: 5.6
           env:
-            - COMPOSER_PROCESS_TIMEOUT=600
+            - COMPOSER_PROCESS_TIMEOUT=1200
             - TEST_CHECK_COVER=true
             - CS_CHECK=true
             - CC_CHECK=false
