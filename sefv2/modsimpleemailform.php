@@ -44,72 +44,96 @@ class sefv2modsimpleemailform implements
 {
 
     /**
+     * Contains an instance of a JForm object.
+     *
      * @var JForm
      * @since 2.0.0
      */
     protected $jForm;
 
     /**
+     * Contains an instance of a JMail object.
+     *
      * @var JMail
      * @since 2.0.0
      */
     protected $jMail;
 
     /**
+     * Contains an instance of a sefv2simpleemailformemailmsg object.
+     *
      * @var sefv2simpleemailformemailmsg
      * @since 2.0.0
      */
     protected $emailMsg;
 
     /**
+     * Contains an instance of a JDocument object.
+     *
      * @var JDocument
      * @since 2.0.0
      */
     protected $jDocument;
 
     /**
+     * Contains an instance of a JLanguage object.
+     *
      * @var JLanguage
      * @since 2.0.0
      */
     protected $jLanguage;
 
     /**
+     * Contains an instance of a Joomla\Registry\Registry object.
+     *
      * @var Registry
      * @since 2.0.0
      */
     protected $params;
 
     /**
+     * Contains an instance of a JInput object.
+     *
      * @var JInput
      * @since 2.0.0
      */
     protected $jInput;
 
     /**
+     * Contains an instance of a JTableExtension object.
+     *
      * @var JTableExtension
      * @since 2.0.0
      */
     protected $jTableExtension;
 
     /**
+     * Contains an instance of a JTableModule object.
+     *
      * @var JTableModule
      * @since 2.0.0
      */
     protected $jTableModule;
 
     /**
+     * Contains an instance of a stdClass object.
+     *
      * @var stdClass
      * @since 2.0.0
      */
     protected $jModuleHelperResult;
 
     /**
+     * Contains an instance of a JSession object.
+     *
      * @var JSession
      * @since 2.0.0
      */
     protected $jSession;
 
     /**
+     * Contains an instance of a JFile object.
+     *
      * @var JFile
      * @since 2.0.0
      */
@@ -122,24 +146,32 @@ class sefv2modsimpleemailform implements
     protected $jComponentIds;
 
     /**
+     * Contains an array of module identifiers in the Joomla system.
+     *
      * @var stdClass
      * @since 2.0.0
      */
     protected $module;
 
     /**
+     * Contains an array version of the Joomla\Registry\Registry object.
+     *
      * @var array (copy of Registry)
      * @since 2.0.0
      */
     protected $paramsArray = array();
 
     /**
+     * Contains an XML string signifying the form's configuration.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $xmlConfig = '';
 
     /**
+     * Contains an integer of the maximum number of configurable fields.
+     *
      * @var int
      * @since 2.0.0
      *
@@ -149,289 +181,389 @@ class sefv2modsimpleemailform implements
     protected $maxFields = 8;
 
     /**
+     * Contains a string signifying the prefix name of the fields found in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formPrefixName = 'mod_simpleemailform';
 
     /**
+     * Contains a string signifying the name of the renderingOverride field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formRenderingOverrideName = '_renderingOverride';
 
     /**
-     * @var int
+     * Contains a string signifying the name of the instance field in the mod_simpleemailform.xml file.
+     *
+     * @var string
      * @since 2.0.0
      */
     protected $formInstanceName = '_instance';
 
     /**
+     * Contains a string signifying the name of the mod_simpleemailform_submit button parameter.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formSubmitButtonName = 'mod_simpleemailform_submit';
 
     /**
+     * Contains a string signifying the name of the mod_simpleemailform_reset button parameter.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formResetButtonName = 'mod_simpleemailform_reset';
 
     /**
+     * Contains a string signifying the name of Simple Email Form's CSS class parameter.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formCssClassName = '_cssClass';
 
     /**
+     * Contains a string signifying the name of Simple Email Form's redirectURL parameter.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formRedirectURLName = '_redirectURL';
 
     /**
+     * Contains a string signifying the name of Simple Email Form's col2space parameter.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formCol2SpaceName = '_col2space';
 
     /**
+     * Contains a string signifying the name of Simple Email Form's labelAlign parameter.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formLabelAlignName = '_labelAlign';
 
     /**
+     * Contains a string signifying the name of Simple Email Form's errorTxtColor parameter.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formErrorColourName = '_errorTxtColor';
 
     /**
+     * Contains a string signifying the name of Simple Email Form's successTxtColor parameter.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formSuccessColourName = '_successTxtColor';
 
     /**
+     * Contains a string signifying the name of Simple Email Form's anchor parameter.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formAnchorName = '_anchor';
 
     /**
+     * Contains a string signifying the name of Simple Email Form's uploadActive parameter.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formUploadActiveName = '_uploadActive';
 
     /**
+     * Contains a string signifying the name of Simple Email Form's copymeLabel parameter.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formCopymeLabelName = '_copymeLabel';
 
     /**
+     * Contains a string signifying the name of Simple Email Form's copymeActive parameter.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formCopymeActiveName = '_copymeActive';
 
     /**
+     * Contains a string signifying the name of Simple Email Form's useCaptcha parameter.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formUseCaptchaName = '_useCaptcha';
 
     /**
+     * Contains a string signifying the name of the defaultLang field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formDefaultLangName = '_defaultLang';
 
     /**
+     * Contains a string signifying the name of the testMode field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formTestModeName = '_testMode';
 
     /**
+     * Contains a string signifying the name of the field field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $fieldPrefixName = '_field';
 
     /**
+     * Contains a string signifying the name of the field label field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $fieldLabelName = 'label';
 
     /**
+     * Contains a string signifying the name of the field value field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $fieldValueName = 'value';
 
     /**
+     * Contains a string signifying the name of the field size field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $fieldSizeName = 'size';
 
     /**
+     * Contains a string signifying the name of the field maxx field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $fieldMaxxName = 'maxx';
 
     /**
+     * Contains a string signifying the name of the field from field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $fieldFromName = 'from';
 
     /**
+     * Contains a string signifying the name of the field ckRfmt field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $fieldCkrfmtName = 'ckRfmt';
 
     /**
+     * Contains a string signifying the name of the field ckRpos field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $fieldCkrposName = 'ckRpos';
 
     /**
+     * Contains a string signifying the name of the emailTo field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $fieldEmailToName = '_emailTo';
 
     /**
+     * Contains a string signifying the name of the field active field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $fieldActiveName = 'active';
 
     /**
+     * Contains a string signifying the name of the upload field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $fieldUploadName = '_upload';
 
     /**
+     * Contains a string signifying the name of the upload label field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $fieldUploadLabelName = '_uploadLabel';
 
     /**
+     * Contains a string signifying the name of the uploadAllowed field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $fieldUploadAllowedName = '_uploadAllowed';
 
     /**
+     * Contains a string signifying the name of the uploadRequired field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $fieldUploadRequiredName = '_uploadRequired';
 
     /**
+     * Contains a string signifying the name of the copyMe field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $fieldCopymeName = '_copyMe';
 
     /**
+     * Contains a string signifying the name of the captcha field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $fieldCaptchaName = '_captcha';
 
     /**
+     * Contains a string signifying the name of the emailFile field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $emailFileName = '_emailFile';
 
     /**
+     * Contains a string signifying the name of the copymeAuto field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $emailCopymeAutoName = '_copymeAuto';
 
     /**
+     * Contains a string signifying the name of the copymeContent field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.1.0
      */
     protected $emailCopymeContentName = '_copymeContent';
 
     /**
+     * Contains a string signifying the name of the emailTo field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $emailToName = '_emailTo';
 
     /**
+     * Contains a string signifying the name of the emailCC field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $emailCCName = '_emailCC';
 
     /**
+     * Contains a string signifying the name of the emailBCC field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $emailBCCName = '_emailBCC';
 
     /**
+     * Contains a string signifying the name of the replytoActive field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $replyToActiveName = '_replytoActive';
 
     /**
+     * Contains a string signifying the name of the emailReplyTo field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $emailReplyToName = '_emailReplyTo';
 
     /**
+     * Contains a string signifying the name of the addTitle field in the mod_simpleemailform.xml file.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $addTitleName = '_addTitle';
 
     /**
+     * DEPRECATED - Contained a string signifying the value of the copyme field in the submitted form.
+     *
+     * @deprecated 2.1.0
+     *
      * @var string
      * @since 2.0.0
      */
     protected $emailCopyme = 'N';
 
     /**
+     * DEPRECATED - Contained a string signifying the value of the copyme field's label in the rendered form.
+     *
+     * @deprecated 2.1.0
+     *
      * @var string
      * @since 2.0.0
      */
     protected $emailCopymeLabel = '';
 
     /**
+     * Contains a string signifying the value of Joomla's language tag.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $lang = '';
 
     /**
+     * Contains an array of strings parsed from the appropriate language file.
+     *
      * @var array
      * @since 2.0.0
      */
     protected $transLang = array();
 
     /**
-     * @var array
+     * Contains a string of allowed HTML tags in the email body.
+     *
+     * @var string
      * @since 2.0.0
      */
     protected $allowedHtmlTags = '<p><a><strong><span><em>
@@ -440,150 +572,200 @@ class sefv2modsimpleemailform implements
                                     <h1><h2><h3><h4><h5><h6>';
 
     /**
-     * @var string
+     * Contains an array of strings signifying the names of the form's upload fields.
+     *
+     * @var array
      * @since 2.0.0
      */
-    protected $uploadName = '';
+    protected $uploadName = array();
 
     /**
+     * Contains a string signifying the value of the form's upload field label.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $uploadLabel = '';
 
     /**
+     * Contains a string signifying the value of allowed uploaded file suffixes.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $uploadAllowedFiles = '';
 
     /**
+     * Contains an array of the exploded string contained in the $uploadAllowedFiles property.
+     *
      * @var array
      * @since 2.0.0
      */
     protected $uploadAllowedFilesArray = array();
 
     /**
+     * Contains an integer signifying the form instance number.
+     *
      * @var int
      * @since 2.0.0
      */
     protected $formInstance;
 
     /**
+     * Contains a string signifying the value of the form's HTML anchor.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formAnchor;
 
     /**
+     * Contains a boolean signifying that rendering is on or off.
+     *
      * @var bool
      * @since 2.0.0
      */
     protected $formRendering = true;
 
     /**
+     * Contains a string signifying that test mode is on or off.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formTestMode = 'N';
 
     /**
+     * Contains an array of strings signifying the values of the form's active fields.
+     *
      * @var array
      * @since 2.0.0
      */
     protected $formActiveElements;
 
     /**
+     * Contains an integer signifying the number of active fields.
+     *
      * @var int
      * @since 2.0.0
      */
     protected $formActiveElementsCount;
 
     /**
+     * Contains a string signifying the value of Simple Email Form's CSS class parameter.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formCssClass;
 
     /**
+     * Contains a string signifying the name of Simple Email Form's CSS Table class parameter.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formTableClass;
 
     /**
+     * Contains a string signifying the name of Simple Email Form's CSS TR class parameter.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formTrClass;
 
     /**
+     * Contains a string signifying the name of Simple Email Form's CSS TH class parameter.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formThClass;
 
     /**
+     * Contains a string signifying the name of Simple Email Form's CSS Space class parameter.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formSpaceClass;
 
     /**
+     * Contains a string signifying the name of Simple Email Form's CSS TD class parameter.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formTdClass;
 
     /**
+     * Contains a string signifying the name of Simple Email Form's CSS Input class parameter.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formInputClass;
 
     /**
+     * Contains a string signifying the name of Simple Email Form's CSS Captcha class parameter.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formCaptchaClass;
 
     /**
+     * Contains a string signifying the value of Simple Email Form's CSS Col2space class parameter.
+     *
      * @var int
      * @since 2.0.0
      */
     protected $formCol2Space;
 
     /**
+     * Contains a string signifying the value of Simple Email Form's CSS labelAlign class parameter.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $formLabelAlign;
 
     /**
+     * Contains a string signifying the value of the success message color.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $successColour = 'green';
 
     /**
+     * Contains a string signifying the value of the error message color.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $errorColour = 'red';
 
     /**
+     * Contains a string signifying the value of Simple Email Form's redirectURL parameter.
+     *
      * @var string
      * @since 2.0.0
      */
     protected $redirectedToURL = '';
 
     /**
+     * Contains a string signifying the value of Simple Email Form's flash messaging.
+     *
      * @var string
      * @since 2.0.0
      */
     public $msg = '';
 
     /**
+     * Contains a string signifying the value of Simple Email Form's rendered HTML output.
+     *
      * @var string
      * @since 2.0.0
      */
@@ -785,7 +967,7 @@ class sefv2modsimpleemailform implements
 
                 if ($redirectURL !== '') {
                     $this->redirectedToURL = $redirectURL;
-                    header('Location: ' . $redirectURL);
+                    header('Location: ' . $this->redirectedToURL);
                     ob_end_clean();
                     return;
                 }
@@ -805,7 +987,7 @@ class sefv2modsimpleemailform implements
     /**
      * Method to bind data to the form.
      *
-     * @param $data
+     * @param mixed $data
      *
      * @return mixed
      *
@@ -1119,6 +1301,8 @@ class sefv2modsimpleemailform implements
     /**
      * Getter for the form data
      *
+     * @param null
+     *
      * @return mixed
      *
      * @since 2.0.0
@@ -1130,6 +1314,8 @@ class sefv2modsimpleemailform implements
 
     /**
      * Return all errors, if any.
+     *
+     * @param null
      *
      * @return mixed
      *
@@ -1143,7 +1329,7 @@ class sefv2modsimpleemailform implements
     /**
      * Method to get a form field represented as a JFormField object.
      *
-     * @param $name
+     * @param string $name
      * @param null $group
      * @param null $value
      *
@@ -1162,7 +1348,7 @@ class sefv2modsimpleemailform implements
      * Method to get an array of JFormField objects in a given fieldset by name.
      * If no name is given then all fields are returned.
      *
-     * @param $set
+     * @param null $set
      *
      * @return mixed
      *
@@ -1173,36 +1359,99 @@ class sefv2modsimpleemailform implements
         return $this->jForm->getFieldset($set);
     }
 
+    /**
+     * Gets the value of the formAnchor property.
+     *
+     * @param null
+     *
+     * @return string
+     *
+     * @since 2.1.0
+     */
     public function getFormAnchor()
     {
         return $this->formAnchor;
     }
 
+    /**
+     * Gets the value of the formInstance property.
+     *
+     * @param null
+     *
+     * @return int
+     *
+     * @since 2.1.0
+     */
     public function getFormInstance()
     {
         return $this->formInstance;
     }
 
+    /**
+     * Gets the value of the formRendering property.
+     *
+     * @param null
+     *
+     * @return bool
+     *
+     * @since 2.1.0
+     */
     public function getFormRendering()
     {
         return $this->formRendering;
     }
 
+    /**
+     * Gets the value of the formResetButtonName property.
+     *
+     * @param null
+     *
+     * @return string
+     *
+     * @since 2.1.0
+     */
     public function getFormResetButtonName()
     {
         return $this->formResetButtonName;
     }
 
+    /**
+     * Gets the value of the formSubmitButtonName property.
+     *
+     * @param null
+     *
+     * @return string
+     *
+     * @since 2.1.0
+     */
     public function getFormSubmitButtonName()
     {
         return $this->formSubmitButtonName;
     }
 
+    /**
+     * Gets the value of the msg property.
+     *
+     * @param null
+     *
+     * @return string
+     *
+     * @since 2.1.0
+     */
     public function getMsg()
     {
         return $this->msg;
     }
 
+    /**
+     * Gets the value of the transLang property at the given index.
+     *
+     * @param string
+     *
+     * @return string
+     *
+     * @since 2.1.0
+     */
     public function getTransLang($index)
     {
         $index = (string) $index;
@@ -1413,7 +1662,7 @@ class sefv2modsimpleemailform implements
     /**
      * Method to load the form description from an XML string or object.
      *
-     * @param $xmlConfigString
+     * @param string $xmlConfigString
      *
      * @return mixed
      *
@@ -1540,7 +1789,7 @@ class sefv2modsimpleemailform implements
     /**
      * Method to remove a field from the form definition.
      *
-     * @param $name
+     * @param string $name
      * @param null $group
      *
      * @return mixed
@@ -1556,6 +1805,8 @@ class sefv2modsimpleemailform implements
 
     /**
      * Render the Simple Email Form.
+     *
+     * @param null
      *
      * @return string
      *
@@ -1725,9 +1976,7 @@ class sefv2modsimpleemailform implements
         $emailMsg->replyToActive  = $paramsArray[$this->formPrefixName . $this->replyToActiveName];
 
         if ($emailMsg->replyToActive == 'Y') {
-            // 2016-04-18 DB: ReplyTo no longer needs to be an array.
-            $emailMsg->replyTo = $paramsArray[$this->formPrefixName . $this->emailReplyToName];
-
+            // 2016-04-18 DB: ReplyTo no longer needs to be an array if Joomla >= 3.0.
             if (version_compare(JVERSION, '3.0', 'ge')) {
                 $emailMsg->replyTo = $paramsArray[$this->formPrefixName . $this->emailReplyToName];
             } else {
