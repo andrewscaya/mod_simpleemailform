@@ -1844,16 +1844,16 @@ class sefv2modsimpleemailform implements
 
         $submitandReset = "<br /><input
                                 class=\"{$this->formInputClass}\"
-                                name=\"{$this->formSubmitButtonName}_{$this->getFormInstance()}\"
-                                id=\"{$this->formSubmitButtonName}_{$this->getFormInstance()}\"
+                                name=\"{$this->getFormSubmitButtonName()}_{$this->getFormInstance()}\"
+                                id=\"{$this->getFormSubmitButtonName()}_{$this->getFormInstance()}\"
                                 value=\"{$this->getTransLang('MOD_SIMPLEEMAILFORM_button_submit')}\"
                                 title=\"{$this->getTransLang('MOD_SIMPLEEMAILFORM_click_submit')}\"
                                 type=\"submit\">\n";
 
         $submitandReset .= "<input
                                 class=\"{$this->formInputClass}\"
-                                name=\"{$this->formResetButtonName}_{$this->getFormInstance()}\"
-                                id=\"{$this->formResetButtonName}_{$this->getFormInstance()}\"
+                                name=\"{$this->getFormResetButtonName()}_{$this->getFormInstance()}\"
+                                id=\"{$this->getFormResetButtonName()}_{$this->getFormInstance()}\"
                                 value=\"{$this->getTransLang('MOD_SIMPLEEMAILFORM_button_reset')}\"
                                 title=\"\"
                                 type=\"reset\">\n";
