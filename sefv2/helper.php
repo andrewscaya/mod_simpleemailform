@@ -38,8 +38,10 @@
 class sefv2helper implements sefv2helperfactoryinterface
 {
     /**
+     * Contains an instance of the sefv2helper object.
+     *
      * @var null|sefv2helper
-     * @since version
+     * @since 2.0.0
      */
     private static $instance = null;
 
@@ -64,6 +66,8 @@ class sefv2helper implements sefv2helperfactoryinterface
 
     /**
      * Returns a singleton instance of sefv2helper.
+     *
+     * @param null
      *
      * @return sefv2helper
      *
