@@ -6,6 +6,7 @@
     <transformer>
         <target>docs-api/build</target>
     </transformer>
+    <title>Simple Email Form</title>
     <files>
         <directory>./sefv2</directory>
     </files>

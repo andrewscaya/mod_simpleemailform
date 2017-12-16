@@ -41,6 +41,8 @@ interface sefv2customrenderinginterface
     /**
      * Gets the value of the formAnchor property.
      *
+     * @param null
+     *
      * @return string
      *
      * @since 2.1.0
@@ -49,6 +51,8 @@ interface sefv2customrenderinginterface
 
     /**
      * Gets the value of the formInstance property.
+     *
+     * @param null
      *
      * @return int
      *
@@ -59,6 +63,8 @@ interface sefv2customrenderinginterface
     /**
      * Gets the value of the formRendering property.
      *
+     * @param null
+     *
      * @return bool
      *
      * @since 2.1.0
@@ -67,6 +73,8 @@ interface sefv2customrenderinginterface
 
     /**
      * Gets the value of the formResetButtonName property.
+     *
+     * @param null
      *
      * @return string
      *
@@ -77,6 +85,8 @@ interface sefv2customrenderinginterface
     /**
      * Gets the value of the formSubmitButtonName property.
      *
+     * @param null
+     *
      * @return string
      *
      * @since 2.1.0
@@ -85,6 +95,8 @@ interface sefv2customrenderinginterface
 
     /**
      * Gets the value of the msg property.
+     *
+     * @param null
      *
      * @return string
      *

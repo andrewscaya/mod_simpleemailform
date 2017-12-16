@@ -40,6 +40,8 @@ interface sefv2formrendererinterface
     /**
      * Render the Simple Email Form.
      *
+     * @param null
+     *
      * @return string
      *
      * @since 2.0.0
