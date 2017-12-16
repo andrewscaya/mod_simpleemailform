@@ -84,7 +84,7 @@
 					<option value="jform">JForm</option>
 					<option value="classic">Classic (TO BE REMOVED mid-2019)</option>
 				</field>
-				<field name="mod_simpleemailform_defaultLang (Classic)" type="list" default="en" label="Default Language" description="Choose the default language" >
+				<field name="mod_simpleemailform_defaultLang" type="list" default="en" label="Default Language (Classic)" description="Choose the default language" >
 					<option value="en-GB">English</option>
 					<option value="af-ZA">Afrikaans</option>
 					<option value="ar-SA">Arabic</option>
@@ -122,16 +122,16 @@
 					<option value="R">Right</option>
 					<option value="C">Center</option>
 				</field>
-				<field name="mod_simpleemailform_field1active" type="radio"          default="R"       label="Activate Field 1" description="Select 'Y' if you want to activate field 1 and 'R' to activate and make it required. Enter 'H' to make the field hidden (appears in email automatically)" >
+				<field name="mod_simpleemailform_field1active" type="radio"          default="R"       label="Activate Field 1" description="Select 'Y' if you want to activate field 1 and 'R' to activate and make it required. Enter 'H' to make the field hidden (appears in email automatically)." >
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
 					<option value="R">Required</option>
 					<option value="H">Hidden</option>
 				</field>
-				<field name="mod_simpleemailform_field1label"  type="text" size="40" default="From"  	label="Label for Field 1" description="The label for the 1st optional field which will appear in your email form" />
+				<field name="mod_simpleemailform_field1label"  type="text" size="40" default="From"  	label="Label for Field 1" description="The label for the 1st optional field which will appear in your email form." />
 				<field name="mod_simpleemailform_field1value"  type="text" size="40" default=""  		label="Default Value for Field 1" description="Enter the default value for this field, or hit the spacebar for no default. If this field is a drop-down select, radio button, or checkbox field, enter options separated by commas as follows: return1=visible1,return2=visible2 (where 'returnX' = value returned when selected and 'visibleX' = what is visible onscreen. If this field remains as the 'From' field, the value entered here will be used if email checking is disabled or if there is no email address supplied by the website visitor." />
 				<field name="mod_simpleemailform_field1size"   type="text" size="4"  default="40" 		label="Display Size of Field 1" description="The size of the 1st optional field which will appear in your email form.  If textarea, enter value as n,n (rows,cols).  If field is Radio / Checkbox size is width in pixels.  Set to 0 to suppress this width, which allows the CSS class to determine appearance." />
-				<field name="mod_simpleemailform_field1maxx"   type="text" size="4"  default="255" 		label="Maximum Length of Field 1" description="The maximum number of characters allowed in this field" />
+				<field name="mod_simpleemailform_field1maxx"   type="text" size="4"  default="255" 		label="Maximum Length of Field 1" description="The maximum number of characters allowed in this field." />
 				<field name="mod_simpleemailform_field1from"   type="list"           default="F" 		label="Field Type" description="Select 'From' if you want this field to be the 'From' text field, 'Subject' if you want this to be the subject text field, 'Normal' for a normal text field, 'Textarea' for a textarea (i.e. a box), 'Drop' for a drop-down select box, 'Radio' for radio buttons, and 'Checkbox' for check boxes. PLEASE NOTE: 'User Defined' type will be removed in 2.1.0!" >
 					<option value="F">From</option>
 					<option value="S">Subject</option>
@@ -151,16 +151,16 @@
 					<option value="B">Before</option>
 					<option value="A">After</option>
 				</field>
-				<field name="mod_simpleemailform_field2active" type="radio"          default="R" 		label="Activate Field 2" description="Select 'Y' if you want to activate field 2 and 'R' to activate and make it required. Enter 'H' to make the field hidden (appears in email automatically)" >
+				<field name="mod_simpleemailform_field2active" type="radio"          default="R" 		label="Activate Field 2" description="Select 'Y' if you want to activate field 2 and 'R' to activate and make it required. Enter 'H' to make the field hidden (appears in email automatically)." >
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
 					<option value="R">Required</option>
 					<option value="H">Hidden</option>
 				</field>
-				<field name="mod_simpleemailform_field2label"  type="text" size="40" default="Subject" 	label="Label for Field 2" description="The label for the 2nd optional field which will appear in your email form" />
+				<field name="mod_simpleemailform_field2label"  type="text" size="40" default="Subject" 	label="Label for Field 2" description="The label for the 2nd optional field which will appear in your email form." />
 				<field name="mod_simpleemailform_field2value"  type="text" size="40" default="Subject"  label="Default Value for Field 2" description="Enter the default value for this field, or hit the spacebar for no default. If this field is a drop-down select, radio button, or checkbox field, enter options separated by commas as follows: return1=visible1,return2=visible2 (where 'returnX' = value returned when selected and 'visibleX' = what is visible onscreen." />
 				<field name="mod_simpleemailform_field2size"   type="text" size="4"  default="40" 		label="Display Size of Field 2" description="The size of the 2nd optional field which will appear in your email form.  If textarea, enter value as n,n (rows,cols).  If field is Radio / Checkbox size is width in pixels.  Set to 0 to suppress this width, which allows the CSS class to determine appearance." />
-				<field name="mod_simpleemailform_field2maxx"   type="text" size="4"  default="255" 		label="Maximum Length of Field 2" description="The maximum number of characters allowed in this field" />
+				<field name="mod_simpleemailform_field2maxx"   type="text" size="4"  default="255" 		label="Maximum Length of Field 2" description="The maximum number of characters allowed in this field." />
 				<field name="mod_simpleemailform_field2from"   type="list"           default="S" 		label="Field Type" description="Select 'From' if you want this field to be the 'From' text field, 'Subject' if you want this to be the subject text field, 'Normal' for a normal text field, 'Textarea' for a textarea (i.e. a box), 'Drop' for a drop-down select box, 'Radio' for radio buttons, and 'Checkbox' for check boxes. PLEASE NOTE: 'User Defined' type will be removed in 2.1.0!" >
 					<option value="F">From</option>
 					<option value="S">Subject</option>
@@ -180,16 +180,16 @@
 					<option value="B">Before</option>
 					<option value="A">After</option>
 				</field>
-				<field name="mod_simpleemailform_field3active" type="radio"          default="N" 		label="Activate Field 3" description="Select 'Y' if you want to activate field 3 and 'R' to activate and make it required. Enter 'H' to make the field hidden (appears in email automatically)" >
+				<field name="mod_simpleemailform_field3active" type="radio"          default="N" 		label="Activate Field 3" description="Select 'Y' if you want to activate field 3 and 'R' to activate and make it required. Enter 'H' to make the field hidden (appears in email automatically)." >
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
 					<option value="R">Required</option>
 					<option value="H">Hidden</option>
 				</field>
-				<field name="mod_simpleemailform_field3label"  type="text" size="40" default="Field 3" 	label="Label for Field 3" description="The label for the 3rd optional field which will appear in your email form" />
+				<field name="mod_simpleemailform_field3label"  type="text" size="40" default="Field 3" 	label="Label for Field 3" description="The label for the 3rd optional field which will appear in your email form." />
 				<field name="mod_simpleemailform_field3value"  type="text" size="40" default="Value 3"  label="Default Value for Field 3" description="Enter the default value for this field, or hit the spacebar for no default. If this field is a drop-down select, radio button, or checkbox field, enter options separated by commas as follows: return1=visible1,return2=visible2 (where 'returnX' = value returned when selected and 'visibleX' = what is visible onscreen." />
 				<field name="mod_simpleemailform_field3size"   type="text" size="4"  default="40" 		label="Display Size of Field 3" description="The size of the 3rd optional field which will appear in your email form.  If textarea, enter value as n,n (rows,cols).  If field is Radio / Checkbox size is width in pixels.  Set to 0 to suppress this width, which allows the CSS class to determine appearance." />
-				<field name="mod_simpleemailform_field3maxx"   type="text" size="4"  default="255" 		label="Maximum Length of Field 3" description="The maximum number of characters allowed in this field" />
+				<field name="mod_simpleemailform_field3maxx"   type="text" size="4"  default="255" 		label="Maximum Length of Field 3" description="The maximum number of characters allowed in this field." />
 				<field name="mod_simpleemailform_field3from"   type="list"           default="N" 		label="Field Type" description="Select 'From' if you want this field to be the 'From' text field, 'Subject' if you want this to be the subject text field, 'Normal' for a normal text field, 'Textarea' for a textarea (i.e. a box), 'Drop' for a drop-down select box, 'Radio' for radio buttons, and 'Checkbox' for check boxes. PLEASE NOTE: 'User Defined' type will be removed in 2.1.0!" >
 					<option value="F">From</option>
 					<option value="S">Subject</option>
@@ -209,16 +209,16 @@
 					<option value="B">Before</option>
 					<option value="A">After</option>
 				</field>
-				<field name="mod_simpleemailform_field4active" type="radio"          default="N" 		label="Activate Field 4" description="Select 'Y' if you want to activate field 4 and 'R' to activate and make it required. Enter 'H' to make the field hidden (appears in email automatically)" >
+				<field name="mod_simpleemailform_field4active" type="radio"          default="N" 		label="Activate Field 4" description="Select 'Y' if you want to activate field 4 and 'R' to activate and make it required. Enter 'H' to make the field hidden (appears in email automatically)." >
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
 					<option value="R">Required</option>
 					<option value="H">Hidden</option>
 				</field>
-				<field name="mod_simpleemailform_field4label"  type="text" size="40" default="Field 4" 	label="Label for Field 4" description="The label for the 4th optional field which will appear in your email form" />
+				<field name="mod_simpleemailform_field4label"  type="text" size="40" default="Field 4" 	label="Label for Field 4" description="The label for the 4th optional field which will appear in your email form." />
 				<field name="mod_simpleemailform_field4value"  type="text" size="40" default="Value 4"  label="Default Value for Field 4" description="Enter the default value for this field, or hit the spacebar for no default. If this field is a drop-down select, radio button, or checkbox field, enter options separated by commas as follows: return1=visible1,return2=visible2 (where 'returnX' = value returned when selected and 'visibleX' = what is visible onscreen." />
 				<field name="mod_simpleemailform_field4size"   type="text" size="4"  default="40" 		label="Display Size of Field 4" description="The size of the 4th optional field which will appear in your email form.  If textarea, enter value as n,n (rows,cols).  If field is Radio / Checkbox size is width in pixels.  Set to 0 to suppress this width, which allows the CSS class to determine appearance." />
-				<field name="mod_simpleemailform_field4maxx"   type="text" size="4"  default="255" 		label="Maximum Length of Field 4" description="The maximum number of characters allowed in this field" />
+				<field name="mod_simpleemailform_field4maxx"   type="text" size="4"  default="255" 		label="Maximum Length of Field 4" description="The maximum number of characters allowed in this field." />
 				<field name="mod_simpleemailform_field4from"   type="list"           default="N" 		label="Field Type" description="Select 'From' if you want this field to be the 'From' text field, 'Subject' if you want this to be the subject text field, 'Normal' for a normal text field, 'Textarea' for a textarea (i.e. a box), 'Drop' for a drop-down select box, 'Radio' for radio buttons, and 'Checkbox' for check boxes. PLEASE NOTE: 'User Defined' type will be removed in 2.1.0!" >
 					<option value="F">From</option>
 					<option value="S">Subject</option>
@@ -238,16 +238,16 @@
 					<option value="B">Before</option>
 					<option value="A">After</option>
 				</field>
-				<field name="mod_simpleemailform_field5active" type="radio"          default="N" 		label="Activate Field 5" description="Select 'Y' if you want to activate field 5 and 'R' to activate and make it required. Enter 'H' to make the field hidden (appears in email automatically)" >
+				<field name="mod_simpleemailform_field5active" type="radio"          default="N" 		label="Activate Field 5" description="Select 'Y' if you want to activate field 5 and 'R' to activate and make it required. Enter 'H' to make the field hidden (appears in email automatically)." >
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
 					<option value="R">Required</option> 
 					<option value="H">Hidden</option>
 				</field>
-				<field name="mod_simpleemailform_field5label"  type="text" size="40" default="Field 5" 	label="Label for Field 5" description="The label for the 5th optional field which will appear in your email form" />
+				<field name="mod_simpleemailform_field5label"  type="text" size="40" default="Field 5" 	label="Label for Field 5" description="The label for the 5th optional field which will appear in your email form." />
 				<field name="mod_simpleemailform_field5value"  type="text" size="40" default="Value 5"  label="Default Value for Field 5" description="Enter the default value for this field, or hit the spacebar for no default. If this field is a drop-down select, radio button, or checkbox field, enter options separated by commas as follows: return1=visible1,return2=visible2 (where 'returnX' = value returned when selected and 'visibleX' = what is visible onscreen." />
 				<field name="mod_simpleemailform_field5size"   type="text" size="4"  default="40" 	 	label="Display Size of Field 5" description="The size of the 5th optional field which will appear in your email form.  If textarea, enter value as n,n (rows,cols).  If field is Radio / Checkbox size is width in pixels.  Set to 0 to suppress this width, which allows the CSS class to determine appearance." />
-				<field name="mod_simpleemailform_field5maxx"   type="text" size="4"  default="255" 	 	label="Maximum Length of Field 5" description="The maximum number of characters allowed in this field" />
+				<field name="mod_simpleemailform_field5maxx"   type="text" size="4"  default="255" 	 	label="Maximum Length of Field 5" description="The maximum number of characters allowed in this field." />
 				<field name="mod_simpleemailform_field5from"   type="list"           default="N" 		label="Field Type" description="Select 'From' if you want this field to be the 'From' text field, 'Subject' if you want this to be the subject text field, 'Normal' for a normal text field, 'Textarea' for a textarea (i.e. a box), 'Drop' for a drop-down select box, 'Radio' for radio buttons, and 'Checkbox' for check boxes. PLEASE NOTE: 'User Defined' type will be removed in 2.1.0!" >
 					<option value="F">From</option>
 					<option value="S">Subject</option>
@@ -267,16 +267,16 @@
 					<option value="B">Before</option>
 					<option value="A">After</option>
 				</field>
-				<field name="mod_simpleemailform_field6active" type="radio"          default="N" 		label="Activate Field 6" description="Select 'Y' if you want to activate Field 6 and 'R' to activate and make it required. Enter 'H' to make the field hidden (appears in email automatically)" >
+				<field name="mod_simpleemailform_field6active" type="radio"          default="N" 		label="Activate Field 6" description="Select 'Y' if you want to activate Field 6 and 'R' to activate and make it required. Enter 'H' to make the field hidden (appears in email automatically)." >
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
 					<option value="R">Required</option> 
 					<option value="H">Hidden</option>
 				</field>
-				<field name="mod_simpleemailform_field6label"  type="text" size="40" default="Field 6" 	label="Label for Field 6" description="The label for the 5th optional field which will appear in your email form" />
+				<field name="mod_simpleemailform_field6label"  type="text" size="40" default="Field 6" 	label="Label for Field 6" description="The label for the 5th optional field which will appear in your email form." />
 				<field name="mod_simpleemailform_field6value"  type="text" size="40" default="Value 6"  label="Default Value for Field 6" description="Enter the default value for this field, or hit the spacebar for no default. If this field is a drop-down select, radio button, or checkbox field, enter options separated by commas as follows: return1=visible1,return2=visible2 (where 'returnX' = value returned when selected and 'visibleX' = what is visible onscreen." />
 				<field name="mod_simpleemailform_field6size"   type="text" size="4"  default="40" 	 	label="Display Size of Field 6" description="The size of the 5th optional field which will appear in your email form.  If textarea, enter value as n,n (rows,cols).  If field is Radio / Checkbox size is width in pixels.  Set to 0 to suppress this width, which allows the CSS class to determine appearance." />
-				<field name="mod_simpleemailform_field6maxx"   type="text" size="4"  default="255" 	 	label="Maximum Length of Field 6" description="The maximum number of characters allowed in this field" />
+				<field name="mod_simpleemailform_field6maxx"   type="text" size="4"  default="255" 	 	label="Maximum Length of Field 6" description="The maximum number of characters allowed in this field." />
 				<field name="mod_simpleemailform_field6from"   type="list"           default="N" 		label="Field Type" description="Select 'From' if you want this field to be the 'From' text field, 'Subject' if you want this to be the subject text field, 'Normal' for a normal text field, 'Textarea' for a textarea (i.e. a box), 'Drop' for a drop-down select box, 'Radio' for radio buttons, and 'Checkbox' for check boxes. PLEASE NOTE: 'User Defined' type will be removed in 2.1.0!" >
 					<option value="F">From</option>
 					<option value="S">Subject</option>
@@ -296,16 +296,16 @@
 					<option value="B">Before</option>
 					<option value="A">After</option>
 				</field>
-				<field name="mod_simpleemailform_field7active" type="radio"          default="N" 		label="Activate Field 7" description="Select 'Y' if you want to activate Field 7 and 'R' to activate and make it required. Enter 'H' to make the field hidden (appears in email automatically)" >
+				<field name="mod_simpleemailform_field7active" type="radio"          default="N" 		label="Activate Field 7" description="Select 'Y' if you want to activate Field 7 and 'R' to activate and make it required. Enter 'H' to make the field hidden (appears in email automatically)." >
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
 					<option value="R">Required</option> 
 					<option value="H">Hidden</option>
 				</field>
-				<field name="mod_simpleemailform_field7label"  type="text" size="40" default="Field 7" 	label="Label for Field 7" description="The label for the 5th optional field which will appear in your email form" />
+				<field name="mod_simpleemailform_field7label"  type="text" size="40" default="Field 7" 	label="Label for Field 7" description="The label for the 5th optional field which will appear in your email form." />
 				<field name="mod_simpleemailform_field7value"  type="text" size="40" default="Value 7"  label="Default Value for Field 7" description="Enter the default value for this field, or hit the spacebar for no default. If this field is a drop-down select, radio button, or checkbox field, enter options separated by commas as follows: return1=visible1,return2=visible2 (where 'returnX' = value returned when selected and 'visibleX' = what is visible onscreen." />
 				<field name="mod_simpleemailform_field7size"   type="text" size="4"  default="40" 	 	label="Display Size of Field 7" description="The size of the 5th optional field which will appear in your email form.  If textarea, enter value as n,n (rows,cols).  If field is Radio / Checkbox size is width in pixels.  Set to 0 to suppress this width, which allows the CSS class to determine appearance." />
-				<field name="mod_simpleemailform_field7maxx"   type="text" size="4"  default="255" 	 	label="Maximum Length of Field 7" description="The maximum number of characters allowed in this field" />
+				<field name="mod_simpleemailform_field7maxx"   type="text" size="4"  default="255" 	 	label="Maximum Length of Field 7" description="The maximum number of characters allowed in this field." />
 				<field name="mod_simpleemailform_field7from"   type="list"           default="N" 		label="Field Type" description="Select 'From' if you want this field to be the 'From' text field, 'Subject' if you want this to be the subject text field, 'Normal' for a normal text field, 'Textarea' for a textarea (i.e. a box), 'Drop' for a drop-down select box, 'Radio' for radio buttons, and 'Checkbox' for check boxes. PLEASE NOTE: 'User Defined' type will be removed in 2.1.0!" >
 					<option value="F">From</option>
 					<option value="S">Subject</option>
@@ -325,16 +325,16 @@
 					<option value="B">Before</option>
 					<option value="A">After</option>
 				</field>
-				<field name="mod_simpleemailform_field8active" type="radio"          default="N" 		label="Activate Field 8" description="Select 'Y' if you want to activate Field 8 and 'R' to activate and make it required. Enter 'H' to make the field hidden (appears in email automatically)" >
+				<field name="mod_simpleemailform_field8active" type="radio"          default="N" 		label="Activate Field 8" description="Select 'Y' if you want to activate Field 8 and 'R' to activate and make it required. Enter 'H' to make the field hidden (appears in email automatically)." >
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
 					<option value="R">Required</option> 
 					<option value="H">Hidden</option>
 				</field>
-				<field name="mod_simpleemailform_field8label"  type="text" size="40" default="Field 8" 	label="Label for Field 8" description="The label for the 5th optional field which will appear in your email form" />
+				<field name="mod_simpleemailform_field8label"  type="text" size="40" default="Field 8" 	label="Label for Field 8" description="The label for the 5th optional field which will appear in your email form." />
 				<field name="mod_simpleemailform_field8value"  type="text" size="40" default="Value 8"  label="Default Value for Field 8" description="Enter the default value for this field, or hit the spacebar for no default. If this field is a drop-down select, radio button, or checkbox field, enter options separated by commas as follows: return1=visible1,return2=visible2 (where 'returnX' = value returned when selected and 'visibleX' = what is visible onscreen." />
 				<field name="mod_simpleemailform_field8size"   type="text" size="4"  default="40" 	 	label="Display Size of Field 8" description="The size of the 5th optional field which will appear in your email form.  If textarea, enter value as n,n (rows,cols).  If field is Radio / Checkbox size is width in pixels.  Set to 0 to suppress this width, which allows the CSS class to determine appearance." />
-				<field name="mod_simpleemailform_field8maxx"   type="text" size="4"  default="255" 	 	label="Maximum Length of Field 8" description="The maximum number of characters allowed in this field" />
+				<field name="mod_simpleemailform_field8maxx"   type="text" size="4"  default="255" 	 	label="Maximum Length of Field 8" description="The maximum number of characters allowed in this field." />
 				<field name="mod_simpleemailform_field8from"   type="list"           default="N" 		label="Field Type" description="Select 'From' if you want this field to be the 'From' text field, 'Subject' if you want this to be the subject text field, 'Normal' for a normal text field, 'Textarea' for a textarea (i.e. a box), 'Drop' for a drop-down select box, 'Radio' for radio buttons, and 'Checkbox' for check boxes. PLEASE NOTE: 'User Defined' type will be removed in 2.1.0!" >
 					<option value="F">From</option>
 					<option value="S">Subject</option>
@@ -368,48 +368,49 @@
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
 				</field>
-				<field name="mod_simpleemailform_autoreset (Classic)"    type="radio"          default="N" 		label="Auto Reset Fields" description="Select 'Y' if you want all form fields to be automatically reset (cleared) after successful form submission" >
+				<field name="mod_simpleemailform_autoreset"    type="radio"          default="N" 		label="Auto Reset Fields  (Classic)" description="Select 'Y' if you want all form fields to be automatically reset (cleared) after successful form submission." >
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
 				</field>
 				<field name="mod_simpleemailform_cssClass"     type="text" size="20" default="mod_sef"  label="Name of CSS Class" description="Enter the name of a CSS class to use with the form.  Creates xxx_table, xxx_row, xxx_th, xxx_td classes and xxx_input inside form where xxx = your CSS class.  Default is 'mod_sef'." />
-				<field name="mod_simpleemailform_col2space"    type="text" size="4"  default="5" label="Space After Labels" description="Enter the amount of space between the label and the input field in pixels" />
+				<field name="mod_simpleemailform_col2space"    type="text" size="4"  default="5" label="Space After Labels" description="Enter the amount of space between the label and the input field in pixels." />
 				<field name="mod_simpleemailform_redirectURL"  type="text" size="20" default=""  label="Redirect URL" description="Enter the URL you wish to redirect to after successful form submission.  NOTE: leave blank to NOT redirect!" />
 				<field name="mod_simpleemailform_useCaptcha"   type="radio"          default="N" label="Use Captcha" description="To use a 'Captcha' to foil spammers, select 'I' for an image captcha (requires additional configuration), or 'T' for a text captcha. NOTE : JForm version will use the CAPTCHA module that is activated in your Joomla installation!" >
 					<option value="N">No Captcha</option>
 					<option value="I">Image Captcha</option>
 					<option value="T">Text Captcha</option>
 				</field>
-				<field name="mod_simpleemailform_captchaDir (Classic)"   		type="text" size="60" default=""        label="Directory to Write Captchas" description="Enter the absolute directory path where the module can write 'captchas' (i.e. /var/www/application/images" />
-				<field name="mod_simpleemailform_captchaURL (Classic)"   		type="text" size="60" default=""        label="URL for Captcha Directory" description="Enter a URL which corresponds with the Captcha Directory (above)" />
-				<field name="mod_simpleemailform_captchaLen (Classic)"   		type="text" size="4"  default="8"       label="Captcha Word Length" description="Enter the desired Captcha word length (number of characters)" />
-				<field name="mod_simpleemailform_captchaSize (Classic)"  		type="text" size="4"  default="24"      label="Captcha Font Size" description="Enter the desired Captcha font size" />
-				<field name="mod_simpleemailform_captchaWidth (Classic)"  	type="text" size="4"  default="200"     label="Captcha Width" description="Enter the desired Captcha width in pixels" />
-				<field name="mod_simpleemailform_captchaHeight (Classic)"  	type="text" size="4"  default="80"      label="Captcha Height" description="Enter the desired Captcha height in pixels" />
-				<field name="mod_simpleemailform_captchaTxtColor (Classic)"  	type="text" size="8"  default="#000000" label="Captcha Text Color" description="Enter the desired Captcha text color" />
-				<field name="mod_simpleemailform_captchaLinesColor (Classic)" type="text" size="8"  default="#FFFF00" label="Captcha Lines Color" description="Enter the desired Captcha lines color" />
-				<field name="mod_simpleemailform_captchaBgColor (Classic)"  	type="text" size="8"  default="#BFBFBF" label="Captcha Background Color" description="Enter the desired Captcha background color" />
-				<field name="mod_simpleemailform_errorTxtColor"  	type="text" size="8"  default="red"     label="Error Text Color" description="Enter the desired HTML text color for errors" />
-				<field name="mod_simpleemailform_successTxtColor"  	type="text" size="8"  default="green"   label="Success Text Color" description="Enter the desired HTML text color for success" />
+				<field name="mod_simpleemailform_captchaDir"   		type="text" size="60" default=""        label="Directory to Write Captchas (Classic)" description="Enter the absolute directory path where the module can write 'captchas' (i.e. /var/www/application/images)." />
+				<field name="mod_simpleemailform_captchaURL"   		type="text" size="60" default=""        label="URL for Captcha Directory (Classic)" description="Enter a URL which corresponds with the Captcha Directory (above)." />
+				<field name="mod_simpleemailform_captchaLen"   		type="text" size="4"  default="8"       label="Captcha Word Length (Classic)" description="Enter the desired Captcha word length (number of characters)." />
+				<field name="mod_simpleemailform_captchaSize"  		type="text" size="4"  default="24"      label="Captcha Font Size (Classic)" description="Enter the desired Captcha font size." />
+				<field name="mod_simpleemailform_captchaWidth"  	type="text" size="4"  default="200"     label="Captcha Width (Classic)" description="Enter the desired Captcha width in pixels." />
+				<field name="mod_simpleemailform_captchaHeight"  	type="text" size="4"  default="80"      label="Captcha Height (Classic)" description="Enter the desired Captcha height in pixels." />
+				<field name="mod_simpleemailform_captchaTxtColor"  	type="text" size="8"  default="#000000" label="Captcha Text Color (Classic)" description="Enter the desired Captcha text color." />
+				<field name="mod_simpleemailform_captchaLinesColor" type="text" size="8"  default="#FFFF00" label="Captcha Lines Color (Classic)" description="Enter the desired Captcha lines color." />
+				<field name="mod_simpleemailform_captchaBgColor"  	type="text" size="8"  default="#BFBFBF" label="Captcha Background Color (Classic)" description="Enter the desired Captcha background color." />
+				<field name="mod_simpleemailform_errorTxtColor"  	type="text" size="8"  default="red"     label="Error Text Color" description="Enter the desired HTML text color for errors." />
+				<field name="mod_simpleemailform_successTxtColor"  	type="text" size="8"  default="green"   label="Success Text Color" description="Enter the desired HTML text color for success." />
 				<field name="mod_simpleemailform_anchor"  			type="text" size="8"  default=""   	    label="Name of Anchor Tag" description="Enter the name of any anchor tags associated with the form. When form is submitted, redirects back to this anchor." />
-				<field name="mod_simpleemailform_uploadActive"      type="text"	size="4"  default="0"       label="Number of Upload Fields" description="Enter a number greater than 0 which represents how many file upload fields you want to have for email attachments" />
+				<field name="mod_simpleemailform_uploadActive"      type="text"	size="4"  default="0"       label="Number of Upload Fields" description="Enter a number greater than 0 which represents how many file upload fields you want to have for email attachments." />
 				<field name="mod_simpleemailform_uploadLabel" 		type="text" size="20" default="Attachment"     	label="Upload Field Label" description="Enter a label for the file upload fields (if any)." />
 				<field name="mod_simpleemailform_uploadAllowed" 	type="text" size="20" default=""             	label="Allowed Attachment Filenames" description="Enter a list of allowed filename extensions separated by commas.  Example: if you want jpg,png, or gif, then enter 'jpg,png,gif'.  Leave blank to allow ANY type of file." />
 				<field name="mod_simpleemailform_uploadRequired" 	type="radio"          default="N"             	label="Are upload fields required?" description="Select 'Y' if upload fields are to be required for valid form submission." >
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
 				</field>
-				<field name="mod_simpleemailform_emailFile"    		type="text" size="60" default=""          		label="Directory to Save Attachments" description="Enter the absolute directory path for email attachment files" />
-				<field name="mod_simpleemailform_copymeLabel" 		type="text" size="40" default="Send me a copy"	label="Send Me A Copy Field Label" description="The label for the Send Me A Copy Field" />
-				<field name="mod_simpleemailform_copymeActive" 		type="radio"		  default="N"         		label="Send Me A Copy Field" description="Select 'Y' if you want to activate a field which lets users send a copy to themselves" >
+				<field name="mod_simpleemailform_emailFile"    		type="text" size="60" default=""          		label="Directory to Save Attachments" description="Enter the absolute directory path for email attachment files." />
+				<field name="mod_simpleemailform_copymeLabel" 		type="text" size="40" default="Send me a copy"	label="Send Me an Email Field Label" description="The label for the Send Me an Email Field." />
+				<field name="mod_simpleemailform_copymeActive" 		type="radio"		  default="N"         		label="Send Me an Email Field" description="Select 'Y' if you want to activate a field which lets users send an email to themselves." >
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
 				</field>
-				<field name="mod_simpleemailform_copymeAuto"  	type="radio"	      default="N" 			label="Send User a Copy Automatically" description="Select 'Y' if you want to send a copy to users automatically" >
+				<field name="mod_simpleemailform_copymeAuto"  	type="radio"	      default="N" 			label="Send User an Email Automatically" description="Select 'Y' if you want to send an email to users automatically." >
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
 				</field>
-				<field name="mod_simpleemailform_emailCheck (Classic)"	type="radio"	      default="Y" 			label="Email Check" description="Select 'Y' if you want to check the 'From' email address.  Set to 'N' to disable this check.  If email check is disabled, the 'From' field will automatically take its value from what you entered as a default value for the 'From' field." >
+				<field name="mod_simpleemailform_copymeContent"  	type="textarea"	      default="" 			label="Send User a Custom Message" description="Enter a custom message if you want to define the contents of the send an email field. If empty, the user will receive a copy of the form values." />
+				<field name="mod_simpleemailform_emailCheck"	type="radio"	      default="Y" 			label="Email Check  (Classic)" description="Select 'Y' if you want to check the 'From' email address.  Set to 'N' to disable this check.  If email check is disabled, the 'From' field will automatically take its value from what you entered as a default value for the 'From' field." >
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
 				</field>

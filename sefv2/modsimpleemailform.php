@@ -366,6 +366,12 @@ class sefv2modsimpleemailform implements
 
     /**
      * @var string
+     * @since 2.1.0
+     */
+    protected $emailCopymeContentName = '_copymeContent';
+
+    /**
+     * @var string
      * @since 2.0.0
      */
     protected $emailToName = '_emailTo';
@@ -1831,6 +1837,14 @@ class sefv2modsimpleemailform implements
             if ($emailMsg->copyMe === true || $emailMsg->copyMeAuto === true) {
                 $jMail->clearAllRecipients();
                 $jMail->addRecipient($emailMsg->from, $emailMsg->fromName);
+
+                // 2017-12-15 AC: Added the option of changing the copyme email's body content with a predefined value.
+                if (!empty($paramsArray[$this->formPrefixName . $this->emailCopymeContentName])) {
+                    $emailMsg->body = '';
+                    $emailMsg->body = $paramsArray[$this->formPrefixName . $this->emailCopymeContentName];
+                    $jMail->setBody($emailMsg->body);
+                }
+
                 if (!$sent = $jMail->send()) {
                     return false;
                 }

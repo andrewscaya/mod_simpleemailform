@@ -1884,6 +1884,60 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests sefv2modsimpleemailform::sendFormData(
+     *                                      array $formDataClean,
+     *                                      array $paramsArray,
+     *                                      sefv2simpleemailformemailmsg $emailMsg,
+     *                                      \JMail $jMail
+     *                                  )
+     *
+     * @since 2.1.0
+     */
+    public function testSendFormDataWillReplaceTheCopymeBodyContentWithAppropriateParamsField()
+    {
+        list(
+            $formCleanData,
+            $emailMsg,
+            $paramsArray,
+            $formPrefixName,
+            $emailToName,
+            $emailCCName,
+            $emailBCCName,
+            $jDocumentMock,
+            $jMailMock
+            ) = $this->setUpSendFormDataTests();
+
+        define('JVERSION', '3.0');
+
+        $emailCopymeContentName= $this->sefv2modsimpleemailformProperties['emailCopymeContentName']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $paramsArray[$formPrefixName . $emailCopymeContentName] = '<html><head></head><body><p>Thanks.</p></body></html>';
+
+        $jDocumentMock
+            ->shouldReceive('getTitle')
+            ->once()
+            ->andReturn('Home: Article');
+
+        $jMailMock
+            ->shouldReceive('setBody')
+            ->once()
+            ->with('<html><head></head><body><p>Thanks.</p></body></html>')
+            ->andReturn($jMailMock);
+        $jMailMock
+            ->shouldReceive('send')
+            ->twice()
+            ->andReturn(true);
+
+        $output = $this->sefv2modsimpleemailformMethods['sendFormData']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array($formCleanData, $paramsArray, $emailMsg, $jMailMock)
+        );
+
+        $this->assertTrue($output);
+    }
+
+    /**
      * Creates the test doubles that are called from \sefv2modsimpleemailform's
      * sendFormData tests.
      *
