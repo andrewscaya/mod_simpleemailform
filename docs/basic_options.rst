@@ -142,7 +142,7 @@ This field isn't used with field types **Drop**, **Radio** and **Checkbox**.
 
 Field type
 ----------
-In version **2.0**, available field types are:
+Since version **2.0**, available field types are:
 
 * From
 
