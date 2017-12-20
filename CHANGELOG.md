@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2.1.0 (2017-12-22)
+
+- Fixes issue #15 - Allow users to configure an automated reply email to those submitting the form.
+- Fixes issue #18 - Getting error of missing closing DIV.
+- Fixes issue #22 - Allow to easily modify SEF's rendering by using its internal methods.
+- Sets JForm as Simple Email Form's default mode.
+- Offers a complete API documentation for developers.
+
 ## 2.0.1 (2017-02-24)
 
 - Fixes issue #17 - JForm translations not explained well enough in documentation.
