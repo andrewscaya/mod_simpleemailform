@@ -7,7 +7,7 @@ Welcome to Simple Email Form's documentation
 Home Page : `<http://joomla.unlikelysource.org/>`_
 
 .. toctree::
-:maxdepth: 3
+   :maxdepth: 3
 
    whats_new
    installation
