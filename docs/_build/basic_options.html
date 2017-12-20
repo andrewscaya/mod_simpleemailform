@@ -61,7 +61,7 @@
 <div class="section" id="form-type">
 <span id="index-0"></span><h2>Form type<a class="headerlink" href="#form-type" title="Permalink to this headline">¶</a></h2>
 <p>First, the form type must be chosen.</p>
-<p><strong>JForm</strong> is the most recent version that integrates new Joomla requirements.</p>
+<p><strong>JForm</strong> is the most recent version that integrates new Joomla requirements. This is the default option since version 2.1.</p>
 <p><strong>Classic</strong> shows the form as it used to be.
 This option is deprecated and won&#8217;t be available in version 3.0 of the module.</p>
 <img alt="_images/basic_options02.png" src="_images/basic_options02.png" />
@@ -89,7 +89,7 @@ If there&#8217;s more than one address, separate them with commas or spaces.</p>
 </div>
 <div class="section" id="label-alignment">
 <span id="index-4"></span><h2>Label alignment<a class="headerlink" href="#label-alignment" title="Permalink to this headline">¶</a></h2>
-<p>Choose to have the labels aligned LEFT, RIGHT or CENTER.</p>
+<p>Choose to have the labels aligned <strong>left</strong>, <strong>right</strong> or <strong>center</strong>.</p>
 <img alt="_images/basic_options05.png" src="_images/basic_options05.png" />
 </div>
 </div>
@@ -157,12 +157,81 @@ of the labels besides each radio button or box.</p>
 This field isn&#8217;t used with field types <strong>Drop</strong>, <strong>Radio</strong> and <strong>Checkbox</strong>.</p>
 </div>
 <div class="section" id="field-type">
-<span id="index-10"></span><h2>Field Type<a class="headerlink" href="#field-type" title="Permalink to this headline">¶</a></h2>
-<p>Different types of input you may offer to the user.
-For more details about each one of them, see the <strong>Field Type</strong> section.</p>
+<h2>Field type<a class="headerlink" href="#field-type" title="Permalink to this headline">¶</a></h2>
+<p>Since version <strong>2.0</strong>, available field types are:</p>
+<ul class="simple">
+<li>From</li>
+<li>Subject</li>
+<li>Normal (text)</li>
+<li>Textarea</li>
+<li>Drop (select)</li>
+<li>Radio</li>
+<li>Checkbox</li>
+</ul>
+<div class="section" id="from">
+<span id="index-10"></span><h3>From<a class="headerlink" href="#from" title="Permalink to this headline">¶</a></h3>
+<p>This field type is used to get the email address of the user filling out the form.
+The first field defaults to <strong>From</strong>.</p>
+<img alt="_images/basic_options10.png" src="_images/basic_options10.png" />
+</div>
+<div class="section" id="subject">
+<span id="index-11"></span><h3>Subject<a class="headerlink" href="#subject" title="Permalink to this headline">¶</a></h3>
+<p>Whatever the user enters here will become the &#8220;Subject&#8221; in the email sent to you.
+The second field defaults to <strong>Subject</strong>.</p>
+<img alt="_images/basic_options11.png" src="_images/basic_options11.png" />
+</div>
+<div class="section" id="normal">
+<span id="index-12"></span><h3>Normal<a class="headerlink" href="#normal" title="Permalink to this headline">¶</a></h3>
+<p>This field will appear as one line on your input form.</p>
+<p>If you do not wish to enter a <strong>default value</strong>, make sure to hit the <strong>spacebar</strong>.</p>
+<img alt="_images/basic_options12.png" src="_images/basic_options12.png" />
+</div>
+<div class="section" id="textarea">
+<span id="index-13"></span><h3>Textarea<a class="headerlink" href="#textarea" title="Permalink to this headline">¶</a></h3>
+<p>Creates a text box in which the user can type a message.
+<strong>Label</strong> is the only field that is not ignored by this field type.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The new JForm type displays an HTML editor.</p>
+</div>
+<img alt="_images/basic_options13.png" src="_images/basic_options13.png" />
+</div>
+<div class="section" id="drop">
+<span id="index-14"></span><h3>Drop<a class="headerlink" href="#drop" title="Permalink to this headline">¶</a></h3>
+<p>In the <strong>Default Value</strong> field, enter options separated by commas as follows: Return1=Visible1,Return2=Visible2.</p>
+<p>ReturnX is the value returned in the email message.
+VisibleX is the value appearing in the form.</p>
+<img alt="_images/basic_options14.png" src="_images/basic_options14.png" />
+</div>
+<div class="section" id="radio">
+<span id="index-15"></span><h3>Radio<a class="headerlink" href="#radio" title="Permalink to this headline">¶</a></h3>
+<p>In the <strong>Default Value</strong> field, enter options separated by commas as follows:
+Return1=Visible1,Return2=Visible2.</p>
+<p>ReturnX is the value returned in the email message sent when that button
+is selected. VisibleX is the value appearing in the form.</p>
+<p><strong>Horizontal</strong> format is table/row/col/col/col.</p>
+<p><strong>Vertical</strong> format is table/row/col/col/row/col/col.</p>
+<p><strong>Use CSS</strong> (default) assumes you will use your custom CSS.</p>
+<p><strong>Before</strong> means that the label appears to the left of the button.</p>
+<p><strong>After</strong> means that the label appears to the right of the button.</p>
+<img alt="_images/basic_options15.png" src="_images/basic_options15.png" />
+</div>
+<div class="section" id="checkbox">
+<span id="index-16"></span><h3>Checkbox<a class="headerlink" href="#checkbox" title="Permalink to this headline">¶</a></h3>
+<p>In the <strong>Default Value</strong> field, enter options separated by commas as follows:
+Return1=Visible1,Return2=Visible2.</p>
+<p>ReturnX is the value returned in the email message sent when that box is checked.
+VisibleX is the value appearing in the form.</p>
+<p><strong>Horizontal</strong> format is table/row/col/col/col.</p>
+<p><strong>Vertical</strong> format is table/row/col/col/row/col/col.</p>
+<p><strong>Use CSS</strong> (default) assumes you will use your custom CSS.</p>
+<p><strong>Before</strong> means that the label appears to the left of the box.</p>
+<p><strong>After</strong> means that the label appears to the right of the box.</p>
+<img alt="_images/basic_options16.png" src="_images/basic_options16.png" />
+</div>
 </div>
 <div class="section" id="field-x-format">
-<span id="index-11"></span><h2>Field X Format<a class="headerlink" href="#field-x-format" title="Permalink to this headline">¶</a></h2>
+<span id="index-17"></span><h2>Field X Format<a class="headerlink" href="#field-x-format" title="Permalink to this headline">¶</a></h2>
 <p>Only works with <strong>Radio</strong> and <strong>Checkbox</strong> field types.</p>
 <ul class="simple">
 <li><strong>Horizontal</strong> means that all radio buttons or checkboxes are on the same row.</li>
@@ -177,87 +246,13 @@ For more details about each one of them, see the <strong>Field Type</strong> sec
 </ul>
 </div>
 <div class="section" id="field-x-before-after">
-<span id="index-12"></span><h2>Field X Before/After<a class="headerlink" href="#field-x-before-after" title="Permalink to this headline">¶</a></h2>
+<span id="index-18"></span><h2>Field X Before/After<a class="headerlink" href="#field-x-before-after" title="Permalink to this headline">¶</a></h2>
 <p>Only used with <strong>Radio</strong> and <strong>Checkbox</strong> field types.</p>
 <ul class="simple">
 <li><strong>Before</strong> means that labels are displayed to the left of their respective buttons or checkboxes.</li>
 <li><strong>After</strong> means that they are displayed to the right.</li>
 </ul>
-</div>
-<div class="section" id="field-types">
-<span id="index-13"></span><h2>Field types<a class="headerlink" href="#field-types" title="Permalink to this headline">¶</a></h2>
-<p>In version <strong>2.0</strong>, available field types are:</p>
-<ul class="simple">
-<li>From</li>
-<li>Subject</li>
-<li>Normal (text)</li>
-<li>Textarea</li>
-<li>Drop (select)</li>
-<li>Radio</li>
-<li>Checkbox</li>
-</ul>
-<div class="section" id="from">
-<span id="index-14"></span><h3>From<a class="headerlink" href="#from" title="Permalink to this headline">¶</a></h3>
-<p>This field type is used to get the email address of the user filling out the form.
-The first field defaults to <strong>From</strong>.</p>
-<img alt="_images/basic_options10.png" src="_images/basic_options10.png" />
-</div>
-<div class="section" id="subject">
-<span id="index-15"></span><h3>Subject<a class="headerlink" href="#subject" title="Permalink to this headline">¶</a></h3>
-<p>Whatever the user enters here will become the &#8220;Subject&#8221; in the email sent to you.
-The second field defaults to <strong>Subject</strong>.</p>
-<img alt="_images/basic_options11.png" src="_images/basic_options11.png" />
-</div>
-<div class="section" id="normal">
-<span id="index-16"></span><h3>Normal<a class="headerlink" href="#normal" title="Permalink to this headline">¶</a></h3>
-<p>This field will appear as one line on your input form.</p>
-<p>If you do not wish to enter a <strong>default value</strong>, make sure to hit the <strong>spacebar</strong>.</p>
-<img alt="_images/basic_options12.png" src="_images/basic_options12.png" />
-</div>
-<div class="section" id="textarea">
-<span id="index-17"></span><h3>Textarea<a class="headerlink" href="#textarea" title="Permalink to this headline">¶</a></h3>
-<p>Creates a text box in which the user can type a message.
-<strong>Label</strong> is the only field that is not ignored by this field type.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">The new JForm type displays an HTML editor.</p>
-</div>
-<img alt="_images/basic_options13.png" src="_images/basic_options13.png" />
-</div>
-<div class="section" id="drop">
-<span id="index-18"></span><h3>Drop<a class="headerlink" href="#drop" title="Permalink to this headline">¶</a></h3>
-<p>In the <strong>Default Value</strong> field, enter options separated by commas as follows: Return1=Visible1,Return2=Visible2.</p>
-<p>ReturnX is the value returned in the email message.
-VisibleX is the value appearing in the form.</p>
-<img alt="_images/basic_options14.png" src="_images/basic_options14.png" />
-</div>
-<div class="section" id="radio">
-<span id="index-19"></span><h3>Radio<a class="headerlink" href="#radio" title="Permalink to this headline">¶</a></h3>
-<p>In the <strong>Default Value</strong> field, enter options separated by commas as follows:
-Return1=Visible1,Return2=Visible2.</p>
-<p>ReturnX is the value returned in the email message sent when that button
-is selected. VisibleX is the value appearing in the form.</p>
-<p><strong>Horizontal</strong> format is table/row/col/col/col.</p>
-<p><strong>Vertical</strong> format is table/row/col/col/row/col/col.</p>
-<p><strong>Use CSS</strong> (default) assumes you will use your custom CSS.</p>
-<p><strong>Before</strong> means that the label appears to the left of the button.</p>
-<p><strong>After</strong> means that the label appears to the right of the button.</p>
-<img alt="_images/basic_options15.png" src="_images/basic_options15.png" />
-</div>
-<div class="section" id="checkbox">
-<span id="index-20"></span><h3>Checkbox<a class="headerlink" href="#checkbox" title="Permalink to this headline">¶</a></h3>
-<p>In the <strong>Default Value</strong> field, enter options separated by commas as follows:
-Return1=Visible1,Return2=Visible2.</p>
-<p>ReturnX is the value returned in the email message sent when that box is checked.
-VisibleX is the value appearing in the form.</p>
-<p><strong>Horizontal</strong> format is table/row/col/col/col.</p>
-<p><strong>Vertical</strong> format is table/row/col/col/row/col/col.</p>
-<p><strong>Use CSS</strong> (default) assumes you will use your custom CSS.</p>
-<p><strong>Before</strong> means that the label appears to the left of the box.</p>
-<p><strong>After</strong> means that the label appears to the right of the box.</p>
-<img alt="_images/basic_options16.png" src="_images/basic_options16.png" />
-</div>
-</div>
+<span class="target" id="index-19"></span></div>
 </div>
 
 
@@ -281,10 +276,7 @@ VisibleX is the value appearing in the form.</p>
 <li><a class="reference internal" href="#default-value-for-field-x">Default Value for Field X</a></li>
 <li><a class="reference internal" href="#display-size-of-field-x">Display Size of Field X</a></li>
 <li><a class="reference internal" href="#maximum-length-of-field-x">Maximum Length of Field X</a></li>
-<li><a class="reference internal" href="#field-type">Field Type</a></li>
-<li><a class="reference internal" href="#field-x-format">Field X Format</a></li>
-<li><a class="reference internal" href="#field-x-before-after">Field X Before/After</a></li>
-<li><a class="reference internal" href="#field-types">Field types</a><ul>
+<li><a class="reference internal" href="#field-type">Field type</a><ul>
 <li><a class="reference internal" href="#from">From</a></li>
 <li><a class="reference internal" href="#subject">Subject</a></li>
 <li><a class="reference internal" href="#normal">Normal</a></li>
@@ -294,6 +286,8 @@ VisibleX is the value appearing in the form.</p>
 <li><a class="reference internal" href="#checkbox">Checkbox</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#field-x-format">Field X Format</a></li>
+<li><a class="reference internal" href="#field-x-before-after">Field X Before/After</a></li>
 </ul>
 </li>
 </ul>
