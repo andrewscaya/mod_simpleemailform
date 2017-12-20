@@ -25,9 +25,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Configuration Example" href="demo_config.html" />
-    <link rel="prev" title="Basic configuration options" href="basic_options.html" /> 
+    <link rel="search" title="Search" href="search.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -36,12 +34,6 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="demo_config.html" title="Configuration Example"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="basic_options.html" title="Basic configuration options"
-             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Simple Email Form 2.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
@@ -103,8 +95,8 @@ each one of them a unique number to differentiate them from each other.</p>
 Make sure you enter a <strong>fully formed</strong> URL.</p>
 <p>Example: <a class="reference external" href="http://www.unlikelysource.com/">http://www.unlikelysource.com/</a></p>
 </div>
-<div class="section" id="captcha-use">
-<span id="index-10"></span><h2>Captcha Use<a class="headerlink" href="#captcha-use" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="use-captcha">
+<span id="index-10"></span><h2>Use Captcha<a class="headerlink" href="#use-captcha" title="Permalink to this headline">¶</a></h2>
 <p>With the <strong>JForm</strong> type:</p>
 <p>To be able to use Captcha, you can follow the procedure on the <a class="reference external" href="https://docs.joomla.org/How_do_you_use_Recaptcha_in_Joomla%3F">Joomla Website</a>.</p>
 <p>This will produce a captcha looking like this:</p>
@@ -198,20 +190,25 @@ an upload field is empty.</p>
 <span id="index-27"></span><h2>Directory to Save Attachments<a class="headerlink" href="#directory-to-save-attachments" title="Permalink to this headline">¶</a></h2>
 <p>An absolute path to the directory in which attachments sent by users will be saved.</p>
 </div>
-<div class="section" id="send-me-a-copy-field-label">
-<span id="index-28"></span><h2>Send Me A Copy Field Label<a class="headerlink" href="#send-me-a-copy-field-label" title="Permalink to this headline">¶</a></h2>
-<p>The label for field <strong>Send Me A Copy</strong>, set below.</p>
+<div class="section" id="send-me-an-email-field-label">
+<span id="index-28"></span><h2>Send Me an Email Field Label<a class="headerlink" href="#send-me-an-email-field-label" title="Permalink to this headline">¶</a></h2>
+<p>The label for field <strong>Send Me an Email</strong>, set below.</p>
 </div>
-<div class="section" id="send-me-a-copy-field">
-<span id="index-29"></span><h2>Send Me A Copy Field<a class="headerlink" href="#send-me-a-copy-field" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="send-me-an-email-field">
+<span id="index-29"></span><h2>Send Me an Email Field<a class="headerlink" href="#send-me-an-email-field" title="Permalink to this headline">¶</a></h2>
 <p>If set to <strong>Yes</strong>, users can ask to receive a copy of the form that they send.</p>
 </div>
-<div class="section" id="send-user-a-copy-automatically">
-<span id="index-30"></span><h2>Send User a Copy Automatically<a class="headerlink" href="#send-user-a-copy-automatically" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="send-user-an-email-automatically">
+<span id="index-30"></span><h2>Send User an Email Automatically<a class="headerlink" href="#send-user-an-email-automatically" title="Permalink to this headline">¶</a></h2>
 <p>If set to <strong>Yes</strong>, users will always receive a copy of the form that they send.</p>
 </div>
+<div class="section" id="send-user-a-custom-message">
+<span id="custom-message"></span><span id="index-31"></span><h2>Send User a Custom Message<a class="headerlink" href="#send-user-a-custom-message" title="Permalink to this headline">¶</a></h2>
+<p>If the <strong>Send User an Email Automatically</strong> option is set to <strong>Yes</strong>, you can fill out this section
+to send your user a custom message.</p>
+</div>
 <div class="section" id="email-check">
-<span id="index-31"></span><h2>Email Check<a class="headerlink" href="#email-check" title="Permalink to this headline">¶</a></h2>
+<span id="index-32"></span><h2>Email Check<a class="headerlink" href="#email-check" title="Permalink to this headline">¶</a></h2>
 <p>If set to <strong>Yes</strong>, the data entered in the <strong>From</strong> field is validated and must
 follow the format <a class="reference external" href="mailto:emailaccount&#37;&#52;&#48;domain">emailaccount<span>&#64;</span>domain</a>.</p>
 <div class="admonition note">
@@ -220,37 +217,40 @@ follow the format <a class="reference external" href="mailto:emailaccount&#37;&#
 </div>
 </div>
 <div class="section" id="include-article-title">
-<span id="index-32"></span><h2>Include Article Title<a class="headerlink" href="#include-article-title" title="Permalink to this headline">¶</a></h2>
+<span id="index-33"></span><h2>Include Article Title<a class="headerlink" href="#include-article-title" title="Permalink to this headline">¶</a></h2>
 <p>If set to <strong>Yes</strong>, the Joomla article title is automatically included
 in a hidden field added to the email.</p>
 </div>
 <div class="section" id="test-mode">
-<span id="index-33"></span><h2>Test Mode<a class="headerlink" href="#test-mode" title="Permalink to this headline">¶</a></h2>
+<span id="index-34"></span><h2>Test Mode<a class="headerlink" href="#test-mode" title="Permalink to this headline">¶</a></h2>
 <p>If set to <strong>Yes</strong>, the form is used in test mode.</p>
 </div>
 <div class="section" id="override-rendering">
-<span id="index-34"></span><h2>Override rendering<a class="headerlink" href="#override-rendering" title="Permalink to this headline">¶</a></h2>
+<span id="index-35"></span><span id="id1"></span><h2>Override rendering<a class="headerlink" href="#override-rendering" title="Permalink to this headline">¶</a></h2>
 <p>Set this option to <strong>Yes</strong> if you want to use your own template to
-modify the module&#8217;s display.</p>
+modify the module&#8217;s display. To get you started, you can copy the <strong>mod_simpleemailform/tmpl/default_custom.php.dist</strong>
+and name it <strong>default_custom.php</strong>.</p>
+<p>You can also give your custom file another name, but you will have to insert your chosen name on line 7 of the
+<strong>default.php</strong> template file.</p>
 </div>
 <div class="section" id="module-tag">
-<span id="index-35"></span><h2>Module Tag<a class="headerlink" href="#module-tag" title="Permalink to this headline">¶</a></h2>
+<span id="index-36"></span><h2>Module Tag<a class="headerlink" href="#module-tag" title="Permalink to this headline">¶</a></h2>
 <p>The html tag used for the module. This option is provided by <a class="reference external" href="https://docs.joomla.org/Help36:Extensions_Module_Manager_Tags_Popular#Advanced">Joomla</a>.</p>
 </div>
 <div class="section" id="bootstrap-size">
-<span id="index-36"></span><h2>Bootstrap Size<a class="headerlink" href="#bootstrap-size" title="Permalink to this headline">¶</a></h2>
+<span id="index-37"></span><h2>Bootstrap Size<a class="headerlink" href="#bootstrap-size" title="Permalink to this headline">¶</a></h2>
 <p>The number of columns used in the module. This option is provided by <a class="reference external" href="https://docs.joomla.org/Help36:Extensions_Module_Manager_Tags_Popular#Advanced">Joomla</a>.</p>
 </div>
 <div class="section" id="header-tag">
-<span id="index-37"></span><h2>Header Tag<a class="headerlink" href="#header-tag" title="Permalink to this headline">¶</a></h2>
+<span id="index-38"></span><h2>Header Tag<a class="headerlink" href="#header-tag" title="Permalink to this headline">¶</a></h2>
 <p>The HTML tag used for module headers and titles. This option is provided by <a class="reference external" href="https://docs.joomla.org/Help36:Extensions_Module_Manager_Tags_Popular#Advanced">Joomla</a>.</p>
 </div>
 <div class="section" id="header-class">
-<span id="index-38"></span><h2>Header Class<a class="headerlink" href="#header-class" title="Permalink to this headline">¶</a></h2>
+<span id="index-39"></span><h2>Header Class<a class="headerlink" href="#header-class" title="Permalink to this headline">¶</a></h2>
 <p>The CSS class used for module headers and titles. This option is provided by <a class="reference external" href="https://docs.joomla.org/Help36:Extensions_Module_Manager_Tags_Popular#Advanced">Joomla</a>.</p>
 </div>
 <div class="section" id="module-style">
-<span id="index-39"></span><h2>Module Style<a class="headerlink" href="#module-style" title="Permalink to this headline">¶</a></h2>
+<span id="index-40"></span><h2>Module Style<a class="headerlink" href="#module-style" title="Permalink to this headline">¶</a></h2>
 <p>The option used to override the template style. It is provided by <a class="reference external" href="https://docs.joomla.org/Help36:Extensions_Module_Manager_Tags_Popular#Advanced">Joomla</a>.</p>
 </div>
 </div>
@@ -274,7 +274,7 @@ modify the module&#8217;s display.</p>
 <li><a class="reference internal" href="#name-of-css-class">Name of CSS Class</a></li>
 <li><a class="reference internal" href="#space-after-labels">Space After Labels</a></li>
 <li><a class="reference internal" href="#redirect-url">Redirect URL</a></li>
-<li><a class="reference internal" href="#captcha-use">Captcha Use</a></li>
+<li><a class="reference internal" href="#use-captcha">Use Captcha</a></li>
 <li><a class="reference internal" href="#directory-to-write-captchas">Directory to Write Captchas</a></li>
 <li><a class="reference internal" href="#url-for-captcha-directory">URL for Captcha Directory</a></li>
 <li><a class="reference internal" href="#captcha-word-length">Captcha Word Length</a></li>
@@ -292,9 +292,10 @@ modify the module&#8217;s display.</p>
 <li><a class="reference internal" href="#allowed-attachment-filenames">Allowed Attachment Filenames</a></li>
 <li><a class="reference internal" href="#are-upload-fields-required">Are upload fields required?</a></li>
 <li><a class="reference internal" href="#directory-to-save-attachments">Directory to Save Attachments</a></li>
-<li><a class="reference internal" href="#send-me-a-copy-field-label">Send Me A Copy Field Label</a></li>
-<li><a class="reference internal" href="#send-me-a-copy-field">Send Me A Copy Field</a></li>
-<li><a class="reference internal" href="#send-user-a-copy-automatically">Send User a Copy Automatically</a></li>
+<li><a class="reference internal" href="#send-me-an-email-field-label">Send Me an Email Field Label</a></li>
+<li><a class="reference internal" href="#send-me-an-email-field">Send Me an Email Field</a></li>
+<li><a class="reference internal" href="#send-user-an-email-automatically">Send User an Email Automatically</a></li>
+<li><a class="reference internal" href="#send-user-a-custom-message">Send User a Custom Message</a></li>
 <li><a class="reference internal" href="#email-check">Email Check</a></li>
 <li><a class="reference internal" href="#include-article-title">Include Article Title</a></li>
 <li><a class="reference internal" href="#test-mode">Test Mode</a></li>
@@ -308,12 +309,6 @@ modify the module&#8217;s display.</p>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="basic_options.html"
-                        title="previous chapter">Basic configuration options</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="demo_config.html"
-                        title="next chapter">Configuration Example</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -341,12 +336,6 @@ modify the module&#8217;s display.</p>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
-        <li class="right" >
-          <a href="demo_config.html" title="Configuration Example"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="basic_options.html" title="Basic configuration options"
-             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Simple Email Form 2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
