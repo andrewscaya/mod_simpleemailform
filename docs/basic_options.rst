@@ -14,7 +14,7 @@ Form type
 
 First, the form type must be chosen.
 
-**JForm** is the most recent version that integrates new Joomla requirements.
+**JForm** is the most recent version that integrates new Joomla requirements. This is the default option since version 2.1.
 
 **Classic** shows the form as it used to be.
 This option is deprecated and won't be available in version 3.0 of the module.
@@ -53,7 +53,7 @@ An empty **Email address** field will prevent the form from displaying and gener
 
 Label alignment
 ---------------
-Choose to have the labels aligned LEFT, RIGHT or CENTER.
+Choose to have the labels aligned **left**, **right** or **center**.
 
 .. image:: /images/basic_options05.png
 
@@ -140,45 +140,8 @@ Maximum Length of Field X
 Highest number of characters accepted from the user.
 This field isn't used with field types **Drop**, **Radio** and **Checkbox**.
 
-.. index:: Field Type
-
-Field Type
+Field type
 ----------
-
-Different types of input you may offer to the user.
-For more details about each one of them, see the **Field Type** section.
-
-.. index:: Field X Format
-
-Field X Format
---------------
-
-Only works with **Radio** and **Checkbox** field types.
-
-* **Horizontal** means that all radio buttons or checkboxes are on the same row.
-
-.. image:: /images/basic_options08.png
-
-* **Vertical** means that the various button-label pairs are displayed one above the other.
-
-.. image:: /images/basic_options09.png
-
-* **Use CSS** means that you use your custom CSS to display the buttons or boxes.
-
-.. index:: Field X Before/After
-
-Field X Before/After
---------------------
-
-Only used with **Radio** and **Checkbox** field types.
-
-* **Before** means that labels are displayed to the left of their respective buttons or checkboxes.
-* **After** means that they are displayed to the right.
-
-.. index:: Field types
-
-Field types
------------
 In version **2.0**, available field types are:
 
 * From
@@ -297,3 +260,33 @@ VisibleX is the value appearing in the form.
 **After** means that the label appears to the right of the box.
 
 .. image:: /images/basic_options16.png
+
+
+.. index:: Field X Format
+
+Field X Format
+--------------
+
+Only works with **Radio** and **Checkbox** field types.
+
+* **Horizontal** means that all radio buttons or checkboxes are on the same row.
+
+.. image:: /images/basic_options08.png
+
+* **Vertical** means that the various button-label pairs are displayed one above the other.
+
+.. image:: /images/basic_options09.png
+
+* **Use CSS** means that you use your custom CSS to display the buttons or boxes.
+
+.. index:: Field X Before/After
+
+Field X Before/After
+--------------------
+
+Only used with **Radio** and **Checkbox** field types.
+
+* **Before** means that labels are displayed to the left of their respective buttons or checkboxes.
+* **After** means that they are displayed to the right.
+
+.. index:: Field types
