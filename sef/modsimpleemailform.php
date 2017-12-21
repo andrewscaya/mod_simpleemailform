@@ -1299,6 +1299,6 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
      */
     public function getFormRendering()
     {
-        return TRUE;
+        return true;
     }
 }
