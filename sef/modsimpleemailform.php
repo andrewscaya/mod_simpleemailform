@@ -1292,4 +1292,13 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
     {
         return $this->main();
     }
+
+    /*
+     * 2017-12-21 AC: Added this placeholder method to avoid a backward-compatibility break
+     * caused by the new customrenderinginterface implementation.
+     */
+    public function getFormRendering()
+    {
+        return TRUE;
+    }
 }
