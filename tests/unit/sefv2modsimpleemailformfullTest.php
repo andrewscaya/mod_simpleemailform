@@ -3,8 +3,8 @@
 /**
  * sefv2modsimpleemailformfullTest.php
  *
- * Copyright 2010 - 2017 D. Bierer <doug@unlikelysource.com>
- * Version 2.0.1
+ * Copyright 2010 - 2018 D. Bierer <doug@unlikelysource.com>
+ * Version 2.1.0
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  * MA 02110-1301, USA.
  *
  * @package    Simple Email Form Test Suite
- * @copyright  Copyright 2010 - 2017 D. Bierer <doug@unlikelysource.com>
+ * @copyright  Copyright 2010 - 2018 D. Bierer <doug@unlikelysource.com>
  * @link       http://joomla.unlikelysource.org/
  * @license    GNU/GPLv2, see above
  * @since 2.0.0
@@ -1881,6 +1881,60 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
             . '  Please re-enter your email address.',
             $msg
         );
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::sendFormData(
+     *                                      array $formDataClean,
+     *                                      array $paramsArray,
+     *                                      sefv2simpleemailformemailmsg $emailMsg,
+     *                                      \JMail $jMail
+     *                                  )
+     *
+     * @since 2.1.0
+     */
+    public function testSendFormDataWillReplaceTheCopymeBodyContentWithAppropriateParamsField()
+    {
+        list(
+            $formCleanData,
+            $emailMsg,
+            $paramsArray,
+            $formPrefixName,
+            $emailToName,
+            $emailCCName,
+            $emailBCCName,
+            $jDocumentMock,
+            $jMailMock
+            ) = $this->setUpSendFormDataTests();
+
+        define('JVERSION', '3.0');
+
+        $emailCopymeContentName= $this->sefv2modsimpleemailformProperties['emailCopymeContentName']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $paramsArray[$formPrefixName . $emailCopymeContentName] = '<html><head></head><body><p>Thanks.</p></body></html>';
+
+        $jDocumentMock
+            ->shouldReceive('getTitle')
+            ->once()
+            ->andReturn('Home: Article');
+
+        $jMailMock
+            ->shouldReceive('setBody')
+            ->once()
+            ->with('<html><head></head><body><p>Thanks.</p></body></html>')
+            ->andReturn($jMailMock);
+        $jMailMock
+            ->shouldReceive('send')
+            ->twice()
+            ->andReturn(true);
+
+        $output = $this->sefv2modsimpleemailformMethods['sendFormData']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array($formCleanData, $paramsArray, $emailMsg, $jMailMock)
+        );
+
+        $this->assertTrue($output);
     }
 
     /**

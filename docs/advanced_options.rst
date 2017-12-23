@@ -19,8 +19,8 @@ This option is provided by `Joomla <https://docs.joomla.org/Help36:Extensions_Mo
 Form Instance
 -------------
 
-If you use more than one simple email form on the same page, you need to
-give each one a unique number to differentiate them from the other forms.
+If you use more than one **Classic** forms on your website, even on different pages, you need to give
+each one of them a unique number to differentiate them from each other.
 
 .. index:: Send Results CC
 
@@ -87,7 +87,7 @@ Example: http://www.unlikelysource.com/
 
 .. index:: Captcha Use
 
-Captcha Use
+Use Captcha
 -----------
 
 With the **JForm** type:
@@ -243,26 +243,35 @@ Directory to Save Attachments
 
 An absolute path to the directory in which attachments sent by users will be saved.
 
-.. index:: Send Me a Copy Field Label
+.. index:: Send Me an Email Field Label
 
-Send Me A Copy Field Label
---------------------------
+Send Me an Email Field Label
+----------------------------
 
-The label for field **Send Me A Copy**, set below.
+The label for field **Send Me an Email**, set below.
 
-.. index:: Send Me A Copy Field
+.. index:: Send Me an Email Field
 
-Send Me A Copy Field
---------------------
+Send Me an Email Field
+----------------------
 
 If set to **Yes**, users can ask to receive a copy of the form that they send.
 
-.. index:: Send User a Copy Automatically
+.. index:: Send User an Email Automatically
 
-Send User a Copy Automatically
-------------------------------
+Send User an Email Automatically
+--------------------------------
 
 If set to **Yes**, users will always receive a copy of the form that they send.
+
+.. index:: Send User a Custom Messasge
+.. _custom-message:
+
+Send User a Custom Message
+--------------------------
+
+If the **Send User an Email Automatically** option is set to **Yes**, you can fill out this section
+to send your user a custom message.
 
 .. index:: Email Check
 
@@ -290,12 +299,18 @@ Test Mode
 If set to **Yes**, the form is used in test mode.
 
 .. index:: Override rendering
+.. _override-rendering:
 
 Override rendering
 ------------------
 
 Set this option to **Yes** if you want to use your own template to
-modify the module's display.
+modify the module's display. To get you started, you can copy the **mod_simpleemailform/tmpl/default_custom.php.dist**
+and name it **default_custom.php**.
+
+You can also give your custom file another name, but you will have to insert your chosen name on line 7 of the
+**default.php** template file.
+
 
 .. index:: Module Tag
 

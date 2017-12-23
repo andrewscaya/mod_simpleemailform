@@ -1,8 +1,8 @@
 <update>
     <name>Simple Email Form</name>
     <description><![CDATA[
-	A simple email form from unlikelysource.com with up to 8 fields + CAPTCHA + 32 languages.
-	<br />Version 2.0.1 -- works on 3.x (1.8.1-1x supports Joomla 1.x)!
+	A simple email form from unlikelysource.com with up to 8 fields + Joomla CAPTCHA + 32 languages.
+	<br />Version 2.1.0 -- works on Joomla 3.x.
 	<br />REQUIRES a web server running at a minimum PHP 5.3!!!
 	<br />TO LOAD IN AN ARTICLE (most common):
 	<ul><li>In the Details box, modify Position to user99 (or whatever).  </li>
@@ -12,15 +12,15 @@
     </description>
     <element>Simple Email Form</element>
     <type>module</type>
-    <version>2.0.1</version>
+    <version>2.1.0</version>
     <infourl title="Simple Email Form">http://joomla.unlikelysource.org/</infourl>
     <downloads>
-        <downloadurl type="full" format="tar.gz">https://github.com/andrewscaya/mod_simpleemailform/archive/2.0.0.tar.gz</downloadurl>
+        <downloadurl type="full" format="tar.gz">https://github.com/andrewscaya/mod_simpleemailform/archive/latest.tar.gz</downloadurl>
     </downloads>
     <tags>
         <tag>stable</tag>
     </tags>
-    <maintainer>Doug Bierer</maintainer>
-    <maintainerurl>http://www.unlikelysource.com</maintainerurl>
-    <targetplatform name="joomla" version="3.[0123456]"/>
+    <maintainer>Andrew Caya</maintainer>
+    <maintainerurl>https://github.com/andrewscaya/mod_simpleemailform</maintainerurl>
+    <targetplatform name="joomla" version="3.[012345678]"/>
 </update>

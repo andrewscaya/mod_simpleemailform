@@ -3,8 +3,8 @@
 /**
  * simpleemailformemailmsg.php
  *
- * Copyright 2010 - 2017 D. Bierer <doug@unlikelysource.com>
- * Version 2.0.1
+ * Copyright 2010 - 2018 D. Bierer <doug@unlikelysource.com>
+ * Version 2.1.0
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  * MA 02110-1301, USA.
  *
  * @package    Simple Email Form
- * @copyright  Copyright 2010 - 2017 D. Bierer <doug@unlikelysource.com>
+ * @copyright  Copyright 2010 - 2018 D. Bierer <doug@unlikelysource.com>
  * @link       http://joomla.unlikelysource.org/
  * @license    GNU/GPLv2, see above
  * @since 2.0.0
@@ -38,84 +38,115 @@
 class sefv2simpleemailformemailmsg
 {
     /**
+     * Contains a string signifying the recipient's email address.
+     *
      * @var null|string
      * @since 2.0.0
      */
     public $to            = null;
 
     /**
+     * Contains a string signifying the sender's email address.
+     *
      * @var null|string
      * @since 2.0.0
      */
     public $from          = null;
 
     /**
+     * Contains a string signifying the sender's name.
+     *
      * @var null|string
      * @since 2.0.0
      */
     public $fromName      = null;
 
     /**
+     * Contains a string signifying the value of the cc email addresses.
+     *
      * @var null|string
      * @since 2.0.0
      */
     public $cc            = null;
 
     /**
+     * Contains a string signifying the value of the bcc email addresses.
+     *
      * @var null|string
      * @since 2.0.0
      */
     public $bcc           = null;
 
     /**
-     * @var null|string
+     * Contains a string (or an array of strings if Joomla < 3.0) signifying the value of
+     * the email address parameter that will be in the replyTo field of the email.
+     *
+     * @var mixed
      * @since 2.0.0
      */
     public $replyTo       = null;
 
     /**
+     * Contains a string signifying that the replyTo field has to be added or not to the email.
+     *
      * @var null|string
      * @since 2.0.0
      */
-    public $replyToActive = false;
+    public $replyToActive = 'N';
 
     /**
+     * Contains an array of attached documents.
+     *
      * @var array
      * @since 2.0.0
      */
     public $attachment    = array();
 
     /**
+     * Contains a string signifying the value of the email' subject.
+     *
      * @var null|string
      * @since 2.0.0
      */
     public $subject       = '';
 
     /**
+     * Contains a string signifying the value of the email' body.
+     *
      * @var null|string
      * @since 2.0.0
      */
     public $body          = '';
 
     /**
+     * Contains a string signifying the value of the directory containing the attachments.
+     *
      * @var null|string
      * @since 2.0.0
      */
     public $dir           = '';
 
     /**
+     * Contains a boolean signifying that the value of the form's field was set or not.
+     *
+     * @var null|bool
+     * @since 2.0.0
+     */
+    public $copyMe        = false;
+
+    /**
+     * Contains a boolean signifying that the value of the form's parameter was set or not.
+     *
      * @var null|string
      * @since 2.0.0
      */
-    public $copyMe        = '';
+    public $copyMeAuto    = false;
 
     /**
-     * @var null|string
-     * @since 2.0.0
-     */
-    public $copyMeAuto    = '';
-
-    /**
+     * Contains a string signifying the value of the error message if an error occurred when sending the email.
+     *
+     * @deprecated 2.1.0
+     *
      * @var null|string
      * @since 2.0.0
      */

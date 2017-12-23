@@ -3,8 +3,8 @@
 /**
  * jformproxyinterface.php
  *
- * Copyright 2010 - 2017 D. Bierer <doug@unlikelysource.com>
- * Version 2.0.1
+ * Copyright 2010 - 2018 D. Bierer <doug@unlikelysource.com>
+ * Version 2.1.0
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@
  * MA 02110-1301, USA.
  *
  * @package    Simple Email Form
- * @copyright  Copyright 2010 - 2017 D. Bierer <doug@unlikelysource.com>
+ * @copyright  Copyright 2010 - 2018 D. Bierer <doug@unlikelysource.com>
  * @link       http://joomla.unlikelysource.org/
  * @license    GNU/GPLv2, see above
  * @since 2.0.0
@@ -40,7 +40,7 @@ interface sefv2jformproxyinterface
     /**
      * Method to bind data to the form.
      *
-     * @param $data
+     * @param mixed $data
      *
      * @return mixed
      *
@@ -63,6 +63,8 @@ interface sefv2jformproxyinterface
     /**
      * Getter for the form data
      *
+     * @param null
+     *
      * @return mixed
      *
      * @since 2.0.0
@@ -71,6 +73,8 @@ interface sefv2jformproxyinterface
 
     /**
      * Return all errors, if any.
+     *
+     * @param null
      *
      * @return mixed
      *
@@ -81,7 +85,7 @@ interface sefv2jformproxyinterface
     /**
      * Method to get a form field represented as a JFormField object.
      *
-     * @param $name
+     * @param string $name
      * @param null $group
      * @param null $value
      *
@@ -95,18 +99,18 @@ interface sefv2jformproxyinterface
      * Method to get an array of JFormField objects in a given fieldset by name.
      * If no name is given then all fields are returned.
      *
-     * @param $set
+     * @param null $set
      *
      * @return mixed
      *
      * @since 2.0.0
      */
-    public function getFieldset($set);
+    public function getFieldset($set = null);
 
     /**
      * Method to load the form description from an XML string or object.
      *
-     * @param $xmlConfigString
+     * @param string $xmlConfigString
      *
      * @return mixed
      *
@@ -117,7 +121,7 @@ interface sefv2jformproxyinterface
     /**
      * Method to remove a field from the form definition.
      *
-     * @param $name
+     * @param string $name
      * @param null $group
      *
      * @return mixed
