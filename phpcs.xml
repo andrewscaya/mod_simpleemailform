@@ -8,11 +8,11 @@
 
     <!-- inherit rules from: -->
     <rule ref="PSR2">
-        <exclude name="PSR2.Methods.MethodDeclaration" />
-        <exclude name="PSR2.Classes.PropertyDeclaration" />
-        <exclude name="PSR1.Classes.ClassDeclaration" />
         <exclude name="PSR1.Files.SideEffects" />
+        <exclude name="PSR1.Classes.ClassDeclaration" />
         <exclude name="Squiz.Classes.ValidClassName" />
+        <exclude name="PSR2.Methods.MethodDeclaration" />
+        <!-- <exclude name="PSR2.Classes.PropertyDeclaration" /> -->
     </rule>
 	
     <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace">
@@ -45,6 +45,7 @@
     <exclude-pattern>*/docs-api/*</exclude-pattern>
     <exclude-pattern>*/language_files/*</exclude-pattern>
     <exclude-pattern>*/lib/*</exclude-pattern>
+    <exclude-pattern>*/sef/*</exclude-pattern>
     <exclude-pattern>*/vendor/*</exclude-pattern>
     <exclude-pattern>PEAR.php</exclude-pattern>
     <exclude-pattern>PEAR5.php</exclude-pattern>
