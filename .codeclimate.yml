@@ -70,6 +70,7 @@ exclude_patterns:
 - "**/*.d.ts"
 - "bin/"
 - "build/"
+- "data/"
 - "docs/"
 - "docs-api/"
 - "language_files/"
