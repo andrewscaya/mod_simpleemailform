@@ -376,42 +376,52 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertInstanceOf(
             'JForm',
-            $this->sefv2modsimpleemailformProperties['jForm']->getValue($this->sefv2modsimpleemailform)
+            $this->sefv2modsimpleemailformProperties['jForm']
+                ->getValue($this->sefv2modsimpleemailform)
         );
         $this->assertInstanceOf(
             'JMail',
-            $this->sefv2modsimpleemailformProperties['jMail']->getValue($this->sefv2modsimpleemailform)
+            $this->sefv2modsimpleemailformProperties['jMail']
+                ->getValue($this->sefv2modsimpleemailform)
         );
         $this->assertInstanceOf(
             'sefv2simpleemailformemailmsg',
-            $this->sefv2modsimpleemailformProperties['emailMsg']->getValue($this->sefv2modsimpleemailform)
+            $this->sefv2modsimpleemailformProperties['emailMsg']
+                ->getValue($this->sefv2modsimpleemailform)
         );
         $this->assertInstanceOf(
             'JDocument',
-            $this->sefv2modsimpleemailformProperties['jDocument']->getValue($this->sefv2modsimpleemailform)
+            $this->sefv2modsimpleemailformProperties['jDocument']
+                ->getValue($this->sefv2modsimpleemailform)
         );
         $this->assertInstanceOf(
             'Joomla\Registry\Registry',
-            $this->sefv2modsimpleemailformProperties['params']->getValue($this->sefv2modsimpleemailform)
+            $this->sefv2modsimpleemailformProperties['params']
+                ->getValue($this->sefv2modsimpleemailform)
         );
         $this->assertInstanceOf(
             'JInput',
-            $this->sefv2modsimpleemailformProperties['jInput']->getValue($this->sefv2modsimpleemailform)
+            $this->sefv2modsimpleemailformProperties['jInput']
+                ->getValue($this->sefv2modsimpleemailform)
         );
         $this->assertSame(
             '1',
-            $this->sefv2modsimpleemailformProperties['formInstance']->getValue($this->sefv2modsimpleemailform)
+            $this->sefv2modsimpleemailformProperties['formInstance']
+                ->getValue($this->sefv2modsimpleemailform)
         );
         $this->assertEquals(
             8,
-            $this->sefv2modsimpleemailformProperties['maxFields']->getValue($this->sefv2modsimpleemailform)
+            $this->sefv2modsimpleemailformProperties['maxFields']
+                ->getValue($this->sefv2modsimpleemailform)
         );
         $this->assertSame(
             'en-GB',
-            $this->sefv2modsimpleemailformProperties['lang']->getValue($this->sefv2modsimpleemailform)
+            $this->sefv2modsimpleemailformProperties['lang']
+                ->getValue($this->sefv2modsimpleemailform)
         );
 
-        $transLang = $this->sefv2modsimpleemailformProperties['transLang']->getValue($this->sefv2modsimpleemailform);
+        $transLang = $this->sefv2modsimpleemailformProperties['transLang']
+            ->getValue($this->sefv2modsimpleemailform);
 
         $this->assertTrue(
             is_array($transLang)
@@ -426,18 +436,21 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             8,
             count(
-                $this->sefv2modsimpleemailformProperties['formActiveElements']->getValue($this->sefv2modsimpleemailform)
+                $this->sefv2modsimpleemailformProperties['formActiveElements']
+                    ->getValue($this->sefv2modsimpleemailform)
             )
         );
         $this->assertEquals(
             8,
-            $this->sefv2modsimpleemailformProperties['formActiveElementsCount']->getValue($this->sefv2modsimpleemailform)
+            $this->sefv2modsimpleemailformProperties['formActiveElementsCount']
+                ->getValue($this->sefv2modsimpleemailform)
         );
         $this->assertEquals(
             1,
             preg_match(
                 '/<\?xml version="1.0" encoding="UTF-8"\?>/',
-                $this->sefv2modsimpleemailformProperties['xmlConfig']->getValue($this->sefv2modsimpleemailform)
+                $this->sefv2modsimpleemailformProperties['xmlConfig']
+                    ->getValue($this->sefv2modsimpleemailform)
             )
         );
     }
@@ -1912,7 +1925,8 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
         $emailCopymeContentName= $this->sefv2modsimpleemailformProperties['emailCopymeContentName']
             ->getValue($this->sefv2modsimpleemailform);
 
-        $paramsArray[$formPrefixName . $emailCopymeContentName] = '<html><head></head><body><p>Thanks.</p></body></html>';
+        $paramsArray[$formPrefixName . $emailCopymeContentName] =
+            '<html><head></head><body><p>Thanks.</p></body></html>';
 
         $jDocumentMock
             ->shouldReceive('getTitle')

@@ -226,7 +226,8 @@ class sefmodsimpleemailformTest extends \PHPUnit_Framework_TestCase
      */
     public function testFormatRow($expectedResult, $fieldPropertyValue)
     {
-        // @TODO $_POST cannot be an array - code in helper.php will have to be modified in a future version - lines 402-411
+        // @TODO $_POST cannot be an array -
+        // code in helper.php will have to be modified in a future version - lines 402-411
         $_POST['mod_simpleemailform_field1_1'] = 'TEST_POST';
 
         $this->modsimpleemailformProperties['_maxFields']->setValue($this->modsimpleemailform, 1);
@@ -504,7 +505,11 @@ class sefmodsimpleemailformTest extends \PHPUnit_Framework_TestCase
             ->once()
             ->andReturn($jMailMock);
 
-        $result = $this->modsimpleemailform->sendResults($msg, $this->modsimpleemailformProperties['_field']->getValue($this->modsimpleemailform));
+        $result =
+            $this->modsimpleemailform->sendResults(
+                $msg,
+                $this->modsimpleemailformProperties['_field']->getValue($this->modsimpleemailform)
+            );
 
         $this->assertTrue($result);
     }
