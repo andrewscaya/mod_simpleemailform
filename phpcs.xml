@@ -22,12 +22,12 @@
     </rule>
     
     <!-- Lines can be 200 chars long and never show errors -->
-    <rule ref="Generic.Files.LineLength">
+    <!-- <rule ref="Generic.Files.LineLength">
         <properties>
             <property name="lineLimit" value="200"/>
             <property name="absoluteLineLimit" value="0"/>
         </properties>
-    </rule>
+    </rule> -->
     
     <!-- Allow long array syntax (PHP 5.3) -->
     <rule ref="Generic.Arrays.DisallowLongArraySyntax.Found">
@@ -38,11 +38,14 @@
     <file>.</file>
     
     <!-- Paths and files to ignore -->
-    <exclude-pattern>*/vendor/*</exclude-pattern>
-    <exclude-pattern>*/lib/*</exclude-pattern>
+    <exclude-pattern>*/bin/*</exclude-pattern>
+    <exclude-pattern>*/build/*</exclude-pattern>
+    <exclude-pattern>*/data/*</exclude-pattern>
     <exclude-pattern>*/docs/*</exclude-pattern>
     <exclude-pattern>*/docs-api/*</exclude-pattern>
-    <exclude-pattern>*/data/*</exclude-pattern>
+    <exclude-pattern>*/language_files/*</exclude-pattern>
+    <exclude-pattern>*/lib/*</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
     <exclude-pattern>PEAR.php</exclude-pattern>
     <exclude-pattern>PEAR5.php</exclude-pattern>
 </ruleset>
