@@ -270,13 +270,6 @@
       }
     },
     {
-      "type": "setElementSelected",
-      "locator": {
-        "type": "id",
-        "value": "jform_params_mod_simpleemailform_field3active0"
-      }
-    },
-    {
       "type": "clickElement",
       "locator": {
         "type": "xpath",
@@ -354,6 +347,14 @@
         "type": "id",
         "value": "mod_simpleemailform_field2_1"
       }
+    },
+    {
+      "type": "verifyTextPresent",
+      "text": "From"
+    },
+    {
+      "type": "verifyTextPresent",
+      "text": "Subject"
     }
   ],
   "data": {
