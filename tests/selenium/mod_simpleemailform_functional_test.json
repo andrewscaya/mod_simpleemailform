@@ -1,0 +1,364 @@
+{
+  "type": "script",
+  "seleniumVersion": "2",
+  "formatVersion": 2,
+  "steps": [
+    {
+      "type": "get",
+      "url": "http://localhost:8181/installation/index.php"
+    },
+    {
+      "type": "pause",
+      "waitTime": "10"
+    },
+    {
+      "type": "setElementText",
+      "locator": {
+        "type": "id",
+        "value": "jform_site_name"
+      },
+      "text": "SEF Test"
+    },
+    {
+      "type": "setElementText",
+      "locator": {
+        "type": "id",
+        "value": "jform_admin_email"
+      },
+      "text": "admin@localhost"
+    },
+    {
+      "type": "setElementText",
+      "locator": {
+        "type": "id",
+        "value": "jform_admin_user"
+      },
+      "text": "admin"
+    },
+    {
+      "type": "setElementText",
+      "locator": {
+        "type": "id",
+        "value": "jform_admin_password"
+      },
+      "text": "testpass"
+    },
+    {
+      "type": "setElementText",
+      "locator": {
+        "type": "id",
+        "value": "jform_admin_password2"
+      },
+      "text": "testpass"
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "xpath",
+        "value": "//form[@id='adminForm']//a[.=' Next']"
+      }
+    },
+    {
+      "type": "pause",
+      "waitTime": "10"
+    },
+    {
+      "type": "setElementText",
+      "locator": {
+        "type": "id",
+        "value": "jform_db_user"
+      },
+      "text": "root"
+    },
+    {
+      "type": "setElementText",
+      "locator": {
+        "type": "id",
+        "value": "jform_db_pass"
+      },
+      "text": ""
+    },
+    {
+      "type": "setElementText",
+      "locator": {
+        "type": "id",
+        "value": "jform_db_name"
+      },
+      "text": "joomlatest"
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "xpath",
+        "value": "//div[@class='row-fluid']//a[.=' Next']"
+      }
+    },
+    {
+      "type": "pause",
+      "waitTime": "10"
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "xpath",
+        "value": "//form[@id='adminForm']/div[7]/div/div/a[2]"
+      }
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "name",
+        "value": "instDefault"
+      }
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "link text",
+        "value": "Administrator"
+      }
+    },
+    {
+      "type": "setElementText",
+      "locator": {
+        "type": "id",
+        "value": "mod-login-username"
+      },
+      "text": "admin"
+    },
+    {
+      "type": "setElementText",
+      "locator": {
+        "type": "id",
+        "value": "mod-login-password"
+      },
+      "text": "testpass"
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "xpath",
+        "value": "//div[@class='btn-group']//button[normalize-space(.)='Log in']"
+      }
+    },
+    {
+      "type": "pause",
+      "waitTime": "10"
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "link text",
+        "value": "Extensions"
+      }
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "xpath",
+        "value": "//ul[@id='nav-empty']//a[.='Install']"
+      }
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "link text",
+        "value": "Install from Folder"
+      }
+    },
+    {
+      "type": "setElementText",
+      "locator": {
+        "type": "id",
+        "value": "install_directory"
+      },
+      "text": "/tmp/mod_simpleemailform"
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "id",
+        "value": "installbutton_directory"
+      }
+    },
+    {
+      "type": "pause",
+      "waitTime": "30"
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "link text",
+        "value": "Extensions"
+      }
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "link text",
+        "value": "Modules"
+      }
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "link text",
+        "value": "Simple Email Form"
+      }
+    },
+    {
+      "type": "pause",
+      "waitTime": "10"
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "xpath",
+        "value": "//div[@id='jform_position_chzn']/a/div/b"
+      }
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "xpath",
+        "value": "//div[@id='jform_position_chzn']//li[.='position-2']"
+      }
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "xpath",
+        "value": "//div[@id='jform_published_chzn']/a/div/b"
+      }
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "xpath",
+        "value": "//div[@id='jform_published_chzn']//li[.='Published']"
+      }
+    },
+    {
+      "type": "setElementText",
+      "locator": {
+        "type": "id",
+        "value": "jform_params_mod_simpleemailform_emailTo"
+      },
+      "text": "admin@localhost"
+    },
+    {
+      "type": "setElementSelected",
+      "locator": {
+        "type": "id",
+        "value": "jform_params_mod_simpleemailform_field3active0"
+      }
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "xpath",
+        "value": "//div[@id='jform_params_mod_simpleemailform_field3from_chzn']/a/div/b"
+      }
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "xpath",
+        "value": "//div[@id='jform_params_mod_simpleemailform_field3from_chzn']//li[.='Textarea']"
+      }
+    },
+    {
+      "type": "setElementText",
+      "locator": {
+        "type": "id",
+        "value": "jform_params_mod_simpleemailform_field3size"
+      },
+      "text": "150"
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "xpath",
+        "value": "//div[@id='toolbar-apply']//button[normalize-space(.)='Save']"
+      }
+    },
+    {
+      "type": "pause",
+      "waitTime": "10"
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "xpath",
+        "value": "//form[@id='module-form']/input"
+      }
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "link text",
+        "value": "Menu Assignment"
+      }
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "link text",
+        "value": "No pages"
+      }
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "css selector",
+        "value": "li.active-result.result-selected"
+      }
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "xpath",
+        "value": "//form[@id='module-form']/input"
+      }
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "xpath",
+        "value": "//div[@id='toolbar-save']//button[normalize-space(.)='Save & Close']"
+      }
+    },
+    {
+      "type": "pause",
+      "waitTime": "10"
+    },
+    {
+      "type": "get",
+      "url": "http://localhost:8181/"
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "id",
+        "value": "mod_simpleemailform_field1_1"
+      }
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "id",
+        "value": "mod_simpleemailform_field2_1"
+      }
+    },
+    {
+      "type": "verifyTextPresent",
+      "text": "Field 3"
+    }
+  ],
+  "data": {
+    "configs": {},
+    "source": "none"
+  },
+  "inputs": [],
+  "timeoutSeconds": 60
+}
