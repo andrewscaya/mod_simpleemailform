@@ -194,6 +194,13 @@
       "text": "https://codeload.github.com/andrewscaya/mod_simpleemailform/tar.gz/latest"
     },
     {
+      "type": "waitForElementPresent",
+      "locator": {
+        "type": "id",
+        "value": "installbutton_url"
+      }
+    },
+    {
       "type": "clickElement",
       "locator": {
         "type": "id",
