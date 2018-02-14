@@ -196,8 +196,8 @@
     {
       "type": "clickElement",
       "locator": {
-        "type": "id",
-        "value": "installbutton_directory"
+        "type": "xpath",
+        "value": "//*[@id='installbutton_directory']"
       }
     },
     {
