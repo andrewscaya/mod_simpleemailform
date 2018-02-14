@@ -8,16 +8,12 @@
       "url": "http://localhost:8181/installation/index.php"
     },
     {
-      "type": "pause",
-      "waitTime": "10"
-    },
-    {
       "type": "setElementText",
       "locator": {
         "type": "id",
         "value": "jform_site_name"
       },
-      "text": "SEF Test"
+      "text": "Joomla Test"
     },
     {
       "type": "setElementText",
@@ -59,24 +55,12 @@
       }
     },
     {
-      "type": "pause",
-      "waitTime": "10"
-    },
-    {
       "type": "setElementText",
       "locator": {
         "type": "id",
         "value": "jform_db_user"
       },
       "text": "root"
-    },
-    {
-      "type": "setElementText",
-      "locator": {
-        "type": "id",
-        "value": "jform_db_pass"
-      },
-      "text": ""
     },
     {
       "type": "setElementText",
@@ -94,14 +78,10 @@
       }
     },
     {
-      "type": "pause",
-      "waitTime": "10"
-    },
-    {
       "type": "clickElement",
       "locator": {
-        "type": "xpath",
-        "value": "//form[@id='adminForm']/div[7]/div/div/a[2]"
+        "type": "link text",
+        "value": "Install"
       }
     },
     {
@@ -140,10 +120,6 @@
         "type": "xpath",
         "value": "//div[@class='btn-group']//button[normalize-space(.)='Log in']"
       }
-    },
-    {
-      "type": "pause",
-      "waitTime": "10"
     },
     {
       "type": "clickElement",
@@ -189,10 +165,6 @@
       }
     },
     {
-      "type": "pause",
-      "waitTime": "30"
-    },
-    {
       "type": "clickElement",
       "locator": {
         "type": "link text",
@@ -214,8 +186,12 @@
       }
     },
     {
-      "type": "pause",
-      "waitTime": "10"
+      "type": "setElementText",
+      "locator": {
+        "type": "id",
+        "value": "jform_params_mod_simpleemailform_emailTo"
+      },
+      "text": "admin@localhost"
     },
     {
       "type": "clickElement",
@@ -246,14 +222,6 @@
       }
     },
     {
-      "type": "setElementText",
-      "locator": {
-        "type": "id",
-        "value": "jform_params_mod_simpleemailform_emailTo"
-      },
-      "text": "admin@localhost"
-    },
-    {
       "type": "setElementSelected",
       "locator": {
         "type": "id",
@@ -264,34 +232,8 @@
       "type": "clickElement",
       "locator": {
         "type": "xpath",
-        "value": "//div[@id='jform_params_mod_simpleemailform_field3from_chzn']/a/div/b"
-      }
-    },
-    {
-      "type": "clickElement",
-      "locator": {
-        "type": "xpath",
-        "value": "//div[@id='jform_params_mod_simpleemailform_field3from_chzn']//li[.='Textarea']"
-      }
-    },
-    {
-      "type": "setElementText",
-      "locator": {
-        "type": "id",
-        "value": "jform_params_mod_simpleemailform_field3size"
-      },
-      "text": "150"
-    },
-    {
-      "type": "clickElement",
-      "locator": {
-        "type": "xpath",
         "value": "//div[@id='toolbar-apply']//button[normalize-space(.)='Save']"
       }
-    },
-    {
-      "type": "pause",
-      "waitTime": "10"
     },
     {
       "type": "clickElement",
@@ -310,8 +252,8 @@
     {
       "type": "clickElement",
       "locator": {
-        "type": "link text",
-        "value": "No pages"
+        "type": "xpath",
+        "value": "//div[@id='jform_assignment_chzn']/a/div/b"
       }
     },
     {
@@ -325,19 +267,15 @@
       "type": "clickElement",
       "locator": {
         "type": "xpath",
-        "value": "//form[@id='module-form']/input"
+        "value": "//div[@id='toolbar-save']//button[normalize-space(.)='Save & Close']"
       }
     },
     {
       "type": "clickElement",
       "locator": {
         "type": "xpath",
-        "value": "//div[@id='toolbar-save']//button[normalize-space(.)='Save & Close']"
+        "value": "//form[@id='module-form']/input"
       }
-    },
-    {
-      "type": "pause",
-      "waitTime": "10"
     },
     {
       "type": "get",
@@ -356,10 +294,6 @@
         "type": "id",
         "value": "mod_simpleemailform_field2_1"
       }
-    },
-    {
-      "type": "verifyTextPresent",
-      "text": "Field 3"
     }
   ],
   "data": {
