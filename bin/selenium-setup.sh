@@ -9,5 +9,6 @@ cd /tmp
 mkdir joomla
 cd joomla
 unzip ../joomla_3-8-5-stable-full_package.zip
+mysql -uroot -e "CREATE DATABASE joomlatest;"
 (php -S localhost:8181 > /dev/null 2>&1) &
 exit 0
