@@ -194,6 +194,10 @@
       "text": "/tmp/mod_simpleemailform"
     },
     {
+      "type": "pause",
+      "waitTime": "10"
+    },
+    {
       "type": "clickElement",
       "locator": {
         "type": "xpath",
