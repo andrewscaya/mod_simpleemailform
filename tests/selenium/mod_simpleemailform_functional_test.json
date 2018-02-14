@@ -178,7 +178,7 @@
       "type": "clickElement",
       "locator": {
         "type": "link text",
-        "value": "Install from Folder"
+        "value": "Install from URL"
       }
     },
     {
@@ -189,19 +189,15 @@
       "type": "setElementText",
       "locator": {
         "type": "id",
-        "value": "install_directory"
+        "value": "install_url"
       },
-      "text": "/tmp/mod_simpleemailform"
-    },
-    {
-      "type": "pause",
-      "waitTime": "10"
+      "text": "https://codeload.github.com/andrewscaya/mod_simpleemailform/tar.gz/latest"
     },
     {
       "type": "clickElement",
       "locator": {
-        "type": "xpath",
-        "value": "//*[@id='installbutton_directory']"
+        "type": "id",
+        "value": "installbutton_url"
       }
     },
     {
