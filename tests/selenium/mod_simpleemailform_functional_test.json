@@ -55,6 +55,10 @@
       }
     },
     {
+      "type": "pause",
+      "waitTime": "10"
+    },
+    {
       "type": "setElementText",
       "locator": {
         "type": "id",
@@ -78,11 +82,19 @@
       }
     },
     {
+      "type": "pause",
+      "waitTime": "10"
+    },
+    {
       "type": "clickElement",
       "locator": {
         "type": "link text",
         "value": "Install"
       }
+    },
+    {
+      "type": "pause",
+      "waitTime": "10"
     },
     {
       "type": "clickElement",
@@ -92,11 +104,19 @@
       }
     },
     {
+      "type": "pause",
+      "waitTime": "10"
+    },
+    {
       "type": "clickElement",
       "locator": {
         "type": "link text",
         "value": "Administrator"
       }
+    },
+    {
+      "type": "pause",
+      "waitTime": "10"
     },
     {
       "type": "setElementText",
@@ -122,6 +142,10 @@
       }
     },
     {
+      "type": "pause",
+      "waitTime": "10"
+    },
+    {
       "type": "clickElement",
       "locator": {
         "type": "link text",
@@ -136,6 +160,10 @@
       }
     },
     {
+      "type": "pause",
+      "waitTime": "10"
+    },
+    {
       "type": "clickElement",
       "locator": {
         "type": "xpath",
@@ -143,11 +171,19 @@
       }
     },
     {
+      "type": "pause",
+      "waitTime": "10"
+    },
+    {
       "type": "clickElement",
       "locator": {
         "type": "link text",
         "value": "Install from Folder"
       }
+    },
+    {
+      "type": "pause",
+      "waitTime": "10"
     },
     {
       "type": "setElementText",
@@ -165,6 +201,10 @@
       }
     },
     {
+      "type": "pause",
+      "waitTime": "10"
+    },
+    {
       "type": "clickElement",
       "locator": {
         "type": "link text",
@@ -179,11 +219,19 @@
       }
     },
     {
+      "type": "pause",
+      "waitTime": "10"
+    },
+    {
       "type": "clickElement",
       "locator": {
         "type": "link text",
         "value": "Simple Email Form"
       }
+    },
+    {
+      "type": "pause",
+      "waitTime": "10"
     },
     {
       "type": "setElementText",
@@ -236,6 +284,10 @@
       }
     },
     {
+      "type": "pause",
+      "waitTime": "10"
+    },
+    {
       "type": "clickElement",
       "locator": {
         "type": "xpath",
@@ -278,8 +330,16 @@
       }
     },
     {
+      "type": "pause",
+      "waitTime": "10"
+    },
+    {
       "type": "get",
       "url": "http://localhost:8181/"
+    },
+    {
+      "type": "pause",
+      "waitTime": "10"
     },
     {
       "type": "clickElement",
