@@ -155,8 +155,15 @@
     {
       "type": "clickElement",
       "locator": {
+        "type": "css selector",
+        "value": "a.dropdown-toggle.menu-install"
+      }
+    },
+    {
+      "type": "clickElement",
+      "locator": {
         "type": "xpath",
-        "value": "//ul[@id='nav-empty']//a[.='Install']"
+        "value": "//ul[@id='submenu']//a[.='Install']"
       }
     },
     {
