@@ -46,7 +46,6 @@ matrix:
           - TEST_CHECK=false
           - CS_CHECK=true
           - CC_CHECK=true
-      - php: hhvm
   allow_failures:
       - php: hhvm
         env:
