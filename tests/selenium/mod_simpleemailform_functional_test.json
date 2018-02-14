@@ -8,6 +8,11 @@
       "url": "http://localhost:8181/installation/index.php"
     },
     {
+      "type": "setWindowSize",
+      "width": "1440",
+      "height": "900"
+    },
+    {
       "type": "setElementText",
       "locator": {
         "type": "id",
@@ -56,7 +61,7 @@
     },
     {
       "type": "pause",
-      "waitTime": "10"
+      "waitTime": "5000"
     },
     {
       "type": "setElementText",
@@ -83,7 +88,7 @@
     },
     {
       "type": "pause",
-      "waitTime": "10"
+      "waitTime": "5000"
     },
     {
       "type": "clickElement",
@@ -94,7 +99,7 @@
     },
     {
       "type": "pause",
-      "waitTime": "10"
+      "waitTime": "30000"
     },
     {
       "type": "clickElement",
@@ -105,7 +110,7 @@
     },
     {
       "type": "pause",
-      "waitTime": "10"
+      "waitTime": "5000"
     },
     {
       "type": "clickElement",
@@ -116,7 +121,7 @@
     },
     {
       "type": "pause",
-      "waitTime": "10"
+      "waitTime": "5000"
     },
     {
       "type": "setElementText",
@@ -143,7 +148,7 @@
     },
     {
       "type": "pause",
-      "waitTime": "10"
+      "waitTime": "5000"
     },
     {
       "type": "clickElement",
@@ -161,7 +166,7 @@
     },
     {
       "type": "pause",
-      "waitTime": "10"
+      "waitTime": "5000"
     },
     {
       "type": "clickElement",
@@ -172,7 +177,7 @@
     },
     {
       "type": "pause",
-      "waitTime": "10"
+      "waitTime": "5000"
     },
     {
       "type": "clickElement",
@@ -183,7 +188,7 @@
     },
     {
       "type": "pause",
-      "waitTime": "10"
+      "waitTime": "5000"
     },
     {
       "type": "setElementText",
@@ -191,7 +196,7 @@
         "type": "id",
         "value": "install_url"
       },
-      "text": "https://codeload.github.com/andrewscaya/mod_simpleemailform/tar.gz/latest"
+      "text": "https://codeload.github.com/andrewscaya/mod_simpleemailform/tar.gz/stable"
     },
     {
       "type": "waitForElementPresent",
@@ -209,7 +214,7 @@
     },
     {
       "type": "pause",
-      "waitTime": "10"
+      "waitTime": "5000"
     },
     {
       "type": "clickElement",
@@ -227,7 +232,7 @@
     },
     {
       "type": "pause",
-      "waitTime": "10"
+      "waitTime": "5000"
     },
     {
       "type": "clickElement",
@@ -238,15 +243,7 @@
     },
     {
       "type": "pause",
-      "waitTime": "10"
-    },
-    {
-      "type": "setElementText",
-      "locator": {
-        "type": "id",
-        "value": "jform_params_mod_simpleemailform_emailTo"
-      },
-      "text": "admin@localhost"
+      "waitTime": "5000"
     },
     {
       "type": "clickElement",
@@ -261,6 +258,25 @@
         "type": "xpath",
         "value": "//div[@id='jform_position_chzn']//li[.='position-2']"
       }
+    },
+    {
+      "type": "setElementText",
+      "locator": {
+        "type": "xpath",
+        "value": "//*[@id='jform_params_mod_simpleemailform_emailTo']"
+      },
+      "text": "admin@localhost"
+    },
+    {
+      "type": "clickElement",
+      "locator": {
+        "type": "xpath",
+        "value": "//div[@id='toolbar-apply']//button[normalize-space(.)='Save']"
+      }
+    },
+    {
+      "type": "pause",
+      "waitTime": "5000"
     },
     {
       "type": "clickElement",
@@ -285,14 +301,7 @@
     },
     {
       "type": "pause",
-      "waitTime": "10"
-    },
-    {
-      "type": "clickElement",
-      "locator": {
-        "type": "xpath",
-        "value": "//form[@id='module-form']/input"
-      }
+      "waitTime": "5000"
     },
     {
       "type": "clickElement",
@@ -300,6 +309,10 @@
         "type": "link text",
         "value": "Menu Assignment"
       }
+    },
+    {
+      "type": "pause",
+      "waitTime": "5000"
     },
     {
       "type": "clickElement",
@@ -311,8 +324,8 @@
     {
       "type": "clickElement",
       "locator": {
-        "type": "css selector",
-        "value": "li.active-result.result-selected"
+        "type": "xpath",
+        "value": "//div[@id='jform_assignment_chzn']//li[.='On all pages']"
       }
     },
     {
@@ -323,15 +336,8 @@
       }
     },
     {
-      "type": "clickElement",
-      "locator": {
-        "type": "xpath",
-        "value": "//form[@id='module-form']/input"
-      }
-    },
-    {
       "type": "pause",
-      "waitTime": "10"
+      "waitTime": "5000"
     },
     {
       "type": "get",
@@ -339,7 +345,7 @@
     },
     {
       "type": "pause",
-      "waitTime": "10"
+      "waitTime": "5000"
     },
     {
       "type": "clickElement",
