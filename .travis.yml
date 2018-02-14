@@ -10,8 +10,8 @@ language: php
 
 cache:
   directories:
-      - $HOME/.composer/cache
-      - vendor
+    - $HOME/.composer/cache
+    - vendor
 
 services:
   - mysql
@@ -29,30 +29,31 @@ branches:
 matrix:
   fast_finish: true
   include:
-      - php: 5.5
-        env:
-          - COMPOSER_PROCESS_TIMEOUT=1200
-          - TEST_CHECK=true
-          - CS_CHECK=true
-          - CC_CHECK=false
-      - php: 5.6
-        env:
-          - COMPOSER_PROCESS_TIMEOUT=1200
-          - TEST_CHECK_COVER=true
-          - CS_CHECK=true
-          - CC_CHECK=false
-      - php: 7
-        env:
-          - TEST_CHECK=false
-          - CS_CHECK=true
-          - CC_CHECK=false
+    - php: 5.5
+      env:
+        - COMPOSER_PROCESS_TIMEOUT=1200
+        - TEST_CHECK=true
+        - CS_CHECK=true
+        - CC_CHECK=false
+    - php: 5.6
+      env:
+        - COMPOSER_PROCESS_TIMEOUT=1200
+        - TEST_CHECK_COVER=true
+        - CS_CHECK=true
+        - CC_CHECK=false
+    - php: 7
+      env:
+        - TEST_CHECK=false
+        - CS_CHECK=true
+        - CC_CHECK=false
+    - php: hhvm
+      env:
+        - TEST_CHECK=false
+        - CS_CHECK=true
+        - CC_CHECK=false
   allow_failures:
-      - php: hhvm
-        env:
-          - TEST_CHECK=false
-          - CS_CHECK=true
-          - CC_CHECK=false
-        
+    - php: hhvm
+
 before_install:
   - travis_retry composer self-update
   - if [[ $TEST_CHECK_54 == 'true' ]]; then rm $TRAVIS_BUILD_DIR/composer.json && mv $TRAVIS_BUILD_DIR/composer.php54.json $TRAVIS_BUILD_DIR/composer.json ; fi
