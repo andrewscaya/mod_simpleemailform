@@ -423,7 +423,11 @@
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
 				</field>
-				<field name="mod_simpleemailform_renderingOverride"  	type="radio"	      default="N" 		label="Override rendering" description="Select 'Y' if you want to manually override the module's rendering of its output and create your own template in the tmpl/default.php file." >
+				<field name="mod_simpleemailform_renderingOverride"  	type="radio"	      default="N" 		label="Override rendering" description="Select 'Y' if you want to manually override the module's rendering of its output and create your own template in the tmpl/default_custom.php file." >
+					<option value="Y">JYES</option>
+					<option value="N">JNO</option>
+				</field>
+				<field name="mod_simpleemailform_stringOverride"  	type="radio"	      default="N" 		label="Override strings (JForm only)" description="Select 'Y' if you want to use Joomla's language override to modify the module's strings manually." >
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
 				</field>
