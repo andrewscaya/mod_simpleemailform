@@ -40,9 +40,6 @@
         "codeclimate/php-test-reporter": "0.2.0",
         "satooshi/php-coveralls": "~0.6",
         "squizlabs/php_codesniffer": "^2.3",
-        "se/selenium-server-standalone": "^2.53",
-        "codeception/codeception": "^2.2",
-        "joomla-projects/joomla-browser": "v3.6.5.1",
         "phpdocumentor/phpdocumentor": "2.9.0",
         "pds/skeleton": "~1.0"
     },
@@ -57,7 +54,6 @@
             "./tests/unit"
         ],
         "exclude-from-classmap": [
-            "./vendor/codeception",
             "./vendor/joomla-projects",
             "./vendor/consolidation"
         ]
@@ -65,15 +61,13 @@
     "scripts": {
         "check": [
             "@cs",
-            "@test",
-            "@cc"
+            "@test"
         ],
         "cs": "phpcs",
         "cs-fix": "phpcbf",
         "test": "phpunit",
         "test-cover": "phpunit --coverage-clover build/logs/clover.xml",
         "test-report": "test-reporter --coverage-report build/logs/clover.xml",
-        "cc": "codecept run acceptance",
         "apidocs": "phpdoc --template=responsive-twig"
     }
 }

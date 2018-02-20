@@ -974,7 +974,9 @@ class sefv2modsimpleemailform implements
 
                 // If not redirected, send a success message to the view.
                 $this->msg .=
-                    "<p style=\"color:{$this->successColour}\">{$this->transLang['MOD_SIMPLEEMAILFORM_form_success']}</p>";
+                    "<p style=\"color:{$this->successColour}\">" .
+                    "{$this->transLang['MOD_SIMPLEEMAILFORM_form_success']}" .
+                    "</p>";
             }
 
             ob_end_clean();
@@ -1685,12 +1687,19 @@ class sefv2modsimpleemailform implements
      *
      * @since 2.0.0
      */
-    protected function processFormData(array $formDataRaw, array $files, array $paramsArray, sefv2simpleemailformemailmsg $emailMsg)
-    {
+    protected function processFormData(
+        array $formDataRaw,
+        array $files,
+        array $paramsArray,
+        sefv2simpleemailformemailmsg $emailMsg
+    ) {
+
         // Check for CSRF token match.
         if (!($this->jSession->checkToken())) {
             $this->msg .=
-                "<p style=\"color:{$this->errorColour}\">\"Invalid Token\" - {$this->transLang['MOD_SIMPLEEMAILFORM_form_unable']}</p>";
+                "<p style=\"color:{$this->errorColour}\">" .
+                "\"Invalid Token\" - {$this->transLang['MOD_SIMPLEEMAILFORM_form_unable']}" .
+                "</p>";
 
             return false;
         }
@@ -1711,7 +1720,9 @@ class sefv2modsimpleemailform implements
                 }
 
                 $this->msg .=
-                    "<p style=\"color:{$this->errorColour}\">\"$errorMsg\" - {$this->transLang['MOD_SIMPLEEMAILFORM_form_unable']}</p>";
+                    "<p style=\"color:{$this->errorColour}\">" .
+                    "\"$errorMsg\" - {$this->transLang['MOD_SIMPLEEMAILFORM_form_unable']}" .
+                    "</p>";
             }
 
             return false;
@@ -1759,7 +1770,8 @@ class sefv2modsimpleemailform implements
                     $files[$this->uploadName[$i]]['tmp_name'],
                     $this->jFile
                 );
-            } elseif (!empty($files[$this->uploadName[$i]]['tmp_name']) && $files[$this->uploadName[$i]]['error'] !== 0) {
+            } elseif (!empty($files[$this->uploadName[$i]]['tmp_name'])
+                && $files[$this->uploadName[$i]]['error'] !== 0) {
                 $uploadFileResult = false;
             } else {
                 if ($paramsArray[$this->formPrefixName . $this->fieldUploadRequiredName] === 'Y') {
@@ -1772,7 +1784,9 @@ class sefv2modsimpleemailform implements
 
             if (!$uploadFileResult) {
                 $this->msg =
-                    "<p style=\"color:{$this->errorColour}\">{$this->transLang['MOD_SIMPLEEMAILFORM_upload_error']}</p>";
+                    "<p style=\"color:{$this->errorColour}\">" .
+                    "{$this->transLang['MOD_SIMPLEEMAILFORM_upload_error']}" .
+                    "</p>";
                 return false;
             }
         }
@@ -1915,8 +1929,13 @@ class sefv2modsimpleemailform implements
      *
      * @since 2.0.0
      */
-    protected function setDefaultValuesOfActiveElements(array $formActiveElements, $formActiveElementsCount, array $paramsArray, \Jform $jForm)
-    {
+    protected function setDefaultValuesOfActiveElements(
+        array $formActiveElements,
+        $formActiveElementsCount,
+        array $paramsArray,
+        \Jform $jForm
+    ) {
+
         $formActiveElementsCount = (int) $formActiveElementsCount;
 
         for ($i = 1; $i <= $formActiveElementsCount; $i++) {
@@ -1948,8 +1967,13 @@ class sefv2modsimpleemailform implements
      *
      * @since 2.0.0
      */
-    protected function sendFormData(array $formDataClean, array $paramsArray, sefv2simpleemailformemailmsg $emailMsg, \JMail $jMail)
-    {
+    protected function sendFormData(
+        array $formDataClean,
+        array $paramsArray,
+        sefv2simpleemailformemailmsg $emailMsg,
+        \JMail $jMail
+    ) {
+
         //Configure the email message's general options.
         $emailMsg->to = trim($paramsArray[$this->formPrefixName . $this->emailToName]);
         $emailMsg->to = (preg_match('/[\s,]+/', $emailMsg->to))
@@ -2072,7 +2096,8 @@ class sefv2modsimpleemailform implements
             }
 
             // Check the copyMe option from the submitted form.
-            $emailMsg->copyMe = (isset($formDataClean[$this->formPrefixName . $this->fieldCopymeName . '_' . $this->formInstance]))
+            $emailMsg->copyMe =
+                (isset($formDataClean[$this->formPrefixName . $this->fieldCopymeName . '_' . $this->formInstance]))
                 ? true
                 : false;
 
@@ -2198,16 +2223,22 @@ class sefv2modsimpleemailform implements
                 // Add the file's attachment
                 $this->emailMsg->attachment[] = $dest;
                 $this->msg .=
-                    "<p style=\"color:{$this->successColour}\">{$this->transLang['MOD_SIMPLEEMAILFORM_upload_success']}</p>";
+                    "<p style=\"color:{$this->successColour}\">" .
+                    "{$this->transLang['MOD_SIMPLEEMAILFORM_upload_success']}" .
+                    "</p>";
                 return true;
             } else {
                 $this->msg .=
-                    "<p style=\"color:{$this->errorColour}\">{$this->transLang['MOD_SIMPLEEMAILFORM_upload_failure']}</p>";
+                    "<p style=\"color:{$this->errorColour}\">" .
+                    "{$this->transLang['MOD_SIMPLEEMAILFORM_upload_failure']}" .
+                    "</p>";
                 return false;
             }
         } else {
             $this->msg .=
-                "<p style=\"color:{$this->errorColour}\">{$this->transLang['MOD_SIMPLEEMAILFORM_disallowed_filename']}</p>";
+                "<p style=\"color:{$this->errorColour}\">" .
+                "{$this->transLang['MOD_SIMPLEEMAILFORM_disallowed_filename']}" .
+                "</p>";
             return false;
         }
     }
