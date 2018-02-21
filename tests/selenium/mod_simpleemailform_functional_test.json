@@ -98,10 +98,6 @@
       }
     },
     {
-      "type": "pause",
-      "waitTime": "30000"
-    },
-    {
       "type": "waitForElementPresent",
       "locator": {
         "type": "name",
