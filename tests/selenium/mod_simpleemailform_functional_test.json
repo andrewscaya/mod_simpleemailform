@@ -99,7 +99,14 @@
     },
     {
       "type": "pause",
-      "waitTime": "20000"
+      "waitTime": "30000"
+    },
+    {
+      "type": "waitForElementPresent",
+      "locator": {
+        "type": "name",
+        "value": "instDefault"
+      }
     },
     {
       "type": "clickElement",
