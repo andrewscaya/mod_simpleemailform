@@ -431,7 +431,7 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertSame(
             'Successfully uploaded',
-            $transLang['MOD_SIMPLEEMAILFORM_upload_success']
+            $transLang['MOD_SIMPLEEMAILFORM_UPLOAD_SUCCESS']
         );
         $this->assertEquals(
             8,

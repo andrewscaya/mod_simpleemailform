@@ -430,7 +430,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertSame(
             'Successfully uploaded',
-            $transLang['MOD_SIMPLEEMAILFORM_upload_success']
+            $transLang['MOD_SIMPLEEMAILFORM_UPLOAD_SUCCESS']
         );
         $this->assertEquals(
             2,
@@ -888,7 +888,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(
             'Transfert du fichier réussi.',
-            $transLang['MOD_SIMPLEEMAILFORM_upload_success']
+            $transLang['MOD_SIMPLEEMAILFORM_UPLOAD_SUCCESS']
         );
     }
 
@@ -1183,7 +1183,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(
             'Successfully uploaded',
-            $transLang['MOD_SIMPLEEMAILFORM_upload_success']
+            $transLang['MOD_SIMPLEEMAILFORM_UPLOAD_SUCCESS']
         );
     }
 
