@@ -2895,6 +2895,101 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests sefv2modsimpleemailform::render()
+     *
+     * @since 2.2.0
+     */
+    public function testStringOverrideIsRenderingCorrectly()
+    {
+        // Test the form anchor.
+        list(
+            $formDataRaw,
+            $formCleanData,
+            $emailMsg,
+            $paramsArray,
+            $formPrefixName,
+            $jSessionMock,
+            $jFormMock,
+            $jDocumentMock,
+            $jMailMock
+            ) = $this->setUpProcessFormDataTests();
+
+        $jHtmlMock = Mockery::mock('alias:JHtml');
+        $jHtmlMock
+            ->shouldReceive('_')
+            ->once()
+            ->with('form.token')
+            ->andReturn('qwerty');
+
+        $jTextMock = Mockery::mock('alias:JText');
+        $jTextMock
+            ->shouldReceive('_')
+            ->once()
+            ->with('MOD_SIMPLEEMAILFORM_BUTTON_SUBMIT')
+            ->andReturn('HAHA');
+
+        $jTextMock
+            ->shouldReceive('_')
+            ->once()
+            ->with('MOD_SIMPLEEMAILFORM_CLICK_SUBMIT')
+            ->andReturn('Click Here to Submit the Form');
+
+        $jTextMock
+            ->shouldReceive('_')
+            ->once()
+            ->with('MOD_SIMPLEEMAILFORM_BUTTON_RESET')
+            ->andReturn('Reset');
+
+        $jFormMock = $this->jFormMock;
+        $jFormMock
+            ->shouldReceive('getFieldset')
+            ->once()
+            ->with('main')
+            ->andReturn(array());
+
+        $this->params->set('mod_simpleemailform_stringOverride', 'Y');
+
+        $this->sefv2modsimpleemailformMethods['__construct']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array(
+                $this->jFormMock,
+                $this->jMailMock,
+                $this->emailMsgFake,
+                $this->jDocumentMock,
+                $this->jLanguageMock,
+                $this->params,
+                $this->jInputMock,
+                $this->jTableExtensionMock,
+                $this->jTableModuleMock,
+                $this->stdClassModuleHelperResultFake,
+                $this->jSessionMock,
+                $this->jFileMock
+            )
+        );
+
+        $output = $this->sefv2modsimpleemailform->render();
+
+        $this->assertEquals(
+            1,
+            preg_match(
+                '/<input.+name="mod_simpleemailform_submit_1".+' .
+                'value="HAHA".+' .
+                'title="Click Here to Submit the Form"/is',
+                $output
+            )
+        );
+
+        $this->assertEquals(
+            1,
+            preg_match(
+                '/<input.+name="mod_simpleemailform_reset_1".+' .
+                'value="Reset"/is',
+                $output
+            )
+        );
+    }
+
+    /**
      * Tests sefv2modsimpleemailform::reset($xml = false).
      *
      * @since 2.0.0
