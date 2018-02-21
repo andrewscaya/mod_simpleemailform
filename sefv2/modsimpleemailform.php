@@ -1825,7 +1825,7 @@ class sefv2modsimpleemailform implements
             }
 
             if (!$uploadFileResult) {
-                $this->msg .= $this->paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
+                $this->msg = $this->paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
                     "<p style=\"color:{$this->errorColour}\">" .
                     "{$this->getTransLang('MOD_SIMPLEEMAILFORM_UPLOAD_ERROR')}" .
                     "</p>" :
@@ -2190,9 +2190,9 @@ class sefv2modsimpleemailform implements
 
             $this->msg .= $this->paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
                 '<p style="color:' . $this->errorColour . '">'
-                . $this->getTransLang('MOD_SIMPLEEMAILFORM_EMAIL_INVALID') . ' : Mail Server</p>' :
+                . $this->getTransLang('MOD_SIMPLEEMAILFORM_EMAIL_INVALID') . '</p>' :
                 '<p style="color:' . $this->errorColour . '">'
-                . JText::_('MOD_SIMPLEEMAILFORM_EMAIL_INVALID') . ' : Mail Server</p>';
+                . JText::_('MOD_SIMPLEEMAILFORM_EMAIL_INVALID') . '</p>';
             /*if ($this->paramsArray[$this->formPrefixName . $this->formTestModeName] == 'Y') {
                 $this->msg .= '<p style="color:' . $this->errorColour . '">' . $e->getMessage() . "</p>\n";
                 $this->msg .= '<p style="color:' . $this->errorColour . '">' . $e->getTraceAsString() . "</p>\n";

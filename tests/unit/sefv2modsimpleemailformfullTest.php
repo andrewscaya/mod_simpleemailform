@@ -1891,7 +1891,7 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(
             '<p style="color:red">Error : Mail Server</p>'
             . '<p style="color:red">SORRY: This email address is invalid!'
-            . '  Please re-enter your email address.',
+            . '  Please re-enter your email address.</p>',
             $msg
         );
     }
