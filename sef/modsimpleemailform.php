@@ -231,13 +231,15 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
         // Load language files
         // i.e. tr-TR.mod_simpleemailform.ini
         $this->_lang = $params->get('mod_simpleemailform_defaultLang');
-        $langFile = MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'language_files'
-                  . DIRECTORY_SEPARATOR . $this->_lang . '.mod_simpleemailform.ini';
+        $langFile = MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'language'
+            . DIRECTORY_SEPARATOR . $this->_lang
+            . DIRECTORY_SEPARATOR . $this->_lang . '.mod_simpleemailform.ini';
         if (file_exists($langFile)) {
             $this->_transLang = parse_ini_file($langFile);
         } else {
-            $langFile = MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'language_files'
-                      . DIRECTORY_SEPARATOR . 'en-GB.mod_simpleemailform.ini';
+            $langFile = MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'language'
+                . DIRECTORY_SEPARATOR . $this->_lang
+                . DIRECTORY_SEPARATOR . 'en-GB.mod_simpleemailform.ini';
             $this->_transLang = parse_ini_file($langFile);
         }
 
