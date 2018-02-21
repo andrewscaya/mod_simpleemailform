@@ -67,10 +67,10 @@ before_script:
   - if [[ $CC_CHECK == 'true' ]]; then npm install -g se-interpreter ; fi
 
 script:
+  - if [[ $CC_CHECK == 'true' ]]; then se-interpreter tests/selenium/se-interpreter_config.json ; fi
   - if [[ $TEST_CHECK == 'true' || $TEST_CHECK_54 == 'true' ]]; then composer test ; fi
   - if [[ $TEST_CHECK_COVER == 'true' ]]; then composer test-cover ; fi
   - if [[ $CS_CHECK == 'true' ]]; then composer cs ; fi
-  - if [[ $CC_CHECK == 'true' ]]; then se-interpreter tests/selenium/se-interpreter_config.json ; fi
 
 after_success:
   - if [[ $TEST_CHECK_COVER == 'true' ]]; then composer test-report ; fi
