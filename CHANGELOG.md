@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2.2.0 (2018-02-23)
+
+- Fixes issue #16 - Language overrides do not work in SEF 1.8.9 and Joomla 3.6.5.
+- Fixes all functional tests by having them run on the Sauce Labs Selenium Server.
+
 ## 2.1.0 (2017-12-22)
 
 - Fixes issue #15 - Allow users to configure an automated reply email to those submitting the form.

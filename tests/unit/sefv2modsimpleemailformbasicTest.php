@@ -4,7 +4,7 @@
  * sefv2modsimpleemailformbasicTest.php
  *
  * Copyright 2010 - 2018 D. Bierer <doug@unlikelysource.com>
- * Version 2.1.0
+ * Version 2.2.0
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -430,7 +430,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertSame(
             'Successfully uploaded',
-            $transLang['MOD_SIMPLEEMAILFORM_upload_success']
+            $transLang['MOD_SIMPLEEMAILFORM_UPLOAD_SUCCESS']
         );
         $this->assertEquals(
             2,
@@ -888,7 +888,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(
             'Transfert du fichier réussi.',
-            $transLang['MOD_SIMPLEEMAILFORM_upload_success']
+            $transLang['MOD_SIMPLEEMAILFORM_UPLOAD_SUCCESS']
         );
     }
 
@@ -1183,7 +1183,7 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame(
             'Successfully uploaded',
-            $transLang['MOD_SIMPLEEMAILFORM_upload_success']
+            $transLang['MOD_SIMPLEEMAILFORM_UPLOAD_SUCCESS']
         );
     }
 
@@ -2891,6 +2891,101 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             1,
             preg_match('/<a.+name="".+<form.+action="#"/is', $output)
+        );
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::render()
+     *
+     * @since 2.2.0
+     */
+    public function testStringOverrideIsRenderingCorrectly()
+    {
+        // Test the form anchor.
+        list(
+            $formDataRaw,
+            $formCleanData,
+            $emailMsg,
+            $paramsArray,
+            $formPrefixName,
+            $jSessionMock,
+            $jFormMock,
+            $jDocumentMock,
+            $jMailMock
+            ) = $this->setUpProcessFormDataTests();
+
+        $jHtmlMock = Mockery::mock('alias:JHtml');
+        $jHtmlMock
+            ->shouldReceive('_')
+            ->once()
+            ->with('form.token')
+            ->andReturn('qwerty');
+
+        $jTextMock = Mockery::mock('alias:JText');
+        $jTextMock
+            ->shouldReceive('_')
+            ->once()
+            ->with('MOD_SIMPLEEMAILFORM_BUTTON_SUBMIT')
+            ->andReturn('HAHA');
+
+        $jTextMock
+            ->shouldReceive('_')
+            ->once()
+            ->with('MOD_SIMPLEEMAILFORM_CLICK_SUBMIT')
+            ->andReturn('Click Here to Submit the Form');
+
+        $jTextMock
+            ->shouldReceive('_')
+            ->once()
+            ->with('MOD_SIMPLEEMAILFORM_BUTTON_RESET')
+            ->andReturn('Reset');
+
+        $jFormMock = $this->jFormMock;
+        $jFormMock
+            ->shouldReceive('getFieldset')
+            ->once()
+            ->with('main')
+            ->andReturn(array());
+
+        $this->params->set('mod_simpleemailform_stringOverride', 'Y');
+
+        $this->sefv2modsimpleemailformMethods['__construct']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array(
+                $this->jFormMock,
+                $this->jMailMock,
+                $this->emailMsgFake,
+                $this->jDocumentMock,
+                $this->jLanguageMock,
+                $this->params,
+                $this->jInputMock,
+                $this->jTableExtensionMock,
+                $this->jTableModuleMock,
+                $this->stdClassModuleHelperResultFake,
+                $this->jSessionMock,
+                $this->jFileMock
+            )
+        );
+
+        $output = $this->sefv2modsimpleemailform->render();
+
+        $this->assertEquals(
+            1,
+            preg_match(
+                '/<input.+name="mod_simpleemailform_submit_1".+' .
+                'value="HAHA".+' .
+                'title="Click Here to Submit the Form"/is',
+                $output
+            )
+        );
+
+        $this->assertEquals(
+            1,
+            preg_match(
+                '/<input.+name="mod_simpleemailform_reset_1".+' .
+                'value="Reset"/is',
+                $output
+            )
         );
     }
 

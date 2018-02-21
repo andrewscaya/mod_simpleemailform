@@ -4,7 +4,7 @@
  * sefv2modsimpleemailformfullTest.php
  *
  * Copyright 2010 - 2018 D. Bierer <doug@unlikelysource.com>
- * Version 2.1.0
+ * Version 2.2.0
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -431,7 +431,7 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertSame(
             'Successfully uploaded',
-            $transLang['MOD_SIMPLEEMAILFORM_upload_success']
+            $transLang['MOD_SIMPLEEMAILFORM_UPLOAD_SUCCESS']
         );
         $this->assertEquals(
             8,
@@ -1891,7 +1891,7 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(
             '<p style="color:red">Error : Mail Server</p>'
             . '<p style="color:red">SORRY: This email address is invalid!'
-            . '  Please re-enter your email address.',
+            . '  Please re-enter your email address.</p>',
             $msg
         );
     }

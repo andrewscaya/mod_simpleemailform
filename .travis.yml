@@ -34,18 +34,18 @@ matrix:
         - COMPOSER_PROCESS_TIMEOUT=1200
         - TEST_CHECK=true
         - CS_CHECK=true
-        - CC_CHECK=false
+        - CC_CHECK=true
     - php: 5.6
       env:
         - COMPOSER_PROCESS_TIMEOUT=1200
         - TEST_CHECK_COVER=true
         - CS_CHECK=true
-        - CC_CHECK=false
+        - CC_CHECK=true
     - php: 7
       env:
         - TEST_CHECK=false
         - CS_CHECK=true
-        - CC_CHECK=false
+        - CC_CHECK=true
     - php: hhvm
       env:
         - TEST_CHECK=false
