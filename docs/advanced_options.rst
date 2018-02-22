@@ -224,7 +224,8 @@ The label for the upload fields.
 Allowed Attachment Filenames
 ----------------------------
 
-List of approved filename extensions, separated by commas.
+List of approved filename extensions, separated by commas. For security reasons, Joomla will prevent
+any user from sending executable content, for instance a .php file.
 
 .. index:: Are upload fields required
 
