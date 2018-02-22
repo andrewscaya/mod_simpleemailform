@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Advanced configuration options &#8212; Simple Email Form 2.0 documentation</title>
+    <title>Advanced configuration options &#8212; Simple Email Form 2.2.0 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.0',
+        VERSION:     '2.2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -25,7 +25,9 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Configuration Example" href="demo_config.html" />
+    <link rel="prev" title="Basic configuration options" href="basic_options.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -34,7 +36,13 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="index.html">Simple Email Form 2.0 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="demo_config.html" title="Configuration Example"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="basic_options.html" title="Basic configuration options"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Simple Email Form 2.2.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -233,24 +241,32 @@ and name it <strong>default_custom.php</strong>.</p>
 <p>You can also give your custom file another name, but you will have to insert your chosen name on line 7 of the
 <strong>default.php</strong> template file.</p>
 </div>
+<div class="section" id="override-strings">
+<span id="index-36"></span><span id="id2"></span><h2>Override strings<a class="headerlink" href="#override-strings" title="Permalink to this headline">¶</a></h2>
+<p>Set this option to <strong>Yes</strong> if you want to use Joomla&#8217;s
+<a class="reference external" href="https://docs.joomla.org/J3.x:Language_Overrides_in_Joomla">language overrides feature</a>.
+Searching for constants with &#8220;MOD_SIMPLEEMAILFORM&#8221; will give you a list of all the strings that can be overriden in this
+module.</p>
+<p>Thanks to this feature, you won&#8217;t lose your changes the next time you update Simple Email Form.</p>
+</div>
 <div class="section" id="module-tag">
-<span id="index-36"></span><h2>Module Tag<a class="headerlink" href="#module-tag" title="Permalink to this headline">¶</a></h2>
+<span id="index-37"></span><h2>Module Tag<a class="headerlink" href="#module-tag" title="Permalink to this headline">¶</a></h2>
 <p>The html tag used for the module. This option is provided by <a class="reference external" href="https://docs.joomla.org/Help36:Extensions_Module_Manager_Tags_Popular#Advanced">Joomla</a>.</p>
 </div>
 <div class="section" id="bootstrap-size">
-<span id="index-37"></span><h2>Bootstrap Size<a class="headerlink" href="#bootstrap-size" title="Permalink to this headline">¶</a></h2>
+<span id="index-38"></span><h2>Bootstrap Size<a class="headerlink" href="#bootstrap-size" title="Permalink to this headline">¶</a></h2>
 <p>The number of columns used in the module. This option is provided by <a class="reference external" href="https://docs.joomla.org/Help36:Extensions_Module_Manager_Tags_Popular#Advanced">Joomla</a>.</p>
 </div>
 <div class="section" id="header-tag">
-<span id="index-38"></span><h2>Header Tag<a class="headerlink" href="#header-tag" title="Permalink to this headline">¶</a></h2>
+<span id="index-39"></span><h2>Header Tag<a class="headerlink" href="#header-tag" title="Permalink to this headline">¶</a></h2>
 <p>The HTML tag used for module headers and titles. This option is provided by <a class="reference external" href="https://docs.joomla.org/Help36:Extensions_Module_Manager_Tags_Popular#Advanced">Joomla</a>.</p>
 </div>
 <div class="section" id="header-class">
-<span id="index-39"></span><h2>Header Class<a class="headerlink" href="#header-class" title="Permalink to this headline">¶</a></h2>
+<span id="index-40"></span><h2>Header Class<a class="headerlink" href="#header-class" title="Permalink to this headline">¶</a></h2>
 <p>The CSS class used for module headers and titles. This option is provided by <a class="reference external" href="https://docs.joomla.org/Help36:Extensions_Module_Manager_Tags_Popular#Advanced">Joomla</a>.</p>
 </div>
 <div class="section" id="module-style">
-<span id="index-40"></span><h2>Module Style<a class="headerlink" href="#module-style" title="Permalink to this headline">¶</a></h2>
+<span id="index-41"></span><h2>Module Style<a class="headerlink" href="#module-style" title="Permalink to this headline">¶</a></h2>
 <p>The option used to override the template style. It is provided by <a class="reference external" href="https://docs.joomla.org/Help36:Extensions_Module_Manager_Tags_Popular#Advanced">Joomla</a>.</p>
 </div>
 </div>
@@ -300,6 +316,7 @@ and name it <strong>default_custom.php</strong>.</p>
 <li><a class="reference internal" href="#include-article-title">Include Article Title</a></li>
 <li><a class="reference internal" href="#test-mode">Test Mode</a></li>
 <li><a class="reference internal" href="#override-rendering">Override rendering</a></li>
+<li><a class="reference internal" href="#override-strings">Override strings</a></li>
 <li><a class="reference internal" href="#module-tag">Module Tag</a></li>
 <li><a class="reference internal" href="#bootstrap-size">Bootstrap Size</a></li>
 <li><a class="reference internal" href="#header-tag">Header Tag</a></li>
@@ -309,6 +326,12 @@ and name it <strong>default_custom.php</strong>.</p>
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="basic_options.html"
+                        title="previous chapter">Basic configuration options</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="demo_config.html"
+                        title="next chapter">Configuration Example</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -336,11 +359,17 @@ and name it <strong>default_custom.php</strong>.</p>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
-        <li class="nav-item nav-item-0"><a href="index.html">Simple Email Form 2.0 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="demo_config.html" title="Configuration Example"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="basic_options.html" title="Basic configuration options"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Simple Email Form 2.2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2017, Doug Bierer, Andrew Caya and Martin Beaudry.
+        &#169; Copyright 2018, Doug Bierer, Andrew Caya and Martin Beaudry.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
     </div>
   </body>
