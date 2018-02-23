@@ -1,6 +1,18 @@
 <?php // no direct access
 defined('_JEXEC') or die('Restricted access');
 
+$submitValue = $this->paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
+            $this->getTransLang('MOD_SIMPLEEMAILFORM_BUTTON_SUBMIT') :
+            JText::_('MOD_SIMPLEEMAILFORM_BUTTON_SUBMIT');
+
+$submitTitle = $this->paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
+            $this->getTransLang('MOD_SIMPLEEMAILFORM_CLICK_SUBMIT') :
+            JText::_('MOD_SIMPLEEMAILFORM_CLICK_SUBMIT');
+
+$resetValue = $this->paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
+            $this->getTransLang('MOD_SIMPLEEMAILFORM_BUTTON_RESET') :
+            JText::_('MOD_SIMPLEEMAILFORM_BUTTON_RESET');
+
 $output .=
     '<a name="'
     . substr($form->getFormAnchor(), 1)
@@ -18,14 +30,14 @@ $fieldSets = $form->getFieldset('main');
 $submitandReset = "<br /><input
         name=\"{$form->getFormSubmitButtonName()}_{$form->getFormInstance()}\"
         id=\"{$form->getFormSubmitButtonName()}_{$form->getFormInstance()}\"
-        value=\"{$form->getTransLang('MOD_SIMPLEEMAILFORM_BUTTON_SUBMIT')}\"
-        title=\"{$form->getTransLang('MOD_SIMPLEEMAILFORM_CLICK_SUBMIT')}\"
+        value=\"$submitValue\"
+        title=\"$submitTitle\"
         type=\"submit\">\n";
 
 $submitandReset .= "<br /><input
         name=\"{$form->getFormResetButtonName()}_{$form->getFormInstance()}\"
         id=\"{$form->getFormResetButtonName()}_{$form->getFormInstance()}\"
-        value=\"{$form->getTransLang('MOD_SIMPLEEMAILFORM_BUTTON_RESET')}\"
+        value=\"$resetValue\"
         title=\"\"
         type=\"submit\">\n";
 

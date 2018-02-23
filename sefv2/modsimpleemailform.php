@@ -999,7 +999,7 @@ class sefv2modsimpleemailform implements
                     "{$this->getTransLang('MOD_SIMPLEEMAILFORM_FORM_SUCCESS')}" .
                     "</p>" :
                         "<p style=\"color:{$this->successColour}\">" .
-                        "{JText::_('MOD_SIMPLEEMAILFORM_FORM_SUCCESS')}" .
+                        JText::_('MOD_SIMPLEEMAILFORM_FORM_SUCCESS') .
                         "</p>";
             }
 
@@ -1732,12 +1732,12 @@ class sefv2modsimpleemailform implements
 
         // Check for CSRF token match.
         if (!($this->jSession->checkToken())) {
-            $this->msg .= $this->paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
+            $this->msg .= $paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
                 "<p style=\"color:{$this->errorColour}\">" .
                 "\"Invalid Token\" - {$this->getTransLang('MOD_SIMPLEEMAILFORM_FORM_UNABLE')}" .
                 "</p>" :
                 "<p style=\"color:{$this->errorColour}\">" .
-                "\"Invalid Token\" - {JText::_('MOD_SIMPLEEMAILFORM_FORM_UNABLE')}" .
+                "\"Invalid Token\" - " . JText::_('MOD_SIMPLEEMAILFORM_FORM_UNABLE') .
                 "</p>";
 
             return false;
@@ -1758,12 +1758,12 @@ class sefv2modsimpleemailform implements
                     $errorMsg = trim($errorMsg);
                 }
 
-                $this->msg .= $this->paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
+                $this->msg .= $paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
                     "<p style=\"color:{$this->errorColour}\">" .
                     "\"$errorMsg\" - {$this->getTransLang('MOD_SIMPLEEMAILFORM_FORM_UNABLE')}" .
                     "</p>" :
                     "<p style=\"color:{$this->errorColour}\">" .
-                    "\"$errorMsg\" - {JText::_('MOD_SIMPLEEMAILFORM_FORM_UNABLE')}" .
+                    "\"$errorMsg\" - " . JText::_('MOD_SIMPLEEMAILFORM_FORM_UNABLE') .
                     "</p>";
             }
 
@@ -1810,7 +1810,8 @@ class sefv2modsimpleemailform implements
                 $uploadFileResult = $this->uploadFile(
                     $files[$this->uploadName[$i]]['name'],
                     $files[$this->uploadName[$i]]['tmp_name'],
-                    $this->jFile
+                    $this->jFile,
+                    $paramsArray
                 );
             } elseif (!empty($files[$this->uploadName[$i]]['tmp_name'])
                 && $files[$this->uploadName[$i]]['error'] !== 0) {
@@ -1825,12 +1826,12 @@ class sefv2modsimpleemailform implements
             }
 
             if (!$uploadFileResult) {
-                $this->msg = $this->paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
+                $this->msg = $paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
                     "<p style=\"color:{$this->errorColour}\">" .
                     "{$this->getTransLang('MOD_SIMPLEEMAILFORM_UPLOAD_ERROR')}" .
                     "</p>" :
                     "<p style=\"color:{$this->errorColour}\">" .
-                    "{JText::_('MOD_SIMPLEEMAILFORM_UPLOAD_ERROR')}" .
+                    JText::_('MOD_SIMPLEEMAILFORM_UPLOAD_ERROR') .
                     "</p>";
 
                 return false;
@@ -2182,13 +2183,13 @@ class sefv2modsimpleemailform implements
                 }
             }
         } catch (Exception $e) {
-            $this->msg .= $this->paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
+            $this->msg .= $paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
                 '<p style="color:' . $this->errorColour . '">'
                 . $this->getTransLang('MOD_SIMPLEEMAILFORM_ERROR') . ' : Mail Server</p>' :
                 '<p style="color:' . $this->errorColour . '">'
                 . JText::_('MOD_SIMPLEEMAILFORM_ERROR') . ' : Mail Server</p>';
 
-            $this->msg .= $this->paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
+            $this->msg .= $paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
                 '<p style="color:' . $this->errorColour . '">'
                 . $this->getTransLang('MOD_SIMPLEEMAILFORM_EMAIL_INVALID') . '</p>' :
                 '<p style="color:' . $this->errorColour . '">'
@@ -2258,12 +2259,13 @@ class sefv2modsimpleemailform implements
      * @param string fileName
      * @param string $fileTmpName
      * @param JFile $jFile
+     * @param array $paramsArray
      *
      * @return bool
      *
-     * @since 2.0.0
+     * @since 2.2.0
      */
-    protected function uploadFile($fileName, $fileTmpName, \JFile $jFile)
+    protected function uploadFile($fileName, $fileTmpName, \JFile $jFile, $paramsArray)
     {
         $fileName = (string) $fileName;
         $fileTmpName = (string) $fileTmpName;
@@ -2289,33 +2291,33 @@ class sefv2modsimpleemailform implements
                 // Add the file's attachment
                 $this->emailMsg->attachment[] = $dest;
 
-                $this->msg .= $this->paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
+                $this->msg .= $paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
                     "<p style=\"color:{$this->successColour}\">" .
                     "{$this->getTransLang('MOD_SIMPLEEMAILFORM_UPLOAD_SUCCESS')}" .
                     "</p>" :
                     "<p style=\"color:{$this->successColour}\">" .
-                    "{JText::_('MOD_SIMPLEEMAILFORM_UPLOAD_SUCCESS')}" .
+                    JText::_('MOD_SIMPLEEMAILFORM_UPLOAD_SUCCESS') .
                     "</p>";
 
                 return true;
             } else {
-                $this->msg .= $this->paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
+                $this->msg .= $paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
                     "<p style=\"color:{$this->errorColour}\">" .
                     "{$this->getTransLang('MOD_SIMPLEEMAILFORM_UPLOAD_FAILURE')}" .
                     "</p>" :
                     "<p style=\"color:{$this->errorColour}\">" .
-                    "{JText::_('MOD_SIMPLEEMAILFORM_UPLOAD_FAILURE')}" .
+                    JText::_('MOD_SIMPLEEMAILFORM_UPLOAD_FAILURE') .
                     "</p>";
 
                 return false;
             }
         } else {
-            $this->msg .= $this->paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
+            $this->msg .= $paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
                 "<p style=\"color:{$this->errorColour}\">" .
                 "{$this->getTransLang('MOD_SIMPLEEMAILFORM_DISALLOWED_FILENAME')}" .
                 "</p>" :
                 "<p style=\"color:{$this->errorColour}\">" .
-                "{JText::_('MOD_SIMPLEEMAILFORM_DISALLOWED_FILENAME')}" .
+                JText::_('MOD_SIMPLEEMAILFORM_DISALLOWED_FILENAME') .
                 "</p>";
 
             return false;

@@ -981,6 +981,67 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
      *
      * @since 2.0.0
      */
+    public function testProcessFormDataWithAllEightFieldsAndUploadedFilesWithStringOverride()
+    {
+        list(
+            $formDataRaw,
+            $formCleanData,
+            $files,
+            $emailMsg,
+            $paramsArray,
+            $formPrefixName,
+            $jSessionMock,
+            $jFormMock,
+            $jFileMock,
+            $jDocumentMock,
+            $jMailMock
+            ) = $this->setUpProcessFormDataTests();
+
+        $jSessionMock
+            ->shouldReceive('checkToken')
+            ->once()
+            ->andReturn(true);
+
+        $jTextMock = Mockery::mock('alias:JText');
+        $jTextMock
+            ->shouldReceive('_')
+            ->times(3)
+            ->with('MOD_SIMPLEEMAILFORM_UPLOAD_SUCCESS')
+            ->andReturn('GOOD UPLOAD.');
+
+        $stringOverrideName = $this->sefv2modsimpleemailformProperties['formStringOverrideName']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $paramsArray[$formPrefixName . $stringOverrideName] = 'Y';
+
+        $output = $this->sefv2modsimpleemailformMethods['processFormData']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array($formDataRaw, $files, $paramsArray, $emailMsg)
+        );
+
+        $this->assertTrue($output);
+
+        $msg = $this->sefv2modsimpleemailformProperties['msg']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame(
+            '<p style="color:green">GOOD UPLOAD.</p>'
+            . '<p style="color:green">GOOD UPLOAD.</p>'
+            . '<p style="color:green">GOOD UPLOAD.</p>',
+            $msg
+        );
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::processFormData(
+     *                                      array $formDataRaw,
+     *                                      array $files,
+     *                                      array $paramsArray,
+     *                                      sefv2simpleemailformemailmsg $emailMsg
+     *                                  )
+     *
+     * @since 2.0.0
+     */
     public function testProcessFormDataWithAllEightFieldsAndUploadedFilesAreOptionalAndOneUploadedFileIsMissing()
     {
         list(
@@ -1130,6 +1191,78 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
             ->getValue($this->sefv2modsimpleemailform);
 
         $this->assertSame('<p style="color:red">Error uploading file</p>', $msg);
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::processFormData(
+     *                                      array $formDataRaw,
+     *                                      array $files,
+     *                                      array $paramsArray,
+     *                                      sefv2simpleemailformemailmsg $emailMsg
+     *                                  )
+     *
+     * @since 2.0.0
+     */
+    public function testProcessFormDataWithAllEightFieldsAndUploadedFileErrorWithStringOverride()
+    {
+        list(
+            $formDataRaw,
+            $formCleanData,
+            $files,
+            $emailMsg,
+            $paramsArray,
+            $formPrefixName,
+            $jSessionMock,
+            $jFormMock,
+            $jFileMock,
+            $jDocumentMock,
+            $jMailMock
+            ) = $this->setUpProcessFormDataTests();
+
+        $this->sefv2modsimpleemailformProperties['msg']
+            ->setValue(
+                $this->sefv2modsimpleemailform,
+                ''
+            );
+
+        $files['mod_simpleemailform_upload3_1'] = array(
+            'tmp_name' => '/tmp/phpz93m97',
+            'error' => 4,
+        );
+
+        $jSessionMock
+            ->shouldReceive('checkToken')
+            ->once()
+            ->andReturn(true);
+
+        $jTextMock = Mockery::mock('alias:JText');
+        $jTextMock
+            ->shouldReceive('_')
+            ->twice()
+            ->with('MOD_SIMPLEEMAILFORM_UPLOAD_SUCCESS')
+            ->andReturn('GOOD UPLOAD.');
+        $jTextMock
+            ->shouldReceive('_')
+            ->once()
+            ->with('MOD_SIMPLEEMAILFORM_UPLOAD_ERROR')
+            ->andReturn('BAD UPLOAD.');
+
+        $stringOverrideName = $this->sefv2modsimpleemailformProperties['formStringOverrideName']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $paramsArray[$formPrefixName . $stringOverrideName] = 'Y';
+
+        $output = $this->sefv2modsimpleemailformMethods['processFormData']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array($formDataRaw, $files, $paramsArray, $emailMsg)
+        );
+
+        $this->assertFalse($output);
+
+        $msg = $this->sefv2modsimpleemailformProperties['msg']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame('<p style="color:red">BAD UPLOAD.</p>', $msg);
     }
 
     /**
@@ -1892,6 +2025,131 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
             '<p style="color:red">Error : Mail Server</p>'
             . '<p style="color:red">SORRY: This email address is invalid!'
             . '  Please re-enter your email address.</p>',
+            $msg
+        );
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::sendFormData(
+     *                                      array $formDataClean,
+     *                                      array $paramsArray,
+     *                                      sefv2simpleemailformemailmsg $emailMsg,
+     *                                      \JMail $jMail
+     *                                  )
+     *
+     * @since 2.0.0
+     */
+    public function testSendFormDataWillReturnFalseWithExceptionIfEmailAddressDoesNotExistWhenCopymeWithStringOverride()
+    {
+        list(
+            $formCleanData,
+            $emailMsg,
+            $paramsArray,
+            $formPrefixName,
+            $emailToName,
+            $emailCCName,
+            $emailBCCName,
+            $jDocumentMock,
+            $jMailMock
+            ) = $this->setUpSendFormDataTests();
+
+        define('JVERSION', '3.0');
+
+        $paramsArray[$formPrefixName . $emailToName] = 'thisaddress@doesnotexist';
+        $paramsArray[$formPrefixName . $emailCCName] = 'thisaddress@doesnotexist';
+        $paramsArray[$formPrefixName . $emailBCCName] = 'thisaddress@doesnotexist';
+
+        $jDocumentMock
+            ->shouldReceive('getTitle')
+            ->once()
+            ->andReturn('Home: Article');
+
+        $jMailMock2 = Mockery::Mock('overload:JMail');
+        $jMailMock2
+            ->shouldReceive('setSender')
+            ->once()
+            ->with('root@localhost')
+            ->andReturn($jMailMock2);
+        $jMailMock2
+            ->shouldReceive('setSubject')
+            ->once()
+            ->with('Test')
+            ->andReturn($jMailMock2);
+        $jMailMock2
+            ->shouldReceive('addRecipient')
+            ->once()
+            ->with(array('thisaddress@doesnotexist'))
+            ->andReturn($jMailMock2);
+        $jMailMock2
+            ->shouldReceive('addCC')
+            ->once()
+            ->with(array('thisaddress@doesnotexist'))
+            ->andReturn($jMailMock2);
+        $jMailMock2
+            ->shouldReceive('addBCC')
+            ->once()
+            ->with(array('thisaddress@doesnotexist'))
+            ->andReturn($jMailMock2);
+        $jMailMock2
+            ->shouldReceive('setBody')
+            ->once()
+            ->with(
+                "\n"
+                . "Test: option1\n"
+                . "Comments: <p>This is a test.</p>\n"
+                . "Field 5: Test: option1\n"
+                . "Field 6: Test: option3\n"
+                . "Field 7: Test: option5\n"
+                . "Field 8: Test again"
+            )
+            ->andReturn($jMailMock2);
+        $jMailMock2
+            ->shouldReceive('clearAllRecipients')
+            ->once();
+        $jMailMock2
+            ->shouldReceive('addRecipient')
+            ->once()
+            ->withArgs(array('thisaddress@doesnotexist', null))
+            ->andReturn($jMailMock2);
+        $jMailMock2
+            ->shouldReceive('addReplyTo')
+            ->once()
+            ->andReturn($jMailMock2);
+        $jMailMock2
+            ->shouldReceive('send')
+            ->twice()
+            ->andReturn(true);
+
+        $jTextMock = Mockery::mock('alias:JText');
+        $jTextMock
+            ->shouldReceive('_')
+            ->once()
+            ->with('MOD_SIMPLEEMAILFORM_ERROR')
+            ->andReturn('EMAIL ERROR');
+        $jTextMock
+            ->shouldReceive('_')
+            ->once()
+            ->with('MOD_SIMPLEEMAILFORM_EMAIL_INVALID')
+            ->andReturn('BAD EMAIL ADDRESS.');
+
+        $stringOverrideName = $this->sefv2modsimpleemailformProperties['formStringOverrideName']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $paramsArray[$formPrefixName . $stringOverrideName] = 'Y';
+
+        $output = $this->sefv2modsimpleemailformMethods['sendFormData']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array($formCleanData, $paramsArray, $emailMsg, $jMailMock2)
+        );
+
+        $this->assertFalse($output);
+
+        $msg = $this->sefv2modsimpleemailformProperties['msg']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->assertSame(
+            '<p style="color:red">EMAIL ERROR : Mail Server</p>'
+            . '<p style="color:red">BAD EMAIL ADDRESS.</p>',
             $msg
         );
     }
