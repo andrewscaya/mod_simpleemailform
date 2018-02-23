@@ -224,7 +224,8 @@ The label for the upload fields.
 Allowed Attachment Filenames
 ----------------------------
 
-List of approved filename extensions, separated by commas.
+List of approved filename extensions, separated by commas. For security reasons, Joomla will prevent
+any user from sending executable content, for instance a .php file.
 
 .. index:: Are upload fields required
 
@@ -311,6 +312,18 @@ and name it **default_custom.php**.
 You can also give your custom file another name, but you will have to insert your chosen name on line 7 of the
 **default.php** template file.
 
+.. index:: Override strings
+.. _override-strings:
+
+Override strings
+----------------
+
+Set this option to **Yes** if you want to use Joomla's
+`language overrides feature <https://docs.joomla.org/J3.x:Language_Overrides_in_Joomla>`_.
+Searching for constants with "MOD_SIMPLEEMAILFORM" will give you a list of all the strings that can be overriden in this
+module.
+
+Thanks to this feature, you won't lose your changes the next time you update Simple Email Form.
 
 .. index:: Module Tag
 
