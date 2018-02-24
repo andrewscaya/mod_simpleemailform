@@ -1470,6 +1470,20 @@ class sefv2modsimpleemailform implements
     }
 
     /**
+     * Gets the value of the stringOverride index in the Joomla Registry.
+     *
+     * @param null
+     *
+     * @return string
+     *
+     * @since 2.2.0
+     */
+    public function getStringOverride()
+    {
+        return $this->paramsArray[$this->formPrefixName . $this->formStringOverrideName];
+    }
+
+    /**
      * Gets the value of the transLang property at the given index.
      *
      * @param string

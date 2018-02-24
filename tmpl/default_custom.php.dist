@@ -1,16 +1,17 @@
-<?php // no direct access
+<?php
+// no direct access
 defined('_JEXEC') or die('Restricted access');
 
-$submitValue = $this->paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
-            $this->getTransLang('MOD_SIMPLEEMAILFORM_BUTTON_SUBMIT') :
+$submitValue = $form->getStringOverride() === 'N' ?
+            $form->getTransLang('MOD_SIMPLEEMAILFORM_BUTTON_SUBMIT') :
             JText::_('MOD_SIMPLEEMAILFORM_BUTTON_SUBMIT');
 
-$submitTitle = $this->paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
-            $this->getTransLang('MOD_SIMPLEEMAILFORM_CLICK_SUBMIT') :
+$submitTitle = $form->getStringOverride() === 'N' ?
+            $form->getTransLang('MOD_SIMPLEEMAILFORM_CLICK_SUBMIT') :
             JText::_('MOD_SIMPLEEMAILFORM_CLICK_SUBMIT');
 
-$resetValue = $this->paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
-            $this->getTransLang('MOD_SIMPLEEMAILFORM_BUTTON_RESET') :
+$resetValue = $form->getStringOverride() === 'N' ?
+            $form->getTransLang('MOD_SIMPLEEMAILFORM_BUTTON_RESET') :
             JText::_('MOD_SIMPLEEMAILFORM_BUTTON_RESET');
 
 $output .=
