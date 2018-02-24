@@ -2037,6 +2037,64 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests sefv2modsimpleemailform::getStringOverride().
+     *
+     * @since 2.0.0
+     */
+    public function testGetStringOverride()
+    {
+        $this->assertSame('N', $this->sefv2modsimpleemailform->getStringOverride());
+    }
+
+    /**
+     * Tests sefv2modsimpleemailform::getStringOverride().
+     *
+     * @since 2.0.0
+     */
+    public function testGetStringOverrideWithModifiedValue()
+    {
+        list(
+            $formDataRaw,
+            $formCleanData,
+            $emailMsg,
+            $paramsArray,
+            $formPrefixName,
+            $jSessionMock,
+            $jFormMock,
+            $jDocumentMock,
+            $jMailMock
+            ) = $this->setUpProcessFormDataTests();
+
+        $stringOverrideName = $this->sefv2modsimpleemailformProperties['formStringOverrideName']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->params = $this->sefv2modsimpleemailformProperties['params']
+            ->getValue($this->sefv2modsimpleemailform);
+
+        $this->params->set($formPrefixName . $stringOverrideName, 'Y');
+
+        $this->sefv2modsimpleemailformMethods['__construct']->invokeArgs(
+            $this->sefv2modsimpleemailform,
+            array(
+                $this->jFormMock,
+                $this->jMailMock,
+                $this->emailMsgFake,
+                $this->jDocumentMock,
+                $this->jLanguageMock,
+                $this->params,
+                $this->jInputMock,
+                $this->jTableExtensionMock,
+                $this->jTableModuleMock,
+                $this->stdClassModuleHelperResultFake,
+                $this->jSessionMock,
+                $this->jFileMock
+            )
+        );
+
+        $this->assertSame('Y', $this->sefv2modsimpleemailform->getStringOverride());
+    }
+
+    /**
      * Tests sefv2modsimpleemailform::getXMLField($active, $from, $name, $label, $value, $size, $maxx).
      *
      * @param $active
