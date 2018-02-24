@@ -1893,15 +1893,15 @@ class sefv2modsimpleemailform implements
             return;
         }
 
-        $submitValue = $this->paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
+        $submitValue = $this->getStringOverride() === 'N' ?
             $this->getTransLang('MOD_SIMPLEEMAILFORM_BUTTON_SUBMIT') :
             JText::_('MOD_SIMPLEEMAILFORM_BUTTON_SUBMIT');
 
-        $submitTitle = $this->paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
+        $submitTitle = $this->getStringOverride() === 'N' ?
             $this->getTransLang('MOD_SIMPLEEMAILFORM_CLICK_SUBMIT') :
             JText::_('MOD_SIMPLEEMAILFORM_CLICK_SUBMIT');
 
-        $resetValue = $this->paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
+        $resetValue = $this->getStringOverride() === 'N' ?
             $this->getTransLang('MOD_SIMPLEEMAILFORM_BUTTON_RESET') :
             JText::_('MOD_SIMPLEEMAILFORM_BUTTON_RESET');
 
