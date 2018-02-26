@@ -1,7 +1,12 @@
 .. _WhatsNewAnchor:
 
-What's new in version 2.1
+What's new in version 2.2
 =========================
+
+* Joomla language overrides now work in Simple Email Form. For more information, see :ref:`override-strings`.
+
+
+New since version 2.1
 
 * JForm has become the option by default instead of the deprecated Classic mode.
 

@@ -1,3 +1,24 @@
+env:
+  global:
+    - SAUCE_USERNAME=andrewscaya
+    - secure: "Cwt3tdw/XN4MX/rLxCh23Af6y6GOKccX/YTPCQUAJDkKvUDqPtM/Q0PnCQwHdOfhmliFsP9QVZzrv3cZrpggNrjU5cctc+w9GsdMogZlEULaV3sa4DgXHjfrTniguOh2YsZQ3tcTQkL/jH3mJ6FiY+8zZOGJvMEydyFp5u06khW/ahmot6EVkXt6+4dswtfckTaQZiXBdOdjyZ9lMbnjEpeLp7Ed0FqQDdq9GZK0M9weurEHZwLhClXzyMhHMA4GolvYCFR9+a1WBU3T/c3GJjMfVLjqvW3l5MzI1/ShFeC8/mXaaWfzNobo+x6Iv3CNUB657dRBxFr2PFvIx8GQYZXG1q7WBUrONoXZFUqEdUYHMTly/vGYkiMXfXYJAHpAuRmEHTyprYFDc7TtnPGC3bq5eqmUwZlE3Sjm0HnDQWhwpzVr0yTqccr3cXPNBrK9xLMTLo0sbGHRMvJLt7LltNd1dkuRNoo5sPedYK46pZQLaJ5sKWCHMNBBnVVHXJzjdaoRdFk2NY2Y9E8PMiqRl68kHl2hs7pSUu+QhrC0bPLGcf8cVxko/foPAbXDYQalG+T1zsbrPHhb5ZvE8Un3IZF6Gpl1QeYqbD0HWbm/chHy+0oXiIvRAESxoQtv505if1u8NszHYZVL0+Cj/dkKunwhZoIhr+DHsGyAsfE8RnU="
+    - secure: "fatMNhRKgFgwcE0AY1kcuL/hC7698iOta96kotcpBT4kCrIJ0HjlhVWzh94JzSYl0MaiSU0hgi/KG1Goo/8byEbkB3TYrw/gasJLontbl6aCVPNi/HRS4uD2kvB6NzqNzkvX9zd4L/MjZzOJc0CGR/EbO/gVhXYqodL8Qbj5Kdwlodx7Aa4CIC0vF+WiwArQWqIFWPoRG81dgxd0Ze95fOQwLYfSuwmm1IWor42oZLR4UnAEtIDDcuCVKEeADgPWsTIUZP+05KhiMhE8sGV2kolp4FbG8yqFsGe06DfGTnCujFdPZINobEip7HmKhZQWmgC9/9QJLW1G+jcA2cwugk4/1hz0eiuFbVZcElY3yISwNOv3UrQX49FOZ83AiueqwODfhdaGBgVXStSj0f2lKPixRD5M/0dovHT0qDKB0C/OnBYDXtUW84U+dBi2LlQKRFZn5XJ2uDYGWnTsMIAbtttxdmMDg/9GXFWY+/5PXzTaD38+V+C1BGxI4/xfTk8Pm8sLJef08vm7apPv/x4k3YaBxIxVbXfg9UgN2mYcaQxJBMCOHxiRr77gHqmPmEAtRCVFWJ+t/e8UcCRReD2gYZ/WmTRnTz5YmaaaySA5yr+KpwRL/UczrY4R/0KxJnOONiBl3z6UM0f/ysufaAE7bAvr07YEm3IrYVUAsVHV0Ak="
+
+sudo: false
+
+language: php
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - vendor
+
+services:
+  - mysql
+
+addons:
+  sauce_connect: true
+
 branches:
   except:
     - 1.8.9
@@ -5,65 +26,51 @@ branches:
     - 1.8.7
     - develop
 
-sudo: false
-
-language: php
-
-cache:
-    directories:
-        - $HOME/.composer/cache
-        - vendor
-
-services:
-  - mysql
-
-addons:
-  firefox: "31.6"
-
 matrix:
-    fast_finish: true
-    include:
-        - php: 5.5
-          env:
-            - COMPOSER_PROCESS_TIMEOUT=1200
-            - TEST_CHECK=true
-            - CS_CHECK=true
-            - CC_CHECK=false
-        - php: 5.6
-          env:
-            - COMPOSER_PROCESS_TIMEOUT=1200
-            - TEST_CHECK_COVER=true
-            - CS_CHECK=true
-            - CC_CHECK=false
-            - CODECLIMATE_REPO_TOKEN=cdf9d20bb5113bdc18f79b722ca5a54c965e2ccae2912ba40d92d0651cf8affa
-        - php: 7
-          env:
-            - TEST_CHECK=false
-            - CS_CHECK=true
-            - CC_CHECK=false
-        - php: hhvm
-    allow_failures:
-        - php: hhvm
-        
+  fast_finish: true
+  include:
+    - php: 5.5
+      env:
+        - COMPOSER_PROCESS_TIMEOUT=1200
+        - TEST_CHECK=true
+        - CS_CHECK=true
+        - CC_CHECK=true
+    - php: 5.6
+      env:
+        - COMPOSER_PROCESS_TIMEOUT=1200
+        - TEST_CHECK_COVER=true
+        - CS_CHECK=true
+        - CC_CHECK=true
+    - php: 7
+      env:
+        - TEST_CHECK=false
+        - CS_CHECK=true
+        - CC_CHECK=true
+    - php: hhvm
+      env:
+        - TEST_CHECK=false
+        - CS_CHECK=true
+        - CC_CHECK=false
+  allow_failures:
+    - php: hhvm
+
 before_install:
-    # XVFB
-    - "export DISPLAY=:99.0"
-    - "sh -e /etc/init.d/xvfb start"
-    - sleep 5 # give xvfb some time to start
-    - travis_retry composer self-update
-    - if [[ $TEST_CHECK_54 == 'true' ]]; then rm $TRAVIS_BUILD_DIR/composer.json && mv $TRAVIS_BUILD_DIR/composer.php54.json $TRAVIS_BUILD_DIR/composer.json ; fi
-    - if [[ -z "$TEST_CHECK_COVER" ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
-    - if [[ $CC_CHECK == 'true' ]]; then $TRAVIS_BUILD_DIR/bin/codeception-setup.sh ; fi
-    - sleep 5 # gives enough time to Selenium to start
+  - travis_retry composer self-update
+  - if [[ $TEST_CHECK_54 == 'true' ]]; then rm $TRAVIS_BUILD_DIR/composer.json && mv $TRAVIS_BUILD_DIR/composer.php54.json $TRAVIS_BUILD_DIR/composer.json ; fi
+  - if [[ -z "$TEST_CHECK_COVER" ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
     
 install:
-    - travis_retry composer install --no-interaction
-    
+  - travis_retry composer install --no-interaction
+
+before_script:
+  - if [[ $CC_CHECK == 'true' ]]; then $TRAVIS_BUILD_DIR/bin/selenium-setup.sh ; fi
+  - if [[ $CC_CHECK == 'true' ]]; then npm install -g se-interpreter ; fi
+
 script:
-    - if [[ $TEST_CHECK == 'true' || $TEST_CHECK_54 == 'true' ]]; then composer test ; fi
-    - if [[ $TEST_CHECK_COVER == 'true' ]]; then composer test-cover ; fi
-    - if [[ $CS_CHECK == 'true' ]]; then composer cs ; fi
-    - if [[ $CC_CHECK == 'true' ]]; then composer cc ; fi
+  - if [[ $CC_CHECK == 'true' ]]; then se-interpreter tests/selenium/se-interpreter_config.json ; fi
+  - if [[ $TEST_CHECK == 'true' || $TEST_CHECK_54 == 'true' ]]; then composer test ; fi
+  - if [[ $TEST_CHECK_COVER == 'true' ]]; then composer test-cover ; fi
+  - if [[ $CS_CHECK == 'true' ]]; then composer cs ; fi
 
 after_success:
-    - if [[ $TEST_CHECK_COVER == 'true' ]]; then composer test-report ; fi
+  - if [[ $TEST_CHECK_COVER == 'true' ]]; then composer test-report ; fi

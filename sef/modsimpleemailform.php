@@ -231,13 +231,15 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
         // Load language files
         // i.e. tr-TR.mod_simpleemailform.ini
         $this->_lang = $params->get('mod_simpleemailform_defaultLang');
-        $langFile = MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'language_files'
-                  . DIRECTORY_SEPARATOR . $this->_lang . '.mod_simpleemailform.ini';
+        $langFile = MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'language'
+            . DIRECTORY_SEPARATOR . $this->_lang
+            . DIRECTORY_SEPARATOR . $this->_lang . '.mod_simpleemailform.ini';
         if (file_exists($langFile)) {
             $this->_transLang = parse_ini_file($langFile);
         } else {
-            $langFile = MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'language_files'
-                      . DIRECTORY_SEPARATOR . 'en-GB.mod_simpleemailform.ini';
+            $langFile = MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'language'
+                . DIRECTORY_SEPARATOR . $this->_lang
+                . DIRECTORY_SEPARATOR . 'en-GB.mod_simpleemailform.ini';
             $this->_transLang = parse_ini_file($langFile);
         }
 
@@ -322,24 +324,24 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
                         // Copy file
                         if (move_uploaded_file($_FILES[$fieldLabel]['tmp_name'], $copyfile)) {
                             // Save name of file
-                            $message[] .= $this->formatErrorMessage($successTxtColor, $this->_transLang['MOD_SIMPLEEMAILFORM_upload_success'], $fn);
+                            $message[] .= $this->formatErrorMessage($successTxtColor, $this->_transLang['MOD_SIMPLEEMAILFORM_UPLOAD_SUCCESS'], $fn);
                             $result = $fn;
                             return $result;
                         } else {
                             // Trap upload file handle errors
-                            $message[] .= $this->formatErrorMessage($errorTxtColor, $this->_transLang['MOD_SIMPLEEMAILFORM_upload_unable'], $fn);
+                            $message[] .= $this->formatErrorMessage($errorTxtColor, $this->_transLang['MOD_SIMPLEEMAILFORM_UPLOAD_UNABLE'], $fn);
                         }
                     } else {
                         // Failed security check
-                        $message[] .= $this->formatErrorMessage($errorTxtColor, $this->_transLang['MOD_SIMPLEEMAILFORM_upload_failure'], $fn);
+                        $message[] .= $this->formatErrorMessage($errorTxtColor, $this->_transLang['MOD_SIMPLEEMAILFORM_UPLOAD_FAILURE'], $fn);
                     }
                 } else {
                     // Failed security check
-                    $message[] .= $this->formatErrorMessage($errorTxtColor, $this->_transLang['MOD_SIMPLEEMAILFORM_upload_error'], $fn);
+                    $message[] .= $this->formatErrorMessage($errorTxtColor, $this->_transLang['MOD_SIMPLEEMAILFORM_UPLOAD_ERROR'], $fn);
                 }
             } else {
                 // Failed regex
-                $message[] .= $this->formatErrorMessage($errorTxtColor, $this->_transLang['MOD_SIMPLEEMAILFORM_disallowed_filename'], $fn);
+                $message[] .= $this->formatErrorMessage($errorTxtColor, $this->_transLang['MOD_SIMPLEEMAILFORM_DISALLOWED_FILENAME'], $fn);
             }
         }
         return null;
@@ -573,7 +575,7 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
                 $document = JFactory::getDocument();
                 $msg->body .= "\nArticle Title: " . $document->getTitle();
             } catch (Exception $e) {
-                echo $this->_transLang['MOD_SIMPLEEMAILFORM_error'] . ': JFactory::getDocument()->getTitle()';
+                echo $this->_transLang['MOD_SIMPLEEMAILFORM_ERROR'] . ': JFactory::getDocument()->getTitle()';
             }
         }
         for ($x = 1; $x <= $this->_maxFields; $x++) {
@@ -631,7 +633,7 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
         }
         try {
             if (!$sent = $message->send()) {
-                throw new Exception($this->_transLang['MOD_SIMPLEEMAILFORM_error']);
+                throw new Exception($this->_transLang['MOD_SIMPLEEMAILFORM_ERROR']);
             }
             $msg->copyMe = (isset($_POST['mod_simpleemailform_copyMe_' . $this->_instance]))
                             ? (int) $_POST['mod_simpleemailform_copyMe_' . $this->_instance] : 0;
@@ -640,14 +642,14 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
                 $message->clearAllRecipients();
                 $message->addRecipient($msg->from, $msg->fromName);
                 if (!$sent = $message->send()) {
-                    throw new Exception($this->_transLang['MOD_SIMPLEEMAILFORM_error']);
+                    throw new Exception($this->_transLang['MOD_SIMPLEEMAILFORM_ERROR']);
                 }
             }
             $result = true;
         } catch (Exception $e) {
             $result = false;
-            $msg->error = $this->_transLang['MOD_SIMPLEEMAILFORM_error'] . ': Mail Server';
-            $msg->error .= '<br />' . $this->_transLang['MOD_SIMPLEEMAILFORM_email_invalid'];
+            $msg->error = $this->_transLang['MOD_SIMPLEEMAILFORM_ERROR'] . ': Mail Server';
+            $msg->error .= '<br />' . $this->_transLang['MOD_SIMPLEEMAILFORM_EMAIL_INVALID'];
             if ($this->_testMode == 'Y') {
                 $this->_testInfo[] = '<br />' . $e->getMessage() . "\n";
                 $this->_testInfo[] = '<br />' . $e->getTraceAsString() . "\n";
@@ -700,13 +702,13 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
         $c = Text_CAPTCHA::factory('Image');
         $retval = $c->init($options);
         if (PEAR::isError($retval)) {
-            throw new Exception($this->_transLang['MOD_SIMPLEEMAILFORM_captcha_error_init'] . ' ' . $retval->getMessage());
+            throw new Exception($this->_transLang['MOD_SIMPLEEMAILFORM_CAPTCHA_ERROR_INIT'] . ' ' . $retval->getMessage());
         }
 
         // Get CAPTCHA image (as PNG)
         $png = $c->getCAPTCHAAsPNG();
         if (PEAR::isError($png)) {
-            throw new Exception($this->_transLang['MOD_SIMPLEEMAILFORM_captcha_error_gen'] . ' ' . $png->getMessage());
+            throw new Exception($this->_transLang['MOD_SIMPLEEMAILFORM_CAPTCHA_ERROR_GEN'] . ' ' . $png->getMessage());
         }
         $randval = time() . rand(1, 999);
         $fn = 'captcha_' . $this->_instance . '_' . md5($randval) . '.png';
@@ -917,7 +919,7 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
             $this->_labelAlign,
             $this->_labelAlign,
             $this->_thClass,
-            $this->_transLang['MOD_SIMPLEEMAILFORM_captcha_please_enter']
+            $this->_transLang['MOD_SIMPLEEMAILFORM_CAPTCHA_PLEASE_ENTER']
         );
         // space between cols
         $output .= "<td class='" . $this->_spaceClass . "' width='" . $this->_col2space . "'>&nbsp;</td>";
@@ -938,7 +940,7 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
                         . "size='" . $this->_captchaLen . "' "
                         . "maxlength='" . $this->_captchaLen . "' "
                         . " class='" . $this->_inputClass . "' />";
-        $output .= "&nbsp;" . $this->_transLang['MOD_SIMPLEEMAILFORM_captcha_please_help'];
+        $output .= "&nbsp;" . $this->_transLang['MOD_SIMPLEEMAILFORM_CAPTCHA_PLEASE_HELP'];
         // send md5 hash of CAPTCHA phrase
         $output .= "<input type='hidden' name='" . $this->buildHiddenCaptchaField() . "' value='" . $hiddenHash . "' />\n";
         $output .= "</td>";
@@ -966,7 +968,7 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
                 }
             }
         } catch (Exception $e) {
-            $output .= $this->formatErrorMessage($this->_errorTxtColor, $this->_transLang['MOD_SIMPLEEMAILFORM_unable_clean_captcha']);
+            $output .= $this->formatErrorMessage($this->_errorTxtColor, $this->_transLang['MOD_SIMPLEEMAILFORM_UNABLE_CLEAN_CAPTCHA']);
             // Make Captcha directory and URL recommendations
             $dirs = explode(DIRECTORY_SEPARATOR, dirname(__FILE__));
             if (count($dirs) > 2) {
@@ -975,8 +977,8 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
             }
             $suggestedCaptchaDir = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . 'captcha';
             $suggestedCaptchaURL = 'http://' . $_SERVER['HTTP_HOST'] . DIRECTORY_SEPARATOR . 'captcha';
-            $output .= "<p>" . $this->_transLang['MOD_SIMPLEEMAILFORM_make_captcha_dir'] . ": " . $suggestedCaptchaDir . "</p>\n";
-            $output .= "<p>" . $this->_transLang['MOD_SIMPLEEMAILFORM_make_captcha_url'] . ": " . $suggestedCaptchaURL . "</p>\n";
+            $output .= "<p>" . $this->_transLang['MOD_SIMPLEEMAILFORM_MAKE_CAPTCHA_DIR'] . ": " . $suggestedCaptchaDir . "</p>\n";
+            $output .= "<p>" . $this->_transLang['MOD_SIMPLEEMAILFORM_MAKE_CAPTCHA_URL'] . ": " . $suggestedCaptchaURL . "</p>\n";
             if ($this->_testMode == 'Y') {
                 $this->_testInfo[] = "<p>" . __FILE__               . "</p>\n";
                 $this->_testInfo[] = "<p>" . $e->getTraceAsString()     . "</p>\n";
@@ -1059,7 +1061,7 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
                 $email_ok = isset($this->_msg->from) && $this->_msg->from && $this->isEmailAddress($this->_msg->from);
                 if (!$email_ok) {
                     $requiredCheck = false;
-                    $this->_field[$this->_fromField]['error'] = $this->_transLang['MOD_SIMPLEEMAILFORM_email_invalid']
+                    $this->_field[$this->_fromField]['error'] = $this->_transLang['MOD_SIMPLEEMAILFORM_EMAIL_INVALID']
                                                               . ' '
                                                               . $this->_field[$this->_fromField]['label'];
                 }
@@ -1070,7 +1072,7 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
                 if ($this->_field[$x]['active'] == 'R') {
                     if (!isset($_POST[$fieldLabel]) || $_POST[$fieldLabel] == null) {
                         $requiredCheck = false;
-                        $this->_field[$x]['error'] = $this->_transLang['MOD_SIMPLEEMAILFORM_required_field'] . ' ' . $this->_field[$x]['label'];
+                        $this->_field[$x]['error'] = $this->_transLang['MOD_SIMPLEEMAILFORM_REQUIRED_FIELD'] . ' ' . $this->_field[$x]['label'];
                     }
                 }
             }
@@ -1086,7 +1088,7 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
                     // does form CAPTCHA fields hash match full hash?
                     if (!$this->doesCaptchaMatch()) {
                         $sendResultsFlag = false;
-                        $message .=  $this->formatErrorMessage($this->_errorTxtColor, $this->_transLang['MOD_SIMPLEEMAILFORM_form_reenter']);
+                        $message .=  $this->formatErrorMessage($this->_errorTxtColor, $this->_transLang['MOD_SIMPLEEMAILFORM_FORM_REENTER']);
                     }
                 }
                 // send results if OK
@@ -1107,7 +1109,7 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
                     }
 
                     if ($this->sendResults($this->_msg, $this->_field)) {
-                        $message .=  $this->formatErrorMessage($this->_successTxtColor, $this->_transLang['MOD_SIMPLEEMAILFORM_form_success']);
+                        $message .=  $this->formatErrorMessage($this->_successTxtColor, $this->_transLang['MOD_SIMPLEEMAILFORM_FORM_SUCCESS']);
                         if ($this->_redirectURL !== '') {
                             header('Location: ' . $this->_redirectURL);
                             exit;
@@ -1116,7 +1118,7 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
                             $this->autoResetForm();
                         }
                     } else {
-                        $message .=  $this->formatErrorMessage($this->_errorTxtColor, $this->_transLang['MOD_SIMPLEEMAILFORM_form_unable']);
+                        $message .=  $this->formatErrorMessage($this->_errorTxtColor, $this->_transLang['MOD_SIMPLEEMAILFORM_FORM_UNABLE']);
                     }
                 }
                 // Add any mail server error messages (is blank if none)
@@ -1188,7 +1190,7 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
                     $this->_labelAlign,
                     $this->_labelAlign,
                     $this->_thClass,
-                    $this->_transLang['MOD_SIMPLEEMAILFORM_error']
+                    $this->_transLang['MOD_SIMPLEEMAILFORM_ERROR']
                 );
                 // space between cols
                 $this->_output .= "<td class='" . $this->_spaceClass . "' width='" . $this->_col2space . "'>&nbsp;</td>";
@@ -1227,15 +1229,15 @@ class sefmodsimpleemailform implements sefv2formrendererinterface
                         . "type='submit' "
                         . "name='mod_simpleemailform_submit_" . $this->_instance . "' "
                         . "id='mod_simpleemailform_submit_" . $this->_instance . "' "
-                        . "value='" . $this->_transLang['MOD_SIMPLEEMAILFORM_button_submit'] . "' "
-                        . "title='" . $this->_transLang['MOD_SIMPLEEMAILFORM_click_submit'] . "' />";
+                        . "value='" . $this->_transLang['MOD_SIMPLEEMAILFORM_BUTTON_SUBMIT'] . "' "
+                        . "title='" . $this->_transLang['MOD_SIMPLEEMAILFORM_CLICK_SUBMIT'] . "' />";
         $this->_output .= "&nbsp;&nbsp;";
         $this->_output .= "<input "
                         . " class='" . $this->_inputClass . "' "
                         . "type='submit' "
                         . "name='mod_simpleemailform_reset_" . $this->_instance . "' "
                         . "id='mod_simpleemailform_reset_" . $this->_instance . "' "
-                        . "value='" . $this->_transLang['MOD_SIMPLEEMAILFORM_button_reset'] . "' "
+                        . "value='" . $this->_transLang['MOD_SIMPLEEMAILFORM_BUTTON_RESET'] . "' "
                         . "title='' />";
         $this->_output .= "</td>";
         $this->_output .= "</tr>\n";
