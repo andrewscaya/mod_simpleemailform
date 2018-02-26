@@ -1135,7 +1135,12 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
         $msg = $this->sefv2modsimpleemailformProperties['msg']
             ->getValue($this->sefv2modsimpleemailform);
 
-        $this->assertSame('<p style="color:red">Error uploading file</p>', $msg);
+        $this->assertSame(
+            '<p style="color:green">Successfully uploaded</p>'
+            . '<p style="color:green">Successfully uploaded</p>'
+            . '<p style="color:red">Error uploading file</p>',
+            $msg
+        );
     }
 
     /**
@@ -1190,7 +1195,12 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
         $msg = $this->sefv2modsimpleemailformProperties['msg']
             ->getValue($this->sefv2modsimpleemailform);
 
-        $this->assertSame('<p style="color:red">Error uploading file</p>', $msg);
+        $this->assertSame(
+            '<p style="color:green">Successfully uploaded</p>'
+            . '<p style="color:green">Successfully uploaded</p>'
+            . '<p style="color:red">Error uploading file</p>',
+            $msg
+        );
     }
 
     /**
@@ -1262,7 +1272,12 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
         $msg = $this->sefv2modsimpleemailformProperties['msg']
             ->getValue($this->sefv2modsimpleemailform);
 
-        $this->assertSame('<p style="color:red">BAD UPLOAD.</p>', $msg);
+        $this->assertSame(
+            '<p style="color:green">GOOD UPLOAD.</p>'
+            . '<p style="color:green">GOOD UPLOAD.</p>'
+            . '<p style="color:red">BAD UPLOAD.</p>',
+            $msg
+        );
     }
 
     /**
