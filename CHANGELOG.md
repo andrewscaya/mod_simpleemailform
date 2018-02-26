@@ -4,6 +4,7 @@
 
 - Fixes issue #16 - Language overrides do not work in SEF 1.8.9 and Joomla 3.6.5.
 - Fixes all functional tests by having them run on the Sauce Labs Selenium Server.
+- Fixes a minor issue with the upload error messages.
 
 ## 2.1.0 (2017-12-22)
 

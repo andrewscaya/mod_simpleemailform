@@ -1840,7 +1840,7 @@ class sefv2modsimpleemailform implements
             }
 
             if (!$uploadFileResult) {
-                $this->msg = $paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
+                $this->msg .= $paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
                     "<p style=\"color:{$this->errorColour}\">" .
                     "{$this->getTransLang('MOD_SIMPLEEMAILFORM_UPLOAD_ERROR')}" .
                     "</p>" :
@@ -2315,7 +2315,7 @@ class sefv2modsimpleemailform implements
 
                 return true;
             } else {
-                $this->msg .= $paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
+                $this->msg = $paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
                     "<p style=\"color:{$this->errorColour}\">" .
                     "{$this->getTransLang('MOD_SIMPLEEMAILFORM_UPLOAD_FAILURE')}" .
                     "</p>" :
@@ -2326,7 +2326,7 @@ class sefv2modsimpleemailform implements
                 return false;
             }
         } else {
-            $this->msg .= $paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
+            $this->msg = $paramsArray[$this->formPrefixName . $this->formStringOverrideName] === 'N' ?
                 "<p style=\"color:{$this->errorColour}\">" .
                 "{$this->getTransLang('MOD_SIMPLEEMAILFORM_DISALLOWED_FILENAME')}" .
                 "</p>" :
