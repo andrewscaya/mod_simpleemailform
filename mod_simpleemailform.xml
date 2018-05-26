@@ -72,7 +72,7 @@
 		<filename>language/ru-RU/ru-RU.mod_simpleemailform.ini</filename>
 		<filename>language/se-SE/se-SE.mod_simpleemailform.ini</filename>
 		<filename>language/sk-SK/sk-SK.mod_simpleemailform.ini</filename>
-		<filename>language/sl-SL/sl-SL.mod_simpleemailform.ini</filename>
+		<filename>language/sl-SI/sl-SI.mod_simpleemailform.ini</filename>
 		<filename>language/th-TH/th-TH.mod_simpleemailform.ini</filename>
 		<filename>language/tr-TR/tr-TR.mod_simpleemailform.ini</filename>
 		<filename>language/vi-VN/vi-VN.mod_simpleemailform.ini</filename>
@@ -114,7 +114,7 @@
 					<option value="ru-RU">русский (Russian)</option>
 					<option value="se-SE">Svenska</option>
 					<option value="sk-SK">Slovak</option>
-					<option value="sl-SL">Slovene</option>
+					<option value="sl-SI">Slovenian</option>
 					<option value="th-TH">ไทย (Thai)</option>
 					<option value="tr-TR">Türkçe (Turkish)</option>
 					<option value="vi-VN">Việt (Vietnamese)</option>

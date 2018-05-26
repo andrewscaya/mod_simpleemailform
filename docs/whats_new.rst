@@ -3,7 +3,7 @@
 What's new in version 2.3
 =========================
 
-* A new Slovene translation has been added.
+* A new Slovenian translation has been added.
 
 
 New since version 2.2

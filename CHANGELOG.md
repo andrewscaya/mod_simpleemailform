@@ -2,7 +2,7 @@
 
 ## 2.3.0 (2018-05-25)
 
-- Adds a new translation (Slovene - Thanks to Ervin ervin.bizjak@gmail.com).
+- Adds a new translation (Slovenian - Thanks to Ervin ervin.bizjak@gmail.com).
 
 ## 2.2.0 (2018-02-23)
 
