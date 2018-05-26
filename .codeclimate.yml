@@ -73,7 +73,7 @@ exclude_patterns:
 - "data/"
 - "docs/"
 - "docs-api/"
-- "language_files/"
+- "language/"
 - "lib/"
 - "sef/"
 - "tests/"

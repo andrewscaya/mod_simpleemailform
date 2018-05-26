@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.3.0 (2018-05-25)
+
+- Adds a new translation (Slovene - Thanks to Ervin ervin.bizjak@gmail.com).
+
 ## 2.2.0 (2018-02-23)
 
 - Fixes issue #16 - Language overrides do not work in SEF 1.8.9 and Joomla 3.6.5.

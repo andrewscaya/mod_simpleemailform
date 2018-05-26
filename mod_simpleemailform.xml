@@ -7,10 +7,10 @@
 	<license>GNU General Public License version 2</license>
 	<authorEmail>info@unlikelysource.com</authorEmail>
 	<authorUrl>www.unlikelysource.com</authorUrl> 
-	<version>2.2.0</version>
+	<version>2.3.0</version>
 	<description><![CDATA[ 
 	A simple email form from unlikelysource.com with up to 8 fields + Joomla CAPTCHA + 32 languages.
-	<br />Version 2.2.0 -- works on Joomla 3.x.
+	<br />Version 2.3.0 -- works on Joomla 3.x.
 	<br />REQUIRES a web server running at a minimum PHP 5.3!!!
 	<br />TO LOAD IN AN ARTICLE (most common): 
 	<ul><li>In the Details box, modify Position to user99 (or whatever).  </li>
@@ -72,6 +72,7 @@
 		<filename>language/ru-RU/ru-RU.mod_simpleemailform.ini</filename>
 		<filename>language/se-SE/se-SE.mod_simpleemailform.ini</filename>
 		<filename>language/sk-SK/sk-SK.mod_simpleemailform.ini</filename>
+		<filename>language/sl-SL/sl-SL.mod_simpleemailform.ini</filename>
 		<filename>language/th-TH/th-TH.mod_simpleemailform.ini</filename>
 		<filename>language/tr-TR/tr-TR.mod_simpleemailform.ini</filename>
 		<filename>language/vi-VN/vi-VN.mod_simpleemailform.ini</filename>
@@ -113,6 +114,7 @@
 					<option value="ru-RU">русский (Russian)</option>
 					<option value="se-SE">Svenska</option>
 					<option value="sk-SK">Slovak</option>
+					<option value="sl-SL">Slovene</option>
 					<option value="th-TH">ไทย (Thai)</option>
 					<option value="tr-TR">Türkçe (Turkish)</option>
 					<option value="vi-VN">Việt (Vietnamese)</option>
