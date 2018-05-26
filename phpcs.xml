@@ -43,7 +43,7 @@
     <exclude-pattern>*/data/*</exclude-pattern>
     <exclude-pattern>*/docs/*</exclude-pattern>
     <exclude-pattern>*/docs-api/*</exclude-pattern>
-    <exclude-pattern>*/language_files/*</exclude-pattern>
+    <exclude-pattern>*/language/*</exclude-pattern>
     <exclude-pattern>*/lib/*</exclude-pattern>
     <exclude-pattern>*/sef/*</exclude-pattern>
     <exclude-pattern>*/vendor/*</exclude-pattern>
