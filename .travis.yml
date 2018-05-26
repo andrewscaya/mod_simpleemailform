@@ -85,5 +85,5 @@ script:
   #- if [[ $TEST_CHECK_COVER == 'true' ]]; then mv build/logs/clover.xml clover.xml ; fi
   #- if [[ $TEST_CHECK_COVER == 'true' ]]; then ./cc-test-reporter after-build --coverage-input-type clover --id 12345 --exit-code $TRAVIS_TEST_RESULT ; fi
 
-after_success:
-  - if [[ $TEST_CHECK_COVER == 'true' ]]; then composer test-report ; fi
+#after_success:
+  #- if [[ $TEST_CHECK_COVER == 'true' ]]; then composer test-report ; fi
