@@ -6,7 +6,7 @@ What's new in version 2.3
 * A new Slovene translation has been added.
 
 
-New since version 2.1
+New since version 2.2
 
 * Joomla language overrides now work in Simple Email Form. For more information, see :ref:`override-strings`.
 
