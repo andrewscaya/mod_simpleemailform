@@ -8,3 +8,4 @@ vendor/*
 data/*
 docs/_build/*
 tests/_output/*
+composer.lock
