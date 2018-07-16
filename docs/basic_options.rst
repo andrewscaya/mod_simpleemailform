@@ -122,15 +122,20 @@ Display Size of Field X
 -----------------------
 
 Size, in rows and columns, of a **Textarea** field.
-Size is entered in the following format: row,column
+
+Size is entered in the following format: row,column.
+
+To set the size of the field when using a WYSIWYG editor, please enter the desired values in the corresponding plugin's settings. For example, when using the TinyMCE editor:
+
+.. image:: /images/basic_options17.png
+
+.. note:: With the **Classic** form type, size is entered in the following format: row,column
 
 With field types **Radio** and **Checkbox**,
 you can enter the width, in pixels,
 of the labels besides each radio button or box.
 
 **Display Size** has no effect on other field types.
-
-.. note:: This option is only available with the **Classic** form type.
 
 .. index:: Maximum Length of Field X
 
