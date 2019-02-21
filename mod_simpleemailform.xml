@@ -64,6 +64,8 @@
 		<filename>language/hr-HR/hr-HR.mod_simpleemailform.ini</filename>
 		<filename>language/hu-HU/hu-HU.mod_simpleemailform.ini</filename>
 		<filename>language/it-IT/it-IT.mod_simpleemailform.ini</filename>
+		<filename>language/lt-LT/lt-LT.mod_simpleemailform.ini</filename>
+		<filename>language/lv-LV/lv-LV.mod_simpleemailform.ini</filename>
 		<filename>language/nb-NO/nb-NO.mod_simpleemailform.ini</filename>
 		<filename>language/nl-NL/nl-NL.mod_simpleemailform.ini</filename>
 		<filename>language/pl-PL/pl-PL.mod_simpleemailform.ini</filename>
@@ -104,7 +106,8 @@
 					<option value="fr-FR">Français</option>
 					<option value="he-IL">Hebrew</option>
 					<option value="it-IT">Italiano</option>
-					<option value="lv-LV">Latvian</option>
+					<option value="lt-LT">Lietuvių</option>
+					<option value="lv-LV">Latviešu</option>
 					<option value="nl-NL">Nederlandse</option>
 					<option value="nb-NO">Norsk</option>
 					<option value="hu-HU">Magyar</option>
