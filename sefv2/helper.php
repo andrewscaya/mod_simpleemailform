@@ -93,11 +93,7 @@ class sefv2helper implements sefv2helperfactoryinterface
      */
     public function buildForm(\Joomla\Registry\Registry $params)
     {
-        if ($params->get('mod_simpleemailform_formType') === 'jform') {
-            $formFactory = new sefv2formfactory();
-            return $formFactory->createSefv2FormObject($params);
-        } else {
-            return new sefmodsimpleemailform($params);
-        }
+        $formFactory = new sefv2formfactory();
+        return $formFactory->createSefv2FormObject($params);
     }
 }

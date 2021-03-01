@@ -34,14 +34,6 @@
 		<filename>sefv2/jformproxyinterface.php</filename>
 		<filename>sefv2/modsimpleemailform.php</filename>
 		<filename>sefv2/simpleemailformemailmsg.php</filename>
-		<filename>sef/CAPTCHA.php</filename>
-		<filename>sef/FreeSansBold.ttf</filename>
-		<filename>sef/Image.php</filename>
-		<filename>sef/modsimpleemailform.php</filename>
-		<filename>sef/Password.php</filename>
-		<filename>sef/PEAR.php</filename>
-		<filename>sef/PEAR5.php</filename>
-		<filename>sef/Text.php</filename>
 		<filename>tmpl/default.php</filename>
 		<filename>tmpl/default_custom.php.dist</filename>
 		<filename>tmpl/index.html</filename>
@@ -82,43 +74,6 @@
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
-				<field name="mod_simpleemailform_formType" type="radio" default="jform" label="Form Type" description="Choose the default form type" >
-					<option value="jform">JForm</option>
-					<option value="classic">Classic (TO BE REMOVED mid-2019)</option>
-				</field>
-				<field name="mod_simpleemailform_defaultLang" type="list" default="en" label="Default Language (Classic)" description="Choose the default language" >
-					<option value="en-GB">English</option>
-					<option value="af-ZA">Afrikaans</option>
-					<option value="ar-SA">Arabic</option>
-					<option value="be-BY">беларускі (Belarusian)</option>
-					<option value="bg-BG">български (Bulgarian)</option>
-					<option value="cs-CZ">česky</option>
-					<option value="zh-ZH">中文 (Chinese)</option>
-					<option value="hr-HR">hrvatski (Croatian)</option>
-					<option value="dk-DK">Dansk</option>
-					<option value="de-DE">Deutsch</option>
-					<option value="el-GR">Ελληνικά (Greek)</option>
-					<option value="es-ES">Español</option>
-					<option value="et-EE">Eesti</option>
-					<option value="fi-FI">Finnish</option>
-					<option value="fr-FR">Français</option>
-					<option value="he-IL">Hebrew</option>
-					<option value="it-IT">Italiano</option>
-					<option value="lv-LV">Latvian</option>
-					<option value="nl-NL">Nederlandse</option>
-					<option value="nb-NO">Norsk</option>
-					<option value="hu-HU">Magyar</option>
-					<option value="pl-PL">Polski</option>
-					<option value="pt-PT">Português (Portugal)</option>
-					<option value="pt-BR">Português (Brazil)</option>
-					<option value="ru-RU">русский (Russian)</option>
-					<option value="se-SE">Svenska</option>
-					<option value="sk-SK">Slovak</option>
-					<option value="sl-SI">Slovenian</option>
-					<option value="th-TH">ไทย (Thai)</option>
-					<option value="tr-TR">Türkçe (Turkish)</option>
-					<option value="vi-VN">Việt (Vietnamese)</option>
-				</field>
 				<field name="mod_simpleemailform_emailTo"      type="text" size="40" default=""  label="Send Results To" description="Send results to this email address.   If more than one, separate with commas or spaces." />
 				<field name="mod_simpleemailform_labelAlign"   type="radio" 		 default="L" label="Label Alignment" description="Choose to have the labels aligned LEFT,RIGHT, or CENTER" >
 					<option value="L">Left</option>
@@ -371,27 +326,9 @@
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
 				</field>
-				<field name="mod_simpleemailform_autoreset"    type="radio"          default="N" 		label="Auto Reset Fields  (Classic)" description="Select 'Y' if you want all form fields to be automatically reset (cleared) after successful form submission." >
-					<option value="Y">JYES</option>
-					<option value="N">JNO</option>
-				</field>
 				<field name="mod_simpleemailform_cssClass"     type="text" size="20" default="mod_sef"  label="Name of CSS Class" description="Enter the name of a CSS class to use with the form.  Creates xxx_table, xxx_row, xxx_th, xxx_td classes and xxx_input inside form where xxx = your CSS class.  Default is 'mod_sef'." />
 				<field name="mod_simpleemailform_col2space"    type="text" size="4"  default="5" label="Space After Labels" description="Enter the amount of space between the label and the input field in pixels." />
 				<field name="mod_simpleemailform_redirectURL"  type="text" size="20" default=""  label="Redirect URL" description="Enter the URL you wish to redirect to after successful form submission.  NOTE: leave blank to NOT redirect!" />
-				<field name="mod_simpleemailform_useCaptcha"   type="radio"          default="N" label="Use Captcha" description="To use a 'Captcha' to foil spammers, select 'I' for an image captcha (requires additional configuration), or 'T' for a text captcha. NOTE : JForm version will use the CAPTCHA module that is activated in your Joomla installation!" >
-					<option value="N">No Captcha</option>
-					<option value="I">Image Captcha</option>
-					<option value="T">Text Captcha</option>
-				</field>
-				<field name="mod_simpleemailform_captchaDir"   		type="text" size="60" default=""        label="Directory to Write Captchas (Classic)" description="Enter the absolute directory path where the module can write 'captchas' (i.e. /var/www/application/images)." />
-				<field name="mod_simpleemailform_captchaURL"   		type="text" size="60" default=""        label="URL for Captcha Directory (Classic)" description="Enter a URL which corresponds with the Captcha Directory (above)." />
-				<field name="mod_simpleemailform_captchaLen"   		type="text" size="4"  default="8"       label="Captcha Word Length (Classic)" description="Enter the desired Captcha word length (number of characters)." />
-				<field name="mod_simpleemailform_captchaSize"  		type="text" size="4"  default="24"      label="Captcha Font Size (Classic)" description="Enter the desired Captcha font size." />
-				<field name="mod_simpleemailform_captchaWidth"  	type="text" size="4"  default="200"     label="Captcha Width (Classic)" description="Enter the desired Captcha width in pixels." />
-				<field name="mod_simpleemailform_captchaHeight"  	type="text" size="4"  default="80"      label="Captcha Height (Classic)" description="Enter the desired Captcha height in pixels." />
-				<field name="mod_simpleemailform_captchaTxtColor"  	type="text" size="8"  default="#000000" label="Captcha Text Color (Classic)" description="Enter the desired Captcha text color." />
-				<field name="mod_simpleemailform_captchaLinesColor" type="text" size="8"  default="#FFFF00" label="Captcha Lines Color (Classic)" description="Enter the desired Captcha lines color." />
-				<field name="mod_simpleemailform_captchaBgColor"  	type="text" size="8"  default="#BFBFBF" label="Captcha Background Color (Classic)" description="Enter the desired Captcha background color." />
 				<field name="mod_simpleemailform_errorTxtColor"  	type="text" size="8"  default="red"     label="Error Text Color" description="Enter the desired HTML text color for errors." />
 				<field name="mod_simpleemailform_successTxtColor"  	type="text" size="8"  default="green"   label="Success Text Color" description="Enter the desired HTML text color for success." />
 				<field name="mod_simpleemailform_anchor"  			type="text" size="8"  default=""   	    label="Name of Anchor Tag" description="Enter the name of any anchor tags associated with the form. When form is submitted, redirects back to this anchor." />
@@ -413,10 +350,6 @@
 					<option value="N">JNO</option>
 				</field>
 				<field name="mod_simpleemailform_copymeContent"  	type="textarea"	      default="" 			label="Send User a Custom Message" description="Enter a custom message if you want to define the contents of the send an email field. If empty, the user will receive a copy of the form values." />
-				<field name="mod_simpleemailform_emailCheck"	type="radio"	      default="Y" 			label="Email Check  (Classic)" description="Select 'Y' if you want to check the 'From' email address.  Set to 'N' to disable this check.  If email check is disabled, the 'From' field will automatically take its value from what you entered as a default value for the 'From' field." >
-					<option value="Y">JYES</option>
-					<option value="N">JNO</option>
-				</field>
 				<field name="mod_simpleemailform_addTitle"		type="radio"	      default="N" 			label="Include Article Title" description="Select 'Y' if you want to include the Joomla article title in a hidden field, automatically added to the email." >
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
@@ -429,7 +362,7 @@
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
 				</field>
-				<field name="mod_simpleemailform_stringOverride"  	type="radio"	      default="N" 		label="Override strings (JForm only)" description="Select 'Y' if you want to use Joomla's language override to modify the module's strings manually." >
+				<field name="mod_simpleemailform_stringOverride"  	type="radio"	      default="N" 		label="Override strings" description="Select 'Y' if you want to use Joomla's language override to modify the module's strings manually." >
 					<option value="Y">JYES</option>
 					<option value="N">JNO</option>
 				</field>

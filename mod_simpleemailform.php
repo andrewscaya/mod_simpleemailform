@@ -1,5 +1,4 @@
 <?php
-
 /**
  * mod_simpleemailform.php
  *
@@ -40,7 +39,6 @@ defined('MOD_SIMPLEEMAILFORM_DIR')
     || define('MOD_SIMPLEEMAILFORM_DIR', dirname(__FILE__));
 
 // Joomla autoloading
-\JLoader::discover('sef', MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'sef', true, true);
 \JLoader::discover('sefv2', MOD_SIMPLEEMAILFORM_DIR . DIRECTORY_SEPARATOR . 'sefv2', true, true);
 
 // Get the module helper (must be a helperfactoryinterface).
