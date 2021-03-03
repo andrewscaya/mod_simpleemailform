@@ -45,8 +45,8 @@
     <exclude-pattern>*/docs-api/*</exclude-pattern>
     <exclude-pattern>*/language/*</exclude-pattern>
     <exclude-pattern>*/lib/*</exclude-pattern>
-    <exclude-pattern>*/sef/*</exclude-pattern>
     <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/.idea/*</exclude-pattern>
     <exclude-pattern>PEAR.php</exclude-pattern>
     <exclude-pattern>PEAR5.php</exclude-pattern>
 </ruleset>

@@ -1,5 +1,5 @@
 {
-    "name": "mod_simpleemailform",
+    "name": "andrewscaya/mod_simpleemailform",
     "description": "Joomla module: mod_simpleemailform",
     "type": "project",
     "license": "GPL-2.0",
@@ -21,33 +21,49 @@
             "email": "andrewscaya@yahoo.ca",
             "homepage": "https://github.com/andrewscaya",
             "role": "Developer"
-        },
-        {
-            "name": "Martin Beaudry",
-            "email": "martinbeaudry@hotmail.com",
-            "homepage": "https://github.com/martinbeaudry",
-            "role": "Developer"
         }
     ],
     "require": {
-        "php": "^5.3 || ^7.0"
+        "php": ">=5.3.10",
+        "joomla/application": "~1.9",
+        "joomla/archive": "^1.1.7",
+        "joomla/data": "~1.2",
+        "joomla/di": "~1.5",
+        "joomla/event": "~1.2",
+        "joomla/filter": "^1.4.3",
+        "joomla/image": "^1.5",
+        "joomla/input": "~1.3",
+        "joomla/ldap": "~1.2",
+        "joomla/registry": "^1.6",
+        "joomla/session": "^1.3.4",
+        "joomla/string": "^1.4",
+        "joomla/uri": "~1.2",
+        "joomla/utilities": "^1.6",
+        "ircmaxell/password-compat": "1.*",
+        "leafo/lessphp": "dev-master",
+        "paragonie/random_compat": "~1.4",
+        "paragonie/sodium_compat": "1.9.1",
+        "phpmailer/phpmailer": "^5.2.20",
+        "symfony/polyfill-php55": "~1.9",
+        "symfony/polyfill-php56": "~1.9",
+        "symfony/polyfill-php71": "~1.9",
+        "symfony/polyfill-php73": "~1.9",
+        "symfony/yaml": "2.*",
+        "simplepie/simplepie": "1.3.1",
+        "google/recaptcha": "^1.1",
+        "typo3/phar-stream-wrapper": "^2.1"
     },
     "require-dev": {
-        "joomla/framework": "1.1.0",
-        "phpunit/phpunit": "4.8.32",
-        "mockery/mockery": "0.9.7",
-        "psr/log": "1.0.0",
-        "codeclimate/php-test-reporter": "0.2.0",
-        "satooshi/php-coveralls": "~0.6",
+        "phpunit/phpunit": "^4.8.35",
+        "mockery/mockery": "^0.9.7",
+        "psr/log": "^1.0.0",
         "squizlabs/php_codesniffer": "^2.3",
         "phpdocumentor/phpdocumentor": "2.9.0",
         "pds/skeleton": "~1.0"
     },
     "autoload": {
         "psr-0": {
-            "sef": "./sef",
-            "sefv2": "./sefv2",
-            "joomla": "./lib"
+            "sefv2": "./sefv2"
         },
         "classmap": [
             "./",

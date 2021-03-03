@@ -1,5 +1,4 @@
 <?php
-
 /**
  * sefv2modsimpleemailformbasicTest.php
  *
@@ -167,6 +166,10 @@ class sefv2modsimpleemailformbasicTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        // current directory constant
+        defined('MOD_SIMPLEEMAILFORM_DIR')
+            || define('MOD_SIMPLEEMAILFORM_DIR', dirname(dirname(dirname(__FILE__))));
+
         parent::setUp();
 
         $paramsSerialized = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'serializedParamsObjectJformBasic');

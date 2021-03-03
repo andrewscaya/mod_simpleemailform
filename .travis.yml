@@ -1,11 +1,3 @@
-env:
-  global:
-    - SAUCE_USERNAME=andrewscaya
-    - secure: "Cwt3tdw/XN4MX/rLxCh23Af6y6GOKccX/YTPCQUAJDkKvUDqPtM/Q0PnCQwHdOfhmliFsP9QVZzrv3cZrpggNrjU5cctc+w9GsdMogZlEULaV3sa4DgXHjfrTniguOh2YsZQ3tcTQkL/jH3mJ6FiY+8zZOGJvMEydyFp5u06khW/ahmot6EVkXt6+4dswtfckTaQZiXBdOdjyZ9lMbnjEpeLp7Ed0FqQDdq9GZK0M9weurEHZwLhClXzyMhHMA4GolvYCFR9+a1WBU3T/c3GJjMfVLjqvW3l5MzI1/ShFeC8/mXaaWfzNobo+x6Iv3CNUB657dRBxFr2PFvIx8GQYZXG1q7WBUrONoXZFUqEdUYHMTly/vGYkiMXfXYJAHpAuRmEHTyprYFDc7TtnPGC3bq5eqmUwZlE3Sjm0HnDQWhwpzVr0yTqccr3cXPNBrK9xLMTLo0sbGHRMvJLt7LltNd1dkuRNoo5sPedYK46pZQLaJ5sKWCHMNBBnVVHXJzjdaoRdFk2NY2Y9E8PMiqRl68kHl2hs7pSUu+QhrC0bPLGcf8cVxko/foPAbXDYQalG+T1zsbrPHhb5ZvE8Un3IZF6Gpl1QeYqbD0HWbm/chHy+0oXiIvRAESxoQtv505if1u8NszHYZVL0+Cj/dkKunwhZoIhr+DHsGyAsfE8RnU="
-    - secure: "fatMNhRKgFgwcE0AY1kcuL/hC7698iOta96kotcpBT4kCrIJ0HjlhVWzh94JzSYl0MaiSU0hgi/KG1Goo/8byEbkB3TYrw/gasJLontbl6aCVPNi/HRS4uD2kvB6NzqNzkvX9zd4L/MjZzOJc0CGR/EbO/gVhXYqodL8Qbj5Kdwlodx7Aa4CIC0vF+WiwArQWqIFWPoRG81dgxd0Ze95fOQwLYfSuwmm1IWor42oZLR4UnAEtIDDcuCVKEeADgPWsTIUZP+05KhiMhE8sGV2kolp4FbG8yqFsGe06DfGTnCujFdPZINobEip7HmKhZQWmgC9/9QJLW1G+jcA2cwugk4/1hz0eiuFbVZcElY3yISwNOv3UrQX49FOZ83AiueqwODfhdaGBgVXStSj0f2lKPixRD5M/0dovHT0qDKB0C/OnBYDXtUW84U+dBi2LlQKRFZn5XJ2uDYGWnTsMIAbtttxdmMDg/9GXFWY+/5PXzTaD38+V+C1BGxI4/xfTk8Pm8sLJef08vm7apPv/x4k3YaBxIxVbXfg9UgN2mYcaQxJBMCOHxiRr77gHqmPmEAtRCVFWJ+t/e8UcCRReD2gYZ/WmTRnTz5YmaaaySA5yr+KpwRL/UczrY4R/0KxJnOONiBl3z6UM0f/ysufaAE7bAvr07YEm3IrYVUAsVHV0Ak="
-    - GIT_COMMITTED_AT=$( if [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then git log -1 --pretty=format:%ct ; else git log -1 --skip 1 --pretty=format:%ct ; fi )
-    - secure: "NZVEaE6d8aTbS/i/oGNOamWCZ779zLkVGoVReJK7Gy/8T80gP5SBs4qGVb19oiTJlIHrdbJOVrcNungsyLr371FOdg8/NO/IpQ+QcxMe3CJXCGtGrHUmVQAKNhWTYnrBM3bvOqW+S+WOGpUSTGiGw6SvHLGHKN20xOLCPgEvZfOnEImsdRCbiInuhTV5Nx8JeTDHmW5AdAAaa/V+DpxHpAm/yoKE0MW9nMm563Mpt1dYkDz+9EkbeeItnp68qjNOaz5PGNJK+J5ilj81L1IdPt/GNhxvHauzvVXrSxehcmwuxpw+I/lWD/IoY23rj5Ow1DJzIi5lFJ65OXvqDBMO4xCrvOYZkOLSZQDtwMtTV0ElOmei8uOKW6G2fYMzyJMA4RUGcjPSqS8OzM0Py37B3bNKGxN8xOIAXIVsADGdQoT3TJapwO6XDgDrBSeZcmTElav5qdY4/ty6vwuMxMFAWqST+2JcGHH6XknLMU1hbQ1TkZcgEP6rTdmfZv0IR6A9BaFzAK7PUo48FQweV0w4JlHNUY/hpFuOmJCkOwcsimxNyktktc4GuHtR/B8LfkSUglt1dTlHXlqZMrVznEUCCuSNi7Wkv2SvXXyyBdOUx+QixSzHR/dYH1jgJQYo/IgLDYz+gZ+RTO+w0ZmUgdxtrFuakSeq1J/ThGB6oRVKoB0="
-
 sudo: false
 
 language: php
@@ -18,12 +10,6 @@ cache:
     - $HOME/.composer/cache
     - vendor
 
-services:
-  - mysql
-
-addons:
-  sauce_connect: true
-
 branches:
   except:
     - 1.8.9
@@ -34,30 +20,49 @@ branches:
 matrix:
   fast_finish: true
   include:
-    - php: 5.5
+    - php: 5.6
       env:
         - COMPOSER_PROCESS_TIMEOUT=1200
         - TEST_CHECK=true
         - CS_CHECK=true
-        - CC_CHECK=true
-    - php: 5.6
+        - CC_CHECK=false
+    - php: 7.0
       env:
         - COMPOSER_PROCESS_TIMEOUT=1200
-        - TEST_CHECK_COVER=true
+        - TEST_CHECK=true
         - CS_CHECK=true
-        - CC_CHECK=true
-    - php: 7
+        - CC_CHECK=false
+    - php: 7.1
       env:
-        - TEST_CHECK=false
+        - COMPOSER_PROCESS_TIMEOUT=1200
+        - TEST_CHECK=true
         - CS_CHECK=true
-        - CC_CHECK=true
-    - php: hhvm
+        - CC_CHECK=false
+    - php: 7.2
       env:
-        - TEST_CHECK=false
+        - COMPOSER_PROCESS_TIMEOUT=1200
+        - TEST_CHECK=true
+        - CS_CHECK=true
+        - CC_CHECK=false
+    - php: 7.3
+      env:
+        - COMPOSER_PROCESS_TIMEOUT=1200
+        - TEST_CHECK=true
+        - CS_CHECK=true
+        - CC_CHECK=false
+    - php: 7.4
+      env:
+        - COMPOSER_PROCESS_TIMEOUT=1200
+        - TEST_CHECK=true
+        - CS_CHECK=true
+        - CC_CHECK=false
+    - php: 8.0
+      env:
+        - TEST_CHECK=true
         - CS_CHECK=true
         - CC_CHECK=false
   allow_failures:
-    - php: hhvm
+    - php: 8.0
 
 before_install:
   - travis_retry composer self-update
@@ -68,9 +73,6 @@ install:
   - travis_retry composer install --no-interaction
 
 before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
   - if [[ $CC_CHECK == 'true' ]]; then $TRAVIS_BUILD_DIR/bin/selenium-setup.sh ; fi
   - if [[ $CC_CHECK == 'true' ]]; then npm install -g se-interpreter ; fi
 

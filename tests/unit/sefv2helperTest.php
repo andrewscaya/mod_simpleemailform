@@ -1,5 +1,4 @@
 <?php
-
 /**
  * sefv2helperTest.php
  *
@@ -67,6 +66,10 @@ class sefv2helperTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
+        // current directory constant
+        defined('MOD_SIMPLEEMAILFORM_DIR')
+            || define('MOD_SIMPLEEMAILFORM_DIR', dirname(dirname(dirname(__FILE__))));
+
         parent::setUp();
 
         $paramsSerialized = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'serializedParamsObjectJformBasic');
@@ -164,8 +167,6 @@ class sefv2helperTest extends \PHPUnit_Framework_TestCase
     {
         $this->createJoomlaMocks();
 
-        $this->params->set('mod_simpleemailform_formType', $wantedObjectType);
-
         $formObject = $this->sefv2helper->buildForm($this->params);
 
         $this->assertInstanceOf($wantedObjectClassName, $formObject);
@@ -181,17 +182,9 @@ class sefv2helperTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(
-                'classic',
-                'sefmodsimpleemailform',
-            ),
-            array(
                 'jform',
                 'sefv2modsimpleemailform',
-            ),
-            array(
-                'shouldreturnclassicbydefault',
-                'sefmodsimpleemailform',
-            ),
+            )
         );
     }
 

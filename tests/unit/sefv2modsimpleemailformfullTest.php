@@ -1,5 +1,4 @@
 <?php
-
 /**
  * sefv2modsimpleemailformfullTest.php
  *
@@ -176,6 +175,9 @@ class sefv2modsimpleemailformfullTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        defined('MOD_SIMPLEEMAILFORM_DIR')
+            || define('MOD_SIMPLEEMAILFORM_DIR', dirname(dirname(dirname(__FILE__))));
+
         parent::setUp();
 
         // Define directory constant

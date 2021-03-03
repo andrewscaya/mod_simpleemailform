@@ -6,7 +6,7 @@
 .buildpath export-ignore
 # project files and settings
 .project export-ignore
-.settings
+.settings export-ignore
 # composer files
 composer.* export-ignore
 # travis file
